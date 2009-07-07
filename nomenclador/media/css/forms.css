@@ -1,0 +1,153 @@
+form{
+margin-bottom:1em;
+}
+form p, #timelog > li {
+clear:left;
+
+padding:0.25em;
+margin:0 0 0.5em;
+}
+#timelog > li{
+width:30em;
+}
+label{
+width:8em;
+float:left;
+text-align:right;
+padding:0.25em;
+font-size:80%;
+}
+select{
+width:15em;
+}
+.formfields{
+list-style-type:none;
+
+}
+.formfields li{
+padding: 0.25em;
+margin-bottom:0.5em;
+clear:both;
+}
+.formfields li.required {
+}
+.formfields li.tags{
+    background:none;
+}
+.formfields li.required label {
+
+}
+#id_title, #id_name{
+    font-size:1.7em;
+    width:88%;
+}
+.formfields p.required-text{
+margin:0 0 0.25em 0 !important;
+padding: 0 0 0 8em !important;
+}
+.formfields p.required-text span {
+color:#900;
+font-size:80%;
+}
+
+.formfields li.errors{
+background: #fe9 url(/resources/blocked.png) no-repeat !important;
+background-position: 0.5em center !important;
+border:1px solid #F99;
+background:#e99;
+}
+
+.errorlist{
+margin:0;
+padding: 0 0 0 8em;
+list-style-type:none;
+
+}
+.errorlist li{
+width:auto;
+padding:0;
+color:#900;
+margin:0;
+font-size:80%;
+
+}
+.honeypot {
+    position:absolute;
+    left:-9999px;
+    height:0;
+    width:0;
+}
+/* Comment form */
+#comment-form .formfields{
+    margin:0;
+    padding:0;
+}
+#comment-form textarea {
+    height:12em;
+}
+
+
+#comment-form li {
+    margin:0;
+}
+
+/*    datepicker styles */
+#ui-datepicker-div {
+    background:#FFF;
+    font-size:70%;
+    border:2px solid #EEE;
+}
+#ui-datepicker-div table td {
+    border-bottom:none;
+    padding:0;
+}
+.ui-datepicker-title{
+    text-align:center;
+}
+.ui-datepicker-next{
+    float:right;
+}
+.ui-datepicker-prev{
+    float:left;
+}
+ui-state-highlight, .ui-widget-content .ui-state-highlight {
+background:#FFE45C url(images/ui-bg_highlight-soft_75_ffe45c_1x100.png) repeat-x scroll 50% top;
+border:1px solid #FED22F;
+color:#363636;
+}
+.ui-datepicker-calendar .ui-state-default {
+    display:block;
+    text-align:center;
+}
+/* login styles */
+
+#login-form{
+margin:15% auto;
+width:30em;
+background:#FFF;
+padding:0.5em 1em;
+}
+
+/* main search bar */
+#searchform {
+    background:#ffc018;
+    padding:0.5em;  
+}
+#searchform form {
+    margin:0;
+}
+#searchterm{
+    width:85%;
+    border:1px solid #999;
+    border-color: #999 #EEE #EEE #999;
+    font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
+}
+
+#searchbuton {
+    cursor:pointer;
+    font:110% "Trebuchet MS", Verdana, Helvetica, sans-serif;
+    border-color:transparent;
+    width:14%;
+}
+
+/* #content input[type=submit] { outline: 1px solid red } */

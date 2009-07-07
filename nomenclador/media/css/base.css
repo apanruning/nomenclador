@@ -1,0 +1,30 @@
+body {
+    font: 100% 'Trebuchet MS', Helvetica, Arial, sans-serif;
+    margin:0;
+    padding:0;
+    text-align:center;   
+}
+p, h1, h2, h3, ul {
+    color:#333;
+}
+a {
+    color:#05365e;
+    text-decoration:none;
+}
+a:hover{
+    text-decoration:underline;
+}
+
+.visualClear {
+    clear:both;
+    margin:0;
+    padding:0;
+}
+.discreet {
+    font-size:80%;
+    line-height:1.2em;
+    color:#999;
+}
+.hidden {
+   display: none;
+}

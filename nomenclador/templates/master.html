@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+
+{% load banner_tags maap_tags %}
+<head>
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="/media/css/base.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/media/css/layout.css" type="text/css" media="screen" />    
+    <link rel="stylesheet" href="/media/css/style.css" type="text/css" media="screen" />    
+    <link rel="stylesheet" href="/media/css/forms.css" type="text/css" media="screen" />    
+    {% block css %}
+    {% endblock %}
+
+     <script src="/media/js/OpenLayers.js"></script>
+     <script src="http://openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+     <script src="/media/js/jquery.min.js"></script>    
+   
+    {% block javascript %}
+    {% endblock %}
+</head>
+<body>
+<div id="wrapper">
+
+
+
+    <div id="header">
+      <ul id="session">
+
+            {% if user.is_authenticated %}
+                <li><a href="{%url accounts.views.profile user %}"><strong>{{user.first_name}}</strong></a></li>
+
+                {% if user.is_staff %}
+                <li><span><a href="/admin/"> Administration </a></span></li>
+                {% endif %}
+                <li><span><a href="/accounts/logout/">Sign out</a></span></li>
+            {% endif %}
+            {% if user.is_anonymous %}
+                <li><span><a href="/accounts/login/">Log in</a></span></li>
+            {% endif %}
+
+        </ul>
+
+        <h1 id="logo"><a href="{% url maap.views.index %}">Nomenclador Cartogr&aacute;fico</a></h1>
+        <div class="visualClear"> </div>
+    </div>
+
+    <div id="main">
+    <div id="searchform">
+        <form action="{% url maap.views.get_objects %}" method="get" >
+        <input type="text" value="" id="searchterm" name="searchterm">
+        <input type="submit" value="Buscar" id="searchbuton" name="search">
+        </form>
+    </div>
+
+    <div id="categories">
+        {% block categories %}
+            {% category_list %}
+        {% endblock %}
+        <br class="visualClear" />
+    </div>
+    {% block page %}
+        {% block map %}
+        <div id="map">
+
+
+        </div>
+        {% endblock %}
+
+
+        <div id="content">
+        {% block content %}
+        {% endblock %}
+        </div>
+    {% endblock %}
+    </div>
+    
+    <div id="banner-slot-a">    
+        <p>{% pop_slot 'a-1' %}</p>
+    </div>
+    <br class="visualClear" />
+    <div id="footer">
+
+        <ul id="nav">
+        {% block nav %}
+            <li><a href="/">Inicio</a></li>
+            <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contacto</a></li>
+        {% endblock %}
+        </ul>
+        <p credits>&copy;2009 Comercio y Justicia</p>
+    </div>
+</div>    
+
+
+</body>
+
+</html>

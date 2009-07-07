@@ -1,0 +1,2 @@
+
+from nomenclador.settings import *

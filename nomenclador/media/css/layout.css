@@ -1,0 +1,83 @@
+#wrapper {
+    margin:0 auto;
+    text-align:left;
+    width:1000px;
+}
+
+#header {
+}
+#session {
+    float:right;
+    width:30%;
+    margin:0.5em 0 0;
+}
+#logo {
+    margin:0.5em 0;
+}
+#nav {
+    padding:0;
+    margin:0;
+    padding:0.5%;
+}
+
+#nav li {
+    display:inline;
+    margin:0;
+    padding:0;  
+    
+}
+
+#searchform {
+  
+}   
+
+#categories ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+#categories .current ul ul, #categories .not-current ul {
+    margin-left:0.5em;
+}
+#categories ul li {
+
+}
+#categories .current{
+    float:left;
+    width:14%;
+    
+}
+#categories .not-current{
+    float:right;
+    width:78%;
+}
+#categories .not-current div {
+    float:right;
+    width:25%;
+}
+#main {
+    float:left;
+    width:73%;
+}
+#banner-slot-a{
+    float:right;
+    width:26%;
+    text-align:center;
+
+   
+}
+#banner-slot-b {
+    float:right;
+    text-align:center;
+    background:#EEE;
+}   
+#banner-slot-a a img, #banner-slot-b a img{
+    border:none;
+}
+
+#footer{
+    clear:both;
+    margin-top:4em;
+    padding:1em 0;
+    clear:both;
+}
