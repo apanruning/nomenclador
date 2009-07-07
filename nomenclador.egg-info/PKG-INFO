@@ -1,0 +1,25 @@
+Metadata-Version: 1.0
+Name: nomenclador
+Version: 0.1dev
+Summary: Nomenclador
+Home-page: UNKNOWN
+Author: UNKNOWN
+Author-email: UNKNOWN
+License: UNKNOWN
+Description: Introduction
+        ============
+        
+        
+        
+        Changelog
+        =========
+        
+        0.1 - Unreleased
+        ----------------
+        
+        * Initial release
+        
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

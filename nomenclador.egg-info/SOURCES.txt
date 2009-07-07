@@ -1,0 +1,16 @@
+README.txt
+setup.cfg
+setup.py
+nomenclador/__init__.py
+nomenclador/manage.py
+nomenclador/models.py
+nomenclador/settings.py
+nomenclador/urls.py
+nomenclador.egg-info/PKG-INFO
+nomenclador.egg-info/SOURCES.txt
+nomenclador.egg-info/dependency_links.txt
+nomenclador.egg-info/entry_points.txt
+nomenclador.egg-info/namespace_packages.txt
+nomenclador.egg-info/not-zip-safe
+nomenclador.egg-info/requires.txt
+nomenclador.egg-info/top_level.txt
