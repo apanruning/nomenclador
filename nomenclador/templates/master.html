@@ -11,16 +11,25 @@
     <link rel="stylesheet" href="/media/css/base.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/media/css/layout.css" type="text/css" media="screen" />    
     <link rel="stylesheet" href="/media/css/style.css" type="text/css" media="screen" />    
-    <link rel="stylesheet" href="/media/css/forms.css" type="text/css" media="screen" />    
+    <link rel="stylesheet" href="/media/css/forms.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/media/css/wmd.css" type="text/css" media="screen" />    
+    <link rel="stylesheet" href="/media/css/jquery.autocomplete.css" type="text/css" media="screen" />        
     {% block css %}
     {% endblock %}
 
      <script src="/media/js/OpenLayers.js"></script>
      <script src="http://openstreetmap.org/openlayers/OpenStreetMap.js"></script>
      <script src="/media/js/jquery.min.js"></script>    
+     <script src="/media/js/showdown.js"></script>    
+     <script src="/media/js/jquery.autocomplete.js"></script>    
+     <script src="/media/js/jquery.textarearesizer.js"></script>    
+     <script src="/media/js/wmd.js"></script>    
    
     {% block javascript %}
+    {{ form.media.render_js }}
     {% endblock %}
+   
+    
 </head>
 <body>
 <div id="wrapper">

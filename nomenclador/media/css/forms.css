@@ -150,4 +150,16 @@ padding:0.5em 1em;
     width:14%;
 }
 
+.grippie{
+background:#EEE url(/media/img/grippie.png) no-repeat center center;
+height:11px;
+cursor:pointer;
+border-color:#DDDDDD;
+border-style:solid;
+border-width:0 1px 1px;
+cursor:s-resize;
+height:9px;
+overflow:hidden;
+}
+
 /* #content input[type=submit] { outline: 1px solid red } */
