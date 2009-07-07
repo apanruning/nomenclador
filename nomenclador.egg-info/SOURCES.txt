@@ -2,8 +2,10 @@ README.txt
 setup.cfg
 setup.py
 nomenclador/__init__.py
+nomenclador/development.py
 nomenclador/manage.py
 nomenclador/models.py
+nomenclador/production.py
 nomenclador/settings.py
 nomenclador/urls.py
 nomenclador.egg-info/PKG-INFO
