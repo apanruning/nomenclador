@@ -58,18 +58,24 @@
     font-size:80%;
     margin:0 0 1em;
 }
+#categories table {
+    width:100%;
+}
 #categories .root-node {
     font-size:120%;
     
 }
 #categories .current {
     border-right:1px solid #cce44d;
-    padding:1em;
-    
+   
 }
 #categories .not-current{
-    padding:1em;
 
+}
+#categories td{
+    vertical-align:top;
+    width:20%;
+    padding:0.5em;
 }
 
 #footer {

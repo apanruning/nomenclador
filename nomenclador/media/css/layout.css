@@ -36,25 +36,8 @@
     padding:0;
     list-style:none;
 }
-#categories .current ul ul, #categories .not-current ul {
-    margin-left:0.5em;
-}
-#categories ul li {
 
-}
-#categories .current{
-    float:left;
-    width:14%;
-    
-}
-#categories .not-current{
-    float:right;
-    width:78%;
-}
-#categories .not-current div {
-    float:right;
-    width:25%;
-}
+
 #main {
     float:left;
     width:73%;

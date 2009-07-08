@@ -23,7 +23,6 @@
      <script src="/media/js/showdown.js"></script>    
      <script src="/media/js/jquery.autocomplete.js"></script>    
      <script src="/media/js/jquery.textarearesizer.js"></script>    
-     <script src="/media/js/wmd.js"></script>    
    
     {% block javascript %}
     {{ form.media.render_js }}
@@ -58,19 +57,19 @@
     </div>
 
     <div id="main">
-    <div id="searchform">
-        <form action="{% url maap.views.get_objects %}" method="get" >
-        <input type="text" value="" id="searchterm" name="searchterm">
-        <input type="submit" value="Buscar" id="searchbuton" name="search">
-        </form>
-    </div>
 
-    <div id="categories">
-        {% block categories %}
-            {% category_list %}
-        {% endblock %}
-        <br class="visualClear" />
-    </div>
+        <div id="searchform">
+            <form action="{% url maap.views.get_objects %}" method="get" >
+            <input type="text" value="" id="searchterm" name="searchterm">
+            <input type="submit" value="Buscar" id="searchbuton" name="search">
+            </form>
+        </div>
+
+        <div id="categories">
+            {% block categories %}
+                {% category_list %}
+            {% endblock %}
+        </div>
     {% block page %}
         {% block map %}
         <div id="map">
