@@ -3,6 +3,7 @@ setup.cfg
 setup.py
 nomenclador/__init__.py
 nomenclador/development.py
+nomenclador/fields.py
 nomenclador/manage.py
 nomenclador/models.py
 nomenclador/production.py
