@@ -91,7 +91,7 @@ font-size:80%;
     margin:0;
 }
 
-/*    datepicker styles */
+/* datepicker styles */
 #ui-datepicker-div {
     background:#FFF;
     font-size:70%;
@@ -141,6 +141,22 @@ padding:0.5em 1em;
     border:1px solid #999;
     border-color: #999 #EEE #EEE #999;
     font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
+}
+.searchterm{
+    color:#CCC;
+    border:1px solid #999;
+    border-color: #999 #EEE #EEE #999;
+    font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
+}
+.searchterm-dirty{
+    color:#333;
+    border:1px solid #999;
+    border-color: #999 #EEE #EEE #999;
+    font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
+}
+.searchterm:focus{
+    border:1px solid #859cbd;
+    color:#333;
 }
 
 #searchbuton {

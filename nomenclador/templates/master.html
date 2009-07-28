@@ -59,10 +59,12 @@
     <div id="main">
 
         <div id="searchform">
+        {% block searchform%}
             <form action="{% url maap.views.get_objects %}" method="get" >
             <input type="text" value="" id="searchterm" name="searchterm">
             <input type="submit" value="Buscar" id="searchbuton" name="search">
             </form>
+        {% endblock %}    
         </div>
 
         <div id="categories">
