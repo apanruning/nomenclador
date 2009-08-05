@@ -1,5 +1,5 @@
 from django import template
-from banners.models import Banner
+from nomenclador.banners.models import Banner
 
 register = template.Library()
 

@@ -51,7 +51,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'nomenclador.urls'
 
-AUTH_PROFILE_MODULE = "accounts.SiteUserProfile"
+AUTH_PROFILE_MODULE = "nomenclador.accounts.UserProfile"
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -63,9 +63,9 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'tagging',
     'mptt',
-    'accounts',
-    'banners',
-    'maap',
+    'nomenclador.accounts',
+    'nomenclador.banners',
+    'nomenclador.maap',
 )
 
 TEMPLATE_LOADERS = (

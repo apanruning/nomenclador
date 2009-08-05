@@ -8,12 +8,12 @@ admin.autodiscover()
 handler500 # Pyflakes
 
 urlpatterns = patterns( '',
-    (r'^$', 'maap.views.index'),
+    (r'^$', 'nomenclador.maap.views.index'),
     (r'^admin/(.*)', admin.site.root),
     (r'^login/$', 'django.contrib.auth.views.login'),
     (r'^logout/$', 'django.contrib.auth.views.logout'),
-    (r'^maap/', include('maap.urls')),
-    (r'^accounts/', include('accounts.urls')),
+    (r'^maap/', include('nomenclador.maap.urls')),
+    (r'^accounts/', include('nomenclador.accounts.urls')),
 )
 
 if settings.DEBUG:

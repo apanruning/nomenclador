@@ -26,6 +26,5 @@ class SiteUserProfile(models.Model):
 
     def save(self, *args, **kwargs):
 
-        self.picture = handle_thumb(self.picture, None, 64, 64)        
         super(SiteUserProfile, self).save(*args, **kwargs)
 

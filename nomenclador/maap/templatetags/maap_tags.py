@@ -1,5 +1,5 @@
 from django import template
-from maap.models import MaapCategory
+from nomenclador.maap.models import MaapCategory
 
 register = template.Library()
 @register.inclusion_tag('../templates/category_list.html')
