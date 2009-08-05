@@ -1,0 +1,77 @@
+{% extends 'maap/base.html' %}
+{% block title %}
+Busqueda de calles
+{% endblock %}
+{% block css%}
+{% endblock %}
+{% block map %}{% endblock %}
+{% block js_onload %}
+
+
+
+
+        
+        // Show layer event handler
+        $('.show-layer').click(function () {
+            button = $(this)
+            parent = button.parent()
+            id = parent.attr('id');
+            state.loadLayer(id, false, function(layer){
+                layer.show();
+
+                // toogle view
+                parent.children('.hide-layer').css('display','inline');
+                button.css('display','none');
+            
+            });
+            
+            return false;
+        })
+        showresults = function(json){
+
+        }
+
+
+        // Hide layer event handler
+        $('.hide-layer').click(function () {
+            parent = $(this).parent()
+            id = parent.attr('id');
+            
+            state.layers[id].hide();   
+
+            // toogle view
+            parent.children('.show-layer').css('display','inline');
+            $(this).css('display','none');
+            
+            return false;
+        })
+{% endblock %}
+
+</head>
+<body>
+{% block content %}
+{% if intlist or strlist %}
+<h3> Resultados </h3>
+<ul>
+    {% for il in intlist %}    
+    <li >
+    <a href="{% url maap.views.street_location %}?str={{il.0}}&int={{il.1}}">{{il.0}} Int. {{il.1}}</a>
+    </li>
+    {% endfor %}
+    {% for il in strlist %}    
+    <li >
+    <a href="{% url maap.views.street_location %}?str={{il.0}}&door={{POST.streetnumber}}">{{il.0}} {{POST.streetnumber}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else%}{%if request.POST %}
+<h3>No hay resultados</h3>
+{% endif %}{% endif %}
+
+{% endblock %}
+
+
+</body>
+</body>
+
+

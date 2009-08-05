@@ -1,0 +1,45 @@
+{% extends 'registration/base.html' %}
+{%block title%}Perfiles{%endblock%}
+{% load tagging_tags markup  humanize %}	
+{% block contentactions %}
+{% endblock %}
+{% block content %}
+
+
+	<h1 class="documentFirstHeading">Nosotros no somos como los orozco</h1>
+
+    {% for profile in profiles %}
+    
+    <div class="profile-resume"> 
+    <h2><a href="{% url accounts.views.profile profile.user %}">{{profile.user.first_name}} {{profile.user.last_name}}</a></h2>   
+    <div class="avatar">
+    {% if profile.thumb %}
+    <img  src="{{ profile.thumb.url }}" /> 
+    
+    <br />    
+    {% endif %}
+    <a href="{% url accounts.views.profile profile.user %}">{{profile.user}}</a>
+
+    
+    </div>
+    <div class="profile-body">
+        <span class="skills">
+        {% tags_for_object profile as tags %}
+        {% for tag in tags %}
+        {{tag}}
+        {% endfor %}
+         </span> 
+         {{ profile.description|markdown }}
+    </div>
+    <br class="visualClear">
+
+    
+
+    </div>
+    {% endfor %}
+
+
+{% endblock %}
+
+
+

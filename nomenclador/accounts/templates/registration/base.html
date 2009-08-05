@@ -1,0 +1,25 @@
+
+{% extends "master.html" %}
+{% block js %}
+<script type="text/javascript" src="/media/showdown.js"></script>
+<script type="text/javascript" src="/media/jquery.textarearesizer.js"></script>
+<script type="text/javascript" src="/media/jquery.ajaxQueue.js"></script>
+<script type="text/javascript" src="/media/jquery.autocomplete.js"></script> 
+
+{% endblock %}
+{% block css %}
+<link href="/media/wmd.css" type="text/css" media="all" rel="stylesheet" />
+<link href="/media/jquery.autocomplete.css" type="text/css" media="all" rel="stylesheet" />
+{% endblock %}
+{% block title %}{{ page.name }}{% endblock %}
+
+        {% block nav %}    
+        <li><a href="/">Home</a></li>
+        <li><a href="/pages/">Ideas</a></li>
+        <li><a href="/projects/list">Proyectos</a></li>
+        <li class="selected"><a href="/accounts/index">Personas</a></li>
+        {% endblock %}
+
+		{% block content %}{% endblock %}
+
+

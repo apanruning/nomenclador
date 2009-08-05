@@ -24,7 +24,7 @@
      <script src="/media/js/jquery.textarearesizer.js"></script>    
      <script src="/media/js/dimensions.js" type="text/javascript"></script>
      <script src="/media/js/autocomplete.js" type="text/javascript"></script>
-   
+     <script src="/media/js/forms.js"></script>       
     {% block javascript %}
     {{ form.media.render_js }}
     {% endblock %}
@@ -40,7 +40,7 @@
       <ul id="session">
 
             {% if user.is_authenticated %}
-                <li><a href="{%url accounts.views.profile user %}"><strong>{{user.first_name}}</strong></a></li>
+                <li><a href="{%url accounts.views.profile user %}"><strong>{{user}}</strong></a></li>
 
                 {% if user.is_staff %}
                 <li><span><a href="/admin/"> Administration </a></span></li>
@@ -60,12 +60,21 @@
     <div id="main">
 
         <div id="searchform">
-        {% block searchform%}
-            <form action="{% url maap.views.get_objects %}" method="get" >
-            <input type="text" value="" id="searchterm" name="searchterm">
+        {% block searchform %}
+            <form action="{% url maap.views.search_streets %}" method="post" id="streetsform">
+            <input type="text" size="28" id="streetname"
+                   value="{{POST.streetname|default:'Ingrese un nombre de calle'}}" 
+                   class="searchterm" name="streetname">
+            <input type="text" 
+                   value="{{POST.intersection|default:'Interseccion'}}" 
+                   class="searchterm" size="18" name="intersection">
+            <input type="text" 
+                   value="{{POST.streetnumber|default:'Altura'}}" 
+                   class="searchterm" size="8" name="streetnumber">
             <input type="submit" value="Buscar" id="searchbuton" name="search">
             </form>
-        {% endblock %}    
+        {% endblock %}
+
         </div>
 
         <div id="categories">
