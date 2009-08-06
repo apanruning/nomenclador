@@ -9,6 +9,7 @@ class GeoCordobaAdmin(admin.OSMGeoAdmin):
     default_zoom = 12    
     map_width = 800
     map_height = 600
+    extra_js =['/media/js/OpenStreetMap.js']
 
     def save_model(self, request, obj, form, change):
 

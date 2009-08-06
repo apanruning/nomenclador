@@ -60,7 +60,7 @@
         <div id="searchform">
         {% block searchform %}
             <form action="{% url maap.views.search_streets %}" method="post" id="streetsform">
-            <a href="#" id="searchbuton" ></a>
+            <a href="#" id="searchbuton" >Buscar</a>
             <input type="text" size="27" id="streetname"
                    value="{{POST.streetname|default:'Ingrese un nombre de calle'}}" 
                    class="searchterm left" name="streetname">
