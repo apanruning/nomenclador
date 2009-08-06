@@ -18,6 +18,3 @@ urlpatterns = patterns('nomenclador.maap.views',
     (r'^tags/(?P<tag>[^/]+)/$','obj_list_by_tag'),
 )
 
-urlpatterns += patterns('',
-    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': media_root, 'show_indexes':True}),
-)

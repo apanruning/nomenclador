@@ -3,13 +3,11 @@ from django.contrib.auth.models import User
 from tagging.fields import TagField
 from django.utils.translation import ugettext_lazy as _
 
-class UserProfile(models.Model):
+class SiteUserProfile(models.Model):
     # This is the only required field
     user = models.ForeignKey(User, unique=True)
     description = models.TextField()
     picture = models.ImageField(upload_to='images', blank= True)
-    skills = TagField(blank=True)
-    hours_per_week = models.SmallIntegerField()
     @property
     def capacity(self):
         raise NotImplementedError

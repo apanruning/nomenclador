@@ -41,6 +41,7 @@
 #main {
     float:left;
     width:73%;
+    padding-bottom:4em;
 }
 #banner-slot-a{
     float:right;
@@ -59,8 +60,6 @@
 }
 
 #footer{
-    clear:both;
-    margin-top:4em;
     padding:1em 0;
     clear:both;
 }

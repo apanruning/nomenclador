@@ -37,21 +37,19 @@
 
 
     <div id="header">
-      <ul id="session">
-
+      <div id="session">
             {% if user.is_authenticated %}
-                <li><a href="{%url accounts.views.profile user %}"><strong>{{user}}</strong></a></li>
-
-                {% if user.is_staff %}
-                <li><span><a href="/admin/"> Administration </a></span></li>
-                {% endif %}
-                <li><span><a href="/accounts/logout/">Sign out</a></span></li>
+            <a href="{%url accounts.views.userprofile user %}"><strong>{{user}}</strong></a> |
+            {% if user.is_staff %}
+            <a href="/admin/"> Administration </a> |
+            {% endif %}
+            <a href="/accounts/logout/">Sign out</a> 
             {% endif %}
             {% if user.is_anonymous %}
-                <li><span><a href="/accounts/login/">Log in</a></span></li>
+            <a href="/accounts/login/">Log in</a>
             {% endif %}
 
-        </ul>
+        </div>
 
         <h1 id="logo"><a href="{% url maap.views.index %}">Nomenclador Cartogr&aacute;fico</a></h1>
         <div class="visualClear"> </div>
@@ -62,16 +60,17 @@
         <div id="searchform">
         {% block searchform %}
             <form action="{% url maap.views.search_streets %}" method="post" id="streetsform">
-            <input type="text" size="28" id="streetname"
+            <a href="#" id="searchbuton" >Buscar</a>
+            <input type="text" size="27" id="streetname"
                    value="{{POST.streetname|default:'Ingrese un nombre de calle'}}" 
-                   class="searchterm" name="streetname">
+                   class="searchterm left" name="streetname">
             <input type="text" 
                    value="{{POST.intersection|default:'Interseccion'}}" 
-                   class="searchterm" size="18" name="intersection">
+                   class="searchterm middle" size="17" name="intersection">
             <input type="text" 
                    value="{{POST.streetnumber|default:'Altura'}}" 
-                   class="searchterm" size="8" name="streetnumber">
-            <input type="submit" value="Buscar" id="searchbuton" name="search">
+                   class="searchterm right" size="6" name="streetnumber">
+
             </form>
         {% endblock %}
 
@@ -103,7 +102,7 @@
     </div>
     <br class="visualClear" />
     <div id="footer">
-
+        <p id="credits">&copy;2009 Comercio y Justicia</p>
         <ul id="nav">
         {% block nav %}
             <li><a href="/">Inicio</a></li>
@@ -112,7 +111,7 @@
             <li><a href="#">Contacto</a></li>
         {% endblock %}
         </ul>
-        <p credits>&copy;2009 Comercio y Justicia</p>
+
     </div>
 </div>    
 

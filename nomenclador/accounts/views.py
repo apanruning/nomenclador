@@ -14,7 +14,7 @@ from django.contrib.auth import authenticate, login
 
         
         
-def profile(request, username):
+def userprofile(request, username):
     try:
         user = User.objects.get(username__exact=username)
     except User.DoesNotExist:
@@ -29,7 +29,7 @@ def profile(request, username):
         context = RequestContext(request, {'profile':profile})
         return render_to_response('registration/profile.html', context_instance=context)    
     else :
-        return HttpResponseRedirect(reverse('accounts.views.edit', args=(user.username,)))
+        return HttpResponseRedirect(reverse('nomenclador.accounts.views.edit', args=(user.username,)))
 
 def index(request):
     users = User.objects.filter(is_staff=True)

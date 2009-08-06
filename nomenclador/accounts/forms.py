@@ -1,8 +1,11 @@
-from models import SiteUserProfile
+
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django import forms as forms
-from fields import AutoCompleteTagInput, WMDTextField
+
+from models import SiteUserProfile
+from nomenclador.fields import AutoCompleteTagInput, WMDTextField
+
 from tagging.forms import TagField
 
 class ProfileForm(ModelForm):

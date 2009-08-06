@@ -136,34 +136,49 @@ padding:0.5em 1em;
 #searchform form {
     margin:0;
 }
-#searchterm{
-    width:85%;
-    border:1px solid #999;
-    border-color: #999 #EEE #EEE #999;
-    font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
-}
+
 .searchterm{
     color:#CCC;
-    border:1px solid #999;
-    border-color: #999 #EEE #EEE #999;
+    background:transparent url(/media/img/bg_searchterm.png) no-repeat;
+    margin:0 -5px 0 0;
+    padding:0 0.25em;
+    border:2px solid transparent;
     font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
 }
-.searchterm-dirty{
-    color:#333;
-    border:1px solid #999;
-    border-color: #999 #EEE #EEE #999;
-    font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
+#searchform .middle{
+    background-position:center;
+    border-color:transparent #859cbd;
+    
+    
 }
-.searchterm:focus{
-    border:1px solid #859cbd;
-    color:#333;
+#searchform .left{
+    background-position:left;
+}
+#searchform .right{
+    background-position:right;
+}
+.dirty{
+    color:#333 !important;
+    margin:0 -5px 0 0;
+    padding:0 0.25em;
+    background:transparent url(/media/img/bg_searchterm.png) no-repeat;
+    font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
 }
 
 #searchbuton {
-    cursor:pointer;
+    float:right;
     font:110% "Trebuchet MS", Verdana, Helvetica, sans-serif;
     border-color:transparent;
-    width:14%;
+    background:transparent url(/media/img/bg_searchbutton.png) no-repeat;
+    margin:0px;
+    padding:3px 6px;
+    color:#FFF;
+    width:100px;
+    text-align:center;
+    background-position:center center;
+}
+#searchbuton:hover{
+    text-decoration:none;
 }
 
 .grippie{

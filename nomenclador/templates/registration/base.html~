@@ -18,6 +18,7 @@
         <li><a href="/pages/">Ideas</a></li>
         <li><a href="/projects/list">Proyectos</a></li>
         <li class="selected"><a href="/accounts/index">Personas</a></li>
+        {% block map %}{% endblock %}
         {% endblock %}
 
 		{% block content %}{% endblock %}

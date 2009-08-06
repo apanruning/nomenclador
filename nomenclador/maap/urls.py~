@@ -7,7 +7,7 @@ import os
 
 media_root = os.path.join(os.path.dirname(__file__), 'media')
 
-urlpatterns = patterns('nomencladormaap.views',
+urlpatterns = patterns('nomenclador.maap.views',
     (r'^$','index'),
     (r'^api/get$', 'get_objects'),
 #    (r'^json/object/(?P<object_id>\d+)/$', 'json_object'),
