@@ -31,7 +31,7 @@ Maap.Geom = function(metadata) {
 
 Maap.Geom.prototype = {
     layer: null,
-    init: function() { alert(this.id)},
+    init: function() {},
     show: function() {
         this.layer.setVisibility(true);
     },
