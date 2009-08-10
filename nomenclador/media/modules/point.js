@@ -6,8 +6,9 @@
 
 // Methods and extra attributes for object
 
-Maap.Point = Maap.extend(Maap.Geom, {
-    init: function() {
+Maap.Point = Maap.Geom.extend({
+    init: function(metadata) {
+        this._super(metadata);
         size = new OpenLayers.Size(this.icon.width, this.icon.height);
         offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
         icon = new OpenLayers.Icon(this.icon.url, size, offset);
