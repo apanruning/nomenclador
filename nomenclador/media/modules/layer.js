@@ -20,7 +20,7 @@ Maap.Layer = function (metadata) {
         } else if (this.elements[i].type == 'multiline') {
             elms.push(new Maap.MultiLine(this.elements[i]))
         } else if (this.elements[i].type == 'area') {
-            elms.push(new Maap.MultiLine(this.elements[i]))
+            elms.push(new Maap.Area(this.elements[i]))
         }
     };
     

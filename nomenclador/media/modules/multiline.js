@@ -15,12 +15,12 @@ Maap.MultiLine = Maap.Geom.extend({
         var geom = geojson_format.read(this.geojson,"Geometry");
         var lookup = {
             'line': {
-                strokeColor: 'ff5400',
+                strokeColor: '#feff00',
                 strokeOpacity: 0.8,
                 strokeWidth: 5,
             },
             'border':{
-                strokeColor: '612000',
+                strokeColor: '#612000',
                 strokeOpacity: 0.2,
                 strokeWidth: 8
             }
