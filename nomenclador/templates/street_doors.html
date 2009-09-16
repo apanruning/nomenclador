@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Streets Doors</title>
+
+</head>
+<body>
+
+
+<div id="top">
+
+{% if streets %}
+    <div>
+    <select name="streets">
+    {% for street in streets %}
+    <option value={{street.way.id }}>{{ street.name }}</option>
+    {% endfor%}
+    </select>
+    </div>
+{% else %}
+    <p> No se encontraron calles </p>
+{% endif%}
+
+</div>
+
+<div id="left">
+</div>
+
+<div id="right">
+</div>
+
+</body>
+
+</html>
+
+
