@@ -66,6 +66,7 @@ INSTALLED_APPS = (
     'nomenclador.accounts',
     'nomenclador.banners',
     'nomenclador.maap',
+    'nomtools',
 )
 
 TEMPLATE_LOADERS = (
@@ -75,6 +76,7 @@ TEMPLATE_LOADERS = (
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "templates"),
+    
 )
 
 
