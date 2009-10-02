@@ -1,0 +1,293 @@
+/* SVN FILE: $Id: scrollable.css 42 2008-10-31 19:10:35Z naterkane $ */
+/**
+ * @author Nater Kane <nater@naterkane.com>
+ * @version Revision: $Rev: 42 $
+ * @url $URL: http://svn.naterkane.net/jpmorgan/css/scrollable.css $
+ * @modifiedby $LastChangedBy: naterkane $
+ * @lastmodified $LastChangedDate: 2008-10-31 15:10:35 -0400 (Fri, 31 Oct 2008) $
+ */
+
+/**
+ * css reset
+ */
+/*
+html, body,
+ div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+margin: 0;
+padding: 0;
+border: 0;
+outline: 0;
+font-size: 100%;
+vertical-align: baseline;
+background: transparent;
+}
+body {
+line-height: 1;
+}
+ol, ul {
+list-style: none;
+}
+blockquote, q {
+quotes: none;
+}
+
+
+:focus {
+outline: 0;
+}
+
+
+ins {
+text-decoration: none;
+}
+del {
+text-decoration: line-through;
+}
+
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/**
+ * background 
+ */
+
+div.scrollable {
+	background: #B8D1ED;
+	color: #000;
+	font-family: Arial;
+	font-size: 9px;
+	margin-bottom: 1em;
+	padding-bottom: 21px;
+	width: 213px;
+}
+div.scrollable.js {
+	height: 166px;
+	padding: 0;
+}
+div.scrollable a {
+	color: #000;
+	text-decoration: none;
+}
+div.scrollable .more-link {
+	background: url(../images/more_news_arrow.gif) top right no-repeat;
+	display: block;
+	float: right;
+	font-weight: bold;
+	height: 15px;
+	padding-right: 21px;
+	padding-top: 6px;
+}
+
+div.scrollable .more-link:hover {
+	background: url(../images/more_news_arrow_rollovr.gif) top right no-repeat;
+}
+
+div.scrollable ol {
+	clear: both;
+	background: #fff;
+	border-top: 1px solid #fff;
+	width: 213px;
+}
+div.scrollable ol, div.scrollable ul { list-style: none;}
+div.scrollable ol li, div.scrollable ul li { list-style-type: none; }
+div.scrollable ol,
+div.scrollable ul,
+div.scrollable li {
+    margin: 0;
+    padding: 0;
+}
+
+* html div.scrollable.js ol {
+	height: 125px !important;
+}
+
+div.scrollable.js div._scrollable {
+
+	width: 213px;
+	margin: 0 0 0 -20px;
+	padding: 0;
+}
+div.scrollable ul>li {
+	margin-bottom: 0; /* overrides default styles */
+	height: 21px;
+}
+
+div.scrollable.js ol, div.scrollable #itemswrapper {
+
+	border: none;
+	height: 124px;
+}
+div.scrollable.js #itemswrapper {
+	background: #fff;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+
+
+div.scrollable ol>li, 
+div.scrollable ol>div>li { /*display:table for Mozilla & Opera*/
+
+	display: table;
+	position: static;
+	margin-bottom: 1px;
+}
+div.scrollable ol li { /*for IE6*/
+	background: url(../images/news_gradient_pixel.jpg) top left repeat-x;
+	height: 41px;
+	margin: 0 0 1px 0;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	width: 213px;
+}
+
+
+div.scrollable ol li div { /*for IE6*/
+	position: absolute;
+	top: 50%;
+	width: 213px;
+}
+*:first-child+html div.scrollable ol li div { /*for IE7*/
+    position: relative;
+    top: 50%;
+}
+div.scrollable ol li>div { /*for Mozilla & Opera*/
+	display: table-cell;
+	vertical-align: middle;
+	position: static;
+	padding: 0 1em;	
+}
+
+
+div.scrollable ol li div a,
+div.scrollable ol li div a:hover,
+div.scrollable ol li div a:visited,
+div.scrollable ol li div a:active {
+	color: #000;
+	display: block;
+	font-size: 11px;
+	font-weight: bold;
+	margin: 0;
+	overflow: hidden;
+	position: relative;
+	text-decoration: none;
+	top: -50%;
+	line-height: 9px;
+}
+/* next previous tabs */
+div.scrollable a.prev {
+	background: url(../images/more_news_toptab.jpg) bottom left no-repeat;
+	display:block;
+	height: 21px;
+	margin: 0 auto;
+	text-indent: -9999px;
+	width: 40px;
+}
+div.scrollable a.next {
+	background: url(../images/more_news_bottomtab.jpg) top left no-repeat;
+	display:block;
+	height: 13px;
+	margin: 0 auto;
+	text-indent: -9999px;
+	width: 40px;
+}
+
+* html div.scrollable {
+    margin-top: 5px;
+}
+*:first-child+html div.scrollable {
+    margin-top: 5px;
+}
+* html div.scrollable.js a.prev {
+	margin-top: 3px;
+    margin-bottom: -5px;
+}
+* html div.scrollable.js a.next {
+    height: 18px;
+}
+
+* html div.scrollable a.more-link { /* ie6 */
+    font-weight: bold !important;
+    height: 16px;
+}
+*:first-child+html div.scrollable.js .more-link { /* ie7+ */
+    height: 15px;
+}
+
+* html div.scrollable.js ul li {
+
+    padding: 0;
+    margin-bottom: -4px;
+}
+* html div.scrollable.js ul ol li {
+   margin-bottom: -2px;
+}
+* html div.scrollable.js ol li {
+	margin-left: -16px !important;
+}
+*:first-child+html div.scrollable.js ol li {
+    margin-left: -16px !important;
+}
+
+* html div.scrollable ol li {
+	margin-bottom: -2px;
+}
+*:first-child+html div.scrollable.js #itemswrapper {
+    border-bottom: 1px #fff solid;
+}
+*:first-child+html div.scrollable.js #itemswrapper, 
+*:first-child+html .js #items {
+    margin-top: -1px;
+    margin-bottom: -2px;
+    height: 123px;
+}
+* html div.scrollable.js ul li#itemswrapper {
+    height: 123px;
+    margin-top: -1px;
+    margin-bottom: -2px;
+    /*
+border-bottom: none;
+*/
+}
+
+
+*:first-child+html div.scrollable ol li {
+    margin-bottom: -1px;
+}
+* html div.scrollable.js ul li ol li { 
+    height: 46px;
+    margin-bottom: -7px;
+}
+* html .scrollable.js div.__scrollable {
+    width: 213px;
+}
+
+
+* html .scrollable ol li div a{
+    padding: 0 10px;
+}
+
+* html .scrollable a.prev {
+	cursor: pointer;
+	margin: 0 0 2px 86px;
+	margin-top: 0 !important;
+	margin-bottom: 2px !important;
+}
+*:first-child+html .scrollable a.prev {
+    margin: 0 0 -1px 86px;
+}
+* html .scrollable a.next {
+	cursor: pointer;
+	margin: -1px 0 0 86px;
+}
