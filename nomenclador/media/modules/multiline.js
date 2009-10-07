@@ -32,11 +32,12 @@ Maap.MultiLine = Maap.Geom.extend({
         features.push(new OpenLayers.Feature.Vector(geom.clone(),
             {style: 'line'}
         ))
-        
+
         var styleMap = new OpenLayers.StyleMap();
         styleMap.addUniqueValueRules("default", "style", lookup);
         this.layer = new OpenLayers.Layer.Vector(this.id,{styleMap:styleMap});
         this.layer.addFeatures(features);
+        this.layer.events.register("featureselected", features[0], function(evt) { alert(evt);});
     }
 });
 

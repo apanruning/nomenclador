@@ -8,23 +8,32 @@
 -------------
 */
 // Initialization function for object Layer
-Maap.Layer = function (metadata) {
+Maap.Layer = function (metadata, map) {
     for (m in metadata) {
         this[m] = metadata[m];
     }
+    this.map = map;
     var elms = new Array();
     
     for (i=0;i< this.elements.length; i++) {
         if (this.elements[i].type == 'point') {
-            elms.push(new Maap.Point(this.elements[i]))
+            elm = new Maap.Point(this.elements[i])
         } else if (this.elements[i].type == 'multiline') {
-            elms.push(new Maap.MultiLine(this.elements[i]))
+            elm = new Maap.MultiLine(this.elements[i])
         } else if (this.elements[i].type == 'area') {
-            elms.push(new Maap.Area(this.elements[i]))
+            elm = new Maap.Area(this.elements[i])
         }
+        // Set controls
+        var control = new OpenLayers.Control.SelectFeature(elm.layer);
+        this.map.addControl(control);
+        control.activate();
+        elms.push(elm);
     };
     
     this.elements = elms;
+    
+
+    
    
 }
 
@@ -67,7 +76,7 @@ Maap.State.prototype.loadLayer = function(url, reload, callback) {
     $.getJSON(url, 
         function(data) {
             // Eval layer object
-            Layer = new Maap.Layer(data);          
+            Layer = new Maap.Layer(data, state.map);          
             state.map.addLayers(Layer.getLayers());
             state.layers[Layer.id] = Layer;
             callback(Layer);
