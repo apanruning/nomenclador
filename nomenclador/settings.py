@@ -46,6 +46,13 @@ DEFAULT_SRID = 900913
 # Don't share this with anybody.
 SECRET_KEY = 'xg%7r0k+966nuhr*8ls_@bgkf8y*-e2tar_in#9m%v&8r!y5ao'
 
+#Authenticate using email address
+AUTHENTICATION_BACKENDS = (
+    "nomenclador.accounts.email_backend.EmailBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -59,10 +66,13 @@ ROOT_URLCONF = 'nomenclador.urls'
 
 AUTH_PROFILE_MODULE = "accounts.SiteUserProfile"
 
+SITE_ID=1
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sites',
     'django.contrib.sessions',
     'django.contrib.databrowse',
     'django.contrib.gis',
