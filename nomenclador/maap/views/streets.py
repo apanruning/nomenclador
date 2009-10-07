@@ -7,8 +7,9 @@ from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
 from osm.models import *
-from osm.utils import get_locations_by_intersection, get_location_by_door, \
-                      get_streets_list, get_intersection_list
+from osm.utils.search import get_locations_by_intersection, get_location_by_door
+from osm.utils.lists import get_streets_list, get_intersection_list
+from osm.utils.words import clean_search_street
 
 from django.core import urlresolvers
 from django.utils.http import urlquote
@@ -16,8 +17,8 @@ from django.utils.http import urlquote
 
 
 def search_streets(request):
-    streetname = request.POST.get('streetname', None)
-    intersection = request.POST.get('intersection',None)
+    streetname = clean_search_street(request.POST.get('streetname', ''))
+    intersection = clean_search_street(request.POST.get('intersection', ''))
     streetnumber = request.POST.get('streetnumber',None)
     intlist = []
     strlist = []
