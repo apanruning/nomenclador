@@ -53,6 +53,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
 )
 
+ACCOUNT_ACTIVATION_DAYS = 3
+
 ROOT_URLCONF = 'nomenclador.urls'
 
 AUTH_PROFILE_MODULE = "accounts.SiteUserProfile"
@@ -67,10 +69,11 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'tagging',
     'mptt',
+    'nomtools',
+    'registration',
     'nomenclador.accounts',
     'nomenclador.banners',
     'nomenclador.maap',
-    'nomtools',
 )
 
 TEMPLATE_LOADERS = (

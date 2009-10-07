@@ -47,3 +47,6 @@ nomenclador/maap/utils.py
 nomenclador/maap/views.py
 nomenclador/maap/templatetags/__init__.py
 nomenclador/maap/templatetags/maap_tags.py
+nomenclador/maap/views/__init__.py
+nomenclador/maap/views/base.py
+nomenclador/maap/views/streets.py

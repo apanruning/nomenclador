@@ -1,5 +1,5 @@
 
-from django.conf.urls.defaults import patterns, include, handler500
+from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
@@ -13,9 +13,9 @@ urlpatterns = patterns( '',
     (r'^login/$', 'django.contrib.auth.views.login'),
     (r'^logout/$', 'django.contrib.auth.views.logout'),
     (r'^maap/', include('nomenclador.maap.urls')),
-    (r'^accounts/', include('nomenclador.accounts.urls')),
+    (r'^accounts/', include('registration.urls')),
+    (r'^profiles/', include('nomenclador.accounts.urls')),
     (r'^nomtools/', include('nomtools.urls')),
-    
 )
 
 if settings.DEBUG:
