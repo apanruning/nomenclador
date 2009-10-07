@@ -14,6 +14,8 @@ urlpatterns = patterns( '',
     (r'^logout/$', 'django.contrib.auth.views.logout'),
     (r'^maap/', include('nomenclador.maap.urls')),
     (r'^accounts/', include('nomenclador.accounts.urls')),
+    (r'^nomtools/', include('nomtools.urls')),
+    
 )
 
 if settings.DEBUG:

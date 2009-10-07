@@ -9,6 +9,7 @@ nomenclador/models.py
 nomenclador/production.py
 nomenclador/settings.py
 nomenclador/urls.py
+nomenclador/views.py
 nomenclador.egg-info/PKG-INFO
 nomenclador.egg-info/SOURCES.txt
 nomenclador.egg-info/dependency_links.txt
@@ -42,6 +43,7 @@ nomenclador/maap/test_settings.py
 nomenclador/maap/test_urls.py
 nomenclador/maap/tests.py
 nomenclador/maap/urls.py
+nomenclador/maap/utils.py
 nomenclador/maap/views.py
 nomenclador/maap/templatetags/__init__.py
 nomenclador/maap/templatetags/maap_tags.py

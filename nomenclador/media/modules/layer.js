@@ -85,3 +85,21 @@ Maap.State.prototype.loadLayer = function(url, reload, callback) {
     return 0;
 };
 
+// Extends Maap.State functionality: Add Point to Map
+Maap.State.prototype.loadPoint = function(url, reload, callback) {
+    state = this;
+
+    //send request to server for add layer of point
+    $.getJSON(url, 
+        function(data) {
+            // Eval point object
+           var ins = new Maap.Point(data);
+           state.map.addLayer(ins.layer);
+           callback(ins);
+            }
+    );
+    
+   return false;
+ };
+
+
