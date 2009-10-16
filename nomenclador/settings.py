@@ -79,7 +79,6 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'tagging',
     'mptt',
-    'nomtools',
     'registration',
     'nomenclador.accounts',
     'nomenclador.banners',
