@@ -1,0 +1,14 @@
+{% extends "master.html" %}
+{% load inbox %}
+{%block categories %}  {% endblock %}
+{%block map %}  {% endblock %}
+
+{% block actions %}
+    <a href="{% url messages_inbox %}">Bandeja de Entrada({%inbox_count%})</a> ·
+    <a href="{% url messages_outbox %}">Mensajes Enviados</a> ·
+    <a href="{% url messages_compose %}">Nuevo mensaje</a> ·
+    <a href="{% url messages_trash %}">Basura</a></p>
+{% endblock %}
+{% block content %}  
+{% endblock %}
+

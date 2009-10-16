@@ -20,10 +20,12 @@ nomenclador.egg-info/requires.txt
 nomenclador.egg-info/top_level.txt
 nomenclador/accounts/__init__.py
 nomenclador/accounts/admin.py
+nomenclador/accounts/email_backend.py
 nomenclador/accounts/forms.py
 nomenclador/accounts/models.py
 nomenclador/accounts/tests.py
 nomenclador/accounts/urls.py
+nomenclador/accounts/utils.py
 nomenclador/accounts/views.py
 nomenclador/banners/__init__.py
 nomenclador/banners/admin.py
@@ -44,7 +46,6 @@ nomenclador/maap/test_urls.py
 nomenclador/maap/tests.py
 nomenclador/maap/urls.py
 nomenclador/maap/utils.py
-nomenclador/maap/views.py
 nomenclador/maap/templatetags/__init__.py
 nomenclador/maap/templatetags/maap_tags.py
 nomenclador/maap/views/__init__.py

@@ -1,0 +1,28 @@
+{% extends "master.html" %}
+{%block title%}Bienvenido, por favor ingrese su nombre de usuario y contraseña{%endblock%}
+{%block css%}
+<style type="text/css">
+#content form{
+width:50%;
+margin:0 auto;
+border: 1px solid #EBEBEB;
+padding:10px;
+}
+
+</style>
+{%endblock%}
+
+{% block page %}
+<div id="login-form">
+<h2>Bienvenido, ingrese su nombre de usuario y contraseña</h2>
+{% if form.errors %}
+<p id="error-message">Username / password combination does not exist</p>
+{% endif %}
+
+<form method="post" action=".">
+{% include 'generic_form.html' %}
+<input type="hidden" name="next" value="{% if next %}{{ next }}{%else%}/{%endif%}" />
+<input type="submit" value="login" />
+</form>
+</div>
+{% endblock %}

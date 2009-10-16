@@ -12,7 +12,6 @@ Maap.Layer = function (metadata, map) {
     for (m in metadata) {
         this[m] = metadata[m];
     }
-    this.map = map;
     var elms = new Array();
     
     for (i=0;i< this.elements.length; i++) {
@@ -30,10 +29,7 @@ Maap.Layer = function (metadata, map) {
         elms.push(elm);
     };
     
-    this.elements = elms;
-    
-
-    
+    this.elements = elms;   
    
 }
 

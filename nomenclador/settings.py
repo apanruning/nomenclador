@@ -1,5 +1,9 @@
 import os
 
+# Django settings for nomenclador project.
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
@@ -17,10 +21,11 @@ TIME_ZONE = 'America/Cordoba'
 
 LANGUAGE_CODE = 'es-ar'
 
-# gdal an geos local paths
-#INSTANCE_PATH = '/home/fran/repositorios/cyj/instance1/'
-#GDAL_LIBRARY_PATH = INSTANCE_PATH + 'parts/gdal/lib/libgdal.so'
-#GEOS_LIBRARY_PATH = INSTANCE_PATH + 'parts/geos/lib/libgeos_c.so'
+SITE_ID = 1
+
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
+USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -59,40 +64,43 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
 )
-
-ACCOUNT_ACTIVATION_DAYS = 3
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.auth',
+    'django.core.context_processors.request',
+    'django.core.context_processors.media',
+    'announcements.context_processors.site_wide_announcements',
+)
 
 ROOT_URLCONF = 'nomenclador.urls'
 
-AUTH_PROFILE_MODULE = "accounts.SiteUserProfile"
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), "templates"),
+)
+AUTH_PROFILE_MODULE = "profiles.Profile"
 
-SITE_ID=1
-
+ACCOUNT_REQUIRED_EMAIL = True
 INSTALLED_APPS = (
+    'notification',
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sites',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.databrowse',
     'django.contrib.gis',
     'django.contrib.markup',
+    'django.contrib.comments',
+    'emailconfirmation',
+    'announcements',
+    'voting',
     'tagging',
     'mptt',
-    'registration',
-    'nomenclador.accounts',
+    'microblogging',
+    'nomenclador.account',
+    'nomenclador.profiles',
+    'messages',
+    'nomenclador.places',
     'nomenclador.banners',
     'nomenclador.maap',
 )
-
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-)
-
-TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), "templates"),
-    
-)
-
-

@@ -1,0 +1,23 @@
+{% extends 'master.html' %}
+{%block title%}Perfil de {{other_user}} {%endblock%}
+{% load tagging_tags markup inbox %}	
+{%block categories %}  {% endblock %}
+{%block map %}  {% endblock %}
+{% block actions %}
+    <a href="{% url messages_inbox %}">Bandeja de Entrada({%inbox_count%})</a> ·
+    <a href="{% url messages_outbox %}">Mensajes Enviados</a> ·
+    <a href="{% url messages_compose %}">Nuevo mensaje</a> ·
+    <a href="{% url messages_trash %}">Basura</a></p>
+{% endblock %}
+{% block content %}
+<h1><a href="{% url profile_detail other_user %}" rel="bookmark">{{ other_user.get_profile.name}}</a></h1>
+<p class="discreet">  
+
+{{ other_user.get_profile.about|markdown }}
+
+
+
+{% endblock %}
+
+
+

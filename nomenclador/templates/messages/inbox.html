@@ -1,0 +1,27 @@
+{% extends "messages/base.html" %} 
+{% load i18n %} 
+{%block categories%}  {% endblock %}
+{%block map%}  {% endblock %}
+{% block content %}
+    <h1>Bandeja de Entrada</h1>
+    <table class="messages">
+        <thead>
+            <tr><th>Remitente</th><th>Asunto </th><th>Recibido</th><th>&nbsp;</th></tr>
+        </thead>
+        <tbody>
+    {% for message in message_list %} 
+        <tr>
+            <td>{{ message.sender }}</td>
+            <td>
+                {% if message.new %}<strong>{% endif %}
+                {% if message.replied %}<em>{% endif %}
+                <a href="{{message.get_absolute_url }}">{{ message.subject }}</a>
+                {% if message.replied %}</em>{% endif %}
+                {% if message.new %}</strong>{% endif %}</td>
+            <td>{{ message.sent_at|date:_("DATETIME_FORMAT") }}</td>
+            <td><a href="{% url messages.views.delete message.id %}">Borrar</a></td>
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

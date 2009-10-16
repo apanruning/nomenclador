@@ -1,33 +1,32 @@
 form{
-margin-bottom:1em;
+    margin-bottom:1em;
 }
 form p, #timelog > li {
-clear:left;
-
-padding:0.25em;
-margin:0 0 0.5em;
+    clear:left;
+    padding:0.25em;
+    margin:0 0 0.5em;
 }
 #timelog > li{
-width:30em;
+    width:30em;
 }
 label{
-width:8em;
-float:left;
-text-align:right;
-padding:0.25em;
-font-size:80%;
+    width:10em;
+    float:left;
+    text-align:right;
+    padding:0.25em;
+    font-size:80%;
 }
 select{
-width:15em;
+    width:15em;
 }
 .formfields{
-list-style-type:none;
+    list-style-type:none;
 
 }
 .formfields li{
-padding: 0.25em;
-margin-bottom:0.5em;
-clear:both;
+    padding: 0.25em;
+    margin-bottom:0.5em;
+    clear:both;
 }
 .formfields li.required {
 }
@@ -37,38 +36,39 @@ clear:both;
 .formfields li.required label {
 
 }
-#id_title, #id_name{
-    font-size:1.7em;
-    width:88%;
+.honeypot_field{
+    position:absolute;
+    left:-9999px;
+    
 }
 .formfields p.required-text{
-margin:0 0 0.25em 0 !important;
-padding: 0 0 0 8em !important;
+    margin:0 0 0.25em 0 !important;
+    padding: 0 0 0 8em !important;
 }
 .formfields p.required-text span {
-color:#900;
-font-size:80%;
+    color:#900;
+    font-size:80%;
 }
 
 .formfields li.errors{
-background: #fe9 url(/resources/blocked.png) no-repeat !important;
-background-position: 0.5em center !important;
-border:1px solid #F99;
-background:#e99;
+    background: #fe9 url(../img/blocked.png) no-repeat !important;
+    background-position: 0.5em center !important;
+    border:1px solid #F99;
+    background:#e99;
 }
 
 .errorlist{
-margin:0;
-padding: 0 0 0 8em;
-list-style-type:none;
+    margin:0;
+    padding: 0 0 0 8em;
+    list-style-type:none;
 
 }
 .errorlist li{
-width:auto;
-padding:0;
-color:#900;
-margin:0;
-font-size:80%;
+    width:auto;
+    padding:0;
+    color:#900;
+    margin:0;
+    font-size:80%;
 
 }
 .honeypot {
@@ -111,9 +111,9 @@ font-size:80%;
     float:left;
 }
 ui-state-highlight, .ui-widget-content .ui-state-highlight {
-background:#FFE45C url(images/ui-bg_highlight-soft_75_ffe45c_1x100.png) repeat-x scroll 50% top;
-border:1px solid #FED22F;
-color:#363636;
+    background:#FFE45C url(images/ui-bg_highlight-soft_75_ffe45c_1x100.png) repeat-x scroll 50% top;
+    border:1px solid #FED22F;
+    color:#363636;
 }
 .ui-datepicker-calendar .ui-state-default {
     display:block;
@@ -136,40 +136,28 @@ padding:0.5em 1em;
 #searchform form {
     margin:0;
 }
-
+#streetsform{
+    background:transparent url(../img/bg_searchterm.png) no-repeat;
+    padding:0.2em; ;
+}
 .searchterm{
     color:#CCC;
-    background:transparent url(/media/img/bg_searchterm.png) no-repeat;
-    margin:0 -5px 0 0;
-    padding:0 0.25em;
-    border:2px solid transparent;
+    background:transparent;
+    margin:0;
+    padding:0 ;
+    border:none;
     font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
 }
-#searchform .middle{
-    background-position:center;
-    border-color:transparent #859cbd;
-    
-    
-}
-#searchform .left{
-    background-position:left;
-}
-#searchform .right{
-    background-position:right;
-}
+
 .dirty{
     color:#333 !important;
-    margin:0 -5px 0 0;
-    padding:0 0.25em;
-    background:transparent url(/media/img/bg_searchterm.png) no-repeat;
-    font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
 }
 
 #searchbuton {
     float:right;
     font:110% "Trebuchet MS", Verdana, Helvetica, sans-serif;
     border-color:transparent;
-    background:transparent url(/media/img/bg_searchbutton.png) no-repeat;
+    background:transparent url(../img/bg_searchbutton.png) no-repeat;
     margin:0px;
     padding:3px 6px;
     color:#FFF;
@@ -182,15 +170,15 @@ padding:0.5em 1em;
 }
 
 .grippie{
-background:#EEE url(/media/img/grippie.png) no-repeat center center;
-height:11px;
-cursor:pointer;
-border-color:#DDDDDD;
-border-style:solid;
-border-width:0 1px 1px;
-cursor:s-resize;
-height:9px;
-overflow:hidden;
+    background:#EEE url(../img/grippie.png) no-repeat center center;
+    height:11px;
+    cursor:pointer;
+    border-color:#DDDDDD;
+    border-style:solid;
+    border-width:0 1px 1px;
+    cursor:s-resize;
+    height:9px;
+    overflow:hidden;
 }
 
 /* #content input[type=submit] { outline: 1px solid red } */

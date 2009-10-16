@@ -1,0 +1,69 @@
+{% load markup comments %}	
+   	{% get_comment_list for object as comments_list %} 
+	<div id="comments">
+    {% if comments_list %}
+    {% get_comment_count for object as comment_count %}
+	<h4>{{comment_count}} comentarios</h4>
+
+
+	{% for comment in comments_list %}
+    <div class="comment {% if comment.user.is_staff%}staff{% endif %}">
+
+        <div class="comment-user" >
+        {% if comment.user %}
+        <a href="{% url profile_detail comment.user %}">{{comment.user}}</a> 
+        {% else %}
+        <a  href="{{comment.url}}" rel="nofollow">{{comment.name}}</a> 
+        {% endif %}
+        <p class="discreet"> {{ comment.submit_date|date:"F j Y P" }}</p>
+        </div>
+        
+        <div class="comment-body">{{ comment.comment|markdown:"wikilinks" }}</div>
+        <br class="visualClear" />
+    </div>
+
+    {% endfor %}
+    {%else%}
+    {% endif %}
+	</div>
+	<div id="newcomment">
+	<h4>Deje un comentario</h4>
+    {% get_comment_form for object as form %}
+	{% if user.is_authenticated %}
+	<form action="{% comment_form_target %}" method="post" id="comment-form">
+        <input type="hidden" name="next" value="{{object.get_absolute_url}}"/>
+        <ul class="formfields">
+    
+        <li class="{% if form.comment.errors %}errors{% endif %}" >
+            {% if form.comment.required and not form.comment.errors %}
+            <p class="required-text"><span>required</span></p>{%endif%}
+            {{form.comment}}    
+            {% if form.comment.help_text %}<p class="discreet">{{ form.comment.help_text }}</p>{% endif %}
+            {% if form.comment.errors %}{{ form.comment.errors }}{% endif %}
+        </li>
+        <li class="honeypot {% if form.honeypot.errors %}errors{% endif %}" >
+            {% if form.honeypot.required and not form.honeypot.errors %}
+            <p class="required-text"><span>required</span></p>{%endif%}
+            {{form.honeypot.label_tag}} {{form.honeypot}}    
+            {% if form.honeypot.help_text %}<p class="discreet">{{ form.honeypot.help_text }}</p>{% endif %}
+            {% if form.honeypot.errors %}{{ form.honeypot.errors }}{% endif %}
+        </li>
+        {% for field in form %}
+            {% if field.is_hidden %}
+            <li class="hidden">
+                {{field}}    
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+	
+	    <input type="submit" name="submit" class="submit-post" value="Publicar" />
+    </form>
+	{% else %}
+    <form action="{% comment_form_target %}" method="POST" id="comment-form">
+        <input type="hidden" name="next" value="{{target_url}}" />
+	    {% include 'generic_form.html' %}
+	    <input type="submit" name="submit" class="submit-post" value="Publicar" />
+    </form>
+    {%endif%}    
+	</div>

@@ -4,7 +4,6 @@ body {
 }
 #wrapper {
     margin:0 auto;
-    border-top:2px solid #333;
     text-align:left;
     width:1000px;
     padding:0 1em;
@@ -94,4 +93,75 @@ body {
     padding:0.2em 0.5em;
     font-size:80%;
     margin:0;
+}
+.action.close {
+    position:absolute;
+    right:0;
+    padding-left: 20px;
+}
+/*comment styles*/
+
+#comments{
+    margin-top:1em;
+    
+}
+#comments .comment {
+background:#F5F5F5;
+color:#333333;
+font-weight:normal;
+line-height:140%;
+margin-bottom:10px;
+padding:0.5em 1em;
+
+}
+
+#comments .staff {
+background:#FFFFEE;
+}
+#comments .comment-body {
+margin-right:6em;
+}
+#comments td{
+    background:transparent; 
+    border:medium transparent none;
+}
+#comments p {
+margin:0;
+padding:0;
+}
+#comments .comment-user {
+padding-left:1em;
+font-size:90%;
+width:6em;
+float:right;
+    
+}
+#comments .comment-user a {
+color:#900;
+}
+
+.tags{ 
+    padding-left: 20px;
+    background: url("../img/tag_blue.png") no-repeat center left;
+}
+
+.comment-count{ 
+    padding-left: 20px;
+    background: url("../img/comments.png") no-repeat center left;
+}
+#site_wide_announcements {
+    background:#FFC018;
+    border:2px solid #a87f0f;
+    padding:0.2em 0.5em;
+}
+#site_wide_announcements ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+
+}
+#site_wide_announcements ul li {
+    padding:0;
+    margin:0;
+    position:relative;
 }

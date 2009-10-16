@@ -1,0 +1,35 @@
+{% extends 'registration/base.html' %}
+{%block title%}Perfil de {{profile.user}} {%endblock%}
+{% load tagging_tags markup comments humanize %}	
+{% block contentactions %}
+{% endblock %}
+{% block content %}
+
+
+	<h1 class="documentFirstHeading"><a href="../{{ profile.name }}/" rel="bookmark">{{ profile.user.first_name }} {{ profile.user.last_name }}</a></h1>
+    <div id="profile-resume"> 
+    {% if profile.picture %}
+    <img class="avatar" src="{{ profile.picture.url }}" /> 
+    {% else %}
+    <img class="avatar" src="" /> 
+    {% endif %}
+
+        <h2>{{profile.user}}</h2>
+            <p class="skills">
+        {% tags_for_object profile as tags %}
+        {% for tag in tags %}
+        {{tag}}
+        {% endfor %}
+         </p>
+    </p>
+    <br class="visualClear">
+    </div>
+    
+	{{ profile.description|markdown }}
+
+
+
+{% endblock %}
+
+
+

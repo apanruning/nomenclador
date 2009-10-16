@@ -1,0 +1,25 @@
+{% load tagging_tags comments voting_tags %}	
+<p class="visualClear bottom-line discreet">
+    {% if object.creator%}
+	{{object.created|date:"F j Y H:i"}} por 
+	<a href="{% url profile_detail object.creator %}">{{object.creator}}</a> |
+    {% endif %}
+    {% get_comment_count for object as comment_count %}
+    <span class="comment-count">
+        {{comment_count}}    
+    </span> |
+    <span class="tags">
+    {% tags_for_object object as tags %}
+    {% for tag in tags %}
+    <a href="{% url list_by_tag tag %}">{{tag}}</a>
+    {% empty %}
+    no tags
+    {% endfor %}
+    </span> |
+    <span class="votes">
+    {% score_for_object object as score %}
+    <a href="{% url vote object.id,'up' %}">+1</a>
+    {{score.score}}
+    <a href="{% url vote object.id,'down' %}">-1</a>
+    </span>
+</p>
