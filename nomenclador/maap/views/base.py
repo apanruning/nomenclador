@@ -6,16 +6,53 @@ from django.http import HttpResponse, Http404
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
-from ..models import MaapModel, MaapPoint, MaapArea, MaapMultiLine, Icon, MaapCategory
-
+from nomenclador.maap.models import MaapModel, MaapPoint, MaapArea, MaapMultiLine, Icon, MaapCategory
+from django.contrib.auth.decorators import login_required
 from tagging.models import TaggedItem, Tag
 
 
 from django.core import urlresolvers
 from django.utils.http import urlquote
 
+def index(request,*args, **kwargs):
+   
+    queryset = MaapModel.objects.all()
+    return object_list(
+        request, 
+        queryset, 
+        *args,**kwargs)
+    
+##Generic Views
+def view(request,cat_slug, object_slug):
+    objects = Place.objects.all()
+    category = PlaceCategory.objects.get(slug=cat_slug)   
+    return object_detail(
+        request, 
+        objects, 
+        slug=object_slug, 
+        extra_context={'category':category},
+        template_name='maap/object_detail.html')
 
-        
+@login_required  
+def edit(request, model, slug=None):
+    modelm = get_model('posts',model)
+    return create_update.update_object(
+        request, 
+        model=model, 
+        slug=slug, 
+        template_name='maap/object_form.html',
+        extra_context={'model':model.__name__})  
+
+@login_required
+def create(request, model):
+    model = get_model('posts',model)
+    return create_update.create_object(
+        request, 
+        model=model,
+        template_name='maap/object_form.html',
+        extra_context={'model':model.__name__})
+
+
 def get_objects(request):
 
     if request.method == 'GET':
@@ -87,12 +124,7 @@ def maap_object_detail(request,cat_slug, object_id):
     return object_detail(request, objects, int(object_id), 
                          template_name='maap/object_detail.html')
 
-    
-def park_list(request):
-    parks = MaapModel.objects.filter(tags__contains ='park')
-    #TaggedItem.objects.get_by_model(MaapModel,'park')
-    return object_list(request, parks, template_name='maap/park_list.html')
-    
+ 
 def json_layer(qset):
     objects = []
     for mo in qset:
@@ -128,11 +160,5 @@ def json_layer(qset):
         'box_size': box_size
     }
     return layer
-
-def index(request):
-   
-    mls = MaapModel.objects.all()
-    context = RequestContext(request, {'layer_list':mls})
-    return render_to_response('maap/index.html', context_instance=context )    
-    
+        
 

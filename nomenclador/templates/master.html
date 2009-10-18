@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 
-{% load banner_tags places_tags inbox%}
+{% load banner_tags maap_tags inbox%}
 <head>
 
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -80,7 +80,7 @@
 
         <div id="searchform">
         {% block searchform %}
-            <form action="#" method="post" id="streetsform">
+            <form action="{% url nomenclador.maap.views.search_streets %}" method="post" id="streetsform">
             <a href="#" id="searchbuton" >Buscar</a>
             <input type="text" size="27" id="streetname"
                    value="{{POST.streetname|default:'Ingrese un nombre de calle'}}" 

@@ -23,9 +23,9 @@ Maap.Layer = function (metadata, map) {
             elm = new Maap.Area(this.elements[i])
         }
         // Set controls
-        var control = new OpenLayers.Control.SelectFeature(elm.layer);
-        this.map.addControl(control);
-        control.activate();
+        //var control = new OpenLayers.Control.SelectFeature(elm.layer);
+        //this.map.addControl(control);
+        //control.activate();
         elms.push(elm);
     };
     

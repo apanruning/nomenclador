@@ -6,10 +6,12 @@ from osm.models import Nodes
 from nomenclador.settings import DEFAULT_SRID
 from tagging.fields import TagField
 import mptt
-
+from django.template.defaultfilters import slugify
+from django.utils.translation import ugettext_lazy as _
 
 class MaapModel(models.Model):
-    name = models.CharField(max_length=35)
+    slug = models.SlugField(editable=False, null=True)
+    name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True, editable = False)
     changed = models.DateTimeField(auto_now=True, editable = False)
@@ -18,9 +20,15 @@ class MaapModel(models.Model):
     tags = TagField()
     category = models.ManyToManyField('MaapCategory', null=True, blank=True, related_name='maapmodel_set')
     objects = models.GeoManager()
-            
+    banner_slots = models.CharField(max_length=255, blank=True, null=True)
+    default_layers = models.CharField(max_length=255, blank=True, null=True)
+    
     class Meta:
         ordering = ('created', 'name',)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(MaapModel, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.name
@@ -110,5 +118,8 @@ class Icon(models.Model):
         out['height'] = self.image.height
         return out
         
-mptt.register(MaapCategory)
+try: 
+    mptt.register(MaapCategory)  
+except mptt.AlreadyRegistered:
+    pass
 

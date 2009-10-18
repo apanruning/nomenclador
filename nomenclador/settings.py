@@ -53,7 +53,7 @@ SECRET_KEY = 'xg%7r0k+966nuhr*8ls_@bgkf8y*-e2tar_in#9m%v&8r!y5ao'
 
 #Authenticate using email address
 AUTHENTICATION_BACKENDS = (
-    "nomenclador.accounts.email_backend.EmailBackend",
+#    "nomenclador.account.email_backend.EmailBackend",
     "django.contrib.auth.backends.ModelBackend",
 )
 
@@ -100,7 +100,6 @@ INSTALLED_APPS = (
     'nomenclador.account',
     'nomenclador.profiles',
     'messages',
-    'nomenclador.places',
     'nomenclador.banners',
     'nomenclador.maap',
 )
