@@ -7,25 +7,16 @@
 {% endblock %}
 {% block content %}
 
-  {% if objects %}
   <ul id="obj-list">
      {% for object in objects %}
 	 <li>
         {% with object.category.all|first as category %}
           <h3><a href="{% url maap.views.maap_object_detail category.slug,object.pk %}">{{object.name}}</a></h3>
+           {% include "bottom_line.html" %}
         {% endwith %}  
-          <p class="discreet tags">                
-          {% tags_for_object object as tags%}
-           {% for tag in tags%}
-           <a href="{% url maap.views.obj_list_by_tag tag %}">{{tag}}</a> 
-           {% endfor %}
-          </p>
     </li>
     {% endfor %}	
   </ul>
-  {% else %}
-  <h1>No hay objetos en esta categoria</h1>
-  {% endif %}
    
 {% endblock %}
 

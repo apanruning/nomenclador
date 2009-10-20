@@ -1,25 +1,31 @@
-{% load tagging_tags comments voting_tags %}	
-<p class="visualClear bottom-line discreet">
-    {% if object.creator%}
-	{{object.created|date:"F j Y H:i"}} por 
-	<a href="{% url profile_detail object.creator %}">{{object.creator}}</a> |
-    {% endif %}
-    {% get_comment_count for object as comment_count %}
-    <span class="comment-count">
-        {{comment_count}}    
-    </span> |
-    <span class="tags">
-    {% tags_for_object object as tags %}
-    {% for tag in tags %}
-    <a href="{% url list_by_tag tag %}">{{tag}}</a>
-    {% empty %}
-    no tags
-    {% endfor %}
-    </span> |
-    <span class="votes">
+{% load tagging_tags comments voting_tags %}
+<div class="bottom-line">
+    <p class="visualClear discreet">
+        {% if object.creator%}
+	    <a href="{% url profile_detail object.creator %}">{{object.creator}}</a> 
+        {% endif %}
+        {% get_comment_count for object as comment_count %}
+        <span class="comment-count">
+            {{comment_count}}    
+        </span>     
+        {% tags_for_object object as tags %}
+        <span class="tags">
+        {% for tag in tags|slice:":2" %}
+            <a href="{% url list_by_tag tag %}">{{tag}}</a>
+        {% empty %}
+            no tags
+        {% endfor %}
+        </span>
+
+    </p>
+    <dl class="votes">
     {% score_for_object object as score %}
-    <a href="{% url vote object.id,'up' %}">+1</a>
-    {{score.score}}
-    <a href="{% url vote object.id,'down' %}">-1</a>
-    </span>
-</p>
+        <dt>{{score.score}}</dt>
+        <dd>
+            <form class="linkvote" action="{% url vote object.id,'up' %}" method="POST">
+            <input type="hidden" name="next" value="{{object.get_absolute_url}}" />
+            <input type="image" id="linkuparrow{{ link.id }}" src="{{ MEDIA_URL }}/img/plus.png">
+            </form>
+        </dd>
+    </dl>
+</div>	

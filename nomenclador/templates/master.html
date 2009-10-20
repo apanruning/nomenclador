@@ -99,16 +99,25 @@
 
         <div id="categories">
             {% block categories %}
+            {% if categoty %}
+            {% category_list category %}
+            {% else %}
             {% category_list %}
+            {% endif %}
             {% endblock %}
         </div>
     {% block page %}
+
         {% block map %}
         <div id="map">
 
 
         </div>
         {% endblock %}
+        <div id="listing">
+        {% block listing %}
+        {% endblock %}            
+        </div>
 
         <div class="left-col">
         {%block left_column%}  {% endblock %}

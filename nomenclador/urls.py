@@ -3,14 +3,12 @@ from django.conf import settings
 from django.contrib import admin
 from django.views.generic import list_detail, create_update
 from django.views.generic.simple import direct_to_template
-from voting.views import xmlhttprequest_vote_on_object as vote_on_object
+from voting.views import vote_on_object
 from nomenclador.maap.models import MaapModel
 from settings import MEDIA_ROOT
 admin.autodiscover()
 
-maap_dict = {
-    'model': MaapModel,
-}
+
 
 handler500 # Pyflakes
 
@@ -33,8 +31,12 @@ urlpatterns = patterns( '',
     url(r'^ingresar/$', 'nomenclador.account.views.login', name='login'),
     url(r'^salir/$', 'django.contrib.auth.views.logout', {'template_name': 'account/logout.html'}, name='logout'),
     url(r'^miembros/$', 'nomenclador.profiles.views.profiles', name='profile_list'),
-    url(r'^vote/(?P<object_id>\d+)/(?P<direction>up|down|clear)vote/?$', vote_on_object, maap_dict, name="vote"),
-    url(r'^(?P<cat_slug>[^/]+)/(?P<object_slug>[^/]+)/$','nomenclador.maap.views.view', name='view'),
+    url(r'^vote/(?P<object_id>\d+)/(?P<direction>up|down|clear)vote/?$',
+        vote_on_object, dict(model=MaapModel, 
+            template_name='confirm_vote.html',
+            allow_xmlhttprequest=True),
+        name='vote'),
+    url(r'^(?P<cat_slug>[^/]+)/(?P<object_id>[^/]+)/$','nomenclador.maap.views.view', name='view'),
     url(r'^(?P<username>[\w\._-]+)/$', 'nomenclador.profiles.views.profile', name='profile_detail'),
 
 )

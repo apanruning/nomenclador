@@ -40,16 +40,28 @@
 
 #main {
     float:left;
-    width:73%;
+    width:78%;
     padding-bottom:4em;
+}
+#listing{
+    float:left;
+    width:25%;
+}
+#map {
+    float:right;
+    width:73%;
+    height:450px;
+}
+#content {
+    clear:both;
 }
 #banner-slot-a{
     float:right;
-    width:26%;
+    width:21%;
     text-align:center;
-
-   
+    background:#EEE;
 }
+
 #banner-slot-b {
     float:right;
     text-align:center;

@@ -17,8 +17,19 @@
     {% endwith %}
 {% endblock %}
 
-{% block content %}
+{% block listing %}
+	<ul id="obj-list">
+		{% for object in object_list %}
+		<li>
+        {% include 'place.html' %}
+        </li>
+        {% empty %}
+        <li>No se encontraron objetos</li>
+        {% endfor %}
+	</ul>
+{% endblock listing %}
 
+{% block content %}
     {% with object.category.all|first as category %}
     <p class="breadcrumb">
     Usted está en : 
@@ -28,15 +39,8 @@
         <a href="{{category.get_absolute_url}}">{{category.name}}</a> 
     </p>    
     {% endwith %}
-    <h1>{{object.name}}</h1> 
 
-    <p class="discreet tags">    
-    {% tags_for_object object as tags%}
-    {% for tag in tags%}
-    <a href="{% url maap.views.obj_list_by_tag tag %}">{{tag}}</a>
-    {% endfor %}
-    </p>
-
+    {% include 'place.html' %}
     <div id="banner-slot-b">
     {% pop_slot 'b-1' %}
     </div>

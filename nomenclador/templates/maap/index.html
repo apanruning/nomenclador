@@ -41,9 +41,17 @@ Bienvenido
 </head>
 <body>
 
-{% block content %}
-
-{% endblock %}
+{% block listing %}
+	<ul id="obj-list">
+		{% for object in object_list %}
+		<li>
+        {% include 'place.html' %}
+        </li>
+        {% empty %}
+        <li>No se encontraron objetos</li>
+        {% endfor %}
+	</ul>
+{% endblock listing %}
 
 
 </body>

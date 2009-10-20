@@ -7,6 +7,9 @@ body {
 p, h1, h2, h3, ul {
     color:#333;
 }
+h1, h2, h3{
+margin:0;
+}
 a {
     color:#05365e;
     text-decoration:none;
@@ -14,7 +17,9 @@ a {
 a:hover{
     text-decoration:underline;
 }
-
+a img {
+    border:none;
+}
 .visualClear {
     clear:both;
     margin:0;
@@ -27,4 +32,10 @@ a:hover{
 }
 .hidden {
    display: none;
+}
+table{
+    width:100%;
+}
+td{
+    vertical-align:top;
 }

@@ -37,12 +37,24 @@ body {
     text-decoration:underline;
 }
 
-#map {
-    width:100%;
-    height:450px;
-}
 #main{
     background:#FFF;
+}
+#listing ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+#listing h2{
+    font-size:100%;
+}
+
+.votes{
+    text-align:center;
+    margin:0;
+    padding:0;
+    font-size:120%;
+    width:24px;
 }
 #content {
     margin:0;

@@ -1,0 +1,34 @@
+{% load tagging_tags comments voting_tags %}
+<table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <td class="votes">
+        {% score_for_object object as score %}
+        {{score.score}}
+        <form class="linkvote" action="{% url vote object.id,'up' %}" method="POST">
+        <input type="hidden" name="next" value="{{request.path}}" />
+        <input type="image" id="linkuparrow{{ link.id }}" src="{{ MEDIA_URL }}/img/plus.png">
+        </form>
+    </td>
+    <td>
+        <h2><a href="{{ object.get_absolute_url }}">{{object.name}}</a></h2>    
+        <p class="visualClear discreet">
+        {% if object.creator%}
+	    <a href="{% url profile_detail object.creator %}">{{object.creator}}</a> 
+        {% endif %}
+        {% get_comment_count for object as comment_count %}
+        <span class="comment-count">
+            {{comment_count}}    
+        </span>     
+        {% tags_for_object object as tags %}
+        <span class="tags">
+        {% for tag in tags|slice:":2" %}
+            <a href="{% url list_by_tag tag %}">{{tag}}</a>
+        {% empty %}
+            no tags
+        {% endfor %}
+        </span>
+        </p>
+    </td>
+    </tr>
+    
+</table>

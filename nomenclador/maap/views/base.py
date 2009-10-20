@@ -23,15 +23,20 @@ def index(request,*args, **kwargs):
         *args,**kwargs)
     
 ##Generic Views
-def view(request,cat_slug, object_slug):
-    objects = Place.objects.all()
-    category = PlaceCategory.objects.get(slug=cat_slug)   
+def view(request,cat_slug, object_id):
+    objects = MaapModel.objects.filter(category__slug=cat_slug)
+    category = MaapCategory.objects.get(slug=cat_slug)   
     return object_detail(
         request, 
         objects, 
-        slug=object_slug, 
-        extra_context={'category':category},
+        int(object_id), 
+        extra_context={'category':category,'object_list':objects},
         template_name='maap/object_detail.html')
+
+def maap_object_detail(request,cat_slug, object_id):
+    #FIXME no usar la vista de arriba, hay que ver quien esta llamando esta vista
+    # ya que levanta un error cuando la sacas
+    pass
 
 @login_required  
 def edit(request, model, slug=None):
@@ -108,10 +113,11 @@ def obj_list_by_cat(request, cat_slug):
         catel = MaapCategory.objects.get(slug = cat_slug)
     except MaapCategory.DoesNotExist:
         raise Http404
+        
     qscats = catel.get_descendants(include_self=True)
     mmodels = MaapModel.objects.filter(category__in=qscats)
-    context = RequestContext(request, {'category':catel, 'objects':mmodels})
-    return render_to_response('maap/list_by_cat.html', context_instance=context)
+    context = RequestContext(request, {'category':catel, 'object_list':mmodels})
+    return render_to_response('maap/index.html', context_instance=context)
     
     
 def obj_list_by_tag(request, tag):
@@ -119,10 +125,7 @@ def obj_list_by_tag(request, tag):
     context = RequestContext(request, {'tag':tag , 'objs': result})
     return render_to_response('maap/list_by_tag.html', context_instance=context)
 
-def maap_object_detail(request,cat_slug, object_id):
-    objects = MaapModel.objects.all()
-    return object_detail(request, objects, int(object_id), 
-                         template_name='maap/object_detail.html')
+
 
  
 def json_layer(qset):

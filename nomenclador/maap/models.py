@@ -2,12 +2,16 @@ from django.contrib.gis.db import models
 from django.db import models as dbmodels
 from django.utils import simplejson
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from osm.models import Nodes
 from nomenclador.settings import DEFAULT_SRID
-from tagging.fields import TagField
-import mptt
+
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
+
+from tagging.fields import TagField
+
+import mptt
 
 class MaapModel(models.Model):
     slug = models.SlugField(editable=False, null=True)
@@ -32,7 +36,11 @@ class MaapModel(models.Model):
 
     def __unicode__(self):
         return self.name
-  
+        
+    def get_absolute_url(self):
+        cat_slug = self.category.all()[0].slug
+        return reverse('view',args=[cat_slug, self.id])  
+        
     @property
     def json_dict(self):
         out = dict.copy(self.__dict__)
@@ -54,7 +62,7 @@ class MaapCategory(models.Model):
         super(LayerCategory, self).delete()
 
     def get_absolute_url(self):
-        return '/maap/category/%s/'%self.slug
+        return reverse('list_by_category',args=[self.slug])
 
 class MaapPoint(MaapModel):
 
@@ -70,6 +78,11 @@ class MaapPoint(MaapModel):
         out['geojson'] = simplejson.loads(self.geom.geojson)
        
         return out
+
+    def get_absolute_url(self):
+        cat_slug = self.category.all()[0].slug
+        return reverse('view',args=[cat_slug, self.id])
+        
 
 class MaapArea(MaapModel):
     geom = models.PolygonField(srid=DEFAULT_SRID)
