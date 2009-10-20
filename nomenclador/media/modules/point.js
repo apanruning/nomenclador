@@ -25,7 +25,7 @@ Maap.Point = Maap.Geom.extend({
             
             lookup['line'] = {
                 strokeColor: '#f3be4b',
-                strokeOpacity: 0.8,
+                strokeOpacity: 0.1,
                 strokeWidth: 1,
                 fillColor: 'yellow',
                 fillOpacity: 0.2
