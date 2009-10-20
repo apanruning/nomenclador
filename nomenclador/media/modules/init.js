@@ -31,11 +31,11 @@ Maap.State.prototype.initializeBounds = function() {
 //this function initialize the control objects of state 
 Maap.State.prototype.initializeControls = function () {
     //add and/or remove controls to map
-    this.map.addControl( new OpenLayers.Control.LayerSwitcher() );
+/*    this.map.addControl( new OpenLayers.Control.LayerSwitcher() );
     this.map.addControl( new OpenLayers.Control.MousePosition() );
     this.map.addControl( new OpenLayers.Control.PanZoomBar() );
     this.map.addControl( new OpenLayers.Control.Navigation() ); 
-    this.map.addControl( new OpenLayers.Control.Attribution() );
+    this.map.addControl( new OpenLayers.Control.Attribution() );*/
     return 0;
 }
 

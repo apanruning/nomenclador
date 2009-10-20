@@ -97,7 +97,7 @@ def loc_str2layer(strn):
             'type': 'layer',
             'id': 'street_%s' % strn,
             'elements': lpoints,
-            'box_size': None
+            'box_size': pgeom.extent
     }
         
     return HttpResponse(simplejson.dumps(layer), mimetype='text/json') 
