@@ -97,7 +97,7 @@ def loc_str2layer(strn):
             'type': 'layer',
             'id': 'street_%s' % strn,
             'elements': lpoints,
-            'box_size': None
+            'box_size': pgeom.extent
     }
         
     return HttpResponse(simplejson.dumps(layer), mimetype='text/json') 
@@ -115,7 +115,6 @@ def loc_door2layer(pos, strn, door):
           "type": "point",
           "id": 'approx_location_%s_%s' % (strn, door), 
           "name": "%s %s" % (strn, door),
-          "radius": pos[1],
           "geojson": pcoord, 
           "icon": {
             "url": "/media/icons/info.png", 
@@ -125,8 +124,10 @@ def loc_door2layer(pos, strn, door):
         }],
         'box_size': pgeom.extent
     }                
-    
 
+    if pos[1] > 0:    
+        layer['elements'][0]["radius"] = pos[1]
+          
     return simplejson.dumps(layer)
 
 def loc_int2layer(points, str1, str2):
