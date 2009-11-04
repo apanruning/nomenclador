@@ -1,0 +1,13 @@
+{% load mptt_tags %}
+
+<p class="breadcrumb">
+    Usted está en : 
+    <a href="{% url index %}">Inicio</a>
+    {% if current %}
+    {% for cat in current.get_ancestors %}
+    - <a href="{{cat.get_absolute_url}}">{{cat.name}}</a> 
+    {% endfor %}
+    - <a href="{{category.get_absolute_url}}">{{current.name}}</a> 
+    {%endif%}
+</p>    
+

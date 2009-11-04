@@ -31,11 +31,14 @@ Maap.State.prototype.initializeBounds = function() {
 //this function initialize the control objects of state 
 Maap.State.prototype.initializeControls = function () {
     //add and/or remove controls to map
-/*    this.map.addControl( new OpenLayers.Control.LayerSwitcher() );
-    this.map.addControl( new OpenLayers.Control.MousePosition() );
+    //this.map.addControl( new OpenLayers.Control.LayerSwitcher() );
+    //this.map.addControl( new OpenLayers.Control.MousePosition() );
     this.map.addControl( new OpenLayers.Control.PanZoomBar() );
+    this.map.addControl(new OpenLayers.Control.OverviewMap());
+
     this.map.addControl( new OpenLayers.Control.Navigation() ); 
-    this.map.addControl( new OpenLayers.Control.Attribution() );*/
+    //this.map.addControl( new OpenLayers.Control.PanPanel() );
+    this.map.addControl( new OpenLayers.Control.Attribution() );
     return 0;
 }
 
@@ -56,10 +59,10 @@ Maap.State.prototype.init = function() {
     map.setCenter(cordoba, 19);
 
     //load controls to map
-    this.initializeBounds(); 
+    this.initializeControls();
 
     //set the level to the user can see the map. (zoom)        
-    this.initializeControls();
+    this.initializeBounds(); 
 
     return 0;
 

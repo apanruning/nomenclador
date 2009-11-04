@@ -31,13 +31,15 @@ urlpatterns = patterns( '',
     url(r'^ingresar/$', 'nomenclador.account.views.login', name='login'),
     url(r'^salir/$', 'django.contrib.auth.views.logout', {'template_name': 'account/logout.html'}, name='logout'),
     url(r'^miembros/$', 'nomenclador.profiles.views.profiles', name='profile_list'),
+    url(r'^miembros/(?P<username>[\w\._-]+)/$', 'nomenclador.profiles.views.profile', name='profile_detail'),
+    url(r'^miembros/(?P<user_id>[\w\._-]+)/edit$', 'nomenclador.profiles.views.profile_edit', name='profile_edit'),
     url(r'^vote/(?P<object_id>\d+)/(?P<direction>up|down|clear)vote/?$',
         vote_on_object, dict(model=MaapModel, 
             template_name='confirm_vote.html',
             allow_xmlhttprequest=True),
         name='vote'),
     url(r'^(?P<cat_slug>[^/]+)/(?P<object_id>[^/]+)/$','nomenclador.maap.views.view', name='view'),
-    url(r'^(?P<username>[\w\._-]+)/$', 'nomenclador.profiles.views.profile', name='profile_detail'),
+
 
 )
 

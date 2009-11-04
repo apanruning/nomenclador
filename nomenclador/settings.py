@@ -10,6 +10,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+ACCOUNT_EMAIL_VERIFICATION = False
+
 DATABASE_ENGINE = 'postgresql_psycopg2'    # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = ''
 DATABASE_USER = ''             # Not used with sqlite3.
@@ -80,7 +82,7 @@ AUTH_PROFILE_MODULE = "profiles.Profile"
 
 ACCOUNT_REQUIRED_EMAIL = True
 INSTALLED_APPS = (
-    'notification',
+#    'notification',
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.auth',

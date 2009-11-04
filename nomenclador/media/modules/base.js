@@ -62,24 +62,6 @@ var Maap = {};
   };
 })();
 
-
-
-Maap.extend = function (Parent, extra) {
-    var p = Parent.prototype;
-    var out = function(){
-        Parent.apply(this, arguments);
-    };
-    for (var i in p) {
-        out.prototype[i] = p[i];
-    }
-    out.prototype.uber = p;
-    for (e in extra) {
-        out.prototype[e] = extra[e];
-    };
-    return out;
-}
-
-
 /*
 ------------- 
  OBJECT Geom

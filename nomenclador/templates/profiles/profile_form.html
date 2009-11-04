@@ -13,12 +13,11 @@
 {% endblock %}
 {% block content %}
 
-<h1><a href="{% url profile_detail other_user %}" rel="bookmark">{{ other_user.get_profile.name|default:other_user}}</a></h1>
-{% if is_me %}
-<a class="action-link edit" href="{% url profile_edit other_user.id %}">Editar</a>
-{% endif %}
+<form action="{% url profile_edit request.user.id %}" method="post">
+    {% include 'generic_form.html'%}    
 
-{{ other_user.get_profile.description|markdown }}
+    <p class="field"><input type="submit" value="Guardar" /></p>
+</form>
 
 
 {% endblock %}

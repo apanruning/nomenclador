@@ -6,6 +6,7 @@ from django.http import HttpResponse, Http404
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
+from django.views.generic import create_update
 from nomenclador.maap.models import MaapModel, MaapPoint, MaapArea, MaapMultiLine, Icon, MaapCategory
 from django.contrib.auth.decorators import login_required
 from tagging.models import TaggedItem, Tag

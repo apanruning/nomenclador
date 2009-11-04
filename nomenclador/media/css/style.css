@@ -101,7 +101,7 @@ body {
     margin:0;
 }
 .breadcrumb {
-    background:#ffc018;
+    background:#fff;
     padding:0.2em 0.5em;
     font-size:80%;
     margin:0;
@@ -111,6 +111,28 @@ body {
     right:0;
     padding-left: 20px;
 }
+.action-link{ 
+    padding-left: 20px;
+    margin-right: 10px;
+    background: no-repeat center left;
+}
+
+.action-link.edit { 
+    background-image: url("/media/img/edit.png") 
+}
+
+.action-link.log { 
+    background-image: url("/media/img/clock-add.png") 
+}
+
+.action-link.delete { 
+    background-image: url("/media/img/delete.png") 
+}
+
+.action-link.add-task, .action-link.add { 
+    background-image: url("/media/img/add.png") 
+}
+
 /*comment styles*/
 
 #comments{

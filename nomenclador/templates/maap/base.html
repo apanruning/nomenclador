@@ -1,4 +1,9 @@
 {% extends 'master.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}css/maap.css" type="text/css" media="screen" />        
+{% endblock %}
+
 {% block javascript %}
      <script src="/media/modules/base.js"></script>
      <script src="/media/modules/utils.js"></script>     

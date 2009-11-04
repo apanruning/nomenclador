@@ -26,7 +26,8 @@ Maap.State.prototype = {
            'projection' : new OpenLayers.Projection("EPSG:900913"),
            'maxResolution' : 200000.0002,
            'displayProjection' : new OpenLayers.Projection("EPSG:4326"),
-           'units' : "m"
+           'units' : "m",
+           'controls': []
     },
     
 
