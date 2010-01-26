@@ -1,13 +1,6 @@
 form{
     margin-bottom:1em;
 }
-form p, #timelog > li {
-    clear:left;
-    padding:0.25em;
-    margin:0 0 0.5em;
-}
-#timelog > li{
-    width:30em;
 }
 label{
     width:10em;
@@ -137,15 +130,14 @@ padding:0.5em 1em;
     margin:0;
 }
 #streetsform{
-    background:transparent url(../img/bg_searchterm.png) no-repeat;
     padding:0.2em; ;
 }
 .searchterm{
     color:#CCC;
-    background:transparent;
+    background:#FFF;
     margin:0;
-    padding:0 ;
-    border:none;
+    padding:0 0.2em;
+    border:1px solid #999;
     font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
 }
 
@@ -159,7 +151,6 @@ padding:0.5em 1em;
     border-color:transparent;
     background:transparent url(../img/bg_searchbutton.png) no-repeat;
     margin:0px;
-    padding:3px 6px;
     color:#FFF;
     width:100px;
     text-align:center;

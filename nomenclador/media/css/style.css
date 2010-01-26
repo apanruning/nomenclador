@@ -39,6 +39,7 @@ body {
 
 #main{
     background:#FFF;
+    margin-top:1.5em;
 }
 #listing ul{
     list-style:none;
@@ -68,13 +69,21 @@ body {
 #marcadores {
     float:left;
 }
+#search{
+    position:relative;
+}
 #categories {
-    background:#f4f3ee;
     font-size:80%;
-    margin:0 0 1em;
+    margin:-2px 0 1em;
+    z-index:99999;
+    background:#FFF;
+    width:75%;
+    position:absolute;
+    border:2px solid #FFC018;
 }
 #categories table {
     width:100%;
+    display:none;
 }
 #categories .root-node {
     font-size:120%;
@@ -92,7 +101,21 @@ body {
     width:20%;
     padding:0.5em;
 }
-
+#more-categories{
+    background:#FFC018;
+    padding:0.25em 0.5em;
+    vertical-align:middle;
+    position:absolute;
+    bottom:0;
+    right:0;
+    font-size:80%;
+}
+#more-categories:hover{
+    text-decoration:none;
+}
+#more-categories img{ 
+    vertical-align:middle;
+}
 #footer {
     border-top:1px solid #333;
 }
@@ -100,39 +123,6 @@ body {
     float:right;
     margin:0;
 }
-.breadcrumb {
-    background:#fff;
-    padding:0.2em 0.5em;
-    font-size:80%;
-    margin:0;
-}
-.action.close {
-    position:absolute;
-    right:0;
-    padding-left: 20px;
-}
-.action-link{ 
-    padding-left: 20px;
-    margin-right: 10px;
-    background: no-repeat center left;
-}
-
-.action-link.edit { 
-    background-image: url("/media/img/edit.png") 
-}
-
-.action-link.log { 
-    background-image: url("/media/img/clock-add.png") 
-}
-
-.action-link.delete { 
-    background-image: url("/media/img/delete.png") 
-}
-
-.action-link.add-task, .action-link.add { 
-    background-image: url("/media/img/add.png") 
-}
-
 /*comment styles*/
 
 #comments{
@@ -174,15 +164,6 @@ float:right;
 color:#900;
 }
 
-.tags{ 
-    padding-left: 20px;
-    background: url("../img/tag_blue.png") no-repeat center left;
-}
-
-.comment-count{ 
-    padding-left: 20px;
-    background: url("../img/comments.png") no-repeat center left;
-}
 #site_wide_announcements {
     background:#FFC018;
     border:2px solid #a87f0f;
@@ -199,3 +180,55 @@ color:#900;
     margin:0;
     position:relative;
 }
+
+.tags{ 
+    padding-left: 20px;
+    background: url("../img/tag_blue.png") no-repeat center left;
+}
+
+.comment-count{ 
+    padding-left: 20px;
+    background: url("../img/comments.png") no-repeat center left;
+}
+
+.shadow{
+    -moz-box-shadow:2px 2px 2px #999;
+    -webkit-box-shadow:2px 2px 2px #999;
+    box-shadow:2px 2px 2px #999;
+    
+}
+
+.breadcrumb {
+    background:#fff;
+    padding:0.2em 0.5em;
+    font-size:80%;
+    margin:0;
+}
+.action.close {
+    position:absolute;
+    right:0;
+    padding-left: 20px;
+}
+.action-link{ 
+    padding-left: 20px;
+    margin-right: 10px;
+    background: no-repeat center left;
+}
+
+.action-link.edit { 
+    background-image: url("/media/img/edit.png") 
+}
+
+.action-link.log { 
+    background-image: url("/media/img/clock-add.png") 
+}
+
+.action-link.delete { 
+    background-image: url("/media/img/delete.png") 
+}
+
+.action-link.add-task, .action-link.add { 
+    background-image: url("/media/img/add.png") 
+}
+
+

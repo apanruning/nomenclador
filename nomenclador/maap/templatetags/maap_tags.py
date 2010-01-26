@@ -3,7 +3,6 @@ from nomenclador.maap.models import MaapCategory
 
 register = template.Library()
 
-
 @register.inclusion_tag('../templates/category_list.html')
 def category_list(current_node=None):
     if not current_node:
