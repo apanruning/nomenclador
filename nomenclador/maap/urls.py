@@ -14,7 +14,7 @@ urlpatterns = patterns('nomenclador.maap.views',
     (r'^category/(?P<cat_slug>[^/]+)/$', 'obj_list_by_cat'),
     (r'^streets/$', 'search_streets'),
     (r'^streets/location$', 'street_location'),
-    (r'(?P<cat_slug>[^/]+)/(?P<object_id>\d+)/$','maap_object_detail'),
+#    (r'(?P<cat_slug>[^/]+)/(?P<object_id>\d+)/$','maap_object_detail'),
     (r'^tags/(?P<tag>[^/]+)/$','obj_list_by_tag'),
 )
 

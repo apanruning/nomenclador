@@ -108,7 +108,6 @@
 
         <div id="categories" class="shadow">
             {% block categories %}
-
                 {% if category %}
                     {% breadcrumbs category %}
                     {% category_list category %}
@@ -117,6 +116,9 @@
                     {% category_list %}
                 {% endif %}
             {% endblock %}
+            {% block listing %}
+            
+            {% endblock listing%}
         </div>
     </div>
 

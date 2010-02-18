@@ -16,7 +16,6 @@ from django.core import urlresolvers
 from django.utils.http import urlquote
 
 def index(request,*args, **kwargs):
-   
     queryset = MaapModel.objects.all()
     return object_list(
         request, 
@@ -34,14 +33,9 @@ def view(request,cat_slug, object_id):
         extra_context={'category':category,'object_list':objects},
         template_name='maap/object_detail.html')
 
-def maap_object_detail(request,cat_slug, object_id):
-    #FIXME no usar la vista de arriba, hay que ver quien esta llamando esta vista
-    # ya que levanta un error cuando la sacas
-    pass
-
 @login_required  
 def edit(request, model, slug=None):
-    modelm = get_model('posts',model)
+    modelm = get_model('maap',model)
     return create_update.update_object(
         request, 
         model=model, 
@@ -51,7 +45,7 @@ def edit(request, model, slug=None):
 
 @login_required
 def create(request, model):
-    model = get_model('posts',model)
+    model = get_model('maap',model)
     return create_update.create_object(
         request, 
         model=model,
@@ -124,7 +118,7 @@ def obj_list_by_cat(request, cat_slug):
 def obj_list_by_tag(request, tag):
     result = TaggedItem.objects.get_by_model(MaapModel, tag)
     context = RequestContext(request, {'tag':tag , 'objs': result})
-    return render_to_response('maap/list_by_tag.html', context_instance=context)
+    return render_to_response('maap/index.html', context_instance=context)
 
 
 
