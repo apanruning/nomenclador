@@ -10,7 +10,7 @@ TEMPLATE_DEBUG=DEBUG
 
 DATABASES = {
     'default': {
-        'ENGINE': 'postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'nomenclador',
         'USER': 'nomenclador',
         'PASSWORD': 'nomenclador',

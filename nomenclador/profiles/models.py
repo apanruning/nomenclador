@@ -3,13 +3,13 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
-from nomenclador.settings import DEFAULT_SRID
+from django.conf import settings
 
 class Profile(models.Model):
     user = models.ForeignKey(User, unique=True, verbose_name=_('user'))
     name = models.CharField(_('name'), max_length=50, null=True, blank=True)
     description = models.TextField(_('about'), null=True, blank=True)
-    location = models.PointField(_('location'), srid=DEFAULT_SRID, null=True, blank=True)
+    location = models.PointField(_('location'), srid=settings.DEFAULT_SRID, null=True, blank=True)
     public = models.BooleanField(_('is public'), default=False)
     website = models.URLField(_('website'), null=True, blank=True, verify_exists=False)
     
