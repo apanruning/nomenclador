@@ -12,6 +12,10 @@ label{
 select{
     width:15em;
 }
+input[type='text'],
+input[type='password']{
+    width:15em;
+}
 .formfields{
     list-style-type:none;
 
@@ -138,6 +142,7 @@ padding:0.5em 1em;
     margin:0;
     padding:0 0.2em;
     border:1px solid #999;
+    width:auto !important;
     font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
 }
 

@@ -52,6 +52,13 @@
     
 </head>
 <body>
+<div id="site-wrapper">
+<div id="banner-column">
+<p>{% pop_slot 'a-1' %}</p> 
+<script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=8></script>
+<script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=2></script>
+<script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=8></script>
+</div>
 <div id="wrapper">
     {% if site_wide_announcements %}
         <div id="site_wide_announcements">
@@ -116,9 +123,7 @@
                     {% category_list %}
                 {% endif %}
             {% endblock %}
-            {% block listing %}
-            
-            {% endblock listing%}
+
         </div>
     </div>
 
@@ -139,11 +144,10 @@
     {% endblock %}
     </div>
     
-    <div id="banner-slot-a">    
-        <!-- <p>{% pop_slot 'a-1' %}</p> -->
-        <script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=8></script>
-        <script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=2></script>
-        <script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=8></script>
+    <div id="listing">    
+        {% block listing %}
+        
+        {% endblock listing%}
     </div>
     <br class="visualClear" />
     <div id="footer">
@@ -159,7 +163,7 @@
 
     </div>
 </div>    
-
+</div>
 
 </body>
 

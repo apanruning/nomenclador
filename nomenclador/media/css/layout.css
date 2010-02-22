@@ -1,9 +1,16 @@
-#wrapper {
+#site-wrapper{
+    width:1240px;
     margin:0 auto;
     text-align:left;
+}
+#wrapper {
+    float:left;
     width:1000px;
 }
-
+#banner-column {
+    float:right;
+    width:200px;
+}
 #header {
 }
 #session {
@@ -39,13 +46,14 @@
 
 
 #main {
-    float:left;
+    float:right;
     width:78%;
     padding-bottom:4em;
 }
 #listing{
+    margin-top:1.5em;
     float:left;
-    width:25%;
+    width:20%;
 }
 #map {
     width:100%;
