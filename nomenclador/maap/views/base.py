@@ -54,18 +54,15 @@ def create(request, model):
 
 
 def get_objects(request):
-
     if request.method == 'GET':
         params = request.GET        
-        
-
-        qset = MaapModel.objects.all()
+        object_list = MaapModel.objects.all()
 
         if params.has_key('id'):
-            qset &= MaapModel.objects.filter(pk = int(params['id']))
+            object_list &= MaapModel.objects.filter(pk = int(params['id']))
 
         if params.has_key('searchterm'):
-            qset&= MaapModel.objects.filter(name__icontains=params['searchterm'])
+            object_list &= MaapModel.objects.filter(name__icontains=params['searchterm'])
 
         if params.has_key('category'):
             try:
@@ -73,10 +70,10 @@ def get_objects(request):
             except MaapCategory.DoesNotExist:
                 raise Http404
             qscats = catel.get_descendants(include_self=True)
-            qset = qset.filter(category__in=qscats)
+            object_list = object_list.filter(category__in=qscats)
             
         if params.has_key('tag'):
-            qset &= TaggedItem.objects.get_by_model(MaapModel, params['tag'])
+            object_list &= TaggedItem.objects.get_by_model(MaapModel, params['tag'])
         
                 
         if params.has_key('out'):
@@ -88,8 +85,10 @@ def get_objects(request):
                 raise Http404    
         else:
             path = request.get_full_path() + '&out=layer'
-            context = RequestContext(request, {'objs': qset, 'layerpath':path})
-            return render_to_response('maap/results.html', context_instance=context)
+            return object_list(request,
+                                object_list, 
+                                'maap/index.html', 
+                                extra_instance={'layerpath':path})
     else:
         raise Http404
         

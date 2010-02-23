@@ -13,25 +13,17 @@
 
 {% block listing %}
 
-	{% if objs %}
+{% block listing %}
 	<ul id="obj-list">
-		{% for object in objs %}
+		{% for object in object_list %}
 		<li>
-        {% with object.category.all|first as category %}
-        <h3><a href="{% url maap.views.view category.slug,object.pk %}">{{object.name}}</a></h3>
-        {% endwith %}  
-        <p class="discreet tags">                
-        {% tags_for_object object as tags%}
-        {% for tag in tags%}
-            <a href="{% url maap.views.obj_list_by_tag tag %}">{{tag}}</a> 
-        {% endfor %}
-        </p>
+        {% include 'place.html' %}
         </li>
+        {% empty %}
+        <li>No se encontraron objetos</li>
         {% endfor %}
 	</ul>
-    {% else %}
-    <h1>No hay resultados</h1>
-    {% endif %}
+{% endblock listing %}
     
 
 {% endblock %}

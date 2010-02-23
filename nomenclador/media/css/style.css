@@ -76,22 +76,21 @@ body {
     font-size:80%;
     margin:-2px 0 1em;
     z-index:99999;
-    background:#FFF;
-    width:75%;
+    background:#FFC018;
+    width:100%;
     position:absolute;
-    border:2px solid #FFC018;
+    border-bottom:2px solid #CCC;;
 }
 #categories table {
     width:100%;
     display:none;
+    background:#FFF;
 }
 #categories .root-node {
     font-size:120%;
-    
 }
 #categories .current {
     border-right:1px solid #cce44d;
-   
 }
 #categories .not-current{
 
@@ -130,38 +129,36 @@ body {
     
 }
 #comments .comment {
-background:#F5F5F5;
-color:#333333;
-font-weight:normal;
-line-height:140%;
-margin-bottom:10px;
-padding:0.5em 1em;
-
+    background:#F5F5F5;
+    color:#333333;
+    font-weight:normal;
+    line-height:140%;
+    margin-bottom:10px;
+    padding:0.5em 1em;
 }
 
 #comments .staff {
-background:#FFFFEE;
+    background:#FFFFEE;
 }
 #comments .comment-body {
-margin-right:6em;
+    margin-right:6em;
 }
 #comments td{
     background:transparent; 
     border:medium transparent none;
 }
 #comments p {
-margin:0;
-padding:0;
+    margin:0;
+    padding:0;
 }
 #comments .comment-user {
-padding-left:1em;
-font-size:90%;
-width:6em;
-float:right;
-    
+    padding-left:1em;
+    font-size:90%;
+    width:6em;
+    float:right;
 }
 #comments .comment-user a {
-color:#900;
+    color:#900;
 }
 
 #site_wide_announcements {
@@ -202,7 +199,7 @@ color:#900;
     background:#fff;
     padding:0.2em 0.5em;
     font-size:80%;
-    margin:0;
+    margin:2px;
 }
 .action.close {
     position:absolute;
