@@ -12,7 +12,7 @@ from microblogging.models import Following
 
 from nomenclador.profiles.models import Profile
 from nomenclador.profiles.forms import ProfileForm
-from nomenclador.olwidget.widgets import MapDisplay
+#from nomenclador.olwidget.widgets import MapDisplay
 
 
 if "notification" in settings.INSTALLED_APPS:
@@ -54,8 +54,8 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
         is_me = False
         is_following = False
     
-    display_map = MapDisplay(fields=[other_user.get_profile().location])
-    extra_context = {'map':display_map}
+    #display_map = MapDisplay(fields=[other_user.get_profile().location])
+    #extra_context = {'map':display_map}
     return render_to_response(template_name, dict({
         "is_me": is_me,
         "is_following": is_following,

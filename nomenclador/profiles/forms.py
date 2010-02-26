@@ -4,7 +4,7 @@ from nomenclador.fields import WMDTextField
 
 from django.contrib.gis import admin
 from nomenclador.maap.admin import GeoCordobaAdmin
-from nomenclador.olwidget.widgets import EditableMap
+#from nomenclador.olwidget.widgets import EditableMap
 
 admin_instance = GeoCordobaAdmin(Profile, admin.site)
 point_field = Profile._meta.get_field("location")
@@ -16,5 +16,5 @@ class ProfileForm(forms.ModelForm):
         exclude = ('user', 'blogrss', 'timezone', 
             'twitter_user', 'twitter_password')
     description = forms.CharField(widget=WMDTextField, required=False)
-    location = forms.CharField(widget=EditableMap, required=False)
+    location = forms.CharField(widget=PointWidget, required=False)
   
