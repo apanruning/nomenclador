@@ -2,6 +2,9 @@
 {% load tagging_tags markup inbox profile_tags%}	
 
 {%block title%}Perfil de {{other_user}} {%endblock%}
+{% block javascript %}
+    {{map.media}}
+{% endblock %}
 
 {%block categories %}  {% endblock %}
 {%block map %}  {% endblock %}
@@ -19,6 +22,8 @@
 {% endif %}
 
 {{ other_user.get_profile.description|markdown }}
+
+{{map}}
 
 
 {% endblock %}

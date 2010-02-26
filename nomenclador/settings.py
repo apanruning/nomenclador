@@ -114,4 +114,5 @@ INSTALLED_APPS = (
     'messages',
     'nomenclador.banners',
     'nomenclador.maap',
+    'osm',
 )

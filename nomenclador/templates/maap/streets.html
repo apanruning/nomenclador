@@ -40,30 +40,15 @@ Busqueda de calles
 </head>
 <body>
 {% block listing %}
-{% if intlist or strlist %}
+{% if results %}
 <h3> Resultados </h3>
 <ul>
-        {% for il in intlist %}    
+        {% for r in results %}    
         <li >
         <a class="show-layer" 
-           href="{% url maap.views.street_location %}?str={{il.0}}&int={{il.1}}">{{il.0}} Int. {{il.1}}</a>
+           href="{% url maap.views.street_location %}?{{r.url_params}}">{{r.name}}</a>
         </li>
         {% endfor %}
-    {% if POST.streetnumber %}
-        {% for il in strlist %}    
-        <li >
-        <a class="show-layer"
-           href="{% url maap.views.street_location %}?str={{il.0}}&door={{POST.streetnumber}}">{{il.0}}  {{POST.streetnumber}}</a>
-        </li>
-        {% endfor %}
-    {% else %}
-        {% for il in strlist %}    
-        <li >
-        <a class="show-layer"
-           href="{% url maap.views.street_location %}?str={{il.0}}">{{il.0}}</a>
-        </li>
-        {% endfor %}
-    {% endif %}
 </ul>
 {% else%}{%if request.POST %}
 <h3>No hay resultados</h3>

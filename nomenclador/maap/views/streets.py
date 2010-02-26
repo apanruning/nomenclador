@@ -8,34 +8,57 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
 from osm.models import *
 from osm.utils.search import get_locations_by_intersection, get_location_by_door
-from osm.utils.lists import get_streets_list, get_intersection_list
 from osm.utils.words import clean_search_street
-
 from django.core import urlresolvers
 from django.utils.http import urlquote
 from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
 
 def search_streets(request):
-    streetname = clean_search_street(request.POST.get('streetname', ''))
-    intersection = clean_search_street(request.POST.get('intersection', ''))
+
     streetnumber = request.POST.get('streetnumber',None)
-    intlist = []
-    strlist = []
     
-    if streetname and intersection and len(streetname)>2 and len(intersection)>2:
-        intlist = get_intersection_list(streetname, intersection)
-        if len(intlist) == 0:
-            # This should be changed with elegant "not found streets"
+    cs_street = clean_search_street(request.POST.get('streetname', ''))
+    cs_inters = clean_search_street(request.POST.get('intersection', ''))
+    results=[]
+    
+    if cs_street and len(cs_street)>2:
+
+        # Intersection Case
+        if cs_inters and len(cs_inters)>2:
+            
+            # This part must be optimized and refactorized
+            first = Streets.objects.filter(norm__contains = cs_street)
+            for f in first:
+                second = f.intersections.filter(norm__contains = cs_inters)
+                for s in second:
+                    results.append({
+                        'name': '%s Int. %s' % (f.name, s.name),
+                        'url_params': 'str=%s&int=%s' % (f.id, s.id)
+                    })
+        
+        # Street doors Case
+        elif streetnumber is not None and streetnumber.isdigit():
+            strlist = Streets.objects.filter(norm__contains = cs_street)
+            for s in strlist:
+                results.append({
+                    'name': '%s %s' % (s.name, streetnumber),
+                    'url_params': 'str=%s&door=%s' % (s.id, streetnumber)
+                })
+        
+        # Street alone Case
+        else:
+            strlist = Streets.objects.filter(norm__contains = cs_street)
+            for s in strlist:
+                results.append({
+                    'name': '%s' % s.name,
+                    'url_params': 'str=%s' % s.id
+                })
+
+        if len(results) == 0:
+            # This should be changed with elegant "not found current search"
             raise Http404
             
-    elif streetname and len(streetname)>2:
-        strlist = get_streets_list(streetname)
-        if len(strlist) == 0:
-            # This should be changed with elegant "not found streets"
-            raise Http404
-            
-    context = RequestContext(request,{'intlist':intlist, 'strlist':strlist,'POST': request.POST})
-    
+    context = RequestContext(request,{'results':results})
     
     return render_to_response('maap/streets.html', context_instance=context)
     
@@ -46,7 +69,8 @@ def street_location(request):
         if params.has_key('str'):
             if params.has_key('int'):
                 # Intersection Case
-                points = get_locations_by_intersection(params['str'],params['int'])
+                nodes = get_locations_by_intersection(params['str'],params['int'])
+                points = [n.geom.wkt for n in nodes] 
                 layer = loc_int2layer(points, params['str'], params['int'])
                 
             elif params.has_key('door'):
@@ -71,12 +95,12 @@ def street_location(request):
 
 def loc_str2layer(strn):
     
-    swl = SearchableWay.objects.filter(name=strn)
-    wl = [sw.way for sw in swl]
+    waylist = Ways.objects.filter(street__id=strn)
    
     ln = []
-    for w in wl:
-        ln.append(LineString([u.node.geom for u in w.waynodes_set.all()]))
+    for w in waylist:
+        nodes = [u.node.geom for u in w.waynodes_set.all()]
+        ln.append(LineString(nodes))
     
     ml = MultiLineString(ln)
            

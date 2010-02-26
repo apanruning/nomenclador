@@ -12,6 +12,8 @@ from microblogging.models import Following
 
 from nomenclador.profiles.models import Profile
 from nomenclador.profiles.forms import ProfileForm
+from nomenclador.olwidget.widgets import MapDisplay
+
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
@@ -52,26 +54,14 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
         is_me = False
         is_following = False
     
-
+    display_map = MapDisplay(fields=[other_user.get_profile().location])
+    extra_context = {'map':display_map}
     return render_to_response(template_name, dict({
         "is_me": is_me,
         "is_following": is_following,
         "other_user": other_user,
     }, **extra_context), context_instance=RequestContext(request))
     
-def profile_edit(requset, username):
-        if request.method == "POST":
-            if request.POST["action"] == "update":
-                profile_form = ProfileForm(request.POST, instance=other_user.get_profile())
-                if profile_form.is_valid():
-                    profile = profile_form.save(commit=False)
-                    profile.user = other_user
-                    profile.save()
-            else:
-                profile_form = ProfileForm(instance=other_user.get_profile())
-        else:
-            profile_form = ProfileForm(instance=other_user.get_profile())
-
 
 @login_required  
 def profile_edit(request, user_id):
