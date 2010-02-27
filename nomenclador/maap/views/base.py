@@ -53,44 +53,44 @@ def create(request, model):
         extra_context={'model':model.__name__})
 
 
-def get_objects(request):
-    if request.method == 'GET':
-        params = request.GET        
-        object_list = MaapModel.objects.all()
+#def get_objects(request):
+#    if request.method == 'GET':
+#        params = request.GET        
+#        object_list = MaapModel.objects.all()
 
-        if params.has_key('id'):
-            object_list &= MaapModel.objects.filter(pk = int(params['id']))
+#        if params.has_key('id'):
+#            object_list &= MaapModel.objects.filter(pk = int(params['id']))
 
-        if params.has_key('searchterm'):
-            object_list &= MaapModel.objects.filter(name__icontains=params['searchterm'])
+#        if params.has_key('searchterm'):
+#            object_list &= MaapModel.objects.filter(name__icontains=params['searchterm'])
 
-        if params.has_key('category'):
-            try:
-                catel = MaapCategory.objects.get(slug = params['category'])
-            except MaapCategory.DoesNotExist:
-                raise Http404
-            qscats = catel.get_descendants(include_self=True)
-            object_list = object_list.filter(category__in=qscats)
-            
-        if params.has_key('tag'):
-            object_list &= TaggedItem.objects.get_by_model(MaapModel, params['tag'])
-        
-                
-        if params.has_key('out'):
-            out = params['out']
-            if out == 'layer':
-                layer = json_layer(qset)
-                return HttpResponse(simplejson.dumps(layer), mimetype='text/json')  
-            else:
-                raise Http404    
-        else:
-            path = request.get_full_path() + '&out=layer'
-            return object_list(request,
-                                object_list, 
-                                'maap/index.html', 
-                                extra_instance={'layerpath':path})
-    else:
-        raise Http404
+#        if params.has_key('category'):
+#            try:
+#                catel = MaapCategory.objects.get(slug = params['category'])
+#            except MaapCategory.DoesNotExist:
+#                raise Http404
+#            qscats = catel.get_descendants(include_self=True)
+#            object_list = object_list.filter(category__in=qscats)
+#            
+#        if params.has_key('tag'):
+#            object_list &= TaggedItem.objects.get_by_model(MaapModel, params['tag'])
+#        
+#                
+#        if params.has_key('out'):
+#            out = params['out']
+#            if out == 'layer':
+#                layer = json_layer(qset)
+#                return HttpResponse(simplejson.dumps(layer), mimetype='text/json')  
+#            else:
+#                raise Http404    
+#        else:
+#            path = request.get_full_path() + '&out=layer'
+#            return object_list(request,
+#                                object_list, 
+#                                'maap/index.html', 
+#                                extra_instance={'layerpath':path})
+#    else:
+#        raise Http404
         
 def convOSM(wkt):
     """ Converts standard merkartor 

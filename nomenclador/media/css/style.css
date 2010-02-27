@@ -102,6 +102,7 @@ body {
 }
 #more-categories{
     background:#FFC018;
+    border:1px solid #FFC018;
     padding:0.25em 0.5em;
     vertical-align:middle;
     position:absolute;
