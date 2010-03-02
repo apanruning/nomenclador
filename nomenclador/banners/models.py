@@ -8,7 +8,8 @@ class Banner(models.Model):
     slot = TagField()
     clicks = models.PositiveIntegerField(default=0, blank=True)
     views = models.PositiveIntegerField(default=0, blank=True)
-    
+    def __unicode__(self):
+        return "Banner #%s on %s" %(self.pk, self.slot)
     
     
     

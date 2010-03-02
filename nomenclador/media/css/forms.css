@@ -1,9 +1,8 @@
 form{
-    margin-bottom:1em;
-}
+    margin:0;
 }
 label{
-    width:10em;
+    width:8em;
     float:left;
     text-align:right;
     padding:0.25em;
@@ -16,14 +15,18 @@ input[type='text'],
 input[type='password']{
     width:15em;
 }
+
 .formfields{
     list-style-type:none;
+    margin:0;
+    padding:0;
 
 }
 .formfields li{
     padding: 0.25em;
     margin-bottom:0.5em;
     clear:both;
+    overflow:hidden;
 }
 .formfields li.required {
 }
@@ -119,7 +122,7 @@ ui-state-highlight, .ui-widget-content .ui-state-highlight {
 /* login styles */
 
 #login-form{
-margin:15% auto;
+margin:10% 0 25%;
 width:30em;
 background:#FFF;
 padding:0.5em 1em;
