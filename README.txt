@@ -4,7 +4,7 @@ DATABASE INSTALL
  * Osmosis trunk version (http://wiki.openstreetmap.org/wiki/Osmosis_PostGIS_Setup)
  * GeoDjango (http://geodjango.org/docs/install.html)
  
-#Crear dos bases de datos: una para calles (osmosis) y otra para datos de aplicacion (nomenclador)
+#Crear dos bases de datos: una para calles (osmosis) y otra para datos de aplicacion (nomenclador) Utilizar el comando createdb como se indica a continuacion
 $ sudo su postgres -
 <postgres>$ createdb -T template_postgis database_name
 
@@ -49,16 +49,13 @@ $ sudo apt-get install libapache2-mod-wsgi
 $ git clone git://github.com/tutuca/cyj.buildout.git
 
 # Ejecutar el buildout con staging.cfg como archivo de configuración
-$ ./bin/buidout
+$ ./bin/buildout
 
-$ Sincronizamos la base de datos (dentro de la carpeta cyj.buildout)
+# Sincronizamos la base de datos (dentro de la carpeta cyj.buildout). 
+#BUG: Elegir NO CREAR SUPERUSUARIO ya que hay un bug en este punto. Ver el siguiente paso
 $ ./bin/django syncdb
 
-#TODO: Fix this
-# Correr syncdb, NO CREAR SUPERUSUARIO
-$ ./bin/django syncdb
-
-# Luego crear superusuario
+#Crear superusuario para la administracion del entorno
 $ ./bin/django createsuperuser
 
 #Agregar proyeccion google a postgis
