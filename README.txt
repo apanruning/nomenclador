@@ -55,8 +55,11 @@ $ Sincronizamos la base de datos (dentro de la carpeta cyj.buildout)
 $ ./bin/django syncdb
 
 #TODO: Fix this
+# Correr syncdb, NO CREAR SUPERUSUARIO
 $ ./bin/django syncdb
-$ ./bin/django reset profiles
+
+# Luego crear superusuario
+$ ./bin/django createsuperuser
 
 #Agregar proyeccion google a postgis
 #Dentro de la shell, ejecutar
