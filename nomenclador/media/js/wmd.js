@@ -2371,8 +2371,5 @@ if(!Attacklab.wmd)
 
 	};
 	
-	Attacklab.wmd();
-	Attacklab.wmdBase();
-	Attacklab.Util.startEditor();
 };
 

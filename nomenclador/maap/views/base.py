@@ -16,7 +16,7 @@ from django.core import urlresolvers
 from django.utils.http import urlquote
 
 def index(request,*args, **kwargs):
-    queryset = MaapModel.objects.all()
+    queryset = MaapModel.objects.all()[:5]
     return object_list(
         request, 
         queryset, 
@@ -79,7 +79,7 @@ def get_objects(request):
         if params.has_key('out'):
             out = params['out']
             if out == 'layer':
-                layer = json_layer(qset)
+                layer = json_layer(object_list)
                 return HttpResponse(simplejson.dumps(layer), mimetype='text/json')  
             else:
                 raise Http404    

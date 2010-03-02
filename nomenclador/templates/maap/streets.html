@@ -42,14 +42,16 @@ Busqueda de calles
 {% block listing %}
 {% if results %}
 <h3> Resultados </h3>
-<ul>
-        {% for r in results %}    
-        <li >
-        <a class="show-layer" 
-           href="{% url maap.views.street_location %}?{{r.url_params}}">{{r.name}}</a>
-        </li>
-        {% endfor %}
-</ul>
+<dl>
+    {% for result in results %}    
+    <dt >
+    <a class="show-layer" 
+       href="{% url maap.views.street_location %}?{{result.url_params}}">{{result.name}}</a>
+
+    </dt>
+    <dd>{{result.old}}</dd>
+    {% endfor %}
+</dl>
 {% else%}{%if request.POST %}
 <h3>No hay resultados</h3>
 {% endif %}{% endif %}

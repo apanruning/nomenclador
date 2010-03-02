@@ -1,39 +1,29 @@
 {% load mptt_tags %}
-
 <table border="0" cellspacing="0" cellpadding="0">
     <tr>
     {% for root_node in roots %}
-
-
         {% with root_node.children.all as childrens %}
         <td>
         <a class="root-node" href="{{ root_node.get_absolute_url }}">{{ root_node.name }}</a><br />
-        <ul>{% if childrens %}
+        <ul>
             {% for node in childrens %}
             <li>
-            <a href="{{ node.get_absolute_url }}">{{ node.name }}</a>
+            <a href="{{ node.get_absolute_url }}">{{ node.name }} ({{node.get_descendant_count}})</a>
             </li>
             {% endfor %}
-            {% endif %}
         </ul>
         </td>
-    {% endwith %}
-    {% if current %}
-        {% if forloop.counter|divisibleby:"4" %}
-        </tr><tr>
-        
+        {% endwith %}
+        {% if current and forloop.counter|divisibleby:"4" %}
+            </tr><tr>
+        {% else %}
+            {% if forloop.counter|divisibleby:"5" %}
+            </tr><tr>
+            {%endif%}
         {%endif%}
-    {% else %}
-        {% if forloop.counter|divisibleby:"5" %}
-        </tr><tr>
-        
-        {%endif%}
-
-    {%endif%}
     {% empty %}
-    <tr><td>No hay mas categorias debajo de la selecci&oacute;n</td></tr>
-    
+        <tr><td>No hay mas categorias debajo de la selecci&oacute;n</td></tr>
     {% endfor %}
-</tr>
+    </tr>
     <a href="#" id="more-categories">Categor&iacute;as</a>
 </table>

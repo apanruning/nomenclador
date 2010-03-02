@@ -1,3 +1,4 @@
 *~
 *.pyc
-PKG-INFO
+*.egg-info/
+nomenclador/media/banners/*

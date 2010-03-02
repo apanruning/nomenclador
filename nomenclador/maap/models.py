@@ -10,6 +10,7 @@ from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from tagging.fields import TagField
+from django.template.defaultfilters import slugify
 
 import mptt
 
@@ -23,10 +24,11 @@ class MaapModel(models.Model):
     editor = models.ForeignKey('auth.User',related_name='editors', editable = False)
     tags = TagField()
     category = models.ManyToManyField('MaapCategory', null=True, blank=True, related_name='maapmodel_set')
-    objects = models.GeoManager()
     banner_slots = models.CharField(max_length=255, blank=True, null=True)
     default_layers = models.CharField(max_length=255, blank=True, null=True)
-    
+
+    objects = models.GeoManager()
+        
     class Meta:
         ordering = ('created', 'name',)
 
@@ -43,23 +45,42 @@ class MaapModel(models.Model):
         
     @property
     def json_dict(self):
-        out = dict.copy(self.__dict__)
+        out = dict(filter(lambda (x,y): not x.startswith('_'), self.__dict__.iteritems()))
         out['created'] = self.created.strftime('%D %T')        
         out['changed'] = self.changed.strftime('%D %T')	        
 
         return out
 
 class MaapCategory(models.Model):
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, editable=False)
     name = models.CharField(max_length=35)
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')    
     maapmodel = models.ManyToManyField(MaapModel, null=True, blank=True, related_name='category_set')
+    is_public = models.BooleanField(default=True)
+    show_all = models.BooleanField(default=False)
+
+    def save(self, force_insert=False, force_update=False):        
+        if self.id is None:
+            num = 0
+            while num < 100:
+                
+                self.slug = slugify(self.name)
+                if num > 0:
+                    self.slug.append('-%i' % num)
+                try:
+                    out = super(MaapCategory, self).save(force_insert, force_update)
+                    return out
+                except:
+                    num += 1
+        else:
+            return super(MaapCategory, self).save(force_insert, force_update)
+
 
     def __unicode__(self):
         return self.name
 
-    def delete(self):
-        super(LayerCategory, self).delete()
+    #def delete(self):
+    #    super(MaapCategory, self).delete()
 
     def get_absolute_url(self):
         return reverse('list_by_category',args=[self.slug])
