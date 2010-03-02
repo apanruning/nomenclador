@@ -45,7 +45,7 @@ class MaapModel(models.Model):
         
     @property
     def json_dict(self):
-        out = dict.copy(self.__dict__)
+        out = dict(filter(lambda (x,y): not x.startswith('_'), self.__dict__.iteritems()))
         out['created'] = self.created.strftime('%D %T')        
         out['changed'] = self.changed.strftime('%D %T')	        
 
