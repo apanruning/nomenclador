@@ -38,6 +38,10 @@ $ psql -d nomenclador_database_name -U nomenclador -h localhost < <osmosis-djang
 >>>> set_streets()
 >>>> set_doors()
 
+#Para cargar las areas en formato gpx, ejecuter en la shell de cyj.buildout (barrios)
+>>>> from nomenclador.maap.utils import importAreas
+>>>> importAreas('<path_archivo_gpx>', osm=True)
+
 
 DEVELOPMENT CONFIGURATION
 -----------------------------------------------------
