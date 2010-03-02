@@ -54,8 +54,7 @@
 <body>
 <div id="site-wrapper">
 <div id="banner-column">
-<p>{% pop_slot 'a-1' %}</p> 
-<script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=8></script>
+{% pop_slot 'a-1' %}
 <script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=2></script>
 <script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=8></script>
 </div>
@@ -145,9 +144,21 @@
     </div>
     
     <div id="listing">    
-        {% block listing %}
-        
-        {% endblock listing%}
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>
+                {% block listing %}
+                {% endblock listing%}
+            </td>
+            <td id="results-banner-slot">
+            {%if street_name%}
+                {% lookup_banners street_name %}
+            {% endif %}
+            </td>
+            {% pop_slot 'bellow_results' %}
+        </tr>
+    </table>
+
     </div>
     <br class="visualClear" />
     <div id="footer">

@@ -19,14 +19,7 @@
         <span class="comment-count">
             {{comment_count}}    
         </span>     
-        {% tags_for_object object as tags %}
-        <span class="tags">
-        {% for tag in tags|slice:":2" %}
-            <a href="{% url list_by_tag tag %}">{{tag}}</a>
-        {% empty %}
-            no tags
-        {% endfor %}
-        </span>
+
         </p>
     </td>
     </tr>

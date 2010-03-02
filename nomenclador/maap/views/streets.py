@@ -58,7 +58,7 @@ def search_streets(request):
             # This should be changed with elegant "not found current search"
             raise Http404
             
-    context = RequestContext(request,{'results':results})
+    context = RequestContext(request,{'results':results, 'street_name':cs_street})
     
     return render_to_response('maap/streets.html', context_instance=context)
     

@@ -13,6 +13,7 @@ admin.autodiscover()
 urlpatterns = patterns('nomenclador.maap.views',
     (r'^$', 'index',{'template_name':'maap/index.html'}, 'index'),
     url(r'^categoria/(?P<cat_slug>[^/]+)/$', 'obj_list_by_cat', name='list_by_category'),
+    url(r'^api/get$', 'get_objects',name='get_objects'),
     (r'^map/streets/$', 'search_streets'),
     (r'^map/streets/location$', 'street_location'),
     (r'^tags/(?P<tag>[^/]+)/$','obj_list_by_tag'),

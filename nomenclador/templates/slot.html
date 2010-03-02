@@ -1,3 +1,9 @@
 {% for banner in banners %}
-<a href="{{banner.url}}"><img src="/media/{{banner.image}}" /></a>
+<a href="{{banner.url}}">
+{% if banner.image %}<img src="/media/{{banner.image}}" />
+{% else%}{% if banner.code %}
+        {{banner.code|safe}}
+        {% endif %}
+{% endif %}
+</a>
 {% endfor %}
