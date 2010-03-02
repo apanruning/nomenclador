@@ -1,21 +1,26 @@
-from django.contrib.gis.utils import LayerMapping
+#from django.contrib.gis.utils import LayerMapping
+from django.contrib.gis.gdal import DataSource
+from django.contrib.gis.gdal import OGRGeometry, SpatialReference
+from django.contrib.gis.geos import Polygon
 
 from models import MaapOSMArea, MaapArea
 
 
-mapping = {'name' : 'name', 
-           'geom' : 'LINESTRING', 
-} 
-
 def importAreas(filepath, osm=True):
-    lm = LayerMapping(MaapArea, filepath, mapping, source_srs=4269)
-    for e in lm.layer:
-        kwargs = lm.feature_kwargs(e)
-        
-        # Neccesary hacks to commit geometry data
-        kwargs['geom'] = kwargs['geom'].replace('LINESTRING ','POLYGON (')+')'
-        kwargs['creator_id'] = 1
-        kwargs['editor_id'] = 1
+    
+    ds = DataSource(filepath)
+    
+    for e in ds[2]:
+        pgeom = OGRGeometry(Polygon(e.geom.coords[0]).wkt)
+        pgeom.srs = 'EPSG:4326'
+        pgeom.transform_to(SpatialReference('EPSG:900913'))
+
+        kwargs = dict( 
+            geom = pgeom.wkt,
+            name = e.get('name'),
+            creator_id = 1,
+            editor_id = 1,
+        )    
         if osm:
             ma = MaapOSMArea(**kwargs)
         else:
