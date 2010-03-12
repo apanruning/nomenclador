@@ -87,6 +87,8 @@ class MaapCategory(models.Model):
 
 class MaapPoint(MaapModel):
 
+    objects = models.GeoManager()
+
     geom = models.PointField(srid=DEFAULT_SRID)
     icon = models.ForeignKey('Icon')
     
@@ -106,6 +108,8 @@ class MaapPoint(MaapModel):
         
 
 class MaapArea(MaapModel):
+    objects = models.GeoManager()
+
     geom = models.PolygonField(srid=DEFAULT_SRID)
    
     @property
@@ -118,6 +122,7 @@ class MaapArea(MaapModel):
         return out
 
 class MaapOSMArea(MaapArea):
+    objects = models.GeoManager()
     nodes_covered = models.ManyToManyField('osm.Nodes', editable=False)
 
     def save(self, force_insert=False, force_update=False):
@@ -126,6 +131,7 @@ class MaapOSMArea(MaapArea):
 
 
 class MaapMultiLine(MaapModel):
+    objects = models.GeoManager()
     geom = models.MultiLineStringField(srid=DEFAULT_SRID)
 
     @property
