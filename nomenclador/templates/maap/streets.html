@@ -41,13 +41,12 @@ Busqueda de calles
 <body>
 {% block listing %}
 {% if results %}
-<h3> Resultados </h3>
+<h3> Resultados para {{street_name}}</h3>
 <dl>
     {% for result in results %}    
-    <dt >
+    <dt>
     <a class="show-layer" 
        href="{% url maap.views.street_location %}?{{result.url_params}}">{{result.name}}</a>
-
     </dt>
     <dd>{{result.old}}</dd>
     {% endfor %}
