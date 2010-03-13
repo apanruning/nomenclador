@@ -60,26 +60,32 @@ def get_objects(request):
 
         if params.has_key('id'):
             object_list &= MaapModel.objects.filter(pk = int(params['id']))
-
-        if params.has_key('searchterm'):
-            object_list &= MaapModel.objects.filter(name__icontains=params['searchterm'])
-
-        if params.has_key('category'):
-            try:
-                catel = MaapCategory.objects.get(slug = params['category'])
-            except MaapCategory.DoesNotExist:
-                raise Http404
-            qscats = catel.get_descendants(include_self=True)
-            object_list = object_list.filter(category__in=qscats)
             
-        if params.has_key('tag'):
-            object_list &= TaggedItem.objects.get_by_model(MaapModel, params['tag'])
+        from django.contrib.gis.measure import Distance, D
+        _geom = object_list[0].maappoint.geom
+        _distance = D(m=300)
         
-                
+        closests = MaapPoint.objects.filter(geom__dwithin=(_geom, _distance))
+        closests = closests.exclude(id=object_list[0].id)
+        
+        #if params.has_key('searchterm'):
+        #    object_list &= MaapModel.objects.filter(name__icontains=params['searchterm'])
+
+        #if params.has_key('category'):
+        #    try:
+        #        catel = MaapCategory.objects.get(slug = params['category'])
+        #    except MaapCategory.DoesNotExist:
+        #        raise Http404
+        #    qscats = catel.get_descendants(include_self=True)
+        #    object_list = object_list.filter(category__in=qscats)
+            
+        #if params.has_key('tag'):
+            #object_list &= TaggedItem.objects.get_by_model(MaapModel, params['tag'])
+                    
         if params.has_key('out'):
             out = params['out']
             if out == 'layer':
-                layer = json_layer(object_list)
+                layer = json_layer_two(object_list[0], closests)
                 return HttpResponse(simplejson.dumps(layer), mimetype='text/json')  
             else:
                 raise Http404    
@@ -119,9 +125,57 @@ def obj_list_by_tag(request, tag):
     context = RequestContext(request, {'tag':tag , 'objs': result})
     return render_to_response('maap/index.html', context_instance=context)
 
-
-
- 
+def json_layer_two(obj, closests):
+    objects = []
+    try: 
+        objects.append(obj.maappoint)
+        
+    except MaapPoint.DoesNotExist:
+        pass
+    try:
+        objects.append(obj.maapmultiline)
+        
+    except MaapMultiLine.DoesNotExist:
+        pass
+    try:
+        objects.append(obj.maaparea)
+        
+    except MaapArea.DoesNotExist:
+        pass
+    for mo in closests:
+        try: 
+            objects.append(mo.maappoint)
+            continue
+        except MaapPoint.DoesNotExist:
+            pass
+        #try:
+        #    objects.append(mo.maapmultiline)
+        #    continue
+        #except MaapMultiLine.DoesNotExist:
+        #    pass
+        #try:
+        #    objects.append(mo.maaparea)
+        #    continue
+        #except MaapArea.DoesNotExist:
+        #    pass
+            
+    if objects:
+        geom = objects[0].geom
+        for i in range(1,len(objects)):
+            geom = geom.union(objects[i].geom)
+        box_size = geom.extent
+    else:
+        box_size = ''
+        
+    json_results = [o.json_dict for o in objects]
+    layer = {
+        'type': 'layer',
+        'id': 'layer-object-%s' % 'layer',
+        'elements': json_results,
+        'box_size': box_size
+    }
+    return layer
+            
 def json_layer(qset):
     objects = []
     for mo in qset:
