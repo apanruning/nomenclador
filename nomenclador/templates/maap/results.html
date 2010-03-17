@@ -2,7 +2,7 @@
 {% load markup tagging_tags %}
 {% block title %}Resultados de busqueda{%endblock%}
 {% block js_onload %}
-
+{{ block.super }}
     state.loadLayer('{{layerpath}}', false, function(layer){
         layer.show();    
     });

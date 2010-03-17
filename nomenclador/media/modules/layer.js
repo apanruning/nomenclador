@@ -65,16 +65,23 @@ Maap.Layer.prototype = {
 
 
 // Extends Maap.State functionality: Add Layer
+Maap.State.prototype.setLayer = function(data) {
+    // Eval layer object
+    Layer = new Maap.Layer(data, state.map);          
+    state.map.addLayers(Layer.getLayers());
+    state.layers[Layer.id] = Layer;
+    return Layer;
+};
+
+
+// Extends Maap.State functionality: Add Layer
 Maap.State.prototype.loadLayer = function(url, reload, callback) {
     state = this;
-
+    
     //send request to server for get the layer to add 
     $.getJSON(url, 
         function(data) {
-            // Eval layer object
-            Layer = new Maap.Layer(data, state.map);          
-            state.map.addLayers(Layer.getLayers());
-            state.layers[Layer.id] = Layer;
+            Layer = state.setLayer(data);
             callback(Layer);
         }
     );

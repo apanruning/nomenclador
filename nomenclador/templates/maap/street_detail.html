@@ -1,0 +1,19 @@
+{% extends 'maap/base.html' %}
+
+
+{% block js_onload %}
+    {{ block.super }}
+    json_layer = {{ json_layer|safe }};
+    state.setLayer(json_layer).show();     
+{% endblock %}
+
+
+{% block title %}{{object.name}}{% endblock %}
+
+{% block content %}
+
+    <div id="description"></div>
+    <br class="visualClear" />
+
+{% endblock %}
+

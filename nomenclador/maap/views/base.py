@@ -7,13 +7,13 @@ from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
 from django.views.generic import create_update
-from nomenclador.maap.models import MaapModel, MaapPoint, MaapArea, MaapMultiLine, Icon, MaapCategory
 from django.contrib.auth.decorators import login_required
-from tagging.models import TaggedItem, Tag
-
-
+from django.contrib.gis.measure import Distance, D
 from django.core import urlresolvers
 from django.utils.http import urlquote
+from nomenclador.maap.models import MaapModel, MaapPoint, MaapArea, \
+                                    MaapMultiLine, Icon, MaapCategory
+from tagging.models import TaggedItem, Tag
 
 def index(request,*args, **kwargs):
     queryset = MaapModel.objects.all()[:5]
@@ -25,13 +25,19 @@ def index(request,*args, **kwargs):
 ##Generic Views
 def view(request,cat_slug, object_id):
     objects = MaapModel.objects.filter(category__slug=cat_slug)
-    category = MaapCategory.objects.get(slug=cat_slug)   
+    category = MaapCategory.objects.get(slug=cat_slug)  
+    obj = objects.get(id = object_id)
+    geom = obj.maappoint.geom        
+        
+    closests = MaapPoint.objects.filter(geom__dwithin=(geom, D(m=300)))
+    closests = closests.exclude(id=object_id)     
+    json_layer = simplejson.dumps(json_layer_two(obj, closests))
     return object_detail(
         request, 
         objects, 
-        int(object_id), 
-        extra_context={'category':category,'object_list':objects},
-        template_name='maap/object_detail.html')
+        int(object_id),
+        extra_context = {'category':category, 'object_list':objects, 'json_layer': json_layer},
+        template_name = 'maap/object_detail.html')
 
 @login_required  
 def edit(request, model, slug=None):
@@ -61,7 +67,7 @@ def get_objects(request):
         if params.has_key('id'):
             object_list &= MaapModel.objects.filter(pk = int(params['id']))
             
-        from django.contrib.gis.measure import Distance, D
+
         _geom = object_list[0].maappoint.geom
         _distance = D(m=300)
         
@@ -80,7 +86,7 @@ def get_objects(request):
         #    object_list = object_list.filter(category__in=qscats)
             
         #if params.has_key('tag'):
-            #object_list &= TaggedItem.objects.get_by_model(MaapModel, params['tag'])
+        #    object_list &= TaggedItem.objects.get_by_model(MaapModel, params['tag'])
                     
         if params.has_key('out'):
             out = params['out']
@@ -105,7 +111,6 @@ def convOSM(wkt):
     obj = OGRGeometry(wkt)
     obj.srs = 'EPSG:4326'
     obj.transform_to(SpatialReference('EPSG:900913'))
-    #obj.transform_to(SpatialReference('EPSG:4326'))
     return (obj.x, obj.y)
 
 def obj_list_by_cat(request, cat_slug):
@@ -129,7 +134,6 @@ def json_layer_two(obj, closests):
     objects = []
     try: 
         objects.append(obj.maappoint)
-        
     except MaapPoint.DoesNotExist:
         pass
     try:

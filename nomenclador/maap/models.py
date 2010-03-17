@@ -14,6 +14,10 @@ from django.template.defaultfilters import slugify
 
 import mptt
 
+class MaapMetadata(models.Model):
+    key = models.CharField(max_length=100)
+    value = models.CharField(max_length=100)
+
 class MaapModel(models.Model):
     slug = models.SlugField(editable=False, null=True)
     name = models.CharField(max_length=100)
@@ -26,23 +30,23 @@ class MaapModel(models.Model):
     category = models.ManyToManyField('MaapCategory', null=True, blank=True, related_name='maapmodel_set')
     banner_slots = models.CharField(max_length=255, blank=True, null=True)
     default_layers = models.CharField(max_length=255, blank=True, null=True)
-
+    metadata = models.ForeignKey('MaapMetadata', null=True, blank=True)    
     objects = models.GeoManager()
-        
+    
     class Meta:
         ordering = ('created', 'name',)
-
+    
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(MaapModel, self).save(*args, **kwargs)
-
+    
     def __unicode__(self):
         return self.name
-        
+    
     def get_absolute_url(self):
         cat_slug = self.category.all()[0].slug
         return reverse('view',args=[cat_slug, self.id])  
-        
+    
     @property
     def json_dict(self):
         out = dict(filter(lambda (x,y): not x.startswith('_'), self.__dict__.iteritems()))
@@ -58,7 +62,7 @@ class MaapCategory(models.Model):
     maapmodel = models.ManyToManyField(MaapModel, null=True, blank=True, related_name='category_set')
     is_public = models.BooleanField(default=True)
     show_all = models.BooleanField(default=False)
-
+    
     def save(self, force_insert=False, force_update=False):        
         if self.id is None:
             num = 0
@@ -74,23 +78,20 @@ class MaapCategory(models.Model):
                     num += 1
         else:
             return super(MaapCategory, self).save(force_insert, force_update)
-
-
+    
+    
     def __unicode__(self):
         return self.name
-
-    #def delete(self):
-    #    super(MaapCategory, self).delete()
 
     def get_absolute_url(self):
         return reverse('list_by_category',args=[self.slug])
 
 class MaapPoint(MaapModel):
-
-    objects = models.GeoManager()
-
+    
     geom = models.PointField(srid=DEFAULT_SRID)
     icon = models.ForeignKey('Icon')
+    
+    objects = models.GeoManager()
     
     @property
     def json_dict(self):
@@ -99,13 +100,13 @@ class MaapPoint(MaapModel):
         out['type'] = 'point'
         out['icon'] = self.icon.json_dict
         out['geojson'] = simplejson.loads(self.geom.geojson)
-       
+        
         return out
-
+    
     def get_absolute_url(self):
         cat_slug = self.category.all()[0].slug
         return reverse('view',args=[cat_slug, self.id])
-        
+    
 
 class MaapArea(MaapModel):
     objects = models.GeoManager()
@@ -118,10 +119,11 @@ class MaapArea(MaapModel):
         out.pop('geom')
         out['type'] = 'area'
         out['geojson'] = simplejson.loads(self.geom.geojson)
-       
+        
         return out
 
 class MaapOSMArea(MaapArea):
+    nodes_covered = models.ManyToManyField('osm.Nodes', editable=False)
     objects = models.GeoManager()
     nodes_covered = models.ManyToManyField('osm.Nodes', editable=False)
 
@@ -131,8 +133,9 @@ class MaapOSMArea(MaapArea):
 
 
 class MaapMultiLine(MaapModel):
-    objects = models.GeoManager()
     geom = models.MultiLineStringField(srid=DEFAULT_SRID)
+    objects = models.GeoManager()
+    
 
     @property
     def json_dict(self):

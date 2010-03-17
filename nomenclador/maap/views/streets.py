@@ -84,8 +84,11 @@ def street_location(request):
             else:
                 # Street alone
                 layer = loc_str2layer(params['str'])
-                
-            return HttpResponse(layer, mimetype='text/json')  
+            
+            # json_layer = simplejson.dumps(layer)    
+            context = RequestContext(request,{ 'json_layer':layer})
+            
+            return render_to_response('maap/street_detail.html', context_instance=context)
                             
         else:
             raise Http404        
@@ -102,8 +105,7 @@ def loc_str2layer(strn):
         nodes = [u.node.geom for u in w.waynodes_set.all()]
         ln.append(LineString(nodes))
     
-    ml = MultiLineString(ln)
-           
+    ml = MultiLineString(ln)           
     pgeom = OGRGeometry(ml.wkt)
     pgeom.srs = 'EPSG:4326'
     pgeom.transform_to(SpatialReference('EPSG:900913'))
@@ -124,7 +126,7 @@ def loc_str2layer(strn):
             'box_size': pgeom.extent
     }
         
-    return HttpResponse(simplejson.dumps(layer), mimetype='text/json') 
+    return simplejson.dumps(layer) 
 
 def loc_door2layer(pos, strn, door):
     pgeom = OGRGeometry(pos[0].wkt)

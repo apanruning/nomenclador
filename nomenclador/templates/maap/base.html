@@ -10,18 +10,10 @@
      <script src="/media/modules/layer.js"></script>
      <script src="/media/modules/init.js"></script>
 
-     <script type="text/javascript">
-     $(document).ready(
-     //initilize system
-     function(){
-
-        // Initialize state
-        state = new Maap.State();
-        state.init();        
-        {% block js_onload %}
-        {% endblock %}
-    } 
-
-)	
-     </script>
 {% endblock %}
+{% block js_onload %}
+    // Initialize state
+    state = new Maap.State();
+    state.init();        
+{% endblock %}
+

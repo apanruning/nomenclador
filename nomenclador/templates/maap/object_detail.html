@@ -2,11 +2,9 @@
 {% load markup tagging_tags banner_tags mptt_tags maap_tags %}
 
 {% block js_onload %}
-
-    state.loadLayer('{%url get_objects%}?id={{object.pk}}&out=layer', false, function(layer){
-        layer.show();    
-    });
-    
+    {{ block.super }}
+    json_layer = {{ json_layer|safe }};
+    state.setLayer(json_layer).show();     
 {% endblock %}
 
 
