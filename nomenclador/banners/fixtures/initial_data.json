@@ -1,0 +1,50 @@
+[
+  {
+    "pk": 1, 
+    "model": "banners.banner", 
+    "fields": {
+      "slot": "avellaneda colon general indepen julio martin paz san velez", 
+      "code": "", 
+      "views": 0, 
+      "url": "http://www.google.com", 
+      "image": "banners/banner_cuadrado_chico_1.jpg", 
+      "clicks": 0
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "banners.banner", 
+    "fields": {
+      "slot": "b-1", 
+      "code": "", 
+      "views": 0, 
+      "url": "http://www.google.com", 
+      "image": "banners/banner_detalle.jpg", 
+      "clicks": 0
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "banners.banner", 
+    "fields": {
+      "slot": "a-1", 
+      "code": "<script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=2></script>", 
+      "views": 0, 
+      "url": "", 
+      "image": "", 
+      "clicks": 0
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "banners.banner", 
+    "fields": {
+      "slot": "a-1", 
+      "code": "<script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=8></script>", 
+      "views": 0, 
+      "url": "", 
+      "image": "", 
+      "clicks": 0
+    }
+  }
+]
