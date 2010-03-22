@@ -28,11 +28,8 @@ Maap.State.prototype = {
            'displayProjection' : new OpenLayers.Projection("EPSG:4326"),
            'units' : "m",
            'controls': []
-    },
-    
-
-} 
-
+    }
+};
 
 
 

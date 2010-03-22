@@ -60,8 +60,8 @@ Maap.Layer.prototype = {
         for (i=0; i< this.elements.length; i++) {
             this.elements[i].hide();
         }
-    },
-}
+    }
+};
 
 
 // Extends Maap.State functionality: Add Layer

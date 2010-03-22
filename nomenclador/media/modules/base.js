@@ -1,6 +1,3 @@
-var Maap = {};
-
-
 // Inspired by base2 and Prototype
 (function(){
   var initializing = false, fnTest = /xyz/.test(function(){xyz;}) ? /\b_super\b/ : /.*/;
@@ -67,20 +64,22 @@ var Maap = {};
  OBJECT Geom
 -------------
 */
+
+Maap = {};
 Maap.Geom = Class.extend({
     layer: null,
     init: function(metadata){
-        for (m in metadata) {
-            this[m] = metadata[m]
-        }
+        for (m in metadata) 
+            this[m] = metadata[m];
     },
     show: function() {
         this.layer.setVisibility(true);
     },
     hide: function() {
         this.layer.setVisibility(false);
-    },
+    }
 });
+
 
 
 

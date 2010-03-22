@@ -17,7 +17,7 @@ Maap.MultiLine = Maap.Geom.extend({
             'line': {
                 strokeColor: '#feff00',
                 strokeOpacity: 0.8,
-                strokeWidth: 5,
+                strokeWidth: 5
             },
             'border':{
                 strokeColor: '#612000',
