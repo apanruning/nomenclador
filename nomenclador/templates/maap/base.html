@@ -1,16 +1,17 @@
 {% extends 'master.html' %}
 
 {% block javascript %}
-     <script src="/media/modules/base.js"></script>
-     <script src="/media/modules/utils.js"></script>     
-     <script src="/media/modules/state.js"></script>
-     <script src="/media/modules/point.js"></script>
-     <script src="/media/modules/multiline.js"></script>
-     <script src="/media/modules/area.js"></script>
-     <script src="/media/modules/layer.js"></script>
-     <script src="/media/modules/init.js"></script>
+     <script type="text/javascript" src="/media/modules/base.js"></script>
+     <script type="text/javascript" src="/media/modules/utils.js"></script>     
+     <script type="text/javascript" src="/media/modules/state.js"></script>
+     <script type="text/javascript" src="/media/modules/point.js"></script>
+     <script type="text/javascript" src="/media/modules/multiline.js"></script>
+     <script type="text/javascript" src="/media/modules/area.js"></script>
+     <script type="text/javascript" src="/media/modules/layer.js"></script>
+     <script type="text/javascript" src="/media/modules/init.js"></script>
 
 {% endblock %}
+
 {% block js_onload %}
     // Initialize state
     state = new Maap.State();

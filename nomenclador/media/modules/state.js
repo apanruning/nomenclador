@@ -12,10 +12,10 @@ structure:
 // Initialization function
 Maap.State = function() {
     // create map whith map options     
-    map = new OpenLayers.Map('map', this.map_options);
+    mep = new OpenLayers.Map('map', this.map_options);
 
     // update the state variable
-    this.map = map
+    this.map = mep
 };
 
 Maap.State.prototype = {

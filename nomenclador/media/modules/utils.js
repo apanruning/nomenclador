@@ -1,7 +1,7 @@
 //this function create a position. Take a lon and lat data and do. 
 function create_position(x,y) {
-   var lonlat = new OpenLayers.LonLat(x,y).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-   return lonlat
+   var lenlat = new OpenLayers.LonLat(x,y).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+   return lenlat
 };
 
 //this function includes all necessary js files for the application  

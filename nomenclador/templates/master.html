@@ -17,13 +17,13 @@
     {% block css %}
     {% endblock %}
 
-     <script src="{{ MEDIA_URL }}js/OpenLayers.js"></script>
-     <script src="{{ MEDIA_URL }}js/OpenStreetMap.js"></script>
-     <script src="{{ MEDIA_URL }}js/jquery.min.js"></script>    
-     <script src="{{ MEDIA_URL }}js/dimensions.js" type="text/javascript"></script>
-     <script src="{{ MEDIA_URL }}js/autocomplete.js" type="text/javascript"></script>
-     <script src="{{ MEDIA_URL }}js/jquery.boxshadow.js"></script>       
-     <script src="{{ MEDIA_URL }}js/forms.js"></script>       
+     <script type="text/javascript" src="{{ MEDIA_URL }}js/OpenLayers.js"></script>
+     <script type="text/javascript" src="{{ MEDIA_URL }}js/OpenStreetMap.js"></script>
+     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.min.js"></script>    
+     <script type="text/javascript" src="{{ MEDIA_URL }}js/dimensions.js"></script>
+     <script type="text/javascript" src="{{ MEDIA_URL }}js/autocomplete.js"></script>
+     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.boxshadow.js"></script>       
+     <script type="text/javascript" src="{{ MEDIA_URL }}js/forms.js"></script>       
     {% block javascript %}
     {% if form.media %}
         {% for js in form.media.render_js %} 
@@ -35,9 +35,9 @@
     $(document).ready(function(){
         $('.shadow').boxShadow(10, 10, 5, '#888');
         $('#more-categories').click(function(){
-            $('#categories table').toggle()
-            console.log($('#categories table'))
-            console.log($(this).text())
+            $('#categories table').toggle();
+            console.log($('#categories table'));
+            console.log($(this).text());
             if ($(this).text() === 'Categorías'){
                 $(this).text('Ocultar')
             }else{

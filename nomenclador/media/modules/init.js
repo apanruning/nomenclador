@@ -46,17 +46,17 @@ Maap.State.prototype.initializeControls = function () {
 //this function initialize all settings of state. 
 Maap.State.prototype.init = function() {
     //Position: Cordoba
-    var lon = -31.416667
-    var lat = -64.183333
+    //var lon = -31.416667
+    //var lat = -64.183333
     
     //create a position indicating Cordoba
-    cordoba = create_position(lon,lat);
+    //cordoba = create_position(lon,lat);
 
     //add initial layers to map
     this.initializeBaseLayers();
 
     //center the map in Cordoba position
-    map.setCenter(cordoba, 19);
+    //map.setCenter(cordoba, 19);
 
     //load controls to map
     this.initializeControls();
