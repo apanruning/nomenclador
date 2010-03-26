@@ -1,0 +1,21 @@
+<ul id="pagination-digg">
+    <li class="previous{% if not has_previous %}-off{% endif %}">
+    <a href="?page={{ previous }}" 
+       title="to page {{ previous }}">«anterior</a> 
+    </li>
+    {% for pag in page_range %}
+    <li {%ifequal page pag %}class="active"{% endifequal %}>
+      {%ifequal page pag %}{{ pag }}{% else %}
+       <a href="?page={{ pag }}" title="to page {{ pag }}">{{ pag }}</a>
+      {% endifequal %}
+    </li>
+    {% endfor %}
+    
+    <li class="next{% if has_next %}-off{% endif %}">
+    <a href="?page={{ next }}" 
+       title="to page {{ next }}">siguiente»</a>
+    </li>
+</ul>
+
+
+

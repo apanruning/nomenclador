@@ -16,10 +16,11 @@ from nomenclador.maap.models import MaapModel, MaapPoint, MaapArea, \
 from tagging.models import TaggedItem, Tag
 
 def index(request,*args, **kwargs):
-    queryset = MaapModel.objects.all()[:5]
+    queryset = MaapModel.objects.all()
     return object_list(
         request, 
         queryset, 
+        paginate_by=5,
         *args,**kwargs)
     
 ##Generic Views
@@ -100,6 +101,7 @@ def get_objects(request):
             return object_list(request,
                                 object_list, 
                                 'maap/index.html', 
+                                paginate_by=5,
                                 extra_instance={'layerpath':path})
     else:
         raise Http404
