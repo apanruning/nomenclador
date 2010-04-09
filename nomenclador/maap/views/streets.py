@@ -18,40 +18,32 @@ def search_streets(request):
     streetnumber = request.POST.get('streetnumber',None)
     cs_street = clean_search_street(request.POST.get('streetname', ''))
     cs_inters = clean_search_street(request.POST.get('intersection', ''))
-    
     if cs_street and len(cs_street)>2:
 
         # Intersection Case
         if cs_inters and len(cs_inters)>2:
             # Reworked version with only one query
-            street_list = Streets.objects.filter(norm__contains=cs_street, intersects_with__norm__contains=cs_inters)
-            import pdb;pdb.set_trace()
-            for s in street_list:
-                s.display_name = '%s Int. %s' %(f.name, s.name),
-                s.url_params = 'str=%s&int=%s' %(f.id, s.id)
-        
+            street_list = StreetIntersection.objects.filter(first_street__norm__contains=cs_street,
+                                                             second_street__norm__contains=cs_inters)
         # Street doors Case
         elif streetnumber is not None and streetnumber.isdigit():
             street_list = Streets.objects.filter(norm__contains = cs_street)
-            for s in street_list:
-                s.display_name = '%s %s' %(s.name, streetnumber),
-                s.url_params = 'str=%s&door=%s' %(s.id, streetnumber)
-        
+
         # Street alone Case
         else:
             street_list = Streets.objects.filter(norm__contains = cs_street)
-            for s in street_list:
-                s.display_name = '%s' %s.name,
-                s.url_params = 'str=%s' %s.id
 
-        if len(street_list) == 0:
+        if not street_list:
             # This should be changed with elegant "not found current search"
             raise Http404
+            
     return object_list(request,
                         street_list,
                         template_name='maap/streets.html', 
                         extra_context={'street_name':cs_street, 
-                                       'street_number':streetnumber,})
+                                       'intersection_name': cs_inters,
+                                       'street_number':streetnumber,
+                                       'with_intersection': hasattr(street_list[0], 'first_street') and True or False })
     
 def street_location(request):
     if request.method == 'GET':

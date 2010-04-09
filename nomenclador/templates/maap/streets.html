@@ -11,12 +11,19 @@ Busqueda de calles
 <dl>
     {% for street in object_list %}    
     <dt>
+    {% url maap.views.street_location as url%}
+    {% if with_intersection %}
     <a class="show-layer" 
-       href="{% url maap.views.street_location %}?{{street.url_params}}">{{street.display_name}}</a>
+       href="{{ url }}?str={{street.first_street.id}}&int={{street.second_street.id}}">{{street}}</a>
+    {% else %}   
+    <a class="show-layer" 
+       href="{{ url }}?str={{street.id}}{% if streetnumber %}&door={{streetnumber}}{% endif %}">{{street}}</a>
+    {% endif %}
     </dt>
-    <dd>{{street.old}}</dd>
+    <dd>{{street.old|default_if_none:''}}</dd>
     {% endfor %}
 </dl>
+{% include 'pager.html' %}
 {% else%}{%if request.POST %}
 <h3>No hay resultados</h3>
 {% endif %}{% endif %}
