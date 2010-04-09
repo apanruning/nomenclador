@@ -6,15 +6,15 @@ Busqueda de calles
 </head>
 <body>
 {% block listing %}
-{% if results %}
+{% if object_list %}
 <h3> Resultados para {{street_name}}</h3>
 <dl>
-    {% for result in results %}    
+    {% for street in object_list %}    
     <dt>
     <a class="show-layer" 
-       href="{% url maap.views.street_location %}?{{result.url_params}}">{{result.name}}</a>
+       href="{% url maap.views.street_location %}?{{street.url_params}}">{{street.display_name}}</a>
     </dt>
-    <dd>{{result.old}}</dd>
+    <dd>{{street.old}}</dd>
     {% endfor %}
 </dl>
 {% else%}{%if request.POST %}

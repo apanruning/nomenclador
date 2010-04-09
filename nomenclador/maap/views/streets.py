@@ -16,51 +16,42 @@ from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Poi
 def search_streets(request):
 
     streetnumber = request.POST.get('streetnumber',None)
-    
     cs_street = clean_search_street(request.POST.get('streetname', ''))
     cs_inters = clean_search_street(request.POST.get('intersection', ''))
-    results=[]
     
     if cs_street and len(cs_street)>2:
 
         # Intersection Case
         if cs_inters and len(cs_inters)>2:
-            
-            # This part must be optimized and refactorized
-            first = Streets.objects.filter(norm__contains = cs_street)
-            for f in first:
-                second = f.intersections.filter(norm__contains = cs_inters)
-                for s in second:
-                    results.append({
-                        'name': '%s Int. %s' % (f.name, s.name),
-                        'url_params': 'str=%s&int=%s' % (f.id, s.id)
-                    })
+            # Reworked version with only one query
+            street_list = Streets.objects.filter(norm__contains=cs_street, intersects_with__norm__contains=cs_inters)
+            import pdb;pdb.set_trace()
+            for s in street_list:
+                s.display_name = '%s Int. %s' %(f.name, s.name),
+                s.url_params = 'str=%s&int=%s' %(f.id, s.id)
         
         # Street doors Case
         elif streetnumber is not None and streetnumber.isdigit():
-            strlist = Streets.objects.filter(norm__contains = cs_street)
-            for s in strlist:
-                results.append({
-                    'name': '%s %s' % (s.name, streetnumber),
-                    'url_params': 'str=%s&door=%s' % (s.id, streetnumber)
-                })
+            street_list = Streets.objects.filter(norm__contains = cs_street)
+            for s in street_list:
+                s.display_name = '%s %s' %(s.name, streetnumber),
+                s.url_params = 'str=%s&door=%s' %(s.id, streetnumber)
         
         # Street alone Case
         else:
-            strlist = Streets.objects.filter(norm__contains = cs_street)
-            for s in strlist:
-                results.append({
-                    'name': '%s' % s.name,
-                    'url_params': 'str=%s' % s.id
-                })
+            street_list = Streets.objects.filter(norm__contains = cs_street)
+            for s in street_list:
+                s.display_name = '%s' %s.name,
+                s.url_params = 'str=%s' %s.id
 
-        if len(results) == 0:
+        if len(street_list) == 0:
             # This should be changed with elegant "not found current search"
             raise Http404
-            
-    context = RequestContext(request,{'results':results, 'street_name':cs_street})
-    
-    return render_to_response('maap/streets.html', context_instance=context)
+    return object_list(request,
+                        street_list,
+                        template_name='maap/streets.html', 
+                        extra_context={'street_name':cs_street, 
+                                       'street_number':streetnumber,})
     
 def street_location(request):
     if request.method == 'GET':
