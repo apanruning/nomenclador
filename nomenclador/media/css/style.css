@@ -235,33 +235,32 @@ body {
 
 
 #pagination-digg li{
-    border:0; 
     margin:0; 
     padding:0;
     font-size:11px;
     list-style:none;
     margin-right:2px;
+    float:left;
+    border:solid 1px #FFF;
 }
 #pagination-digg a{
-    border:solid 1px #9aafe5
+    border:solid 1px #FFF;
     margin-right:2px;
+    display:block;
+    padding:4px 6px;
 }
-#pagination-digg .previous-off,
-#pagination-digg .next-off {
-    border:solid 1px #DEDEDE
-    color:#888888
+#pagination-digg .off{
+    border:solid 1px #FFF;
+    color:#888888;
     display:block;
     float:left;
     font-weight:bold;
     margin-right:2px;
-    padding:3px 4px;
 }
-#pagination-digg .next a,
-#pagination-digg .previous a {
-    font-weight:bold;
-}
+
 #pagination-digg .active{
     background:#2e6ab1;
+    border:solid 1px #2e6ab1;
     color:#FFFFFF;
     font-weight:bold;
     display:block;
@@ -270,12 +269,44 @@ body {
 }
 #pagination-digg a:link,
 #pagination-digg a:visited {
-    color:#0e509e
+    color:#0e509e;
     display:block;
-    float:left;
-    padding:3px 6px;
+
     text-decoration:none;
 }
 #pagination-digg a:hover{
     border:solid 1px #0e509e
+}
+#pagination-digg .next a,
+#pagination-digg .previous a {
+    font-weight:bold;
+    background:url(../img/arrows.png) no-repeat;
+    width:6px;
+    height:14px;
+}
+#pagination-digg .next span,
+#pagination-digg .previous span {
+    position:absolute;
+    left:-99999px;
+}
+
+#pagination-digg .next a{
+    background-position:right -22px;
+}
+#pagination-digg .next a:hover{
+    background-position:right -44px;
+}
+#pagination-digg .next.off a,
+#pagination-digg .next.off a:hover{
+    background-position:right top;
+}
+#pagination-digg .previous a{
+    background-position:right -88px;
+}
+#pagination-digg .previous a:hover{
+    background-position:right -110px;
+}
+#pagination-digg .previous.off a,
+#pagination-digg .previous.off a:hover{
+    background-position:right -66px ;
 }

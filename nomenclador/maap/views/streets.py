@@ -48,17 +48,20 @@ def search_streets(request):
 def street_location(request):
     if request.method == 'GET':
         params = request.GET        
-
+        street = None
         if params.has_key('str'):
             if params.has_key('int'):
                 # Intersection Case
                 nodes = get_locations_by_intersection(params['str'],params['int'])
+                street = StreetIntersection.objects.get(first_street__id=params['str'], 
+                                                        second_street__id = params['int'])
                 points = [n.geom.wkt for n in nodes] 
                 layer = loc_int2layer(points, params['str'], params['int'])
                 
             elif params.has_key('door'):
                 # Street door Case
                 loc = get_location_by_door(params['str'],params['door'])
+                street = Street.objects.get(params['str'])
                 if loc:
                     layer = loc_door2layer(loc, params['str'],params['door'])                
                 else:
@@ -66,10 +69,11 @@ def street_location(request):
                 
             else:
                 # Street alone
+                street = Street.objects.get(params['str'])
                 layer = loc_str2layer(params['str'])
             
             # json_layer = simplejson.dumps(layer)    
-            context = RequestContext(request,{ 'json_layer':layer})
+            context = RequestContext(request,{ 'json_layer':layer, 'street':street})
             
             return render_to_response('maap/street_detail.html', context_instance=context)
                             
