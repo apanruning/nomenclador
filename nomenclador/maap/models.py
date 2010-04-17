@@ -162,12 +162,6 @@ class MaapModel(models.Model):
         
     class Meta:
         ordering = ('created', 'name',)
-
-#    @property
-#    def get_closest(self):
-#        # This property only works on inherited models with geom field
-#        closest_points = MaapPoint.objects.filter(geom__dwithin=(self.geom, D(m=300)))
-#        return closest_points.exclude(id=self.id)
     
     @property
     def json_dict(self):
@@ -308,9 +302,6 @@ class Icon(models.Model):
         out['width'] = self.image.width
         out['height'] = self.image.height
         return out
-
-    
-    
         
 try: 
     mptt.register(MaapCategory)  

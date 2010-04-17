@@ -11,9 +11,9 @@
 {% block title %}{{object.name}}{% endblock %}
 
 {% block listing %}
-
-    <div id="description">{{street}}</div>
-    <br class="visualClear" />
-
+<dl>
+    <dt id="description">{{street}} {{streetnumber}}</dt>
+    <dd>{{street.old|default_if_none:''}}</dd>
+</dl>
 {% endblock %}
 

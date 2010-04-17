@@ -14,10 +14,10 @@ Busqueda de calles
     {% url maap.views.street_location as url%}
     {% if with_intersection %}
     <a class="show-layer" 
-       href="{{ url }}?str={{street.first_street.id}}&int={{street.second_street.id}}">{{street}}</a>
+       href="{{ url }}?str={{street.first_street.norm}}&int={{street.second_street.norm}}">{{street}}</a>
     {% else %}   
     <a class="show-layer" 
-       href="{{ url }}?str={{street.id}}{% if streetnumber %}&door={{streetnumber}}{% endif %}">{{street}}</a>
+       href="{{ url }}?str={{street.norm}}{% if streetnumber %}&door={{streetnumber}}{% endif %}">{{street}} {{streetnumber}}</a>
     {% endif %}
     </dt>
     <dd>{{street.old|default_if_none:''}}</dd>
