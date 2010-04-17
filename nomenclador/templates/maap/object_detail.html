@@ -3,7 +3,7 @@
 
 {% block js_onload %}
     {{ block.super }}
-    json_layer = {{ json_layer|safe }};
+    json_layer = {{ object.to_layer.layer.json|safe }};
     state.setLayer(json_layer).show();     
 {% endblock %}
 

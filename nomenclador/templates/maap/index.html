@@ -1,5 +1,12 @@
 {% extends 'maap/base.html' %}
 {% block title %}Bienvenido{% endblock %}
+{% block js_onload %}
+    {{ block.super }}
+    {% if object_list %}
+    json_layer = {{ object_list.layer.json|safe }};
+    state.setLayer(json_layer).show();     
+    {% endif %}
+{% endblock %}
 
 </head>
 <body>

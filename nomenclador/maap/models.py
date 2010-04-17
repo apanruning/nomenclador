@@ -1,4 +1,6 @@
 from django.contrib.gis.db import models
+from django.contrib.gis.db.models.query import GeoQuerySet
+from django.contrib.gis.measure import Distance, D
 from django.db import models as dbmodels
 from django.utils import simplejson
 from django.contrib.auth.models import User
@@ -14,10 +16,37 @@ from django.template.defaultfilters import slugify
 
 import mptt
 
+from nomenclador.maap.layers import Point, Area, MultiLine, Layer
+
 class MaapMetadata(models.Model):
     key = models.CharField(max_length=100)
     value = models.CharField(max_length=100)
 
+class MaapQuerySet(GeoQuerySet):
+    def layer(self):
+        elements = self.all()
+        objects = []
+        for obj in elements:
+            try: 
+                objects.append(obj.maappoint.to_layer())
+            except MaapPoint.DoesNotExist:
+                pass
+            try:
+                objects.append(obj.maapmultiline.to_layer())
+                
+            except MaapMultiLine.DoesNotExist:
+                pass
+            try:
+                objects.append(obj.maaparea.to_layer())
+            except MaapArea.DoesNotExist:
+                pass
+        return Layer(elements=objects)
+
+class MaapManager(models.GeoManager):
+    def get_query_set(self):
+        return MaapQuerySet(self.model)
+        
+        
 class MaapModel(models.Model):
     slug = models.SlugField(editable=False, null=True)
     name = models.CharField(max_length=100)
@@ -31,7 +60,7 @@ class MaapModel(models.Model):
     banner_slots = models.CharField(max_length=255, blank=True, null=True)
     default_layers = models.CharField(max_length=255, blank=True, null=True)
     metadata = models.ForeignKey('MaapMetadata', null=True, blank=True)    
-    objects = models.GeoManager()
+    objects = MaapManager()
     
     class Meta:
         ordering = ('created', 'name',)
@@ -82,7 +111,8 @@ class MaapCategory(models.Model):
     
     def __unicode__(self):
         return self.name
-
+        
+    @models.permalink
     def get_absolute_url(self):
         return reverse('list_by_category',args=[self.slug])
 
@@ -92,7 +122,20 @@ class MaapPoint(MaapModel):
     icon = models.ForeignKey('Icon')
     
     objects = models.GeoManager()
+
     
+    def to_layer(self):
+        out = super(MaapPoint, self).json_dict
+        out.pop('geom')
+        out['type'] = 'point'
+        out['geom'] = self.geom
+        return Point(**out)
+    
+    @property
+    def get_closest(self):
+        closest_points = MaapPoint.objects.filter(geom__dwithin=(self.geom, D(m=300)))
+        return closest_points.exclude(id=self.id)
+
     @property
     def json_dict(self):
         out = super(MaapPoint, self).json_dict
@@ -102,16 +145,25 @@ class MaapPoint(MaapModel):
         out['geojson'] = simplejson.loads(self.geom.geojson)
         
         return out
-    
+        
+    @models.permalink
     def get_absolute_url(self):
         cat_slug = self.category.all()[0].slug
-        return reverse('view',args=[cat_slug, self.id])
+        return reverse('view',[cat_slug, self.id])
     
 
 class MaapArea(MaapModel):
     objects = models.GeoManager()
 
     geom = models.PolygonField(srid=DEFAULT_SRID)
+
+    def to_layer(self):
+        out = super(MaapArea, self).json_dict
+        out.pop('geom')
+        out['type'] = 'area'
+        out['geom'] = self.geom
+    
+        return Area(**out)
    
     @property
     def json_dict(self):
@@ -133,9 +185,18 @@ class MaapOSMArea(MaapArea):
 
 
 class MaapMultiLine(MaapModel):
-    geom = models.MultiLineStringField(srid=DEFAULT_SRID)
+    geom = models.MultiLineStringField(srid = DEFAULT_SRID)
     objects = models.GeoManager()
     
+    
+    def to_layer(self):
+        out = super(MaapMultiLine, self).json_dict
+        out.pop('geom')
+        out['type'] = 'multiline'
+        out['geom'] = self.geom
+
+        return MultiLine(**out)
+
 
     @property
     def json_dict(self):
@@ -147,8 +208,8 @@ class MaapMultiLine(MaapModel):
         return out
         
 class Icon(models.Model):
-    name = models.CharField(max_length=100 )
-    image = models.ImageField(upload_to="icons" )
+    name = models.CharField(max_length = 100)
+    image = models.ImageField(upload_to = "icons")
 
     def __unicode__( self ):
         return self.name
