@@ -18,6 +18,7 @@ def search_streets(request):
     streetnumber = request.POST.get('streetnumber',None)
     cs_street = clean_search_street(request.POST.get('streetname', ''))
     cs_inters = clean_search_street(request.POST.get('intersection', ''))
+    with_intersection = False
     if cs_street and len(cs_street)>2:
 
         # Intersection Case
@@ -25,25 +26,25 @@ def search_streets(request):
             # Reworked version with only one query
             street_list = StreetIntersection.objects.filter(first_street__norm__contains=cs_street,
                                                              second_street__norm__contains=cs_inters)
+            with_intersection = True
+            queryterm = '%s y %s' %(cs_street, cs_inters)
         # Street doors Case
         elif streetnumber is not None and streetnumber.isdigit():
             street_list = Streets.objects.filter(norm__contains = cs_street)
-
+            queryterm = '%s al %s' %(cs_street, streetnumber)
         # Street alone Case
         else:
             street_list = Streets.objects.filter(norm__contains = cs_street)
-
+            queryterm = '%s' %(cs_street)
         if not street_list:
             # This should be changed with elegant "not found current search"
             raise Http404
             
     return object_list(request,
                         street_list,
-                        template_name='maap/streets.html', 
-                        extra_context={'street_name':cs_street, 
-                                       'intersection_name': cs_inters,
-                                       'street_number':streetnumber,
-                                       'with_intersection': hasattr(street_list[0], 'first_street') and True or False })
+                        template_name='maap/streets.html',
+                        extra_context={'with_intersection':with_intersection,
+                                       'queryterm':queryterm})
     
 def street_location(request):
     if request.method == 'GET':
@@ -61,7 +62,7 @@ def street_location(request):
             elif params.has_key('door'):
                 # Street door Case
                 loc = get_location_by_door(params['str'],params['door'])
-                street = Street.objects.get(params['str'])
+                street = Streets.objects.get(pk=params['str'])
                 if loc:
                     layer = loc_door2layer(loc, params['str'],params['door'])                
                 else:
@@ -69,7 +70,8 @@ def street_location(request):
                 
             else:
                 # Street alone
-                street = Street.objects.get(params['str'])
+                import pdb; pdb.set_trace()
+                street = Streets.objects.get(pk=params['str'])
                 layer = loc_str2layer(params['str'])
             
             # json_layer = simplejson.dumps(layer)    

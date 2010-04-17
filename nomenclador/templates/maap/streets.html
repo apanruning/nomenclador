@@ -7,7 +7,7 @@ Busqueda de calles
 <body>
 {% block listing %}
 {% if object_list %}
-<h3> Resultados para {{street_name}}</h3>
+<h3> Resultados para {{queryterm}}</h3>
 <dl>
     {% for street in object_list %}    
     <dt>
@@ -25,9 +25,11 @@ Busqueda de calles
     {% endfor %}
 </dl>
 {% include 'pager.html' %}
-{% else%}{%if request.POST %}
+{% else%}
+{%if request.POST %}
 <h3>No hay resultados</h3>
-{% endif %}{% endif %}
+{% endif %}
+{% endif %}
 
 {% endblock %}
 

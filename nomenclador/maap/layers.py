@@ -19,10 +19,11 @@ class BaseLayer(object):
     
     @property
     def json(self):
+        object_dict = dict(self)
         if hasattr(self, 'elements'):
             if self.elements:
-                self.elements = [dict(x) for x in self.elements]
-        return simplejson.dumps(dict(self))
+                object_dict['elements'] = [dict(x) for x in self.elements]
+        return simplejson.dumps(object_dict)
     
 
 class GeoElement(BaseLayer):
@@ -39,19 +40,11 @@ class GeoElement(BaseLayer):
 
 class Point(GeoElement):
     type = 'point'
-
+    center = False
     @property
     def meta(self):
         return super(Point, self).meta + \
-               ['icon','closest']
-
-
-    icon = {
-        "url": "/media/icons/info.png", 
-        "width": 32, 
-        "height": 37
-    }
-
+               ['icon']
 
 class MultiLine(GeoElement):
     type = 'multiline'
@@ -72,11 +65,37 @@ class Layer(BaseLayer):
         
     @property
     def box_size(self):
+        center_object = None
+        
         if self.elements:
-            geom = self.elements[0].geom
+            first_element = self.elements[0]
+            geom = first_element.geom
+
+            if first_element.center:
+                center_object = first_element.geom
+                
             for i in range(1,len(self.elements)):
-                geom = geom.union(self.elements[i].geojson)
-            return geom.extent   
+                if self.elements[i].center:
+                    center_object = self.elements[i].geom
+                geom = geom.union(self.elements[i].geom)
+
+            extent = geom.extent
+
+            if center_object is not None:
+
+                centroid = center_object.centroid
+                delta_x = max(abs(extent[0]-centroid.get_x()), 
+                              abs(extent[2]-centroid.get_x()))
+                              
+                delta_y = max(abs(extent[1]-centroid.get_y()), 
+                              abs(extent[3]-centroid.get_y()))
+
+                extent = ((centroid.get_x() - delta_x),
+                          (centroid.get_y() - delta_y),
+                          (centroid.get_x() + delta_x),
+                          (centroid.get_y() + delta_y),
+                         )
+            return extent   
 
     
     

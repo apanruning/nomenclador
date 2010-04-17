@@ -28,7 +28,7 @@ class MaapQuerySet(GeoQuerySet):
         objects = []
         for obj in elements:
             try: 
-                objects.append(obj.maappoint.to_layer())
+                objects.append(obj.maappoint.to_geo_element())
             except MaapPoint.DoesNotExist:
                 pass
             try:
@@ -120,32 +120,28 @@ class MaapPoint(MaapModel):
     
     geom = models.PointField(srid=DEFAULT_SRID)
     icon = models.ForeignKey('Icon')
-    
-    objects = models.GeoManager()
+    objects = MaapManager()
 
-    
-    def to_layer(self):
-        out = super(MaapPoint, self).json_dict
+    def to_geo_element(self):
+        out = self.json_dict
         out.pop('geom')
         out['type'] = 'point'
         out['geom'] = self.geom
+        out['icon'] = self.icon.json_dict
         return Point(**out)
+        
+    def to_layer(self):
+        out = self.get_closest.layer()
+        center_point = self.to_geo_element()
+        center_point.center = True
+        out.elements.append(center_point)
+        return out
     
     @property
     def get_closest(self):
         closest_points = MaapPoint.objects.filter(geom__dwithin=(self.geom, D(m=300)))
         return closest_points.exclude(id=self.id)
-
-    @property
-    def json_dict(self):
-        out = super(MaapPoint, self).json_dict
-        out.pop('geom')
-        out['type'] = 'point'
-        out['icon'] = self.icon.json_dict
-        out['geojson'] = simplejson.loads(self.geom.geojson)
-        
-        return out
-        
+       
     @models.permalink
     def get_absolute_url(self):
         cat_slug = self.category.all()[0].slug

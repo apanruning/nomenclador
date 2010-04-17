@@ -30,14 +30,19 @@ def view(request,cat_slug, object_id):
     obj = objects.get(id = object_id)
     geom = obj.maappoint.geom        
         
-    closests = MaapPoint.objects.filter(geom__dwithin=(geom, D(m=300)))
-    closests = closests.exclude(id=object_id)     
-    json_layer = simplejson.dumps(json_layer_two(obj, closests))
+#    closests = MaapPoint.objects.filter(geom__dwithin=(geom, D(m=300)))
+#    closests = closests.exclude(id=object_id)     
+#    
+    json_layer = obj.maappoint.to_layer().json
+    
     return object_detail(
         request, 
         objects, 
         int(object_id),
-        extra_context = {'category':category, 'object_list':objects, 'json_layer': json_layer},
+        extra_context = {'category':category, 
+                         'object_list':objects, 
+                         'json_layer': json_layer
+                        },
         template_name = 'maap/object_detail.html')
 
 @login_required  
