@@ -6,8 +6,9 @@ from django.http import HttpResponse, Http404
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
-from osm.models import *
-from osm.utils.search import get_locations_by_intersection, get_location_by_door
+from nomenclador.maap.models import Streets, Nodes
+from osm.models import StreetIntersection, Ways
+from osm.utils.search import get_location_by_door
 from osm.utils.words import clean_search_street
 from django.core import urlresolvers
 from django.utils.http import urlquote
@@ -24,8 +25,7 @@ def search_streets(request):
         # Intersection Case
         if cs_inters and len(cs_inters)>2:
             # Reworked version with only one query
-            street_list = StreetIntersection.objects.filter(first_street__norm__contains=cs_street,
-                                                             second_street__norm__contains=cs_inters)
+            street_list = StreetIntersection.objects.filter(first_street__norm__contains=cs_street,                                                             second_street__norm__contains=cs_inters)
             with_intersection = True
             queryterm = '%s y %s' %(cs_street, cs_inters)
         # Street doors Case
@@ -53,29 +53,35 @@ def street_location(request):
         if params.has_key('str'):
             if params.has_key('int'):
                 # Intersection Case
-                nodes = get_locations_by_intersection(params['str'],params['int'])
-                street = StreetIntersection.objects.get(first_street__id=params['str'], 
-                                                        second_street__id = params['int'])
-                points = [n.geom.wkt for n in nodes] 
-                layer = loc_int2layer(points, params['str'], params['int'])
+                nodes = Nodes.objects.filter(waynodes__way__street__id = params['str'])
+                nodes = nodes.filter(waynodes__way__street__id = params['int'])
                 
+                layer = nodes[0].to_layer()
+                layer.name = "%s %s" % (params['str'], params['int'])
+                json_layer = layer.json
+
             elif params.has_key('door'):
                 # Street door Case
-                loc = get_location_by_door(params['str'],params['door'])
-                street = Streets.objects.get(pk=params['str'])
-                if loc:
-                    layer = loc_door2layer(loc, params['str'],params['door'])                
-                else:
-                    layer = loc_str2layer(params['str'])
+                #loc = get_location_by_door(params['str'],params['door'])
+                street = Streets.objects.get(pk = params['str'])
+                
+                layer = street.get_location_or_street(door = params['door'])
+                json_layer =layer.json
+                
+#                if loc:
+#                    json_layer = loc_door2layer(loc, params['str'],params['door'])                
+#                else:
+#                    json_layer = loc_str2layer(params['str'])
                 
             else:
                 # Street alone
-                import pdb; pdb.set_trace()
                 street = Streets.objects.get(pk=params['str'])
-                layer = loc_str2layer(params['str'])
+                layer = street.to_layer() 
+                json_layer = layer.json
+#                json_layer = loc_str2layer(params['str'])
             
             # json_layer = simplejson.dumps(layer)    
-            context = RequestContext(request,{ 'json_layer':layer, 'street':street})
+            context = RequestContext(request,{ 'json_layer':json_layer, 'street':street})
             
             return render_to_response('maap/street_detail.html', context_instance=context)
                             

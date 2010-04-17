@@ -17,6 +17,7 @@ class BaseLayer(object):
             
         return out.iteritems()
     
+    
     @property
     def json(self):
         object_dict = dict(self)
@@ -44,7 +45,7 @@ class Point(GeoElement):
     @property
     def meta(self):
         return super(Point, self).meta + \
-               ['icon']
+               ['icon','radius']
 
 class MultiLine(GeoElement):
     type = 'multiline'
@@ -82,13 +83,14 @@ class Layer(BaseLayer):
             extent = geom.extent
 
             if center_object is not None:
-
+                # for historical reasons
+                margin = 102
                 centroid = center_object.centroid
                 delta_x = max(abs(extent[0]-centroid.get_x()), 
-                              abs(extent[2]-centroid.get_x()))
+                              abs(extent[2]-centroid.get_x()))+margin
                               
                 delta_y = max(abs(extent[1]-centroid.get_y()), 
-                              abs(extent[3]-centroid.get_y()))
+                              abs(extent[3]-centroid.get_y()))+margin
 
                 extent = ((centroid.get_x() - delta_x),
                           (centroid.get_y() - delta_y),

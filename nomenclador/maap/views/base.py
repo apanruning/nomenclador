@@ -28,12 +28,12 @@ def view(request,cat_slug, object_id):
     objects = MaapModel.objects.filter(category__slug=cat_slug)
     category = MaapCategory.objects.get(slug=cat_slug)  
     obj = objects.get(id = object_id)
-    geom = obj.maappoint.geom        
+    geom = obj.cast().geom        
         
 #    closests = MaapPoint.objects.filter(geom__dwithin=(geom, D(m=300)))
 #    closests = closests.exclude(id=object_id)     
 #    
-    json_layer = obj.maappoint.to_layer().json
+    json_layer = obj.cast().to_layer().json
     
     return object_detail(
         request, 

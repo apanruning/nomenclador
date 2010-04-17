@@ -11,6 +11,7 @@
 Maap.Layer = function (metadata, map) {
     for (m in metadata) {
         this[m] = metadata[m];
+        this.map = map;
     }
     var elms = new Array();
     
@@ -37,8 +38,8 @@ Maap.Layer = function (metadata, map) {
 Maap.Layer.prototype = {
     
     boxCenter: function() {
-        b = this.box_size
-        map.zoomToExtent(new OpenLayers.Bounds(b[0],b[1],b[2],b[3]),true)
+        b = this.box_size;
+        this.map.zoomToExtent(new OpenLayers.Bounds(b[0],b[1],b[2],b[3]),true);
     },
     
     getLayers: function() {

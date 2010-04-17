@@ -5,9 +5,11 @@ from django.db import models as dbmodels
 from django.utils import simplejson
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from osm.models import Nodes
+from osm.models import Nodes as OSMNodes, Streets as OSMStreets, \
+                       StreetIntersection as OSMStreetIntersection 
+from osm.utils.search import get_location_by_door
 from nomenclador.settings import DEFAULT_SRID
-
+from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -17,6 +19,13 @@ from django.template.defaultfilters import slugify
 import mptt
 
 from nomenclador.maap.layers import Point, Area, MultiLine, Layer
+from django.contrib.gis.gdal import OGRGeometry, SpatialReference
+
+def get_closest(geom, exclude_id = None):
+    closest_points = MaapPoint.objects.filter(geom__dwithin = (geom, D(m = 300)))
+    if exclude_id:
+        closest_points.exclude(id = exclude_id)
+    return closest_points
 
 class MaapMetadata(models.Model):
     key = models.CharField(max_length=100)
@@ -27,25 +36,114 @@ class MaapQuerySet(GeoQuerySet):
         elements = self.all()
         objects = []
         for obj in elements:
-            try: 
-                objects.append(obj.maappoint.to_geo_element())
-            except MaapPoint.DoesNotExist:
-                pass
-            try:
-                objects.append(obj.maapmultiline.to_layer())
-                
-            except MaapMultiLine.DoesNotExist:
-                pass
-            try:
-                objects.append(obj.maaparea.to_layer())
-            except MaapArea.DoesNotExist:
-                pass
+            objects.append(obj.cast().to_geo_element())
+            
         return Layer(elements=objects)
 
 class MaapManager(models.GeoManager):
     def get_query_set(self):
         return MaapQuerySet(self.model)
+
+class Nodes(OSMNodes):
+    objects = MaapManager()
+
+    class Meta:
+        proxy = True
+
+    def cast(self):
+        return self
+
+    def to_layer(self):
+        center_point = self.to_geo_element()
+        center_point.center = True
+        out = get_closest(center_point.geom).layer()
+        out.elements.append(center_point)
+        return out
+
+    def to_geo_element(self):
+        geom = OGRGeometry(self.geom.wkt)
+        geom.srs = 'EPSG:4326'
+        geom.transform_to(SpatialReference('EPSG:900913'))
+        geom = geom.geos
+
+        out = Point(
+            id = self.id,
+            geom = geom,
+            icon = {
+                "url": "/media/icons/info.png",
+                "width": 32,
+                "height": 37
+            },
+        )
+        return out
+
+
+class Streets(OSMStreets):
+    objects = MaapManager()
+
+    class Meta:
+        proxy = True
+    
+    def cast(self):
+        return self
         
+    def get_location_or_street(self, door=None):
+        location = get_location_by_door(self.norm, door)
+        if location:
+            geom = OGRGeometry(location[0].wkt)
+            geom.srs = 'EPSG:4326'
+            geom.transform_to(SpatialReference('EPSG:900913'))
+            geom = geom.geos
+            point = Point(
+                id='location_%s_%s' % (self.norm, door),
+                name= "%s %s" % (self.name, door),
+                geom=geom,
+                center=True,
+                icon={
+                    "url": "/media/icons/info.png", 
+                    "width": 32, 
+                    "height": 37
+                },
+            )
+
+            if location[1] > 0:    
+                point.radius = location[1]
+            
+            layer = Layer(elements = [point])     
+        
+        else:
+            layer = self.to_layer()
+
+        return layer
+        
+    def to_layer(self):
+        ways = self.ways_set.all()
+        
+        #Cast ways to multiline 
+        ln = []
+        for w in ways:
+            nodes = [u.node.geom for u in w.waynodes_set.all()]
+            ln.append(LineString(nodes))
+        
+        ml = MultiLineString(ln)
+        
+        
+        geom = OGRGeometry(ml.wkt)
+        geom.srs = 'EPSG:4326'
+        geom.transform_to(SpatialReference('EPSG:900913'))
+        geom = geom.geos
+        
+        multiline = MultiLine(
+            id = 'street_%s' % self.norm,
+            name = self.name,
+            center = True,
+            geom = geom
+        )
+        
+        layer = Layer(id=self.id, elements=[multiline])
+        
+        return layer
+
         
 class MaapModel(models.Model):
     slug = models.SlugField(editable=False, null=True)
@@ -61,10 +159,23 @@ class MaapModel(models.Model):
     default_layers = models.CharField(max_length=255, blank=True, null=True)
     metadata = models.ForeignKey('MaapMetadata', null=True, blank=True)    
     objects = MaapManager()
-    
+        
     class Meta:
         ordering = ('created', 'name',)
+
+#    @property
+#    def get_closest(self):
+#        # This property only works on inherited models with geom field
+#        closest_points = MaapPoint.objects.filter(geom__dwithin=(self.geom, D(m=300)))
+#        return closest_points.exclude(id=self.id)
     
+    @property
+    def json_dict(self):
+        out = dict(filter(lambda (x,y): not x.startswith('_'), self.__dict__.iteritems()))
+        out['created'] = self.created.strftime('%D %T')        
+        out['changed'] = self.changed.strftime('%D %T')
+        return out
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(MaapModel, self).save(*args, **kwargs)
@@ -75,13 +186,29 @@ class MaapModel(models.Model):
     def get_absolute_url(self):
         cat_slug = self.category.all()[0].slug
         return reverse('view',args=[cat_slug, self.id])  
-    
-    @property
-    def json_dict(self):
-        out = dict(filter(lambda (x,y): not x.startswith('_'), self.__dict__.iteritems()))
-        out['created'] = self.created.strftime('%D %T')        
-        out['changed'] = self.changed.strftime('%D %T')	        
 
+    def to_layer(self):
+        # This method only works on inherited models with geom field
+        center_point = self.to_geo_element()
+        center_point.center = True
+        out = get_closest(center_point.geom, self.id).layer()
+        out.elements.append(center_point)
+        return out
+
+    def cast(self):
+        out = self
+        try: 
+            out = self.maappoint
+        except MaapPoint.DoesNotExist:
+            pass
+        try:
+            out = self.maapmultiline
+        except MaapMultiLine.DoesNotExist:
+            pass
+        try:
+            out = self.maaparea
+        except MaapArea.DoesNotExist:
+            pass    
         return out
 
 class MaapCategory(models.Model):
@@ -117,7 +244,7 @@ class MaapCategory(models.Model):
         return reverse('list_by_category',args=[self.slug])
 
 class MaapPoint(MaapModel):
-    
+   
     geom = models.PointField(srid=DEFAULT_SRID)
     icon = models.ForeignKey('Icon')
     objects = MaapManager()
@@ -125,23 +252,10 @@ class MaapPoint(MaapModel):
     def to_geo_element(self):
         out = self.json_dict
         out.pop('geom')
-        out['type'] = 'point'
         out['geom'] = self.geom
         out['icon'] = self.icon.json_dict
         return Point(**out)
-        
-    def to_layer(self):
-        out = self.get_closest.layer()
-        center_point = self.to_geo_element()
-        center_point.center = True
-        out.elements.append(center_point)
-        return out
-    
-    @property
-    def get_closest(self):
-        closest_points = MaapPoint.objects.filter(geom__dwithin=(self.geom, D(m=300)))
-        return closest_points.exclude(id=self.id)
-       
+
     @models.permalink
     def get_absolute_url(self):
         cat_slug = self.category.all()[0].slug
@@ -149,31 +263,20 @@ class MaapPoint(MaapModel):
     
 
 class MaapArea(MaapModel):
-    objects = models.GeoManager()
+    objects = MaapManager()
 
     geom = models.PolygonField(srid=DEFAULT_SRID)
 
-    def to_layer(self):
-        out = super(MaapArea, self).json_dict
+    def to_geo_element(self):
+        out = self.json_dict
         out.pop('geom')
-        out['type'] = 'area'
         out['geom'] = self.geom
-    
-        return Area(**out)
-   
-    @property
-    def json_dict(self):
-        out = super(MaapArea, self).json_dict
-        out.pop('geom')
-        out['type'] = 'area'
-        out['geojson'] = simplejson.loads(self.geom.geojson)
-        
-        return out
+        return Area(**out)   
+
 
 class MaapOSMArea(MaapArea):
     nodes_covered = models.ManyToManyField('osm.Nodes', editable=False)
-    objects = models.GeoManager()
-    nodes_covered = models.ManyToManyField('osm.Nodes', editable=False)
+    objects = MaapManager()
 
     def save(self, force_insert=False, force_update=False):
         super(MaapOSMArea, self).save(force_insert, force_update)
@@ -182,27 +285,15 @@ class MaapOSMArea(MaapArea):
 
 class MaapMultiLine(MaapModel):
     geom = models.MultiLineStringField(srid = DEFAULT_SRID)
-    objects = models.GeoManager()
-    
-    
-    def to_layer(self):
-        out = super(MaapMultiLine, self).json_dict
+    objects = MaapManager()
+
+    def to_geo_element(self):
+        out = self.json_dict
         out.pop('geom')
-        out['type'] = 'multiline'
         out['geom'] = self.geom
-
         return MultiLine(**out)
-
-
-    @property
-    def json_dict(self):
-        out = super(MaapMultiLine, self).json_dict
-        out.pop('geom')
-        out['type'] = 'multiline'
-        out['geojson'] = simplejson.loads(self.geom.geojson)
-
-        return out
         
+
 class Icon(models.Model):
     name = models.CharField(max_length = 100)
     image = models.ImageField(upload_to = "icons")
@@ -217,6 +308,9 @@ class Icon(models.Model):
         out['width'] = self.image.width
         out['height'] = self.image.height
         return out
+
+    
+    
         
 try: 
     mptt.register(MaapCategory)  
