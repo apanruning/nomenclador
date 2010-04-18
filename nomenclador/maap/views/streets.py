@@ -25,7 +25,10 @@ def search_streets(request):
         # Intersection Case
         if cs_inters and len(cs_inters)>2:
             # Reworked version with only one query
-            street_list = StreetIntersection.objects.filter(first_street__norm__contains=cs_street,                                                             second_street__norm__contains=cs_inters)
+            street_list = StreetIntersection.objects.filter(
+                first_street__norm__contains  = cs_street,
+                second_street__norm__contains = cs_inters
+            )
             with_intersection = True
             queryterm = '%s y %s' %(cs_street, cs_inters)
 
@@ -49,11 +52,11 @@ def search_streets(request):
                         extra_context={'with_intersection':with_intersection,
                                        'streetnumber':streetnumber,
                                        'queryterm':queryterm})
-    
+
 def street_location(request):
     if request.method == 'GET':
         params = request.GET        
-        streetnumber = params.get('door',None)
+        streetnumber = params.get('door', None)
         street = None
         if params.has_key('str'):
             if params.has_key('int'):
@@ -68,13 +71,14 @@ def street_location(request):
                 # Street door Case
                 street = Streets.objects.get(norm = params['str'])
                 layer = street.get_location_or_street(door = params['door'])
-                json_layer =layer.json
+                json_layer = layer.json
 
             else:
                 # Street alone
                 street = Streets.objects.get(norm=params['str'])
                 layer = street.to_layer() 
                 json_layer = layer.json
+            
             context = RequestContext(request,{ 
                     'json_layer':json_layer, 
                     'street':street,

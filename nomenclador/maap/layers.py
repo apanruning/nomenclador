@@ -1,10 +1,13 @@
 from django.utils import simplejson
 
-# Objeto layer
+DEFAULT_ICON = {
+    "url": "/media/icons/info.png", 
+    "width": 32, 
+    "height": 37
+}
 
 class BaseLayer(object):
     meta = ['id', 'name', 'type']
-
 
     def __init__(self, **argv):
         for k,v in argv.iteritems():
@@ -13,10 +16,8 @@ class BaseLayer(object):
     def __iter__(self):
         out = dict()
         for e in self.meta:
-            out[e] = getattr(self, e, None)
-            
-        return out.iteritems()
-    
+            out[e] = getattr(self, e, None)            
+        return out.iteritems()    
     
     @property
     def json(self):
@@ -26,33 +27,6 @@ class BaseLayer(object):
                 object_dict['elements'] = [dict(x) for x in self.elements]
         return simplejson.dumps(object_dict)
     
-
-class GeoElement(BaseLayer):
-
-    @property
-    def geojson(self):
-        return simplejson.loads(self.geom.geojson)
-    
-    @property
-    def meta(self):
-        return super(GeoElement, self).meta + \
-               ['geojson']
-
-
-class Point(GeoElement):
-    type = 'point'
-    center = False
-    @property
-    def meta(self):
-        return super(Point, self).meta + \
-               ['icon','radius']
-
-class MultiLine(GeoElement):
-    type = 'multiline'
-
-class Area(GeoElement):
-    type = 'area'
-
 class Layer(BaseLayer):    
     type = 'layer'
     
@@ -61,8 +35,7 @@ class Layer(BaseLayer):
     @property
     def meta(self):
         return super(Layer, self).meta + \
-               ['elements', 'box_size']
-        
+               ['elements', 'box_size']        
         
     @property
     def box_size(self):
@@ -85,57 +58,48 @@ class Layer(BaseLayer):
             if center_object is not None:
                 # for historical reasons
                 margin = 102
-                centroid = center_object.centroid
-                delta_x = max(abs(extent[0]-centroid.get_x()), 
-                              abs(extent[2]-centroid.get_x()))+margin
+                centroid = (
+                    center_object.centroid.get_x(),
+                    center_object.centroid.get_y()
+                )                    
+                delta_x = max(abs(extent[0]-centroid[0]), 
+                              abs(extent[2]-centroid[0])) + margin
                               
-                delta_y = max(abs(extent[1]-centroid.get_y()), 
-                              abs(extent[3]-centroid.get_y()))+margin
+                delta_y = max(abs(extent[1]-centroid[1]), 
+                              abs(extent[3]-centroid[1])) + margin
 
-                extent = ((centroid.get_x() - delta_x),
-                          (centroid.get_y() - delta_y),
-                          (centroid.get_x() + delta_x),
-                          (centroid.get_y() + delta_y),
+                extent = ((centroid[0] - delta_x),
+                          (centroid[1] - delta_y),
+                          (centroid[0] + delta_x),
+                          (centroid[1] + delta_y),
                          )
             return extent   
 
-    
-    
-    
+class GeoElement(BaseLayer):
 
-def show_street(request):
-        street = Nodes.objects.get(pk=request.GET('node')).way
-        
-        points = []
-       
-        wl = Ways.objects.filter(street__name=street.name)
-        wnl = WayNodes.objects.filter(way__in=wl).all()
-        
-        points = wnl
-           
-        lpoints = []
-        for p in points:
-                pgeom = OGRGeometry(p.geom.wkt)
-                pgeom.srs = 'EPSG:4326'
-                pgeom.transform_to(SpatialReference('EPSG:900913'))
-                pcoord = simplejson.loads(pgeom.json)
-                lpoints.append({
-                  "type": "point",
-                  "id": 'point',
-                  "name": "pipin",
-                  "geojson": pcoord,
-                  "icon": {
-                    "url": "/media/icons/info.png",
-                    "width": 32,
-                    "height": 37
-                    }
-                })
-            
-        layer = {
-                'type': 'layer',
-                'id': 'layer-location',
-                'elements': lpoints,
-                'box_size': None
-        } 
+    @property
+    def geojson(self):
+        return simplejson.loads(self.geom.geojson)
     
+    @property
+    def meta(self):
+        return super(GeoElement, self).meta + \
+               ['geojson']
+
+class Point(GeoElement):
+    type = 'point'
+    center = False
+    icon = DEFAULT_ICON
     
+    @property
+    def meta(self):
+        return super(Point, self).meta + \
+               ['icon','radius']
+
+class MultiLine(GeoElement):
+    type = 'multiline'
+
+class Area(GeoElement):
+    type = 'area'
+
+

@@ -30,9 +30,6 @@ def view(request,cat_slug, object_id):
     obj = objects.get(id = object_id)
     geom = obj.cast().geom        
         
-#    closests = MaapPoint.objects.filter(geom__dwithin=(geom, D(m=300)))
-#    closests = closests.exclude(id=object_id)     
-#    
     json_layer = obj.cast().to_layer().json
     
     return object_detail(
@@ -71,14 +68,8 @@ def get_objects(request):
         object_list = MaapModel.objects.all()
 
         if params.has_key('id'):
-            object_list &= MaapModel.objects.filter(pk = int(params['id']))
-            
-
-        _geom = object_list[0].maappoint.geom
-        _distance = D(m=300)
-        
-        closests = MaapPoint.objects.filter(geom__dwithin=(_geom, _distance))
-        closests = closests.exclude(id=object_list[0].id)
+            object = object_list.get(pk = int(params['id']))
+            layer = object.cast().to_layer().json
         
         #if params.has_key('searchterm'):
         #    object_list &= MaapModel.objects.filter(name__icontains=params['searchterm'])
@@ -97,7 +88,7 @@ def get_objects(request):
         if params.has_key('out'):
             out = params['out']
             if out == 'layer':
-                layer = json_layer_two(object_list[0], closests)
+                
                 return HttpResponse(simplejson.dumps(layer), mimetype='text/json')  
             else:
                 raise Http404    
@@ -110,15 +101,6 @@ def get_objects(request):
                                 extra_instance={'layerpath':path})
     else:
         raise Http404
-        
-def convOSM(wkt):
-    """ Converts standard merkartor 
-        to osm projection as tuple 
-    """
-    obj = OGRGeometry(wkt)
-    obj.srs = 'EPSG:4326'
-    obj.transform_to(SpatialReference('EPSG:900913'))
-    return (obj.x, obj.y)
 
 def obj_list_by_cat(request, cat_slug):
     try:
@@ -131,96 +113,9 @@ def obj_list_by_cat(request, cat_slug):
     context = RequestContext(request, {'category':catel, 'object_list':mmodels})
     return render_to_response('maap/index.html', context_instance=context)
     
-    
 def obj_list_by_tag(request, tag):
     result = TaggedItem.objects.get_by_model(MaapModel, tag)
     context = RequestContext(request, {'tag':tag , 'objs': result})
     return render_to_response('maap/index.html', context_instance=context)
 
-def json_layer_two(obj, closests):
-    objects = []
-    try: 
-        objects.append(obj.maappoint)
-    except MaapPoint.DoesNotExist:
-        pass
-    try:
-        objects.append(obj.maapmultiline)
-        
-    except MaapMultiLine.DoesNotExist:
-        pass
-    try:
-        objects.append(obj.maaparea)
-        
-    except MaapArea.DoesNotExist:
-        pass
-    for mo in closests:
-        try: 
-            objects.append(mo.maappoint)
-            continue
-        except MaapPoint.DoesNotExist:
-            pass
-        #try:
-        #    objects.append(mo.maapmultiline)
-        #    continue
-        #except MaapMultiLine.DoesNotExist:
-        #    pass
-        #try:
-        #    objects.append(mo.maaparea)
-        #    continue
-        #except MaapArea.DoesNotExist:
-        #    pass
-            
-    if objects:
-        geom = objects[0].geom
-        for i in range(1,len(objects)):
-            geom = geom.union(objects[i].geom)
-        box_size = geom.extent
-    else:
-        box_size = ''
-        
-    json_results = [o.json_dict for o in objects]
-    layer = {
-        'type': 'layer',
-        'id': 'layer-object-%s' % 'layer',
-        'elements': json_results,
-        'box_size': box_size
-    }
-    return layer
-            
-def json_layer(qset):
-    objects = []
-    for mo in qset:
-        try:
-            objects.append(mo.maappoint)
-            continue
-        except MaapPoint.DoesNotExist:
-            pass
-        try:
-            objects.append(mo.maapmultiline)
-            continue
-        except MaapMultiLine.DoesNotExist:
-            pass
-        try:
-            objects.append(mo.maaparea)
-            continue
-        except MaapArea.DoesNotExist:
-            pass
-    
-    if objects:
-        geom = objects[0].geom
-        for i in range(1,len(objects)):
-            geom = geom.union(objects[i].geom)
-        box_size = geom.extent
-    else:
-        box_size = ''
-    
-    json_results = [o.json_dict for o in objects]
-    layer = {
-        'type': 'layer',
-        'id': 'layer-object-%s' % 'layer',
-        'elements': json_results,
-        'box_size': box_size
-    }
-    return layer
-        
 

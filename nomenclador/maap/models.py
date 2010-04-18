@@ -21,6 +21,13 @@ import mptt
 from nomenclador.maap.layers import Point, Area, MultiLine, Layer
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 
+def merkartor_to_osm(geom):
+    """ Converts standard merkartor to osm projection """
+    obj = OGRGeometry(geom.wkt)
+    obj.srs = 'EPSG:4326'
+    obj.transform_to(SpatialReference('EPSG:900913'))
+    return obj.geos
+
 def get_closest(geom, exclude_id = None):
     closest_points = MaapPoint.objects.filter(geom__dwithin = (geom, D(m = 300)))
     if exclude_id:
@@ -61,19 +68,11 @@ class Nodes(OSMNodes):
         return out
 
     def to_geo_element(self):
-        geom = OGRGeometry(self.geom.wkt)
-        geom.srs = 'EPSG:4326'
-        geom.transform_to(SpatialReference('EPSG:900913'))
-        geom = geom.geos
+        geom = merkartor_to_osm(self.geom)
 
         out = Point(
             id = self.id,
-            geom = geom,
-            icon = {
-                "url": "/media/icons/info.png",
-                "width": 32,
-                "height": 37
-            },
+            geom = geom
         )
         return out
 
@@ -90,20 +89,13 @@ class Streets(OSMStreets):
     def get_location_or_street(self, door=None):
         location = get_location_by_door(self.norm, door)
         if location:
-            geom = OGRGeometry(location[0].wkt)
-            geom.srs = 'EPSG:4326'
-            geom.transform_to(SpatialReference('EPSG:900913'))
-            geom = geom.geos
+            geom = merkartor_to_osm(location[0])
+
             point = Point(
-                id='location_%s_%s' % (self.norm, door),
-                name= "%s %s" % (self.name, door),
-                geom=geom,
-                center=True,
-                icon={
-                    "url": "/media/icons/info.png", 
-                    "width": 32, 
-                    "height": 37
-                },
+                id = 'location_%s_%s' % (self.norm, door),
+                name = "%s %s" % (self.name, door),
+                geom = geom,
+                center = True,
             )
 
             if location[1] > 0:    
@@ -119,7 +111,7 @@ class Streets(OSMStreets):
     def to_layer(self):
         ways = self.ways_set.all()
         
-        #Cast ways to multiline 
+        # Cast ways queryset to multiline 
         ln = []
         for w in ways:
             nodes = [u.node.geom for u in w.waynodes_set.all()]
@@ -127,11 +119,7 @@ class Streets(OSMStreets):
         
         ml = MultiLineString(ln)
         
-        
-        geom = OGRGeometry(ml.wkt)
-        geom.srs = 'EPSG:4326'
-        geom.transform_to(SpatialReference('EPSG:900913'))
-        geom = geom.geos
+        geom = merkartor_to_osm(ml)
         
         multiline = MultiLine(
             id = 'street_%s' % self.norm,
@@ -139,8 +127,9 @@ class Streets(OSMStreets):
             center = True,
             geom = geom
         )
-        
-        layer = Layer(id=self.id, elements=[multiline])
+        layer = get_closest(geom).layer()
+        layer.id = self.id
+        layer.elements.append(multiline)
         
         return layer
 
