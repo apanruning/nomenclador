@@ -16,7 +16,7 @@ from nomenclador.maap.models import MaapModel, MaapPoint, MaapArea, \
 from tagging.models import TaggedItem, Tag
 
 def index(request,*args, **kwargs):
-    queryset = MaapModel.objects.all()
+    queryset = MaapModel.objects.filter(category__isnull=False, category__is_public=True)
     return object_list(
         request, 
         queryset, 

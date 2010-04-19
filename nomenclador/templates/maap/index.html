@@ -1,5 +1,5 @@
 {% extends 'maap/base.html' %}
-{% block title %}{% endblock %}
+{% block title %}{{ category.name|default:'Bienvenido'}}{% endblock %}
 
 <html>
 <head>

@@ -37,10 +37,13 @@ $ psql -d nomenclador_database_name -U nomenclador -h localhost < <osmosis-djang
 >>>> from osm.utils.model import set_streets, set_doors
 >>>> set_streets()
 >>>> set_doors()
+>>>> set_intersections()
 
 #Para cargar las areas en formato gpx, ejecuter en la shell de cyj.buildout (barrios)
->>>> from nomenclador.maap.utils import importAreas
->>>> importAreas('<path_archivo_gpx>', osm=True)
+>>>> from nomenclador.maap.utils import import_areas
+>>>> from nomenclador.maap.models import MaapCategory
+>>>> category = MaapCategory.objects.filter(name='Barrios')
+>>>> import_areas('<path_barrio_gpx>', zone=True, categories = category)
 
 
 DEVELOPMENT CONFIGURATION

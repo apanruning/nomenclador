@@ -166,9 +166,14 @@ class MaapModel(models.Model):
     def __unicode__(self):
         return self.name
     
+    @models.permalink
     def get_absolute_url(self):
-        cat_slug = self.category.all()[0].slug
-        return reverse('view',args=[cat_slug, self.id])  
+        categories = self.category.all()
+        if categories:
+            cat_slug = categories[0].slug
+        else:
+            cat_slug = None
+        return ('view', [cat_slug, self.id])  
 
     def to_layer(self):
         # This method only works on inherited models with geom field
@@ -197,8 +202,7 @@ class MaapModel(models.Model):
 class MaapCategory(models.Model):
     slug = models.SlugField(unique=True, editable=False)
     name = models.CharField(max_length=35)
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='children')    
-    maapmodel = models.ManyToManyField(MaapModel, null=True, blank=True, related_name='category_set')
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
     is_public = models.BooleanField(default=True)
     show_all = models.BooleanField(default=False)
     
@@ -257,12 +261,12 @@ class MaapArea(MaapModel):
         return Area(**out)   
 
 
-class MaapOSMArea(MaapArea):
+class MaapZone(MaapArea):
     nodes_covered = models.ManyToManyField('osm.Nodes', editable=False)
     objects = MaapManager()
 
     def save(self, force_insert=False, force_update=False):
-        super(MaapOSMArea, self).save(force_insert, force_update)
+        super(MaapZone, self).save(force_insert, force_update)
         self.nodes_covered = Nodes.objects.filter(geom__coveredby= self.geom)
 
 

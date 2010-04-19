@@ -151,6 +151,6 @@ class GeoCordobaAdmin(admin.OSMGeoAdmin):
 admin.site.register(MaapCategory, MaapCategoryAdmin)
 admin.site.register(MaapPoint, GeoCordobaAdmin)
 admin.site.register(Icon, admin.GeoModelAdmin)
-admin.site.register(MaapOSMArea, GeoCordobaAdmin)
+admin.site.register(MaapZone, GeoCordobaAdmin)
 admin.site.register(MaapArea, GeoCordobaAdmin)
 admin.site.register(MaapMultiLine, GeoCordobaAdmin)
