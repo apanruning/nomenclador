@@ -12,15 +12,9 @@
 <link href="/media/css/jquery.autocomplete.css" type="text/css" media="all" rel="stylesheet" />
 {% endblock %}
 {% block title %}{{ page.name }}{% endblock %}
+{% block map %}{% endblock %}
+{% endblock %}
 
-        {% block nav %}    
-        <li><a href="/">Home</a></li>
-        <li><a href="/pages/">Ideas</a></li>
-        <li><a href="/projects/list">Proyectos</a></li>
-        <li class="selected"><a href="/accounts/index">Personas</a></li>
-        {% block map %}{% endblock %}
-        {% endblock %}
-
-		{% block content %}{% endblock %}
+{% block content %}{% endblock %}
 
 

@@ -1,16 +1,11 @@
-{% extends 'master.html' %}
+{% extends 'profiles/profile.html' %}
 {% load tagging_tags markup inbox profile_tags%}	
 
 {%block title%}Perfil de {{other_user}} {%endblock%}
 
 {%block categories %}  {% endblock %}
 {%block map %}  {% endblock %}
-{% block actions %}
-    <a href="{% url messages_inbox %}">Bandeja de Entrada({%inbox_count%})</a> ·
-    <a href="{% url messages_outbox %}">Mensajes Enviados</a> ·
-    <a href="{% url messages_compose %}">Nuevo mensaje</a> ·
-    <a href="{% url messages_trash %}">Basura</a></p>
-{% endblock %}
+
 {% block content %}
 
 <form action="{% url profile_edit request.user.id %}" method="post">
