@@ -224,7 +224,7 @@ class MaapCategory(models.Model):
         
     @models.permalink
     def get_absolute_url(self):
-        return reverse('list_by_category',args=[self.slug])
+        return ('list_by_category', [self.slug])
 
 class MaapPoint(MaapModel):
    
@@ -242,7 +242,7 @@ class MaapPoint(MaapModel):
     @models.permalink
     def get_absolute_url(self):
         cat_slug = self.category.all()[0].slug
-        return reverse('view',[cat_slug, self.id])
+        return ('view',[cat_slug, self.id])
     
 
 class MaapArea(MaapModel):
