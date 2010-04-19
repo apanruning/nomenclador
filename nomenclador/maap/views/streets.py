@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, redirect
 from django.db import connection
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.utils import simplejson
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
@@ -11,7 +11,7 @@ from osm.models import StreetIntersection, Ways
 from osm.utils.search import get_location_by_door
 from osm.utils.words import clean_search_street
 from django.core import urlresolvers
-from django.utils.http import urlquote
+from django.utils.http import urlquote, urlencode
 from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
 
 def search_streets(request):
@@ -46,6 +46,24 @@ def search_streets(request):
             # This should be changed with elegant "not found current search"
             raise Http404
             
+        if street_list.count() == 1:
+            # Stand Alone case
+            params = {}
+            if with_intersection:
+                params['str'] = street_list[0].first_street.norm
+                params['int'] = street_list[0].second_street.norm
+            else:
+                params['str'] = street_list[0].norm
+            if streetnumber:
+                params['door'] = streetnumber
+            
+            url = "%s?%s" % (urlresolvers.reverse('nomenclador.maap.views.street_location'), 
+                             urlencode(params))
+                             
+            return  HttpResponseRedirect(url)
+
+
+             
     return object_list(request,
                         street_list,
                         template_name='maap/streets.html',
@@ -78,7 +96,7 @@ def street_location(request):
                 street = Streets.objects.get(norm=params['str'])
                 layer = street.to_layer() 
                 json_layer = layer.json
-            
+
             context = RequestContext(request,{ 
                     'json_layer':json_layer, 
                     'street':street,
