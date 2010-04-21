@@ -1,4 +1,4 @@
-{% if page_range %}
+{% if page_range|length > 1 %}
 
 <ul id="pagination-digg">
     <li class="previous{% if not has_previous %} off{% endif %}">

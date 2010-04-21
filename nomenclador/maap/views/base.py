@@ -33,15 +33,17 @@ def view(request,cat_slug, object_id):
         
     json_layer = obj.cast().to_layer().json
     
-    return object_detail(
+    return object_list(
         request, 
         objects, 
-        int(object_id),
-        extra_context = {'category':category, 
-                         'object_list':objects, 
-                         'json_layer': json_layer
-                        },
-        template_name = 'maap/object_detail.html')
+        paginate_by=10,
+        template_name = 'maap/object_detail.html',
+        extra_context = {
+            'category':category, 
+            'object':obj, 
+            'json_layer': json_layer
+            },
+    )
 
 @login_required  
 def edit(request, model, slug=None):

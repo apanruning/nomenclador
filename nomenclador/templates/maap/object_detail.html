@@ -16,7 +16,6 @@
     {% endwith %}
 {% endblock %}
 {% block listing %}
-
 	<ul id="obj-list">
 		{% for object in object_list %}
 		<li>
@@ -26,10 +25,10 @@
         <li>No se encontraron objetos</li>
         {% endfor %}
 	</ul>
+	{% include 'pager.html' %}
 {% endblock listing %}
 
 {% block content %}
-
     {% include 'place.html' %}
     <div id="banner-slot-b">
     {% pop_slot 'b-1' %}
