@@ -17,10 +17,11 @@ from tagging.models import TaggedItem, Tag
 
 def index(request,*args, **kwargs):
     queryset = MaapModel.objects.filter(category__isnull=False, category__is_public=True)
+    queryset = queryset.distinct()
     return object_list(
         request, 
         queryset, 
-        paginate_by=5,
+        paginate_by=10,
         *args,**kwargs)
     
 ##Generic Views
@@ -70,21 +71,6 @@ def get_objects(request):
         if params.has_key('id'):
             object = object_list.get(pk = int(params['id']))
             layer = object.cast().to_layer().json
-        
-        #if params.has_key('searchterm'):
-        #    object_list &= MaapModel.objects.filter(name__icontains=params['searchterm'])
-
-        #if params.has_key('category'):
-        #    try:
-        #        catel = MaapCategory.objects.get(slug = params['category'])
-        #    except MaapCategory.DoesNotExist:
-        #        raise Http404
-        #    qscats = catel.get_descendants(include_self=True)
-        #    object_list = object_list.filter(category__in=qscats)
-            
-        #if params.has_key('tag'):
-        #    object_list &= TaggedItem.objects.get_by_model(MaapModel, params['tag'])
-                    
         if params.has_key('out'):
             out = params['out']
             if out == 'layer':
@@ -110,8 +96,13 @@ def obj_list_by_cat(request, cat_slug):
         
     qscats = catel.get_descendants(include_self=True)
     mmodels = MaapModel.objects.filter(category__in=qscats)
-    context = RequestContext(request, {'category':catel, 'object_list':mmodels})
-    return render_to_response('maap/index.html', context_instance=context)
+    return object_list(
+        request,
+        mmodels,
+        paginate_by=10,
+        template_name='maap/index.html', 
+        extra_context={'category':catel}
+    )
     
 def obj_list_by_tag(request, tag):
     result = TaggedItem.objects.get_by_model(MaapModel, tag)
