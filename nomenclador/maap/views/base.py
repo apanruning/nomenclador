@@ -27,6 +27,7 @@ def index(request,*args, **kwargs):
 ##Generic Views
 def view(request,cat_slug, object_id):
     objects = MaapModel.objects.filter(category__slug=cat_slug)
+    objects = objects.distinct()
     category = MaapCategory.objects.get(slug=cat_slug)  
     obj = objects.get(id = object_id)
     geom = obj.cast().geom        
@@ -97,10 +98,11 @@ def obj_list_by_cat(request, cat_slug):
         raise Http404
         
     qscats = catel.get_descendants(include_self=True)
-    mmodels = MaapModel.objects.filter(category__in=qscats)
+    queryset = MaapModel.objects.filter(category__in=qscats)
+    queryset = queryset.distinct()
     return object_list(
         request,
-        mmodels,
+        queryset,
         paginate_by=10,
         template_name='maap/index.html', 
         extra_context={'category':catel}

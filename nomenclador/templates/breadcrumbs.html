@@ -7,7 +7,7 @@
     {% for cat in current.get_ancestors %}
     - <a href="{{cat.get_absolute_url}}">{{cat.name}}</a> 
     {% endfor %}
-    - <a href="{{category.get_absolute_url}}">{{current.name}}</a> 
+    - <a href="{{current.get_absolute_url}}">{{current.name}}</a> 
     {%endif%}
 </p>    
 
