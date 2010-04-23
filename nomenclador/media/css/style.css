@@ -71,16 +71,15 @@ body {
 #marcadores {
     float:left;
 }
-#search{
-    position:relative;
-}
+
 #categories {
     font-size:80%;
     margin:-2px 0 1em;
     z-index:99999;
     background:#FFC018;
     width:100%;
-    position:absolute;
+    position:relative;
+    clear:both;
     border-bottom:2px solid #CCC;;
 }
 #categories table {
@@ -310,3 +309,32 @@ body {
 #pagination-digg .previous.off a:hover{
     background-position:right -66px ;
 }
+.ui-tabs-nav{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    
+}
+
+.ui-tabs-nav li{
+    float:left;
+    margin-right:0.5em;
+    list-style-type:none;
+}
+
+.ui-tabs-nav li a{
+    background:#FFF;
+    padding:4px 1em 0;
+    outline:none;
+    text-decoration:none;
+}
+
+.ui-tabs-nav .ui-tabs-selected a{
+    background:#FFC018;
+}
+
+.ui-tabs-hide{
+    display:none;
+}
+

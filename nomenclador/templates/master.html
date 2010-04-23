@@ -24,6 +24,7 @@
      <script type="text/javascript" src="{{ MEDIA_URL }}js/autocomplete.js"></script>
      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.boxshadow.js"></script>       
      <script type="text/javascript" src="{{ MEDIA_URL }}js/forms.js"></script>       
+     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.ui.js"></script>       
     {% block javascript %}
     {% if form.media %}
         {% for js in form.media.render_js %} 
@@ -43,6 +44,7 @@
             }
           return false;
         });
+        $('.tabs').tabs();
         {%block js_onload%}{% endblock %}
     });
     </script>
@@ -90,37 +92,60 @@
         <div id="logo"><a href="{% url index %}"><img src='/media/img/nomenclador_t.jpg'  /></a></div>
         <div class="visualClear"> </div>
     </div>
-    <div id="search">
-        <div id="searchform">
-        {% block searchform %}
-            <form action="{% url nomenclador.maap.views.search_streets %}" method="post" id="streetsform">
-            <input type="submit" value="Buscar" id="searchbuton" />
-            <input type="text" size="27" id="streetname"
-                   value="{{POST.streetname|default:'Ingrese un nombre de calle'}}" 
-                   class="searchterm left" name="streetname" />
-            <input type="text" 
-                   value="{{POST.intersection|default:'Interseccion'}}" 
-                   class="searchterm middle" size="17" name="intersection" />
-            <input type="text" 
-                   value="{{POST.streetnumber|default:'Altura'}}" 
-                   class="searchterm right" size="6" name="streetnumber" />
+    <div id="navigation">    
+        <div id="search-forms-wrapper" class="tabs">
+            <ul>
+            <li><a href="#streets">Calles</a></li>
+            <li><a href="#places">Lugares</a></li>
+            <li><a href="#people">Personas</a></li>
+            </ul>
+            <div id="streets" class="search">
 
-            </form>
-        {% endblock %}
+                <form action="{% url search_streets %}" method="post" id="streetsform">
+                <input type="submit" value="Buscar" class="searchbuton" />
+                <input type="text" size="27" id="streetname"
+                       value="{{POST.streetname|default:'Ingrese un nombre de calle'}}" 
+                       class="searchterm left" name="streetname" />
+                <input type="text" 
+                       value="{{POST.intersection|default:'Interseccion'}}" 
+                       class="searchterm middle" size="17" name="intersection" />
+                <input type="text" 
+                       value="{{POST.streetnumber|default:'Altura'}}" 
+                       class="searchterm right" size="6" name="streetnumber" />
+
+                </form>
+            </div>
+            <div id="places" class="search">
+                <form action="{% url search_places %}" method="post" id="streetsform">
+                <input type="submit" value="Buscar" class="searchbuton" />
+                <input type="text" size="60" id="streetname"
+                       value="{{POST.placename|default:'Ingrese un nombre de un negocio o lugar' }}" 
+                       class="searchterm" 
+                       name="placename" />
+
+                </form>
+            </div>
+            <div id="people" class="search">
+                <form action="{% url search_people %}" method="post" id="streetsform">
+                <input type="submit" value="Buscar" class="searchbuton" />
+                <input type="text" size="60" id="streetname"
+                       value="{{POST.firstname|default:'Ingrese el nombre de la persona que busca'}}" 
+                       class="searchterm" name="firstname" />
+
+                </form>
+            </div>
 
         </div>
-
         <div id="categories">
-            {% block categories %}
-                {% if category %}
-                    {% breadcrumbs category %}
-                    {% category_list category %}
-                {% else %}
-                    {% breadcrumbs %}
-                    {% category_list %}
-                {% endif %}
-            {% endblock %}
-
+        {% block categories %}
+            {% if category %}
+                {% breadcrumbs category %}
+                {% category_list category %}
+            {% else %}
+                {% breadcrumbs %}
+                {% category_list %}
+            {% endif %}
+        {% endblock %}
         </div>
     </div>
 

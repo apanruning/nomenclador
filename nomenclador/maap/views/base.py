@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.gis.measure import Distance, D
 from django.core import urlresolvers
 from django.utils.http import urlquote
+from nomenclador.profiles.models import Profile
 from nomenclador.maap.models import MaapModel, MaapPoint, MaapArea, \
                                     MaapMultiLine, Icon, MaapCategory
 from tagging.models import TaggedItem, Tag
@@ -23,6 +24,21 @@ def index(request,*args, **kwargs):
         queryset, 
         paginate_by=10,
         *args,**kwargs)
+
+def search_people(request):
+    if request.method == 'POST':
+        term = request.POST['firstname']
+        queryset = Profile.objects.filter(name_contains=term)
+        return object_list(
+            request,
+            queryset,
+            paginate_by=10,
+            template_name='maap/index.html', 
+        )
+
+
+def search_places(request):
+    pass
     
 ##Generic Views
 def view(request,cat_slug, object_id):

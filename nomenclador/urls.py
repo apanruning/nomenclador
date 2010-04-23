@@ -12,12 +12,15 @@ admin.autodiscover()
 
 urlpatterns = patterns('nomenclador.maap.views',
     (r'^$', 'index',{'template_name':'maap/index.html'}, 'index'),
-    url(r'^categoria/(?P<cat_slug>[^/]+)/$', 'obj_list_by_cat', name='list_by_category'),
+    url(r'^categoria/barrios$', 'obj_list_by_cat', name='list_by_barrio'),
+    url(r'^categoria/(?P<cat_slug>[^/]+)$', 'obj_list_by_cat', name='list_by_category'),
     url(r'map/(?P<cat_slug>[^/]+)/(?P<object_id>\d+)$','view', name='view'),
     url(r'^api/get$', 'get_objects',name='get_objects'),
-    (r'^map/streets/$', 'search_streets'),
+    url(r'^map/streets$', 'search_streets', name='search_streets'),
+    url(r'^map/people$', 'search_people', name='search_people'),
+    url(r'^map/places$', 'search_places', name='search_places'),
     (r'^map/streets/location$', 'street_location'),
-    (r'^tags/(?P<tag>[^/]+)/$','obj_list_by_tag'),
+    (r'^tags/(?P<tag>[^/]+)$','obj_list_by_tag'),
 
 )
 

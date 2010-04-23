@@ -127,17 +127,19 @@ width:30em;
 background:#FFF;
 padding:0.5em 1em;
 }
-
+#search-forms-wrapper{
+    position:relative;
+}
 /* main search bar */
-#searchform {
+.search{
+    clear:both;
+    position:relative;
     background:#ffc018;
     padding:0.5em;  
-}
-#searchform form {
     margin:0;
 }
-#streetsform{
-    padding:0.2em; ;
+.search form {
+    margin:0;
 }
 .searchterm{
     color:#CCC;
@@ -153,14 +155,14 @@ padding:0.5em 1em;
     color:#333 !important;
 }
 
-#searchbuton {
-    float:right;
+.searchbuton {
     font:110% "Trebuchet MS", Verdana, Helvetica, sans-serif;
     border-color:transparent;
     background:transparent url(../img/bg_searchbutton.png) no-repeat;
     margin:0px;
     color:#FFF;
     width:100px;
+    float:right;
     text-align:center;
     background-position:center center;
 }
