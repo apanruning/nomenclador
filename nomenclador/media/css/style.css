@@ -39,7 +39,6 @@ body {
 
 #main{
     background:#FFF;
-    margin-top:1.5em;
 }
 #listing ul{
     list-style:none;
@@ -319,21 +318,28 @@ body {
 
 .ui-tabs-nav li{
     float:left;
+    background:#FFF;
+    padding:0.5px 1em;
     margin-right:0.5em;
     list-style-type:none;
+    moz-corner-radius:5px 5px 5px;
 }
 
 .ui-tabs-nav li a{
-    background:#FFF;
-    padding:4px 1em 0;
     outline:none;
+    color:#CCC;
     text-decoration:none;
 }
-
-.ui-tabs-nav .ui-tabs-selected a{
-    background:#FFC018;
+.ui-tabs-nav li a:hover{
+    color:#05365E;
 }
-
+.ui-tabs-nav .ui-tabs-selected {
+    background:#FFC018;
+    text-shadow: #999 1px 0px 2px;
+}
+.ui-tabs-nav .ui-tabs-selected a{
+    color:#000;
+}
 .ui-tabs-hide{
     display:none;
 }

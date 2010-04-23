@@ -16,7 +16,6 @@
 #session {
     float:right;
     width:30%;
-    margin:3em 0 0;
 }
 #logo {
     margin:0.5em 0;
@@ -51,7 +50,6 @@
     padding-bottom:4em;
 }
 #listing{
-    margin-top:1.5em;
     float:left;
     width:20%;
 }
