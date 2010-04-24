@@ -4,14 +4,14 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseForbidden
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.views.generic import create_update
+from django.views.generic import create_update, simple
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
-
+from django.core.mail import EmailMessage
 from microblogging.models import Following
 
 from nomenclador.profiles.models import Profile
-from nomenclador.profiles.forms import ProfileForm
+from nomenclador.profiles.forms import ProfileForm, MailForm
 #from nomenclador.olwidget.widgets import MapDisplay
 
 
@@ -71,4 +71,28 @@ def profile_edit(request, user_id):
         object_id = user_id,
         form_class=ProfileForm, 
         template_name='profiles/profile_form.html')  
+
+def mail(request):
+    mailform = MailForm()
+    honeypot = request.POST.get('honeypot', None)
+    if request.method == 'POST':
+        mailform = MailForm(request)
+        if mailform.is_valid() and not honeypot:
+            data = mailform.cleaned_data
+            subject = 'Nuevo mensaje de %s desde la web' %data['name']
+            email = EmailMessage(
+                subject = data['subject'], 
+                body = data['message'],
+                from_email = data['email'],
+                to = ('info@comercioyjusticia.com',)
+                )
+
+            if not settings.DEBUG :                
+                email.send()
+                    
+    return simple.direct_to_template(
+        request,
+        'contact.html', 
+        extra_context={'form':mailform}
+    )
 

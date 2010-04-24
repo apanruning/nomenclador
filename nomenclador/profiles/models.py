@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from nomenclador.maap.models import MaapPoint
 
 class Profile(models.Model):
     user = models.ForeignKey(User, unique=True, verbose_name=_('user'))
