@@ -41,7 +41,7 @@ urlpatterns += patterns('nomenclador',
     url(r'^registrarse/$', 'account.views.signup', name='signup'),
 
     url(r'^miembros/$', 'profiles.views.profiles', name='profile_list'),
-    url(r'^miembros/(?P<username>[\w\._-]+)/$', 'profiles.views.profile', name='profile_detail'),
+    url(r'^miembros/(?P<username>[\w\._-]+)$', 'profiles.views.profile', name='profile_detail'),
     url(r'^miembros/(?P<user_id>[\w\._-]+)/edit$', 'profiles.views.profile_edit', name='profile_edit'),
     url(r'^ingresar/$', 'account.views.login', name='login'),
     )

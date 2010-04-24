@@ -20,14 +20,12 @@ $(document).ready( function(){
         }
     }) 
 
-    $('#searchbuton').click(function(){
-        $('#streetsform').find(':fields').each(function(){
+    $('.search form').submit(function(){
+        $(this).find(':fields').each(function(){
             value = $(this).val();
             if(value=="Ingrese un nombre de calle"||value=="Interseccion"||value=="Altura"){
                 $(this).val('');
             }
         });
-        $('#streetsform').submit();
-    return false;
     })
 })

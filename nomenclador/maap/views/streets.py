@@ -15,10 +15,10 @@ from django.utils.http import urlquote, urlencode
 from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
 
 def search_streets(request):
-
-    streetnumber = request.POST.get('streetnumber',None)
-    cs_street = clean_search_street(request.POST.get('streetname', ''))
-    cs_inters = clean_search_street(request.POST.get('intersection', ''))
+    import ipdb; ipdb.set_trace()
+    streetnumber = request.GET.get('streetnumber',None)
+    cs_street = clean_search_street(request.GET.get('streetname', ''))
+    cs_inters = clean_search_street(request.GET.get('intersection', ''))
     with_intersection = False
     if cs_street and len(cs_street)>2:
 
@@ -41,10 +41,6 @@ def search_streets(request):
         else:
             street_list = Streets.objects.filter(norm__contains = cs_street)
             queryterm = '%s' %(cs_street)
-
-        if not street_list:
-            # This should be changed with elegant "not found current search"
-            raise Http404
             
         if street_list.count() == 1:
             # Stand Alone case
@@ -64,13 +60,16 @@ def search_streets(request):
 
 
              
-    return object_list(request,
-                        street_list,
-                        template_name='maap/streets.html',
-                        extra_context={'with_intersection':with_intersection,
-                                       'streetnumber':streetnumber,
-                                       'queryterm':queryterm})
-
+        return object_list(
+            request,
+            street_list,
+            template_name='maap/streets.html',
+            extra_context={'with_intersection':with_intersection,
+                           'streetnumber':streetnumber,
+                           'queryterm':queryterm})
+                           
+    return redirect('index')
+    
 def street_location(request):
     if request.method == 'GET':
         params = request.GET        
