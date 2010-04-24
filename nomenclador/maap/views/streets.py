@@ -15,7 +15,6 @@ from django.utils.http import urlquote, urlencode
 from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
 
 def search_streets(request):
-    import ipdb; ipdb.set_trace()
     streetnumber = request.GET.get('streetnumber',None)
     cs_street = clean_search_street(request.GET.get('streetname', ''))
     cs_inters = clean_search_street(request.GET.get('intersection', ''))
