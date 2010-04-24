@@ -27,19 +27,20 @@ def index(request,*args, **kwargs):
         *args,**kwargs)
 
 def search_people(request):
-    if request.method == 'POST':
-        term = request.POST['firstname']
-        queryset = Profile.objects.filter(name_contains=term)
-        return object_list(
-            request,
-            queryset,
-            paginate_by=10,
-            template_name='maap/index.html', 
-        )
-
-
-#def search_places(request):
-#    return obj_list_by_cat(request)
+    term = request.GET.get('firstname', None)
+    queryset = Profile.objects.filter(public=True)
+    if term:
+        queryset = queryset.filter(name__icontains=term)
+    
+    return object_list(
+        request,
+        queryset,
+        paginate_by = 10,
+        template_name = 'maap/people.html', 
+        extra_context = {
+            'default':'people'
+        }          
+    )
     
 ##Generic Views
 def view(request,cat_slug, object_id):
@@ -59,7 +60,7 @@ def view(request,cat_slug, object_id):
         extra_context = {
             'category':category, 
             'object':obj, 
-            'json_layer': json_layer
+            'json_layer': json_layer,
             },
     )
 
@@ -115,8 +116,10 @@ def search_places(request, cat_slug=None):
 
     kwargs = dict(
         paginate_by = 10,
-        template_name = 'maap/index.html', 
-        extra_context = {}
+        template_name = 'maap/places.html', 
+        extra_context = {
+            'default':'places'
+        }      
     )
 
     
@@ -132,7 +135,6 @@ def search_places(request, cat_slug=None):
     
     if search_term:
         objects = objects.filter(slug__contains = slugify(search_term))
-        #kwargs['extra_context']['params'] = dict(request.GET)
         
     objects = objects.distinct()
         

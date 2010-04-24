@@ -5,6 +5,11 @@ Busqueda de calles
 
 </head>
 <body>
+{% block tabs %}
+            <li class="ui-tabs-selected"><a href="#streets">Calles</a></li>
+            <li><a href="#places">Lugares</a></li>
+            <li><a href="#people">Personas</a></li>
+{% endblock tabs %}
 {% block listing %}
 {% if object_list %}
 <h3> Resultados para {{queryterm}}</h3>
