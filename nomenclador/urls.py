@@ -33,7 +33,7 @@ urlpatterns += patterns( '',
     (r'^mensajes/', include('messages.urls')),
     (r'^notificaciones/', include('notification.urls')),
     (r"^announcements/", include("announcements.urls")),
-    
+    (r'^contacto/$', 'nomenclador.profiles.views.mail', {}, 'mail'),
     )
 
 

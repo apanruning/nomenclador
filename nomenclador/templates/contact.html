@@ -1,0 +1,12 @@
+{% extends 'master.html' %}
+{% block title %}About {% endblock %}
+{% block map %}{% endblock %}
+{% block content %}
+<h1>Su opini&oacute;n nos interesa</h1>
+<form action="{% url mail %}" method="post">
+    <input type="text" class="honeypot" name="honeypot" value="" id="name" />
+    {% include 'generic_form.html' %}
+    <input type="submit" value="Enviar" /></p>
+
+</form>
+{% endblock %}

@@ -17,4 +17,8 @@ class ProfileForm(forms.ModelForm):
             'twitter_user', 'twitter_password')
     description = forms.CharField(widget=WMDTextField, required=False)
     location = forms.CharField(widget=PointWidget, required=False)
-  
+
+class MailForm(forms.Form):
+    name = forms.CharField(label = 'Su nombre', max_length = 50)
+    mail = forms.EmailField(label = 'Su email')
+    message = forms.CharField(label = 'Mensaje', widget=WMDTextField)

@@ -2,7 +2,7 @@ form{
     margin:0;
 }
 label{
-    width:8em;
+    width:12em;
     float:left;
     text-align:right;
     padding:0.25em;
@@ -24,7 +24,7 @@ input[type='password']{
 }
 .formfields li{
     padding: 0.25em;
-    margin-bottom:0.5em;
+    margin-bottom:0.25em;
     clear:both;
     overflow:hidden;
 }
@@ -43,7 +43,7 @@ input[type='password']{
 }
 .formfields p.required-text{
     margin:0 0 0.25em 0 !important;
-    padding: 0 0 0 8em !important;
+    padding: 0 0 0 10em !important;
 }
 .formfields p.required-text span {
     color:#900;
