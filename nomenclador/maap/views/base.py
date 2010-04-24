@@ -15,6 +15,7 @@ from nomenclador.profiles.models import Profile
 from nomenclador.maap.models import MaapModel, MaapPoint, MaapArea, \
                                     MaapMultiLine, Icon, MaapCategory
 from tagging.models import TaggedItem, Tag
+from django.template.defaultfilters import slugify
 
 def index(request,*args, **kwargs):
     queryset = MaapModel.objects.filter(category__isnull=False, category__is_public=True)
@@ -37,8 +38,8 @@ def search_people(request):
         )
 
 
-def search_places(request):
-    pass
+#def search_places(request):
+#    return obj_list_by_cat(request)
     
 ##Generic Views
 def view(request,cat_slug, object_id):
@@ -107,22 +108,35 @@ def get_objects(request):
     else:
         raise Http404
 
-def obj_list_by_cat(request, cat_slug):
-    try:
-        catel = MaapCategory.objects.get(slug = cat_slug)
-    except MaapCategory.DoesNotExist:
-        raise Http404
-        
-    qscats = catel.get_descendants(include_self=True)
-    queryset = MaapModel.objects.filter(category__in=qscats)
-    queryset = queryset.distinct()
-    return object_list(
-        request,
-        queryset,
-        paginate_by=10,
-        template_name='maap/index.html', 
-        extra_context={'category':catel}
+def search_places(request, cat_slug=None):
+    search_term = request.GET.get('searchterm', None)
+    
+    objects = MaapModel.objects.all()
+
+    kwargs = dict(
+        paginate_by = 10,
+        template_name = 'maap/index.html', 
+        extra_context = {}
     )
+
+    
+    if cat_slug:    
+        try:
+            category = MaapCategory.objects.get(slug = cat_slug)
+        except MaapCategory.DoesNotExist:
+            raise Http404
+        descendants = category.get_descendants(include_self = True)
+        objects = objects.filter(category__in = descendants)
+
+        kwargs['extra_context']['category'] = category
+    
+    if search_term:
+        objects = objects.filter(slug__contains = slugify(search_term))
+        #kwargs['extra_context']['params'] = dict(request.GET)
+        
+    objects = objects.distinct()
+        
+    return object_list(request, objects, **kwargs)
     
 def obj_list_by_tag(request, tag):
     result = TaggedItem.objects.get_by_model(MaapModel, tag)

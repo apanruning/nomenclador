@@ -4,11 +4,11 @@
     {% for root_node in roots %}
         {% with root_node.children.all as childrens %}
         <td>
-        <a class="root-node" href="{{ root_node.get_absolute_url }}">{{ root_node.name }}</a><br />
+        <a class="root-node" href="{{ root_node.get_absolute_url }}{{ param }}">{{ root_node.name }}</a><br />
         <ul>
             {% for node in childrens %}
             <li>
-            <a href="{{ node.get_absolute_url }}">{{ node.name }}</a>
+            <a href="{{ node.get_absolute_url }}{{ param }}"">{{ node.name }}</a>
             </li>
             {% endfor %}
         </ul>
