@@ -70,23 +70,24 @@ body {
 #marcadores {
     float:left;
 }
-
+#navigation{
+}
 #categories {
     font-size:80%;
     margin:-2px 0 1em;
     z-index:99999;
     background:#FFC018;
-    width:100%;
     position:relative;
     clear:both;
-    border-bottom:2px solid #CCC;;
+    padding:2px;
+    -moz-border-radius:0 0 5px 5px;
+    -webkit-border-radius:0 0 5px 5px;
+    border-radius:0 0 5px 5px;
 }
 #categories table {
-    width:100%;
     display:none;
     background:#FFF;
-    border:1px solid #CCC;
-    border-color:transparent #CCC;
+    margin:0;
 }
 #categories .root-node {
     font-size:120%;
@@ -111,6 +112,10 @@ body {
     bottom:0;
     right:0;
     font-size:80%;
+    -moz-border-radius:0 0 5px 0;
+    -webkit-border-radius:0 0 5px 0;
+    border-radius:0 0 5px 0;
+    outline:none;
 }
 #more-categories:hover{
     text-decoration:none;
@@ -202,7 +207,7 @@ body {
     background:#fff;
     padding:0.2em 0.5em;
     font-size:80%;
-    margin:2px;
+    margin:0;
 }
 .action.close {
     position:absolute;
@@ -335,7 +340,7 @@ body {
 }
 .ui-tabs-nav .ui-tabs-selected {
     background:#FFC018;
-    text-shadow: #999 1px 0px 2px;
+    text-shadow: 0 1px 0 #fff, 0 -1px 0 #999;
 }
 .ui-tabs-nav .ui-tabs-selected a{
     color:#000;

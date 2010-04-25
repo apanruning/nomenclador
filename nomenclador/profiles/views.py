@@ -46,16 +46,16 @@ def get_default_redirect(request, redirect_field_name="next",
 
 
 def profile(request, username):
-    user = get_object_or_404(User, username=username)
+    user_profile = get_object_or_404(User, username=username)
     if request.user.is_authenticated():
-        if request.user == user:
+        if request.user == user_profile:
             is_me = True
         else:
             is_me = False
     else:
         is_me = False
     try :
-        json_layer = user.get_profile().location.to_layer().json
+        json_layer = user_profile.get_profile().location.to_layer().json
     except:
         json_layer = None
     return simple.direct_to_template(
@@ -63,7 +63,7 @@ def profile(request, username):
         'profiles/profile.html', 
         {
         'is_me': is_me,
-        'user': user,
+        'user_profile': user_profile,
         'json_layer': json_layer
         
         }
