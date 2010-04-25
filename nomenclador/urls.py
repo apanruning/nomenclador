@@ -62,7 +62,6 @@ urlpatterns += patterns('',
        direct_to_template,
        {'template': 'registration/registration_closed.html'},
        name='registration_disallowed'),
-    (r'', include('registration.auth_urls')),
     (r'^ingresar/$', 'nomenclador.profiles.views.login',{},'login'),
     (r'^salir/$', 'django.contrib.auth.views.logout', {}, 'logout'),
 )
