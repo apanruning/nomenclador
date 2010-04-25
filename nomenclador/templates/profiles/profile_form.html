@@ -1,7 +1,7 @@
 {% extends 'profiles/profile.html' %}
 {% load tagging_tags markup inbox profile_tags%}	
 
-{%block title%}Perfil de {{other_user}} {%endblock%}
+{%block title%}Perfil de {{user}} {%endblock%}
 
 {%block categories %}  {% endblock %}
 {%block map %}  {% endblock %}
@@ -9,8 +9,10 @@
 {% block content %}
 
 <form action="{% url profile_edit request.user.id %}" method="post">
-    {% include 'generic_form.html'%}    
-
+    {% include 'generic_form.html'%}
+    <table>    
+    {% include 'inline_form.html' %}
+    </table>
     <p class="field"><input type="submit" value="Guardar" /></p>
 </form>
 
