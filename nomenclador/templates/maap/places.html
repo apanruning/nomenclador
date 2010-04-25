@@ -1,5 +1,5 @@
 {% extends 'maap/index.html' %}
-
+{% load maap_tags %}
 {% block title %}Resultados de busqueda de lugares{% endblock %}
 
 {% block tabs %}
@@ -7,3 +7,12 @@
             <li class="ui-tabs-selected"><a href="#places">Lugares</a></li>
             <li><a href="#people">Personas</a></li>
 {% endblock tabs %}
+
+{% block listing %}
+    {{ block.super }}
+    {% with request.GET.searchterm as searchterm %}
+    {% if searchterm %}
+    {% suggested_categories searchterm %}
+    {% endif %}
+    {% endwith %}
+{% endblock listing %}

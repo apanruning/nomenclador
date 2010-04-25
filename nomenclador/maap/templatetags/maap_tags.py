@@ -1,6 +1,7 @@
 from django import template
 from nomenclador.maap.models import MaapCategory
 from django.utils.http import urlencode
+from django.template.defaultfilters import slugify
 
 register = template.Library()
 
@@ -21,3 +22,8 @@ def category_list(current_node = None, searchterm = None):
 def breadcrumbs(current_node = None):
     return dict(current = current_node)
 
+@register.inclusion_tag('../templates/suggested_categories.html')
+def suggested_categories(search_term = None):
+    categories = MaapCategory.objects.filter(slug__contains = slugify(search_term))[:5]
+    
+    return dict(categories = categories)

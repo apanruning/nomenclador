@@ -56,8 +56,6 @@ def search_streets(request):
                              urlencode(params))
                              
             return  HttpResponseRedirect(url)
-
-
              
         return object_list(
             request,
@@ -71,7 +69,7 @@ def search_streets(request):
     
 def street_location(request):
     if request.method == 'GET':
-        params = request.GET        
+        params = request.GET
         streetnumber = params.get('door', None)
         street = None
         if params.has_key('str'):
@@ -86,7 +84,6 @@ def street_location(request):
                 layer.name = "%s %s" % (params['str'], params['int'])
                 json_layer = layer.json
 
-
             elif params.has_key('door'):
                 # Street door Case
                 street = Streets.objects.get(norm = params['str'])
@@ -99,7 +96,7 @@ def street_location(request):
                 layer = street.to_layer() 
                 json_layer = layer.json
 
-            context = RequestContext(request,{ 
+            context = RequestContext(request,{
                     'json_layer':json_layer, 
                     'street':street,
                     'streetnumber':streetnumber
@@ -107,7 +104,7 @@ def street_location(request):
             return render_to_response('maap/street_detail.html', context_instance = context)
                             
         else:
-            raise Http404        
+            raise Http404
     else:
         raise Http404
 

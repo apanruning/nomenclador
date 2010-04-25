@@ -51,11 +51,11 @@ def view(request,cat_slug, object_id):
     category = MaapCategory.objects.get(slug=cat_slug)  
     obj = objects.get(id = object_id)
     geom = obj.cast().geom        
-        
+    
     json_layer = obj.cast().to_layer().json
     
     return object_list(
-        request, 
+        request,
         objects, 
         template_name = 'maap/object_detail.html',
         extra_context = {
