@@ -1,4 +1,5 @@
 {% extends 'maap/base.html' %}
+{% load pagination_tags %}
 {% block title %}
 Busqueda de calles
 {% endblock %}
@@ -14,6 +15,7 @@ Busqueda de calles
 {% if object_list %}
 <h3> Resultados para {{queryterm}}</h3>
 <dl>
+    {% autopaginate object_list 10 %}
     {% for street in object_list %}    
     <dt>
     {% url maap.views.street_location as url%}
@@ -28,6 +30,7 @@ Busqueda de calles
     <dd>{{street.old|default_if_none:''}}</dd>
     
     {% endfor %}
+    {% paginate %}    
 </dl>
 {% include 'pager.html' %}
 {% else%}

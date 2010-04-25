@@ -77,11 +77,15 @@ def street_location(request):
         if params.has_key('str'):
             if params.has_key('int'):
                 # Intersection Case
+                ## FIXME: Do it more efficient, avoiding 2 queries
+                street = StreetIntersection.objects.filter(first_street__norm = params['str'])
+                street = street.filter(second_street__norm = params['int'])[0]
                 nodes = Nodes.objects.filter(waynodes__way__street__norm = params['str'])
                 nodes = nodes.filter(waynodes__way__street__norm = params['int'])
                 layer = nodes[0].to_layer()
                 layer.name = "%s %s" % (params['str'], params['int'])
                 json_layer = layer.json
+
 
             elif params.has_key('door'):
                 # Street door Case

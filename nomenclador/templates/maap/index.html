@@ -1,4 +1,5 @@
 {% extends 'maap/base.html' %}
+{% load pagination_tags %}
 {% block title %}{{ category.name|default:'Bienvenido'}}{% endblock %}
 
 <html>
@@ -6,7 +7,7 @@
 {% block js_onload %}
     {{ block.super }}
     {% if object_list and category.show_all %}
-    json_layer = {{ object_list.layer.json|safe }};
+    json_layer = {{ json_layer|safe }};
     state.setLayer(json_layer).show();     
     {% endif %}
 {% endblock %}
@@ -15,6 +16,7 @@
 
 {% block listing %}
 	<ul id="obj-list">
+	    {% autopaginate object_list 10 %}
 		{% for object in object_list %}
 		<li>
         {% include 'place.html' %}
@@ -22,8 +24,9 @@
         {% empty %}
         <li>No se encontraron objetos</li>
         {% endfor %}
+        {% paginate %}
 	</ul>
-	{% include 'pager.html' %}
+
 {% endblock listing %}
 
 

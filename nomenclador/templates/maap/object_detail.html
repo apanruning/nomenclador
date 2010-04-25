@@ -1,4 +1,4 @@
-    {% extends 'maap/base.html' %}
+{% extends 'maap/places.html' %}
 {% load markup tagging_tags banner_tags mptt_tags maap_tags %}
 
 {% block js_onload %}
@@ -15,18 +15,7 @@
        {% category_list category %}
     {% endwith %}
 {% endblock %}
-{% block listing %}
-	<ul id="obj-list">
-		{% for object in object_list %}
-		<li>
-        {% include 'place.html' %}
-        </li>
-        {% empty %}
-        <li>No se encontraron objetos</li>
-        {% endfor %}
-	</ul>
-	{% include 'pager.html' %}
-{% endblock listing %}
+}
 
 {% block content %}
     {% include 'place.html' %}

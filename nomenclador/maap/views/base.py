@@ -22,8 +22,8 @@ def index(request,*args, **kwargs):
     queryset = queryset.distinct()
     return object_list(
         request, 
-        queryset, 
-        paginate_by=10,
+        queryset,
+        extra_context= {'json_layer': queryset.layer().json},       
         *args,**kwargs)
 
 def search_people(request):
@@ -35,10 +35,10 @@ def search_people(request):
     return object_list(
         request,
         queryset,
-        paginate_by = 10,
         template_name = 'maap/people.html', 
         extra_context = {
-            'default':'people'
+            'default':'people',
+#            'json_layer': queryset.layer.json
         }          
     )
     
@@ -55,7 +55,6 @@ def view(request,cat_slug, object_id):
     return object_list(
         request, 
         objects, 
-        paginate_by=10,
         template_name = 'maap/object_detail.html',
         extra_context = {
             'category':category, 
@@ -84,41 +83,15 @@ def create(request, model):
         extra_context={'model':model.__name__})
 
 
-def get_objects(request):
-    if request.method == 'GET':
-        params = request.GET        
-        object_list = MaapModel.objects.all()
-
-        if params.has_key('id'):
-            object = object_list.get(pk = int(params['id']))
-            layer = object.cast().to_layer().json
-        if params.has_key('out'):
-            out = params['out']
-            if out == 'layer':
-                
-                return HttpResponse(simplejson.dumps(layer), mimetype='text/json')  
-            else:
-                raise Http404    
-        else:
-            path = request.get_full_path() + '&out=layer'
-            return object_list(request,
-                                object_list, 
-                                'maap/index.html', 
-                                paginate_by=5,
-                                extra_instance={'layerpath':path})
-    else:
-        raise Http404
-
 def search_places(request, cat_slug=None):
     search_term = request.GET.get('searchterm', None)
     
     objects = MaapModel.objects.all()
 
     kwargs = dict(
-        paginate_by = 10,
         template_name = 'maap/places.html', 
         extra_context = {
-            'default':'places'
+            'default':'places',
         }      
     )
 
@@ -137,7 +110,8 @@ def search_places(request, cat_slug=None):
         objects = objects.filter(slug__contains = slugify(search_term))
         
     objects = objects.distinct()
-        
+    kwargs['extra_context']['json_layer'] = objects.layer().json        
+    
     return object_list(request, objects, **kwargs)
     
 def obj_list_by_tag(request, tag):

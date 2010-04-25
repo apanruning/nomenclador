@@ -68,6 +68,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
+    'pagination.middleware.PaginationMiddleware',    
 )
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.auth',
@@ -100,6 +101,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'emailconfirmation',
     'announcements',
+    'pagination',    
     'voting',
     'tagging',
     'mptt',

@@ -12,7 +12,7 @@
 
 {% block listing %}
 <dl>
-    <dt id="description">{{street}} {{streetnumber}}</dt>
+    <dt id="description">{{street}} {{streetnumber|default_if_none:''}}</dt>
     <dd>{{street.old|default_if_none:''}}</dd>
 </dl>
 {% endblock %}
