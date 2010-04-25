@@ -82,8 +82,10 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "templates"),
 )
 AUTH_PROFILE_MODULE = "profiles.Profile"
+AUTH_PROFILE_ICON = os.path.join(MEDIA_ROOT, 'icons/home.png')
 
 ACCOUNT_REQUIRED_EMAIL = True
+
 INSTALLED_APPS = (
 #    'notification',
     'django.contrib.admin',
