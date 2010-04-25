@@ -29,16 +29,18 @@ def index(request,*args, **kwargs):
 def search_people(request):
     term = request.GET.get('firstname', None)
     queryset = Profile.objects.filter(public=True)
+
     if term:
         queryset = queryset.filter(name__icontains=term)
-    
+
+    objects = MaapPoint.objects.filter(profile__in = queryset)    
     return object_list(
         request,
         queryset,
         template_name = 'maap/people.html', 
         extra_context = {
             'default':'people',
-#            'json_layer': queryset.layer.json
+            'json_layer': objects.layer().json
         }          
     )
     

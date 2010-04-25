@@ -1,5 +1,14 @@
 {% extends 'maap/index.html' %}
 {% block title %}Resultados de busqueda de personas{% endblock %}
+
+{% block js_onload %}
+    {{ block.super }}
+
+    json_layer = {{ json_layer|safe }};
+    state.setLayer(json_layer).show();     
+
+{% endblock %}
+
 {% block tabs %}
             <li><a href="#streets">Calles</a></li>
             <li><a href="#places">Lugares</a></li>

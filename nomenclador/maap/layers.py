@@ -6,6 +6,8 @@ DEFAULT_ICON = {
     "height": 37
 }
 
+order = ['area','multiline','point']
+
 class BaseLayer(object):
     meta = ['id', 'name', 'type']
 
@@ -21,10 +23,14 @@ class BaseLayer(object):
     
     @property
     def json(self):
+        type_cmp = lambda x, y: cmp(order.index(x['type']),order.index(y['type']))
         object_dict = dict(self)
         if hasattr(self, 'elements'):
             if self.elements:
-                object_dict['elements'] = [dict(x) for x in self.elements]
+                elements = [dict(x) for x in self.elements]
+                elements.sort(type_cmp)
+                object_dict['elements'] = elements
+        
         return simplejson.dumps(object_dict)
     
 class Layer(BaseLayer):    
@@ -56,24 +62,33 @@ class Layer(BaseLayer):
             extent = geom.extent
 
             if center_object is not None:
-                # for historical reasons
-                margin = 102
                 centroid = (
                     center_object.centroid.get_x(),
                     center_object.centroid.get_y()
                 )                    
                 delta_x = max(abs(extent[0]-centroid[0]), 
-                              abs(extent[2]-centroid[0])) + margin
+                              abs(extent[2]-centroid[0]))
                               
                 delta_y = max(abs(extent[1]-centroid[1]), 
-                              abs(extent[3]-centroid[1])) + margin
+                              abs(extent[3]-centroid[1]))
 
                 extent = ((centroid[0] - delta_x),
                           (centroid[1] - delta_y),
                           (centroid[0] + delta_x),
                           (centroid[1] + delta_y),
                          )
+
+            # for historical reasons
+            margin = 102
+            extent = (
+                extent[0] - margin,
+                extent[1] - margin,
+                extent[2] + margin,
+                extent[3] + margin
+            )
+            
             return extent   
+
 
 class GeoElement(BaseLayer):
 

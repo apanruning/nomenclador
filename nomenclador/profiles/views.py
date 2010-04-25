@@ -41,9 +41,7 @@ else:
 #        'search_terms': search_terms,
 #    }, **extra_context), context_instance=RequestContext(request))
 
-def profile(request, username, template_name="profiles/profile.html", extra_context=None):
-    if extra_context is None:
-        extra_context = {}
+def profile(request, username):
     other_user = get_object_or_404(User, username=username)
     if request.user.is_authenticated():
         is_following = Following.objects.is_following(request.user, other_user)
@@ -55,11 +53,16 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
         is_me = False
         is_following = False
 
-    return render_to_response(template_name, dict({
-        "is_me": is_me,
-        "is_following": is_following,
-        "other_user": other_user,
-    }, **extra_context), context_instance=RequestContext(request))
+    return simple.direct_to_template(
+        request,
+        'profiles/profile.html', 
+        {
+        'is_me': is_me,
+        'is_following': is_following,
+        'other_user': other_user,
+        'json_layer': other_user.get_profile().location.to_layer().json
+        }
+    )
     
 
 @login_required  
@@ -71,7 +74,6 @@ def profile_edit(request, user_id):
     if profile_instance.location_id is not None:
     
         point = MaapPoint.objects.get(id = profile_instance.location_id)
-        import ipdb; ipdb.set_trace()    
         point_form = InlinePointForm(instance = point)
     else:
         point_form = InlinePointForm()

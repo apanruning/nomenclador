@@ -1,23 +1,20 @@
-{% extends 'master.html' %}
+{% extends 'maap/people.html' %}
 {% load tagging_tags markup inbox profile_tags%}	
 
 {%block title%}Perfil de {{other_user}} {%endblock%}
-{% block javascript %}
-    {{map.media}}
-{% endblock %}
-
 {%block categories %}  {% endblock %}
-{%block map %}  {% endblock %}
-{% block listing %}
-<ul>
-<li><a href="{% url messages_inbox %}">Bandeja de Entrada({%inbox_count%})</a></li>
-<li><a href="{% url messages_outbox %}">Mensajes Enviados</a></li>
-<li><a href="{% url messages_compose %}">Nuevo mensaje</a></li>
-<li><a href="{% url messages_trash %}">Basura</a></li>    
-</ul>
-    
-    
-{% endblock %}
+{% if is_me %}
+    {% block listing %}
+    <ul>
+    <li><a href="{% url messages_inbox %}">Bandeja de Entrada({%inbox_count%})</a></li>
+    <li><a href="{% url messages_outbox %}">Mensajes Enviados</a></li>
+    <li><a href="{% url messages_compose %}">Nuevo mensaje</a></li>
+    <li><a href="{% url messages_trash %}">Basura</a></li>    
+    </ul>
+        
+        
+    {% endblock %}
+{% endif %}
 {% block content %}
 
 <h1><a href="{% url profile_detail other_user %}" rel="bookmark">{{ other_user.get_profile.name|default:other_user}}</a></h1>
@@ -27,7 +24,6 @@
 
 {{ other_user.get_profile.description|markdown }}
 
-{{map}}
 
 
 {% endblock %}

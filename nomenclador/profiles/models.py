@@ -10,7 +10,7 @@ class Profile(models.Model):
     user = models.ForeignKey(User, unique=True, verbose_name=_('user'))
     name = models.CharField(_('name'), max_length=50, null=True, blank=True)
     description = models.TextField(_('about'), null=True, blank=True)
-    location = models.ForeignKey(MaapPoint, null=True)
+    location = models.OneToOneField(MaapPoint, null=True)
     public = models.BooleanField(_('is public'), default=False)
     website = models.URLField(_('website'), null=True, blank=True, verify_exists=False)
     
