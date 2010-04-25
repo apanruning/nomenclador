@@ -86,7 +86,7 @@ AUTH_PROFILE_MODULE = "profiles.Profile"
 AUTH_PROFILE_ICON = os.path.join(MEDIA_ROOT, 'icons/home.png')
 
 ACCOUNT_REQUIRED_EMAIL = True
-
+ACCOUNT_ACTIVATION_DAYS = 7
 INSTALLED_APPS = (
 #    'notification',
     'django.contrib.admin',
@@ -99,14 +99,12 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'django.contrib.markup',
     'django.contrib.comments',
-    'emailconfirmation',
     'announcements',
     'pagination',    
     'voting',
     'tagging',
     'mptt',
-    'microblogging',
-    'nomenclador.account',
+    'registration',
     'nomenclador.profiles',
     'messages',
     'nomenclador.banners',

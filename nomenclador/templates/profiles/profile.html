@@ -1,7 +1,7 @@
 {% extends 'maap/people.html' %}
 {% load tagging_tags markup inbox profile_tags%}	
 
-{%block title%}Perfil de {{other_user}} {%endblock%}
+{%block title%}Perfil de {{user}} {%endblock%}
 {%block categories %}  {% endblock %}
 {% if is_me %}
     {% block listing %}
@@ -17,9 +17,9 @@
 {% endif %}
 {% block content %}
 
-<h1><a href="{% url profile_detail other_user %}" rel="bookmark">{{ other_user.get_profile.name|default:other_user}}</a></h1>
+<h1><a href="{% url profile_detail user %}" rel="bookmark">{{ user.get_profile.name|default:user}}</a></h1>
 {% if is_me %}
-<a class="action-link edit" href="{% url profile_edit other_user.id %}">Editar</a>
+<a class="action-link edit" href="{% url profile_edit user.id %}">Editar</a>
 {% endif %}
 
 {{ other_user.get_profile.description|markdown }}
