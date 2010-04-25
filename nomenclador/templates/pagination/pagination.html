@@ -1,0 +1,31 @@
+{% if is_paginated %}
+{% load i18n %}
+
+<ul id="pagination-digg">
+    {% if page_obj.has_previous %}        
+    <li class="previous{% if not page_obj.has_previous %} off{% endif %}">
+    <a href="?page={{ page_obj.previous_page_number }}{{ getvars }}"
+       title="to page {{ previous }}"><span>anterior</span></a>
+    </li>
+    {% endif %}
+
+    {% for page in pages %}
+    {% if page %}
+        <li {%ifequal page page_obj.number %}class="active"{% endifequal %}>
+        {%ifequal page page_obj.number %}{{ page }}{% else %}
+           <a href="?page={{ page }}{{ getvars }}{{ hashtag|default_if_none:'' }}" title="to page {{ pag }}">{{ page }}</a>
+        {% endifequal %}
+        </li>  
+        {% else %}
+        <li>...</li>
+        {% endif %}
+    {% endfor %}
+    
+    {% if page_obj.has_next %}
+
+    <li class="next{% if not page_obj.has_next %} off{% endif %}">
+        <a href="?page={{ page_obj.next_page_number }}{{ getvars }}" title="to page {{ next }}"><span>siguiente</span></a>
+    </li>
+    {% endif %}   
+</ul>
+{% endif %}
