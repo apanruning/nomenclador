@@ -1,66 +1,71 @@
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseForbidden
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.views.generic import create_update, simple
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
 from django.core.mail import EmailMessage
-from microblogging.models import Following
 
 from nomenclador.profiles.models import Profile
-from nomenclador.profiles.forms import ProfileForm, MailForm, InlinePointForm
+from nomenclador.profiles.forms import ProfileForm, MailForm, InlinePointForm, LoginForm
 from nomenclador.maap.models import MaapPoint, Icon
 #from nomenclador.olwidget.widgets import MapDisplay
-
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
 else:
     notification = None
 
-#def profiles(request, template_name="profiles/profiles.html", extra_context=None):
-#    if extra_context is None:
-#        extra_context = {}
-#    users = User.objects.all().order_by("-date_joined")
-#    search_terms = request.GET.get('search', '')
-#    order = request.GET.get('order')
-#    if not order:
-#        order = 'date'
-#    if search_terms:
-#        users = users.filter(username__icontains=search_terms)
-#    if order == 'date':
-#        users = users.order_by("-date_joined")
-#    elif order == 'name':
-#        users = users.order_by("username")
-#    return render_to_response(template_name, dict({
-#        'users': users,
-#        'order': order,
-#        'search_terms': search_terms,
-#    }, **extra_context), context_instance=RequestContext(request))
+
+
+LOGIN_REDIRECT_URLNAME = getattr(settings, "LOGIN_REDIRECT_URLNAME", '')
+
+def get_default_redirect(request, redirect_field_name="next",
+        login_redirect_urlname=LOGIN_REDIRECT_URLNAME):
+    """
+    Returns the URL to be used in login procedures by looking at different
+    values in the following order:
+    
+    - LOGIN_REDIRECT_URLNAME - the name of a URLconf entry in the settings  
+    - LOGIN_REDIRECT_URL - the URL in the setting
+    - a REQUEST value, GET or POST, named "next" by default.
+    """
+    if login_redirect_urlname:
+        default_redirect_to = reverse(login_redirect_urlname)
+    else:
+        default_redirect_to = settings.LOGIN_REDIRECT_URL
+    redirect_to = request.REQUEST.get(redirect_field_name)
+    # light security check -- make sure redirect_to isn't garabage.
+    if not redirect_to or "://" in redirect_to or " " in redirect_to:
+        redirect_to = default_redirect_to
+    return redirect_to
+
 
 def profile(request, username):
-    other_user = get_object_or_404(User, username=username)
+    user = get_object_or_404(User, username=username)
     if request.user.is_authenticated():
-        is_following = Following.objects.is_following(request.user, other_user)
-        if request.user == other_user:
+        if request.user == user:
             is_me = True
         else:
             is_me = False
     else:
         is_me = False
-        is_following = False
-
+    try :
+        json_layer = user.get_profile().location.to_layer().json
+    except:
+        json_layer = None
     return simple.direct_to_template(
         request,
         'profiles/profile.html', 
         {
         'is_me': is_me,
-        'is_following': is_following,
-        'other_user': other_user,
-        'json_layer': other_user.get_profile().location.to_layer().json
+        'user': user,
+        'json_layer': json_layer
+        
         }
     )
     
@@ -145,5 +150,23 @@ def mail(request):
         request,
         'contact.html', 
         extra_context={'form':mailform}
+    )
+
+
+def login(request, success_url=None):
+    if success_url is None:
+        success_url = get_default_redirect(request)
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.login(request):
+            return HttpResponseRedirect(success_url)
+    else:
+        form = LoginForm()
+    return simple.direct_to_template(
+        request,
+        "registration/login.html", 
+        extra_context={
+        "form": form,
+        }
     )
 

@@ -6,7 +6,7 @@
 
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %} | Nomenclador Cartográfico | </title>
 
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/layout.css" type="text/css" media="screen" />    
@@ -91,7 +91,7 @@
                 {% endif %}
                 {% if user.is_anonymous %}
                 <a href="{% url login %}">Ingresar</a> |
-                <a href="{% url signup %}">Registrarse</a> 
+                <a href="{% url registration_register %}">Registrarse</a> 
                 {% endif %}
 
             </div>

@@ -1,0 +1,5 @@
+Muchas gracias por completar el formulario de registro de usuario del
+Nomenclador Cartográfico Digital.
+Para activar su cuenta visite el siguiente vinculo:
+
+http://{{site.domain}}{% url registration_activate activation_key %}
