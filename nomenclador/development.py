@@ -3,8 +3,8 @@ from nomenclador.settings import *
 ADMINS = (
     ('admin', 'admin@admin.com'),
 )
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
+EMAIL_HOST = '127.0.0.1'
+EMAIL_PORT = 25
 
 
 DEBUG=True
