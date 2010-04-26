@@ -1,7 +1,22 @@
-{% extends 'master' %}
+{% extends 'master.html' %}
 {% block page %}
+
+{% if account %}
+<div id="content">
+</h1>Bienvenido {{account}}</h1>
+<p>Su cuenta está ahora activa, puede disfrutar de los beneficios de su cuenta, quizá le interesa</p>
+<ul>
+<li>Buscar calles por altura o intersección</li>
+<li>Ubicar un barrio</li>
+<li>Completar su perfil de usuario</li>
+<li>Buscar gente conocida</li>
+</ul>
+</div>
+{% else %}
 <div id="content">
 </h1>Ha ingresado mal su clave de activación o su clave ha caducado</h1>
 <p>Su clave era <strong>{{activation_key}}</strong>, por favor renuevela completando el formulario de registro una vez más</p>
 </div>
+{% endif %}
+
 {% endblock%}
