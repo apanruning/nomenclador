@@ -15,11 +15,7 @@
         {% if object.creator%}
 	    <a href="{% url profile_detail object.creator %}">{{object.creator}}</a> 
         {% endif %}
-        {% get_comment_count for object as comment_count %}
-        <span class="comment-count">
-            {{comment_count}}    
-        </span>     
-
+        {{object.edited|default:object.created|date:"j-m-Y"}}
         </p>
     </td>
     </tr>

@@ -45,6 +45,10 @@ body {
     margin:0;
     padding:0;
 }
+#listing ul li {
+    margin-bottom:0.5em;
+    position:relative;
+}
 #listing h2{
     font-size:100%;
 }
@@ -54,12 +58,20 @@ body {
     margin:0;
     padding:0;
     width:24px;
+    position:absolute;
+    left:-24px;
+    display:none;
 }
-#content .votes {
-    font-size:120%;
+#listing ul li:hover .votes{
+    display:block;
 }
 #content {
     margin:0;
+    position:relative;
+}
+#content .votes {
+    font-size:150%;
+    display:block;
 }
 
 #content h1 {
@@ -71,6 +83,7 @@ body {
     float:left;
 }
 #navigation{
+    font-size:120%;
 }
 #categories {
     font-size:80%;
@@ -88,9 +101,13 @@ body {
     display:none;
     background:#FFF;
     margin:0;
+
+}
+#categories table a {
+    color:#5485AF;
 }
 #categories .root-node {
-    font-size:120%;
+    color:#05365E;
 }
 #categories .current {
     border-right:1px solid #cce44d;
@@ -111,7 +128,6 @@ body {
     position:absolute;
     bottom:0;
     right:0;
-    font-size:80%;
     -moz-border-radius:0 0 5px 0;
     -webkit-border-radius:0 0 5px 0;
     border-radius:0 0 5px 0;
@@ -129,6 +145,9 @@ body {
 #credits {
     float:right;
     margin:0;
+}
+#content p {
+    font-size:13px;
 }
 /*comment styles*/
 
@@ -206,7 +225,6 @@ body {
 .breadcrumb {
     background:#fff;
     padding:0.2em 0.5em;
-    font-size:80%;
     margin:0;
 }
 .action.close {
@@ -215,6 +233,7 @@ body {
     padding-left: 20px;
 }
 .action-link{ 
+    font-size:80%;
     padding-left: 20px;
     margin-right: 10px;
     background: no-repeat center left;
@@ -222,10 +241,6 @@ body {
 
 .action-link.edit { 
     background-image: url("/media/img/edit.png") 
-}
-
-.action-link.log { 
-    background-image: url("/media/img/clock-add.png") 
 }
 
 .action-link.delete { 
@@ -324,7 +339,7 @@ body {
 .ui-tabs-nav li{
     float:left;
     background:#FFF;
-    padding:0.5px 1em;
+    padding:0.25em 1em 0;
     margin-right:0.5em;
     list-style-type:none;
     moz-corner-radius:5px 5px 5px;
@@ -349,3 +364,8 @@ body {
     display:none;
 }
 
+/* gravatar */
+h1 .gravatar {
+    position:absolute;
+    left:-85px;
+}

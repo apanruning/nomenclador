@@ -19,28 +19,28 @@ register.simple_tag(clear_search_url)
 
 
 @register.simple_tag
-def gravatar(email, size=48):
+def gravatar(email, size=50, rating='g', default=None):
     """
-    Simply gets the Gravatar for the commenter. There is no rating or
-    custom "not found" icon yet. Used with the Django comments.
-    
-    If no size is given, the default is 48 pixels by 48 pixels.
-    
-    Template Syntax::
-    
-        {% gravatar comment.user_email [size] %}
-        
-    Example usage::
-        
-        {% gravatar comment.user_email 48 %}
-    
+    Returns a gravatar url.
+
+    Example tag usage: {% avatar user.email 80 "g" %}
+
+    :Parameters:
+       - `email`: the email to send to gravatar.
+       - `size`: optional YxY size for the image.
+       - `rating`: optional rating (g, pg, r, or x) of the image.
+       - `default`: optional default image url or hosted image like wavatar.
     """
+    # Verify the rating actually is a rating accepted by gravatar
+    rating = rating.lower()
+    ratings = ['g', 'pg', 'r', 'x']
+    if rating not in ratings:
+        raise template.TemplateSyntaxError('rating must be %s' % (
+            ", ".join(ratings)))
+    # Create and return the url
+    hash = hashlib.md5(email).hexdigest()
+    url = 'http://www.gravatar.com/avatar/%s?s=%s&r=%s' % (
+        hash, size, rating)
     
-    url = "http://www.gravatar.com/avatar.php?"
-    url += urllib.urlencode({
-        'gravatar_id': hashlib.md5(email).hexdigest(), 
-        'size': str(size)
-    })
-    
-    return """<img src="%s" width="%s" height="%s" alt="gravatar" class="gravatar" border="0" />""" % (url, size, size)
+    return """<img src="%s" width="%s" height="%s" alt="avatar" class="gravatar" border="0" />""" % (url, size, size)
 

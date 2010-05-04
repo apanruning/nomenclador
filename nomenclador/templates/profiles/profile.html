@@ -16,7 +16,7 @@
 {% endblock %}
 {% block content %}
 
-<h1><a href="{% url profile_detail user_profile %}" rel="bookmark">{{ user_profile.get_profile.name|default:user_profile}}</a></h1>
+<h1>{% gravatar user_profile.email 80 %}<a href="{% url profile_detail user_profile %}" rel="bookmark">{{ user_profile.get_profile.name|default:user_profile}}</a></h1>
 {% if is_me %}
 <a class="action-link edit" href="{% url profile_edit user_profile.id %}">Editar</a>
 {% endif %}
