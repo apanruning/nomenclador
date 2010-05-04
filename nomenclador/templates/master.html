@@ -6,7 +6,7 @@
 
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
-    <title>{% block title %}{% endblock %} | Nomenclador Cartográfico | </title>
+    <title>{% block title %}{% endblock %} Nomenclador Cartográfico</title>
 
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/layout.css" type="text/css" media="screen" />    
@@ -154,7 +154,7 @@
         {% endblock %}
         </div>
     </div>
-
+    <div id="content-wrapper" class="shadow">
     <div id="main">
 
     {% block page %}
@@ -173,24 +173,13 @@
     </div>
     
     <div id="listing">    
-    <table border="0" cellspacing="0" cellpadding="0">
-        <tr>
-            <td>
-                {% block listing %}
-                {% endblock listing%}
-            </td>
-            <td id="results-banner-slot">
-            {%if street_name%}
-                {% lookup_banners street_name %}
-            {% endif %}
-            </td>
-            {% pop_slot 'bellow_results' %}
-        </tr>
-    </table>
+        {% block listing %}
+        {% endblock listing%}
 
     </div>
     <br class="visualClear" />
-    <div id="footer">
+    </div>
+    <div id="footer" class="shadow">
         <p id="credits">&copy;2009 Comercio y Justicia</p>
         <ul id="nav">
         {% block nav %}

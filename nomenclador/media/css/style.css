@@ -1,5 +1,5 @@
 body {
-    background:#fff;    
+    background:#C2D7E2;    
 
 }
 #wrapper {
@@ -36,9 +36,13 @@ body {
 #session li a:hover {
     text-decoration:underline;
 }
-
-#main{
+#content-wrapper {
+    padding:1.5em 1em 1em;
+    margin-top:-0.5em;
     background:#FFF;
+}
+#main{
+
 }
 #listing ul{
     list-style:none;
@@ -54,8 +58,8 @@ body {
 }
 
 #listing ul li:hover .votes{
-    display:block;
 }
+
 #content {
     margin:0;
     position:relative;
@@ -78,7 +82,6 @@ body {
 }
 #categories {
     font-size:80%;
-    margin:-2px 0 1em;
     z-index:99999;
     background:#FFC018;
     position:relative;
@@ -130,12 +133,21 @@ body {
 #more-categories img{ 
     vertical-align:middle;
 }
+
 #footer {
-    border-top:1px solid #333;
+    margin:-2px 0 1em;
+    z-index:99999;
+    background:#FFC018;
+    border:1px solid #FFC018; 
+    padding:0.5em;
+    -moz-border-radius:0 0 5px 5px;
+    -webkit-border-radius:0 0 5px 5px;
+    border-radius:0 0 5px 5px;
 }
 #credits {
     float:right;
     margin:0;
+    padding:0.5em;
 }
 #content p {
     font-size:13px;
@@ -206,10 +218,10 @@ body {
     background: url("../img/comments.png") no-repeat center left;
 }
 
-.shadow{
-    -moz-box-shadow:2px 2px 2px #999;
-    -webkit-box-shadow:2px 2px 2px #999;
-    box-shadow:2px 2px 2px #999;
+.shadow, .ui-tabs-nav .ui-tabs-selected{
+    box-shadow:2px 2px 3px #999;
+    -moz-box-shadow:2px 2px 3px #999;
+    -webkit-box-shadow:2px 2px 3px #999;
     
 }
 
@@ -241,6 +253,10 @@ body {
     background-image: url("../img/add.png") 
 }
 
+#pagination-digg{
+    overflow:hidden;
+    margin:0 auto !important;
+}
 
 #pagination-digg li{
     margin:0; 
@@ -255,7 +271,7 @@ body {
     border:solid 1px #FFF;
     margin-right:2px;
     display:block;
-    padding:4px;
+    padding:4px 6px;
 }
 #pagination-digg .off{
     border:solid 1px #FFF;
@@ -283,15 +299,17 @@ body {
     text-decoration:none;
 }
 #pagination-digg a:hover{
-    border:solid 1px #0e509e
+    border:solid 1px #C2D7E2;
 }
 #pagination-digg .next a,
 #pagination-digg .previous a {
     font-weight:bold;
+    border-color:#FFF !important;
     background:url(../img/arrows.png) no-repeat;
     width:6px;
     height:14px;
 }
+
 #pagination-digg .next span,
 #pagination-digg .previous span {
     position:absolute;
@@ -314,6 +332,7 @@ body {
 #pagination-digg .previous a:hover{
     background-position:right -110px;
 }
+
 #pagination-digg .previous.off a,
 #pagination-digg .previous.off a:hover{
     background-position:right -66px ;
@@ -328,35 +347,37 @@ body {
 
 .ui-tabs-nav li{
     float:left;
-    background:#FFF;
     padding:0.25em 1em 0;
     margin-right:0.5em;
     list-style-type:none;
-    moz-corner-radius:5px 5px 5px;
+
 }
 
 .ui-tabs-nav li a{
     outline:none;
-    color:#CCC;
+    color:#999;
     text-decoration:none;
 }
 .ui-tabs-nav li a:hover{
-    color:#05365E;
+    color:#4c4c4c;
 }
 .ui-tabs-nav .ui-tabs-selected {
     background:#FFC018;
-    text-shadow: 0 1px 0 #CCC, 0 -1px 0 #999;
-    -moz-box-shadow: 2px 2px 3px #999;
-    -webkit-box-shadow:2px 2px 3px #999
-    box-shadow:2px 2px 3px #999;
+    text-shadow: 0 1px 0 #fff;
+
+    -moz-border-radius:5px 5px 0 0;
+    -webkit-border-radius:5px 5px 0 0;
+    border-radius:5px 5px 0 0;
 }
 .ui-tabs-nav .ui-tabs-selected a{
-    color:#000;
+    color:#4c4c4c;
 }
 .ui-tabs-hide{
     display:none;
 }
-
+#place-title {
+    margin-top:1em;
+}
 /* gravatar */
 h1 .gravatar {
     position:absolute;
@@ -367,7 +388,6 @@ h1 .gravatar {
 
 .score {
     float:left;
-    font-size:150%;
     margin:0 !important;
 }
 
@@ -376,36 +396,36 @@ h1 .gravatar {
     margin:0;
     padding:0;
     width:24px;
-    position:absolute;
-    left:-24px;
-    display:none;
+    vertical-align:middle;
 }
 .content-vote {
-    width:5.5em;
-    padding:0.5em;
+    width:5em;
+    padding:0 0.5em;
+    margin: 0.5em 0;
+    background:#F5D97B;
+    border:1px solid #EEA50A;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    vertical-align:middle;
 }
 .upvote, .downvote {
-    width:22px;
+    vertical-align:middle;
+    width:14px;
     display:block;
-    height:22px;
+    height:14px;
     float:right;
     background-image: url("../img/upvote.png");
     background-position: top right;
-    margin:0 3px;
+    margin:5px 3px;
 }
 .downvote {
     background-image: url("../img/downvote.png");
-    background-position: bottom right;
 }
 .upvote span, .downvote span{
     position:absolute;
     left:-99999px;
 }
-.upvote:hover {
+.upvote:hover, .downvote:hover {
     background-position: bottom right;
 }
-
-.downvote:hover {
-    background-position: top right;
-}
-
