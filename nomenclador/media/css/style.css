@@ -53,15 +53,6 @@ body {
     font-size:100%;
 }
 
-.votes{
-    text-align:center;
-    margin:0;
-    padding:0;
-    width:24px;
-    position:absolute;
-    left:-24px;
-    display:none;
-}
 #listing ul li:hover .votes{
     display:block;
 }
@@ -238,17 +229,16 @@ body {
     margin-right: 10px;
     background: no-repeat center left;
 }
-
 .action-link.edit { 
-    background-image: url("/media/img/edit.png") 
+    background-image: url("../img/edit.png") 
 }
 
 .action-link.delete { 
-    background-image: url("/media/img/delete.png") 
+    background-image: url("../img/delete.png") 
 }
 
 .action-link.add-task, .action-link.add { 
-    background-image: url("/media/img/add.png") 
+    background-image: url("../img/add.png") 
 }
 
 
@@ -355,7 +345,10 @@ body {
 }
 .ui-tabs-nav .ui-tabs-selected {
     background:#FFC018;
-    text-shadow: 0 1px 0 #fff, 0 -1px 0 #999;
+    text-shadow: 0 1px 0 #CCC, 0 -1px 0 #999;
+    -moz-box-shadow: 2px 2px 3px #999;
+    -webkit-box-shadow:2px 2px 3px #999
+    box-shadow:2px 2px 3px #999;
 }
 .ui-tabs-nav .ui-tabs-selected a{
     color:#000;
@@ -369,3 +362,50 @@ h1 .gravatar {
     position:absolute;
     left:-85px;
 }
+
+/* Votes */
+
+.score {
+    float:left;
+    font-size:150%;
+    margin:0 !important;
+}
+
+.votes{
+    text-align:center;
+    margin:0;
+    padding:0;
+    width:24px;
+    position:absolute;
+    left:-24px;
+    display:none;
+}
+.content-vote {
+    width:5.5em;
+    padding:0.5em;
+}
+.upvote, .downvote {
+    width:22px;
+    display:block;
+    height:22px;
+    float:right;
+    background-image: url("../img/upvote.png");
+    background-position: top right;
+    margin:0 3px;
+}
+.downvote {
+    background-image: url("../img/downvote.png");
+    background-position: bottom right;
+}
+.upvote span, .downvote span{
+    position:absolute;
+    left:-99999px;
+}
+.upvote:hover {
+    background-position: bottom right;
+}
+
+.downvote:hover {
+    background-position: top right;
+}
+

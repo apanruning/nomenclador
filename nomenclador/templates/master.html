@@ -103,7 +103,7 @@
             <li><a href="#people">Personas</a></li>
             {% endblock tabs %}
             </ul>
-            <div id="streets" class="search">
+            <div id="streets" class="search shadow">
 
                 <form action="{% url search_streets %}" method="get" id="streetsform">
                 <input type="submit" value="Buscar" class="searchbuton" />
@@ -119,7 +119,7 @@
 
                 </form>
             </div>
-            <div id="places" class="search">
+            <div id="places" class="search shadow">
                 <form action="{% url search_places %}" method="get" id="streetsform">
                 <input type="submit" value="Buscar" class="searchbuton" />
                 <input type="text" size="60" id="streetname"
@@ -129,7 +129,7 @@
 
                 </form>
             </div>
-            <div id="people" class="search">
+            <div id="people" class="search shadow">
                 <form action="{% url search_people %}" method="get" id="streetsform">
                 <input type="submit" value="Buscar" class="searchbuton" />
                 <input type="text" size="60" id="streetname"
@@ -140,7 +140,7 @@
             </div>
 
         </div>
-        <div id="categories">
+        <div id="categories" class="shadow">
         {% block categories %}
             {% with request.GET.searchterm|default_if_none:'' as searchterm %}
             {% if category %}
