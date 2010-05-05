@@ -44,22 +44,25 @@ body {
 #main{
 
 }
-#listing ul{
+#obj-list{
     list-style:none;
     margin:0;
     padding:0;
 }
-#listing ul li {
-    margin-bottom:0.5em;
+#obj-list .item {
     position:relative;
+    padding: 0.5em;
 
 }
+#obj-list .item:hover{
+    background:#ebebeb;
+}
+
 #listing h2{
     font-size:100%;
 }
 
-#listing ul li:hover .votes{
-}
+
 
 #content {
     margin:0;
@@ -398,8 +401,7 @@ h1 .gravatar {
 
 .content-vote {
     float:right;
-    padding:0 0.5em;
-    margin: 0.5em 0;
+    padding:0.25em;
     vertical-align:middle;
 }
 #listing .content-vote{
@@ -416,7 +418,7 @@ h1 .gravatar {
     height:10px;
     float:right;
     background-image: url("../img/upvote.png");
-    background-position: top right;
+    background-position: bottom right;
     margin:1px;
 }
 .downvote {
@@ -427,5 +429,5 @@ h1 .gravatar {
     left:-99999px;
 }
 .upvote:hover, .downvote:hover {
-    background-position: bottom right;
+    background-position: top right;
 }
