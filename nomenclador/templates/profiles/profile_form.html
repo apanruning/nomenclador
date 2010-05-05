@@ -12,6 +12,7 @@
 {% block content %}
 
 <form action="{% url profile_edit request.user.id %}" method="post">
+    <p>Modifique su imagen para mostrar en <a href="http://en.gravatar.com/" target="_blank">gravatar</a></p>
     {% include 'generic_form.html'%}
     <table>    
     {% include 'inline_form.html' %}

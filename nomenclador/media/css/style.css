@@ -52,6 +52,7 @@ body {
 #listing ul li {
     margin-bottom:0.5em;
     position:relative;
+
 }
 #listing h2{
     font-size:100%;
@@ -63,6 +64,7 @@ body {
 #content {
     margin:0;
     position:relative;
+    padding:1em 0;
 }
 #content .votes {
     font-size:150%;
@@ -388,36 +390,34 @@ h1 .gravatar {
 
 .score {
     float:left;
-    margin:0 !important;
+    vertical-align:middle;
+    font-size:20px;
+    margin-right:3px;
 }
 
-.votes{
-    text-align:center;
-    margin:0;
-    padding:0;
-    width:24px;
-    vertical-align:middle;
-}
+
 .content-vote {
-    width:5em;
+    float:right;
     padding:0 0.5em;
     margin: 0.5em 0;
-    background:#F5D97B;
-    border:1px solid #EEA50A;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    border-radius:5px;
     vertical-align:middle;
 }
+#listing .content-vote{
+    display:none;
+}
+#listing li:hover .content-vote {
+    display:block;
+}
 .upvote, .downvote {
+    clear:right;
     vertical-align:middle;
     width:14px;
     display:block;
-    height:14px;
+    height:10px;
     float:right;
     background-image: url("../img/upvote.png");
     background-position: top right;
-    margin:5px 3px;
+    margin:1px;
 }
 .downvote {
     background-image: url("../img/downvote.png");

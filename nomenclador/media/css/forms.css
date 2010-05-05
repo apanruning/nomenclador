@@ -130,6 +130,15 @@ padding:0.5em 1em;
 #search-forms-wrapper{
     position:relative;
 }
+#id_geom_admin_map {
+    float:right;
+}
+.olMap{
+    width:100% !important;
+}
+#id_geom_admin_map{
+    width:80% !important;
+}
 /* main search bar */
 .search{
     clear:both;

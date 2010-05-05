@@ -18,7 +18,7 @@
 	<ul id="obj-list">
 	    {% autopaginate object_list 10 %}
 		{% for object in object_list %}
-		<li>
+		<li class="visualClear">
         {% include 'place.html' %}
         </li>
         {% empty %}

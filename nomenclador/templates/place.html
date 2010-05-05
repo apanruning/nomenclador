@@ -1,23 +1,15 @@
 {% load tagging_tags comments voting_tags %}
-<table border="0" cellspacing="0" cellpadding="0">
-    <tr>
-    <td class="votes">
-        {% score_for_object object as score %}
-        {{score.score}}
-        <form class="linkvote" action="{% url vote object.id,'up' %}" method="POST">
-        <input type="hidden" name="next" value="{{request.path}}" />
-        <input type="image" id="linkuparrow{{ link.id }}" src="{{ MEDIA_URL }}/img/plus.png">
-        </form>
-    </td>
-    <td>
-        <h2><a href="{{ object.get_absolute_url }}">{{object.name}}</a></h2>    
-        <p class="visualClear discreet">
-        {% if object.creator%}
-	    <a href="{% url profile_detail object.creator %}">{{object.creator}}</a> 
-        {% endif %}
-        {{object.edited|default:object.created|date:"j-m-Y"}}
-        </p>
-    </td>
-    </tr>
-    
-</table>
+<div class="content-vote">
+    {% score_for_object object as score %}
+    <h3 class="score">{{score.score}}</h1>
+    <a href="{% url vote object.id,'up' %}" class="upvote"><span>vote up</span></a>
+    <a href="{% url vote object.id,'down' %}" class="downvote"><span>vote down</span></a>
+    <br class="visualClear" />
+</div>
+<h2><a href="{{ object.get_absolute_url }}">{{object.name}}</a></h2>    
+<p class="discreet">
+{% if object.creator%}
+<a href="{% url profile_detail object.creator %}">{{object.creator}}</a> 
+{% endif %}
+{{object.changed|default:object.created|date:"j-m-Y"}}
+</p>

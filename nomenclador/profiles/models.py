@@ -13,6 +13,9 @@ class Profile(models.Model):
     location = models.OneToOneField(MaapPoint, null=True)
     public = models.BooleanField(_('is public'), default=False)
     website = models.URLField(_('website'), null=True, blank=True, verify_exists=False)
+    created = models.DateTimeField(auto_now_add=True, editable = False)
+    changed = models.DateTimeField(auto_now=True, editable = False)
+
     
     def __unicode__(self):
         return self.user.username

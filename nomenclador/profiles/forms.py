@@ -16,7 +16,7 @@ class LoginForm(forms.Form):
 
     username = forms.CharField(
         label=_("Nombre de usuario"), 
-        max_length=30, 
+        max_length=30,
         widget=forms.TextInput()
     )
     password = forms.CharField(

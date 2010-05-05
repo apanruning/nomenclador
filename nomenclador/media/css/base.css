@@ -28,6 +28,7 @@ a img {
 .discreet {
     line-height:1.2em;
     color:#999;
+    margin:0;
 }
 .hidden {
    display: none;
