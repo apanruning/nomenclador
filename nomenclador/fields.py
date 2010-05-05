@@ -16,8 +16,8 @@ class WMDTextField(forms.Textarea):
             'all': ('/media/css/wmd.css',)
         }
         js = (
-            '/media/js/showdown.js',
-            '/media/js/jquery.textarearesizer.js'
+            '%sjs/showdown.js' %settings.MEDIA_URL,
+            '%sjs/jquery.textarearesizer.js' %settings.MEDIA_URL,
 
         )  
 
@@ -39,7 +39,7 @@ class WMDTextField(forms.Textarea):
                   <div id="wmd-button-bar" class="wmd-panel"></div>
 
                   %s  
-
+                    
                   <div id="wmd-preview" class="wmd-panel"></div>
                   <div id="wmd-output" class="wmd-panel"></div>	
                   <script type="text/javascript">
@@ -48,9 +48,9 @@ class WMDTextField(forms.Textarea):
                         buttons: "bold italic | link blockquote code image | ol ul"
                     };
                   </script>
-                  <script type="text/javascript" src="/media/js/wmd.js"></script>      
+                  <script type="text/javascript" src="%sjs/wmd.js"></script>      
               </div>
-            ''' %rendered )
+            ''' %(rendered, settings.MEDIA_URL) )
 
   
 class AutoCompleteTagInput(forms.TextInput):

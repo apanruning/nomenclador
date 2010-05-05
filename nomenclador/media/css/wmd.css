@@ -1,5 +1,8 @@
 #wmd-field{
     float:left;
+    width:78%;
+    padding:0.5em;
+    border:1px solid #ccc;
 }
 .wmd-panel
 {
@@ -14,22 +17,23 @@
 #wmd-button-bar 
 {
 	width: 100%;
-
+    padding-bottom:0.5em;
+    margin-bottom:0.5em;
 }
 
 #wmd-input 
 { 
-    border:1px solid #999;
-    border-color: #999 #EEE #EEE #999;
+    border:0;
 	margin-bottom:0;
+    width:100%;
 }
 
 #wmd-preview { 
-    background-color:#f4f3ee;
-    border:1px solid #CCC;
+    background-color:#EBEBEB;
     line-height:130%;
     margin-top:0;
-    padding:3px;
+    padding:0.5em;
+
 }
 
 #wmd-output { 
