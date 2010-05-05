@@ -261,6 +261,7 @@ body {
 #pagination-digg{
     overflow:hidden;
     margin:0 auto !important;
+    padding:0;
 }
 
 #pagination-digg li{
