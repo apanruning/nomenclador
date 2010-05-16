@@ -9,9 +9,6 @@ body {
     padding:0 1em;
 
 }
-#header {
-    margin-bottom:0em;
-}
 
 #logo a{
     text-decoration:none;
@@ -139,7 +136,7 @@ body {
     vertical-align:middle;
 }
 
-#footer {
+footer {
     margin:-2px 0 1em;
     z-index:99999;
     background:#FFC018;

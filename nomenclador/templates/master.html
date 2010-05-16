@@ -1,10 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<!DOCTYPE html>
+<html lang="es">
 
 {% load banner_tags maap_tags inbox%}
 <head>
 
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
 
     <title>{% block title %}{% endblock %} Nomenclador Cartográfico</title>
 
@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/autocomplete.css" type="text/css" media="screen" />        
     {% block css %}
     {% endblock %}
-
+	<!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
      <script type="text/javascript" src="{{ MEDIA_URL }}js/OpenLayers.js"></script>
      <script type="text/javascript" src="{{ MEDIA_URL }}js/OpenStreetMap.js"></script>
      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.min.js"></script>    
@@ -74,11 +76,11 @@
     {% endif %}
 
 
-    <div id="header">
+    <header id="header">
         <div id="logo"><a href="{% url index %}"><img src='/media/img/nomenclador_t.jpg'  /></a></div>
         <div class="visualClear"> </div>
-    </div>
-    <div id="navigation">    
+    </header>
+    <nav>    
 
 
         <div id="search-forms-wrapper" class="tabs">
@@ -106,7 +108,7 @@
             </ul>
             <div id="streets" class="search shadow">
 
-                <form action="{% url search_streets %}" method="get" id="streetsform">
+                <form action="{% url search_streets %}" method="get">
                 <input type="submit" value="Buscar" class="searchbuton" />
                 <input type="text" size="27" id="streetname"
                        value="{{request.GET.streetname|default:'Ingrese un nombre de calle'}}" 
@@ -121,7 +123,7 @@
                 </form>
             </div>
             <div id="places" class="search shadow">
-                <form action="{% url search_places %}" method="get" id="streetsform">
+                <form action="{% url search_places %}" method="get">
                 <input type="submit" value="Buscar" class="searchbuton" />
                 <input type="text" size="60" id="streetname"
                        value="{{request.GET.searchterm|default:'Ingrese un nombre de un negocio o lugar' }}" 
@@ -131,7 +133,7 @@
                 </form>
             </div>
             <div id="people" class="search shadow">
-                <form action="{% url search_people %}" method="get" id="streetsform">
+                <form action="{% url search_people %}" method="get">
                 <input type="submit" value="Buscar" class="searchbuton" />
                 <input type="text" size="60" id="streetname"
                        value="{{request.GET.firstname|default:'Ingrese el nombre de la persona que busca'}}" 
@@ -141,7 +143,7 @@
             </div>
 
         </div>
-        <div id="categories" class="shadow">
+        <menu id="categories" class="shadow">
         {% block categories %}
             {% with request.GET.searchterm|default_if_none:'' as searchterm %}
             {% if category %}
@@ -153,8 +155,8 @@
             {% endif %}
             {% endwith %}
         {% endblock %}
-        </div>
-    </div>
+        </menu>
+    </nav>
     <div id="content-wrapper" class="shadow">
     <div id="main">
 
@@ -173,25 +175,18 @@
     {% endblock %}
     </div>
     
-    <div id="listing">    
+    <aside id="listing">    
         {% block listing %}
         {% endblock listing%}
 
-    </div>
+    </aside>
     <br class="visualClear" />
     </div>
-    <div id="footer" class="shadow">
+    <footer class="shadow" id="footer">
         <p id="credits">&copy;2009 Comercio y Justicia</p>
-        <ul id="nav">
-        {% block nav %}
-            <li><a href="/">Inicio</a> ·</li>
-            <li><a href="/acerca_de/">Acerca de</a> ·</li>
-            <li><a href="/blog/">Blog</a> ·</li>
-            <li><a href="/contacto/">Contacto</a></li>
-        {% endblock %}
-        </ul>
-
-    </div>
+        <p> <a href="{{ request.get_host }}">Inicio</a> · <li><a href="/acerca_de/">Acerca de</a> · <a href="/blog/">Blog</a> · <a href="/contacto/">Contacto</a></li>
+        </p>
+    </footer>
 </div>    
 </div>
 

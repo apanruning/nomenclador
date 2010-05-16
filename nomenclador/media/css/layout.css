@@ -11,7 +11,8 @@
     float:right;
     width:200px;
 }
-#header {
+header {
+    margin-bottom:0em;
 }
 #session {
     float:right;
@@ -51,7 +52,7 @@
     width:75%;
     padding-bottom:4em;
 }
-#listing{
+aside{
     float:left;
     width:25%;
 }
@@ -78,7 +79,7 @@
     border:none;
 }
 
-#footer{
+footer{
     padding:1em 0;
     clear:both;
 }
