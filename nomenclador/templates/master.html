@@ -24,7 +24,8 @@
      <script type="text/javascript" src="{{ MEDIA_URL }}js/autocomplete.js"></script>
      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.boxshadow.js"></script>       
      <script type="text/javascript" src="{{ MEDIA_URL }}js/forms.js"></script>       
-     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.ui.js"></script>       
+     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.ui.js"></script>  
+      <script type="text/javascript" src="{{ MEDIA_URL }}js/showdown.js"></script>            
     {% block javascript %}
     {% if form.media %}
         {% for js in form.media.render_js %} 
