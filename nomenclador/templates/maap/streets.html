@@ -30,9 +30,9 @@ Busqueda de calles
     <dd>{{street.old|default_if_none:''}}</dd>
     
     {% endfor %}
-    {% paginate %}    
-</dl>
 
+</dl>
+{% paginate %}    
 {% else%}
 {%if request.POST %}
 <h3>No hay resultados</h3>

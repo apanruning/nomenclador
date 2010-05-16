@@ -86,7 +86,7 @@ def create(request, model):
 
 
 def search_places(request, cat_slug=None):
-    search_term = request.GET.get('searchterm', None)
+    search_term = request.GET.get('placename', None)
     
     objects = MaapModel.objects.all()
 

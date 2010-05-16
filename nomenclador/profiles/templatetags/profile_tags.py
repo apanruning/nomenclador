@@ -42,5 +42,5 @@ def gravatar(email, size=50, rating='g', default=None):
     url = 'http://www.gravatar.com/avatar/%s?s=%s&r=%s' % (
         hash, size, rating)
     
-    return """<img src="%s" width="%s" height="%s" alt="avatar" class="gravatar" border="0" />""" % (url, size, size)
+    return """<img src="%s" width="%s" height="%s" alt="avatar" class="gravatar" />""" % (url, size, size)
 

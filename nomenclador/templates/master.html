@@ -27,7 +27,7 @@
      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.boxshadow.js"></script>       
      <script type="text/javascript" src="{{ MEDIA_URL }}js/forms.js"></script>       
      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.ui.js"></script>  
-      <script type="text/javascript" src="{{ MEDIA_URL }}js/showdown.js"></script>            
+     <script type="text/javascript" src="{{ MEDIA_URL }}js/showdown.js"></script>            
     {% block javascript %}
     {% if form.media %}
         {% for js in form.media.render_js %} 
@@ -35,7 +35,7 @@
         {% endfor %}
     {% endif %}
     {% endblock %}
-    <script type="text/javascript" language="javascript">
+    <script type="text/javascript">
     $(document).ready(function(){
         $('.shadow').boxShadow(10, 10, 5, '#888');
         $('#more-categories').click(function(){
@@ -119,15 +119,14 @@
             </form>
             <form action="{% url search_places %}" method="get" id="places" class="search shadow">
                 <input type="submit" value="Buscar" class="searchbuton" />
-                <input type="text" size="60" id="streetname"
+                <input type="text" size="60" id="placename"
                        value="{{request.GET.searchterm|default:'Ingrese un nombre de un negocio o lugar' }}" 
-                       class="searchterm" 
-                       name="searchterm" />
+                       class="searchterm" name="placename" />
 
                 </form>
             <form action="{% url search_people %}" method="get" id="people" class="search shadow">
                 <input type="submit" value="Buscar" class="searchbuton" />
-                <input type="text" size="60" id="streetname"
+                <input type="text" size="60" id="firstname"
                        value="{{request.GET.firstname|default:'Ingrese el nombre de la persona que busca'}}" 
                        class="searchterm" name="firstname" />
 
@@ -184,7 +183,7 @@
         </menu>
     </footer>
 </div>
-
+</div>
 </body>
 
 </html>
