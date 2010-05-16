@@ -77,27 +77,24 @@
 
 
     <header id="header">
-        <div id="logo"><a href="{% url index %}"><img src='/media/img/nomenclador_t.jpg'  /></a></div>
-        <div class="visualClear"> </div>
-    </header>
-    <nav>    
+        <h1 id="logo"><a href="{% url index %}"><img src='/media/img/nomenclador_t.jpg'  /></a></h1>
+        <nav>    
+        <div id="session">
+            {% if user.is_authenticated %}
+            <a href="{% url profile_detail user %}"><strong>{{user}}</strong></a> <a href="{% url messages_inbox %}">({%inbox_count%})</a>|
+            {% if user.is_staff %}
+            <a href="/admin/"> Administraci&oacute;n</a> |
+            {% endif %}
+            <a href="{% url logout %}">Salir</a> 
+            {% endif %}
+            {% if user.is_anonymous %}
+            <a href="{% url login %}">Ingresar</a> |
+            <a href="{% url registration_register %}">Registrarse</a> 
+            {% endif %}
 
-
+        </div>
         <div id="search-forms-wrapper" class="tabs">
-            <div id="session">
-                {% if user.is_authenticated %}
-                <a href="{% url profile_detail user %}"><strong>{{user}}</strong></a> <a href="{% url messages_inbox %}">({%inbox_count%})</a>|
-                {% if user.is_staff %}
-                <a href="/admin/"> Administraci&oacute;n</a> |
-                {% endif %}
-                <a href="{% url logout %}">Salir</a> 
-                {% endif %}
-                {% if user.is_anonymous %}
-                <a href="{% url login %}">Ingresar</a> |
-                <a href="{% url registration_register %}">Registrarse</a> 
-                {% endif %}
 
-            </div>
 
             <ul>
             {% block tabs %}    
@@ -106,9 +103,8 @@
             <li><a href="#people">Personas</a></li>
             {% endblock tabs %}
             </ul>
-            <div id="streets" class="search shadow">
 
-                <form action="{% url search_streets %}" method="get">
+            <form action="{% url search_streets %}" method="get" id="streets" class="search shadow">
                 <input type="submit" value="Buscar" class="searchbuton" />
                 <input type="text" size="27" id="streetname"
                        value="{{request.GET.streetname|default:'Ingrese un nombre de calle'}}" 
@@ -120,10 +116,8 @@
                        value="{{request.GET.streetnumber|default:'Altura'}}" 
                        class="searchterm right" size="6" name="streetnumber" />
 
-                </form>
-            </div>
-            <div id="places" class="search shadow">
-                <form action="{% url search_places %}" method="get">
+            </form>
+            <form action="{% url search_places %}" method="get" id="places" class="search shadow">
                 <input type="submit" value="Buscar" class="searchbuton" />
                 <input type="text" size="60" id="streetname"
                        value="{{request.GET.searchterm|default:'Ingrese un nombre de un negocio o lugar' }}" 
@@ -131,16 +125,13 @@
                        name="searchterm" />
 
                 </form>
-            </div>
-            <div id="people" class="search shadow">
-                <form action="{% url search_people %}" method="get">
+            <form action="{% url search_people %}" method="get" id="people" class="search shadow">
                 <input type="submit" value="Buscar" class="searchbuton" />
                 <input type="text" size="60" id="streetname"
                        value="{{request.GET.firstname|default:'Ingrese el nombre de la persona que busca'}}" 
                        class="searchterm" name="firstname" />
 
-                </form>
-            </div>
+            </form>
 
         </div>
         <menu id="categories" class="shadow">
@@ -157,37 +148,41 @@
         {% endblock %}
         </menu>
     </nav>
-    <div id="content-wrapper" class="shadow">
-    <div id="main">
+    </header>
+    <div id="content-wrapper" class="shadow"> 
+        <div id="main">
 
-    {% block page %}
+        {% block page %}
 
-        {% block map %}
-        <div id="map">
-        </div>
+            {% block map %}
+            <div id="map">
+            </div>
+            {% endblock %}
+            
+            {%block actions%}  {% endblock %}
+            <article id="content">
+            {% block content %}
+            {% endblock %}
+            </article>
         {% endblock %}
-        
-        {%block actions%}  {% endblock %}
-        <div id="content">
-        {% block content %}
-        {% endblock %}
         </div>
-    {% endblock %}
-    </div>
     
-    <aside id="listing">    
-        {% block listing %}
-        {% endblock listing%}
+        <aside>    
+            {% block listing %}
+            {% endblock listing%}
 
-    </aside>
-    <br class="visualClear" />
+        </aside>
+        <br class="visualClear" />
     </div>
-    <footer class="shadow" id="footer">
+    <footer class="shadow">
         <p id="credits">&copy;2009 Comercio y Justicia</p>
-        <p> <a href="{{ request.get_host }}">Inicio</a> · <li><a href="/acerca_de/">Acerca de</a> · <a href="/blog/">Blog</a> · <a href="/contacto/">Contacto</a></li>
-        </p>
+        <menu id="sitemap">
+            <li><a href="/">Inicio</a> ·</li>
+            <li><a href="/acerca_de/">Acerca de</a> ·</li>
+            <li><a href="/blog/">Blog</a> ·</li>
+            <li><a href="/contacto/">Contacto</a></li>
+        </menu>
     </footer>
-</div>    
 </div>
 
 </body>

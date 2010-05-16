@@ -55,7 +55,7 @@ body {
     background:#ebebeb;
 }
 
-#listing h2{
+aside h2{
     font-size:100%;
 }
 
@@ -83,12 +83,12 @@ body {
     font-size:120%;
 }
 #categories {
-    font-size:80%;
     z-index:99999;
     background:#FFC018;
     position:relative;
     clear:both;
     padding:2px;
+    margin:0;
     -moz-border-radius:0 0 5px 5px;
     -webkit-border-radius:0 0 5px 5px;
     border-radius:0 0 5px 5px;
@@ -268,16 +268,13 @@ footer {
     list-style:none;
     margin-right:2px;
     float:left;
-    border:solid 1px #FFF;
 }
 #pagination-digg a{
-    border:solid 1px #FFF;
     margin-right:2px;
     display:block;
     padding:4px 6px;
 }
 #pagination-digg .off{
-    border:solid 1px #FFF;
     color:#888888;
     display:block;
     float:left;
@@ -287,7 +284,6 @@ footer {
 
 #pagination-digg .active{
     background:#2e6ab1;
-    border:solid 1px #2e6ab1;
     color:#FFFFFF;
     font-weight:bold;
     display:block;
@@ -302,12 +298,11 @@ footer {
     text-decoration:none;
 }
 #pagination-digg a:hover{
-    border:solid 1px #C2D7E2;
+    background:#C2D7E2;
 }
 #pagination-digg .next a,
 #pagination-digg .previous a {
     font-weight:bold;
-    border-color:#FFF !important;
     background:url(../img/arrows.png) no-repeat;
     width:6px;
     height:14px;
@@ -402,10 +397,10 @@ h1 .gravatar {
     padding:0.25em;
     vertical-align:middle;
 }
-#listing .content-vote{
+aside .content-vote{
     display:none;
 }
-#listing li:hover .content-vote {
+aside li:hover .content-vote {
     display:block;
 }
 .upvote, .downvote {

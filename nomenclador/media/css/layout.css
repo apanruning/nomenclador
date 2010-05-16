@@ -19,15 +19,15 @@ header {
     width:30%;
 }
 #logo {
-    margin:0.5em 0;
+    margin:0;
 }
-#nav {
+#sitemap {
     padding:0;
     margin:0;
     padding:0.5em;
 }
 
-#nav li {
+#sitemap li {
     display:inline;
     margin:0;
     padding:0;  
@@ -80,6 +80,7 @@ aside{
 }
 
 footer{
+    display:block;
     padding:1em 0;
     clear:both;
 }
