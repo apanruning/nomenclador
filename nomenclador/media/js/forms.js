@@ -1,31 +1,37 @@
 //Form helpers
-$(document).ready( function(){
-    clearValue = function (element){
-        oldvalue = $(element).val();
-        $(element).toggleClass('dirty');
-        $(element).val('');
-        $(element).blur(function(){
-            if ($(element).val()==''){
-                $(element).val(oldvalue);
-                $(element).toggleClass('dirty')
-            }
+(function($) { 
+$.fn.lousyField = function (){
+    oldvalue = ''
+    return $(this)
+        .focus(function(){
+            oldvalue = this.value;
+            return $(this).val('');
         })
-    }   
+        .blur(function(){
+            placeholder = $(this).attr('placeholder');
+            if (this.value == ''){
+                return $(this).val(placeholder);
+            };
+        })
+    }
+})(jQuery);
 
+(function($) { 
+$.fn.noCrap = function (){
+    /*probably an abuse of the plugins system*/
+    this.each(function(){
+        placeholder = $(this).attr('placeholder');
+        if ($(this).val() == placeholder){
+            return $(this).val('');
+        };
+    })
 
-    $('.searchterm').focus(function(){
-        value = $(this).val();
-        if(value=="Ingrese un nombre de calle"||value=="Interseccion"||value=="Altura"){
-            clearValue(this)
-        }
-    }) 
+    }
+})(jQuery);
 
-    $('.search form').submit(function(){
-        $(this).find(':fields').each(function(){
-            value = $(this).val();
-            if(value=="Ingrese un nombre de calle"||value=="Interseccion"||value=="Altura"){
-                $(this).val('');
-            }
-        });
+$(document).ready( function(){
+    $('.searchterm').lousyField()
+    $('.search').submit(function(){
+        $(this).find(':fields').noCrap()
     })
 })
