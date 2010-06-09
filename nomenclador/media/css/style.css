@@ -89,9 +89,6 @@ aside h2{
     clear:both;
     padding:2px;
     margin:0;
-    -moz-border-radius:0 0 5px 5px;
-    -webkit-border-radius:0 0 5px 5px;
-    border-radius:0 0 5px 5px;
 }
 #categories table {
     display:none;
@@ -124,9 +121,6 @@ aside h2{
     position:absolute;
     bottom:0;
     right:0;
-    -moz-border-radius:0 0 5px 0;
-    -webkit-border-radius:0 0 5px 0;
-    border-radius:0 0 5px 0;
     outline:none;
 }
 #more-categories:hover{
@@ -220,12 +214,6 @@ footer {
     background: url("../img/comments.png") no-repeat center left;
 }
 
-.shadow, .ui-tabs-nav .ui-tabs-selected{
-    box-shadow:2px 2px 3px #999;
-    -moz-box-shadow:2px 2px 3px #999;
-    -webkit-box-shadow:2px 2px 3px #999;
-    
-}
 
 .breadcrumb {
     background:#fff;
@@ -362,10 +350,6 @@ footer {
 .ui-tabs-nav .ui-tabs-selected {
     background:#FFC018;
     text-shadow: 0 1px 0 #fff;
-
-    -moz-border-radius:5px 5px 0 0;
-    -webkit-border-radius:5px 5px 0 0;
-    border-radius:5px 5px 0 0;
 }
 .ui-tabs-nav .ui-tabs-selected a{
     color:#4c4c4c;
