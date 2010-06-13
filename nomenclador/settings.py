@@ -13,16 +13,31 @@ ADMINS = (
 MANAGERS = ADMINS
 
 ACCOUNT_EMAIL_VERIFICATION = True
+EMAIL_HOST = '127.0.0.1'
+EMAIL_PORT = 1025
+
+
+DEBUG=True
+TEMPLATE_DEBUG=DEBUG
 
 DATABASES = {
     'default': {
-        'ENGINE': 'postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'nomenclador',
         'USER': 'nomenclador',
         'PASSWORD': 'nomenclador',
+        'HOST':'localhost',
+        'PORT':'5432'
+    },
+    'logs_nomenclador': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'logs_nomenclador',
+        'USER': 'nomenclador',
+        'PASSWORD': 'nomenclador',
+        'HOST':'localhost',
+        'PORT':'5432'
     }
 }
-
 
 TIME_ZONE = 'America/Cordoba'
 
@@ -71,7 +86,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',    
+    'djangodblog.middleware.DBLogMiddleware',
 )
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.auth',
     'django.core.context_processors.request',
@@ -109,9 +126,14 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'registration',
-    'nomenclador.profiles',
+    'djangodblog',
     'messages',
+    'nomenclador.profiles',
     'nomenclador.banners',
     'nomenclador.maap',
     'osm',
 )
+
+DBLOG_CATCH_404_ERRORS = True
+DBLOG_DATABASE_USING = 'logs_nomenclador'
+
