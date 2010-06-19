@@ -1,0 +1,12 @@
+Metadata-Version: 1.0
+Name: nomenclador
+Version: 0.1dev
+Summary: Website for Nomenclador Cartográfico 
+Home-page: UNKNOWN
+Author: CyJ - Dev
+Author-email: cyj-dev@googlegroups.com
+License: GPL
+Description:         
+Platform: Web
+Classifier: Programming Language :: Python
+Classifier: Topic :: Web 
