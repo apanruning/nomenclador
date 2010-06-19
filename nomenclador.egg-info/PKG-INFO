@@ -1,11 +1,11 @@
 Metadata-Version: 1.0
 Name: nomenclador
 Version: 0.1dev
-Summary: Nomenclador
+Summary: Website for Nomenclador Cartográfico 
 Home-page: UNKNOWN
-Author: UNKNOWN
-Author-email: UNKNOWN
-License: UNKNOWN
+Author: CyJ - Dev
+Author-email: cyj-dev@googlegroups.com
+License: GPL
 Description: DATABASE INSTALL
         
         #Instalar geodjango y osmosis
@@ -110,24 +110,6 @@ Description: DATABASE INSTALL
         
         El archivo production.cfg ya está configurado con la dirección ip y el nombre de servidor que tenemos andando en comercio y justicia así que debería funcionar como remplazo de pecho
         
-        
-        
-        
-        
-        
-        
-        
-        
-         
-        
-        
-        
-        
-        
-        
-        
-        
-        
         Changelog
         =========
         
@@ -140,3 +122,4 @@ Description: DATABASE INSTALL
 Platform: UNKNOWN
 Classifier: Programming Language :: Python
 Classifier: Topic :: Software Development :: Libraries :: Python Modules
+
