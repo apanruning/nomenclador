@@ -19,7 +19,6 @@ header {
     width:30%;
 }
 #logo {
-    margin:0;
 }
 #sitemap {
     padding:0;
@@ -62,6 +61,13 @@ aside{
 }
 #content {
     clear:both;
+}
+#head-banner{
+    float:right;
+    clear:right;
+    width:750px;
+    height:75px;
+    overflow:hidden;
 }
 #banner-slot-a{
     float:right;
