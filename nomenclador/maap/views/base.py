@@ -18,7 +18,7 @@ from tagging.models import TaggedItem, Tag
 from django.template.defaultfilters import slugify
 
 def index(request,*args, **kwargs):
-    queryset = MaapModel.objects.filter(category__isnull=False, category__is_public=Trsue)
+    queryset = MaapModel.objects.filter(category__isnull=False, category__is_public=True)
     queryset = queryset.distinct()
     return object_list(
         request, 
