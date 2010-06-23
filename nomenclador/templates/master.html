@@ -91,8 +91,9 @@
             {% endif %}
 
         </div>
-
+        <div id="head-banner">{% pop_slot 'header' %}</div>
         <h1 id="logo"><a href="{% url index %}"><img src="{{ MEDIA_URL }}img/nomenclador_t.jpg"></a></h1>
+
         <nav>    
         <div id="search-forms-wrapper" class="tabs">
 

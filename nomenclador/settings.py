@@ -16,10 +16,6 @@ ACCOUNT_EMAIL_VERIFICATION = True
 EMAIL_HOST = '127.0.0.1'
 EMAIL_PORT = 1025
 
-
-DEBUG=True
-TEMPLATE_DEBUG=DEBUG
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',

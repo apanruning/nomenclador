@@ -57,6 +57,7 @@ body {
 
 aside h2{
     font-size:100%;
+    margin:0;
 }
 
 
@@ -372,7 +373,7 @@ h1 .gravatar {
     float:left;
     vertical-align:middle;
     font-size:20px;
-    margin-right:3px;
+    margin:0 3px;
 }
 
 
