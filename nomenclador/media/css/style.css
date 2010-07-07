@@ -380,10 +380,12 @@ h1 .gravatar {
 .content-vote {
     float:right;
     padding:0.25em;
+    margin:1em;
     vertical-align:middle;
 }
 aside .content-vote{
     display:none;
+    margin:0;
 }
 aside li:hover .content-vote {
     display:block;

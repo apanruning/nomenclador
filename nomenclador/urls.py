@@ -54,6 +54,7 @@ urlpatterns += patterns('',
     url(r'^register/$', 'registration.views.register', name='registration_register'),
     url(r'^register/complete/$', direct_to_template,  {'template': 'registration/registration_complete.html'},      name='registration_complete'),
     (r'^ingresar/$', 'nomenclador.profiles.views.login',{},'login'),
+    (r'^accounts/login/', 'nomenclador.profiles.views.login',{},'login'),
     (r'^salir/$', 'django.contrib.auth.views.logout', {}, 'logout'),
 )
 
