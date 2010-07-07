@@ -38,6 +38,9 @@
     <script type="text/javascript">
     $(document).ready(function(){
         $('.shadow').boxShadow(10, 10, 5, '#888');
+        $('#select-neighborhoods').change(function(){
+            window.location = $(this).find(':selected').attr('value');
+        })
         $('#more-categories').click(function(){
             $('#categories table').toggle();
             if ($(this).text() === 'Categorías'){
@@ -120,7 +123,7 @@
                        placeholder="Interseccion"
                        value="{{request.GET.intersection|default:'Interseccion'}}" 
                        class="searchterm middle" size="17" name="intersection" />
-
+                {% neighbour_list %}
             </form>
             <form action="{% url search_places %}" method="get" id="places" class="search shadow">
                 <input type="submit" value="Buscar" class="searchbuton" />
@@ -128,7 +131,7 @@
                        placeholder="Ingrese un nombre de un negocio o lugar"
                        value="{{request.GET.searchterm|default:'Ingrese un nombre de un negocio o lugar' }}" 
                        class="searchterm" name="placename" />
-
+               {% neighbour_list %}
                 </form>
             <form action="{% url search_people %}" method="get" id="people" class="search shadow">
                 <input type="submit" value="Buscar" class="searchbuton" />
@@ -136,7 +139,7 @@
                        placeholder="Ingrese el nombre de la persona que busca"
                        value="{{request.GET.firstname|default:'Ingrese el nombre de la persona que busca'}}" 
                        class="searchterm" name="firstname" />
-
+               {% neighbour_list %}
             </form>
 
         </div>

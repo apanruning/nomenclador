@@ -1,5 +1,5 @@
 from django import template
-from nomenclador.maap.models import MaapCategory
+from nomenclador.maap.models import MaapCategory, MaapModel
 from django.utils.http import urlencode
 from django.template.defaultfilters import slugify
 
@@ -17,7 +17,11 @@ def category_list(current_node = None, searchterm = None):
         out['param'] = "?searchterm=%s" % searchterm
         
     return out
-
+    
+@register.inclusion_tag('../templates/barrios.html')
+def neighbour_list(current_node = None):
+    return dict(object_list = MaapModel.objects.filter(category__name='Barrios'))
+    
 @register.inclusion_tag('../templates/breadcrumbs.html')
 def breadcrumbs(current_node = None):
     return dict(current = current_node)

@@ -1,0 +1,6 @@
+<select name="barrios" id="select-neighborhoods">
+{% for object in object_list  %}
+    <option value="{{object.get_absolute_url}}">{{object}}</option>    
+{% endfor %}
+</select>
+
