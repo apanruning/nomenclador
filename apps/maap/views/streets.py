@@ -6,7 +6,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
-from nomenclador.maap.models import Streets, Nodes
+from maap.models import Streets, Nodes
 from osm.models import StreetIntersection, Ways
 from osm.utils.search import get_location_by_door
 from osm.utils.words import clean_search_street
@@ -52,7 +52,7 @@ def search_streets(request):
             if streetnumber:
                 params['door'] = streetnumber
             
-            url = "%s?%s" % (urlresolvers.reverse('nomenclador.maap.views.street_location'), 
+            url = "%s?%s" % (urlresolvers.reverse('maap.views.street_location'), 
                              urlencode(params))
                              
             return  HttpResponseRedirect(url)

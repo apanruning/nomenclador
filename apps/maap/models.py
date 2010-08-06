@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from osm.models import Nodes as OSMNodes, Streets as OSMStreets, \
                        StreetIntersection as OSMStreetIntersection 
 from osm.utils.search import get_location_by_door
-from nomenclador.settings import DEFAULT_SRID
+from settings import DEFAULT_SRID
 from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -18,7 +18,7 @@ from django.template.defaultfilters import slugify
 
 import mptt
 
-from nomenclador.maap.layers import Point, Area, MultiLine, Layer
+from maap.layers import Point, Area, MultiLine, Layer
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 
 def merkartor_to_osm(geom):

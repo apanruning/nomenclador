@@ -9,12 +9,12 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from nomenclador.maap.models import MaapModel
-from nomenclador.profiles.forms import LoginForm
+from maap.models import MaapModel
+from profiles.forms import LoginForm
 
 admin.autodiscover()
 
-urlpatterns = patterns('nomenclador.maap.views',
+urlpatterns = patterns('maap.views',
     (r'^$', 'index',{'template_name':'maap/index.html'}, 'index'),
     url(r'^map/streets$', 'search_streets', name='search_streets'),
     url(r'^map/people$', 'search_people', name='search_people'),
@@ -34,7 +34,7 @@ urlpatterns += patterns( '',
     (r'^mensajes/', include('messages.urls')),
     (r'^notificaciones/', include('notification.urls')),
     (r"^announcements/", include("announcements.urls")),
-    (r'^contacto/$', 'nomenclador.profiles.views.mail', {}, 'mail'),
+    (r'^contacto/$', 'profiles.views.mail', {}, 'mail'),
     )
 
 
@@ -53,8 +53,8 @@ urlpatterns += patterns('',
     url(r'^password/reset/done/$', auth_views.password_reset_done, name='auth_password_reset_done'),
     url(r'^register/$', 'registration.views.register', name='registration_register'),
     url(r'^register/complete/$', direct_to_template,  {'template': 'registration/registration_complete.html'},      name='registration_complete'),
-    (r'^ingresar/$', 'nomenclador.profiles.views.login',{},'login'),
-    (r'^accounts/login/', 'nomenclador.profiles.views.login',{},'login'),
+    (r'^ingresar/$', 'profiles.views.login',{},'login'),
+    (r'^accounts/login/', 'profiles.views.login',{},'login'),
     (r'^salir/$', 'django.contrib.auth.views.logout', {}, 'logout'),
 )
 

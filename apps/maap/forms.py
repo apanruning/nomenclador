@@ -1,6 +1,6 @@
 from django import forms
-from nomenclador.maap.admin import GeoCordobaAdmin
-from nomenclador.maap.models import MaapPoint
+from maap.admin import GeoCordobaAdmin
+from maap.models import MaapPoint
 from django.contrib.gis import admin
 
 admin_instance = GeoCordobaAdmin(MaapPoint, admin.site)

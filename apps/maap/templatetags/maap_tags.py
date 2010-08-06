@@ -1,5 +1,5 @@
 from django import template
-from nomenclador.maap.models import MaapCategory, MaapModel
+from maap.models import MaapCategory, MaapModel
 from django.utils.http import urlencode
 from django.template.defaultfilters import slugify
 

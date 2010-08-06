@@ -40,8 +40,8 @@ $ psql -d nomenclador_database_name -U nomenclador -h localhost < <osmosis-djang
 >>>> set_intersections()
 
 #Para cargar las areas en formato gpx, ejecuter en la shell de cyj.buildout (barrios)
->>>> from nomenclador.maap.utils import import_areas
->>>> from nomenclador.maap.models import MaapCategory
+>>>> from maap.utils import import_areas
+>>>> from maap.models import MaapCategory
 >>>> category = MaapCategory.objects.filter(name='Barrios')
 >>>> import_areas('<path_barrio_gpx>', zone=True, categories = category)
 
@@ -90,12 +90,12 @@ $ ./bin/buildout -c production.cfg
 
 # Dejar el sitio disponible para apache
 $ cd /etc/apache2/sites-available/
-$ sudo ln -s <path-to-buildout>/etc/nomenclador.conf
+$ sudo ln -s <path-to-buildout>/etc/conf
 
 # Activarlo
 $ cd ..
 $ cd sites-enabled
-$ sudo ln -s ../sites-available/nomenclador.conf
+$ sudo ln -s ../sites-available/conf
 
 # Reiniciar apache
 $ sudo apache2ctl restart

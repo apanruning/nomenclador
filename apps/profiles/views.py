@@ -10,10 +10,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
 from django.core.mail import EmailMessage
 
-from nomenclador.profiles.models import Profile
-from nomenclador.profiles.forms import ProfileForm, MailForm, InlinePointForm, LoginForm
-from nomenclador.maap.models import MaapPoint, Icon
-#from nomenclador.olwidget.widgets import MapDisplay
+from profiles.models import Profile
+from profiles.forms import ProfileForm, MailForm, InlinePointForm, LoginForm
+from maap.models import MaapPoint, Icon
+#from olwidget.widgets import MapDisplay
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification

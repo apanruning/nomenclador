@@ -71,7 +71,7 @@ SECRET_KEY = 'xg%7r0k+966nuhr*8ls_@bgkf8y*-e2tar_in#9m%v&8r!y5ao'
 
 #Authenticate using email address
 AUTHENTICATION_BACKENDS = (
-#    "nomenclador.account.email_backend.EmailBackend",
+#    "account.email_backend.EmailBackend",
     "django.contrib.auth.backends.ModelBackend",
 )
 
@@ -92,7 +92,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'announcements.context_processors.site_wide_announcements',
 )
 
-ROOT_URLCONF = 'nomenclador.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "templates"),
@@ -124,9 +124,9 @@ INSTALLED_APPS = (
     'registration',
     'djangodblog',
     'messages',
-    'nomenclador.profiles',
-    'nomenclador.banners',
-    'nomenclador.maap',
+    'profiles',
+    'banners',
+    'maap',
     'osm',
 )
 

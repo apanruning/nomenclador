@@ -11,8 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.gis.measure import Distance, D
 from django.core import urlresolvers
 from django.utils.http import urlquote
-from nomenclador.profiles.models import Profile
-from nomenclador.maap.models import MaapModel, MaapPoint, MaapArea, \
+from profiles.models import Profile
+from maap.models import MaapModel, MaapPoint, MaapArea, \
                                     MaapMultiLine, Icon, MaapCategory
 from tagging.models import TaggedItem, Tag
 from django.template.defaultfilters import slugify

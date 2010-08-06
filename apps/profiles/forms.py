@@ -6,10 +6,10 @@ from django.contrib.gis import admin
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 
-from nomenclador.profiles.models import Profile
-from nomenclador.fields import WMDTextField
-from nomenclador.maap.models import MaapPoint
-from nomenclador.maap.forms import InlinePointForm
+from profiles.models import Profile
+from fields import WMDTextField
+from maap.models import MaapPoint
+from maap.forms import InlinePointForm
 
 
 class LoginForm(forms.Form):

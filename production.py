@@ -1,2 +1,2 @@
 
-from nomenclador.settings import *
+from settings import *
