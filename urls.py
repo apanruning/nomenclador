@@ -63,7 +63,7 @@ urlpatterns += patterns('',
 #    url(r'^registrarse/$', 'registration.signup', name='signup'),
 #    url(r'^ingresar/$', 'account.views.login', name='login'),
 #)
-urlpatterns += patterns('nomenclador',
+urlpatterns += patterns('',
 
 #    url(r'^miembros/$', 'profiles.views.profiles', name='profile_list'),
     url(r'^miembros/(?P<username>[\w\._-]+)$', 'profiles.views.profile', name='profile_detail'),
