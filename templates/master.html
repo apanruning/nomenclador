@@ -10,7 +10,6 @@
     <meta name="description" content="{% block description %}Nomenclador Cartográfico, Buqueda de calles y barrios de la ciudad de córdoba y al rededores. Georefenciamiento OpenStreetMaps Mapas{% endblock %}" />
 
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/layout.css" type="text/css" media="screen" />    
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css" media="screen" />    
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/forms.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/wmd.css" type="text/css" media="screen" />    
@@ -90,7 +89,7 @@
 
         </div>
         <div id="head-banner">{% pop_slot 'header' %}</div>
-        <h1 id="logo"><a href="{% url index %}"><img src="{{ MEDIA_URL }}img/nomenclador_t.jpg"></a></h1>
+        <h1 id="logo"><a href="{% url index %}">NOMENCLADOR CARTOGRÁFICO</a></h1>
 
         <nav>    
         <div id="search-forms-wrapper" class="tabs">

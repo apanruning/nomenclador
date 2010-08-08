@@ -1,20 +1,42 @@
 body {
-    background:#C2D7E2;    
-
+    background:#E0EBEC;
+    padding:0;
+    margin:0;
+    text-align:center;
 }
 #wrapper {
+    width:80em;
+    padding:1em;
     margin:0 auto;
     text-align:left;
-    width:1000px;
-    padding:0 1em;
+}
 
+header {
+    margin-bottom:0em;
+}
+#head-banner{
+    float:right;
+    clear:right;
+    width:750px;
+    height:75px;
+    overflow:hidden;
+}
+
+#session {
+    float:right;
+    width:30%;
 }
 
 #logo a{
     text-decoration:none;
     color:#333;
 }
+nav {
+    display:block;
+    clear: both;
+}
 /* Session status styles */
+
 #session {
   list-style:none;
   padding:0;
@@ -33,13 +55,44 @@ body {
 #session li a:hover {
     text-decoration:underline;
 }
+#sitemap {
+    padding:0;
+    margin:0;
+    padding:0.5em;
+}
+
+#sitemap li {
+    display:inline;
+    margin:0;
+    padding:0;  
+    
+}
+#categories ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
 #content-wrapper {
     padding:1.5em 1em 1em;
     margin-top:-0.5em;
     background:#FFF;
 }
-#main{
-
+#main {
+    float:left;
+    width:69%;
+    padding-bottom:4em;
+}
+aside{
+    float:right;
+    width:29%;
+}
+#map {
+    width:100%;
+    height:400px;
+}
+#content {
+    clear:both;
 }
 #obj-list{
     list-style:none;
@@ -119,13 +172,31 @@ body {
     vertical-align:middle;
 }
 
-footer {
+#banner-slot-a{
+    float:right;
+    width:21%;
+    text-align:center;
+    background:#EEE;
+}
+
+#banner-slot-b {
+    float:right;
+    text-align:center;
+    background:#EEE;
+}   
+#banner-slot-a a img, #banner-slot-b a img{
+    border:none;
+}
+
+footer{
+    display:block;
+    padding:1em 0;
+    clear:both;
     margin:-2px 0 1em;
     z-index:99999;
     background:#FFC018;
     border:1px solid #FFC018; 
-    padding:0.5em;
-    -moz-border-radius:0 0 5px 5px;
+-border-radius:0 0 5px 5px;
     -webkit-border-radius:0 0 5px 5px;
     border-radius:0 0 5px 5px;
 }
