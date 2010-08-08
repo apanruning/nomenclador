@@ -13,6 +13,7 @@ from maap.models import MaapModel
 from profiles.forms import LoginForm
 
 admin.autodiscover()
+handler500 = 'maap.views.base.server_error'
 
 urlpatterns = patterns('maap.views',
     (r'^$', 'index',{'template_name':'maap/index.html'}, 'index'),
