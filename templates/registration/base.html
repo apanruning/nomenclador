@@ -1,18 +1,15 @@
-
-{% extends "master.html" %}
+{% extends "nomap.html" %}
 {% block js %}
 <script type="text/javascript" src="/media/js/showdown.js"></script>
 <script type="text/javascript" src="/media/js/jquery.textarearesizer.js"></script>
 <script type="text/javascript" src="/media/js/jquery.ajaxQueue.js"></script>
 <script type="text/javascript" src="/media/js/jquery.autocomplete.js"></script> 
-
 {% endblock %}
 {% block css %}
 <link href="/media/css/wmd.css" type="text/css" media="all" rel="stylesheet" />
 <link href="/media/css/jquery.autocomplete.css" type="text/css" media="all" rel="stylesheet" />
 {% endblock %}
 {% block title %}{{ page.name }}{% endblock %}
-{% block map %}{% endblock %}
 {% endblock %}
 
 {% block content %}{% endblock %}

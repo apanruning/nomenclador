@@ -196,7 +196,7 @@ footer{
     z-index:99999;
     background:#FFC018;
     border:1px solid #FFC018; 
--border-radius:0 0 5px 5px;
+    -moz-border-radius:0 0 5px 5px;
     -webkit-border-radius:0 0 5px 5px;
     border-radius:0 0 5px 5px;
 }
@@ -204,6 +204,9 @@ footer{
     float:right;
     margin:0;
     padding:0.5em;
+}
+#content h1 {
+    position: relative
 }
 #content p {
     font-size:13px;
@@ -390,7 +393,7 @@ footer{
 /* gravatar */
 h1 .gravatar {
     position:absolute;
-    left:-85px;
+    right:-85px;
 }
 
 /* Votes */

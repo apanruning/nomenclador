@@ -13,20 +13,22 @@ Busqueda de calles
 {% endblock tabs %}
 {% block listing %}
 {% if object_list %}
+	<ul id="obj-list">
     {% autopaginate object_list 10 %}
     {% for street in object_list %}    
-    <h2>
-    {% url maap.views.street_location as url%}
-    {% if with_intersection %}
-    <a class="show-layer" 
-       href="{{ url }}?str={{street.first_street.norm}}&int={{street.second_street.norm}}">{{street}}</a>
-    {% else %}   
-    <a class="show-layer" 
-       href="{{ url }}?str={{street.norm}}{% if streetnumber %}&door={{streetnumber}}{% endif %}">{{street}} {{streetnumber}}</a>
-    {% endif %}
-    <span class="discreet">{{street.old|default_if_none:''}}</span>
+		<li class="item">
+        <h2>
+        {% url maap.views.street_location as url%}
+        {% if with_intersection %}
+        <a class="show-layer" 
+           href="{{ url }}?str={{street.first_street.norm}}&int={{street.second_street.norm}}">{{street}}</a>
+        {% else %}   
+        <a class="show-layer" 
+           href="{{ url }}?str={{street.norm}}{% if streetnumber %}&door={{streetnumber}}{% endif %}">{{street}} {{streetnumber}}</a>
+        {% endif %}
+        <span class="discreet">{{street.old|default_if_none:''}}</span>
+        </h2>
     {% endfor %}
-    </h2>
 {% paginate %}    
 {% else%}
 {%if request.POST %}

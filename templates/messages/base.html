@@ -1,8 +1,6 @@
-{% extends "master.html" %}
+{% extends "nomap.html" %}
 {% load inbox %}
 {%block categories %}  {% endblock %}
-{%block map %}  {% endblock %}
-
 {% block actions %}
     <a href="{% url messages_inbox %}">Bandeja de Entrada({%inbox_count%})</a> ·
     <a href="{% url messages_outbox %}">Mensajes Enviados</a> ·
