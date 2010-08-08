@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
 
     <title>{% block title %}{% endblock %} Nomenclador Cartográfico</title>
+    <meta name="description" content="{% block description %}Nomenclador Cartográfico, Buqueda de calles y barrios de la ciudad de córdoba y al rededores. Georefenciamiento OpenStreetMaps Mapas{% endblock %}" />
 
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/layout.css" type="text/css" media="screen" />    
@@ -58,12 +59,6 @@
     
 </head>
 <body>
-<div id="site-wrapper">
-<div id="banner-column">
-{% pop_slot 'a-1' %}
-
-
-</div>
 <div id="wrapper">
     {% if site_wide_announcements %}
         <div id="site_wide_announcements">
@@ -159,15 +154,17 @@
     </nav>
     </header>
     <div id="content-wrapper" class="shadow"> 
+        <aside>
+        {% pop_slot 'a-1' %}
+        </aside>
         <div id="main">
-
         {% block page %}
-
             {% block map %}
             <div id="map">
             </div>
             {% endblock %}
-            
+            {% block listing %}
+            {% endblock listing%}
             {%block actions%}  {% endblock %}
             <article id="content">
             {% block content %}
@@ -175,11 +172,6 @@
             </article>
         {% endblock %}
         </div>
-    
-        <aside>    
-            {% block listing %}
-            {% endblock listing%}
-        </aside>
         <br class="visualClear" />
     </div>
     <footer class="shadow">
@@ -191,7 +183,6 @@
             <li><a href="/contacto/">Contacto</a></li>
         </menu>
     </footer>
-</div>
 </div>
 </body>
 

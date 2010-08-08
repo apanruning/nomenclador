@@ -46,21 +46,15 @@ body {
     margin:0;
     padding:0;
 }
-#obj-list .item {
-    position:relative;
+#obj-list a {
     padding: 0.5em;
+    display:block;
+    
 
 }
-#obj-list .item:hover{
+#obj-list a:hover{
     background:#ebebeb;
 }
-
-aside h2{
-    font-size:100%;
-    margin:0;
-}
-
-
 
 #content {
     margin:0;
@@ -71,12 +65,6 @@ aside h2{
     font-size:150%;
     display:block;
 }
-
-#content h1 {
-    margin:0.2em 0;
-    font-size:150%;
-}
-
 #marcadores {
     float:left;
 }
@@ -204,7 +192,9 @@ footer {
     margin:0;
     position:relative;
 }
-
+#map.collapsed {
+    height:15em;
+}
 .tags{ 
     padding-left: 20px;
     background: url("../img/tag_blue.png") no-repeat center left;
@@ -289,41 +279,6 @@ footer {
 #pagination-digg a:hover{
     background:#C2D7E2;
 }
-#pagination-digg .next a,
-#pagination-digg .previous a {
-    font-weight:bold;
-    background:url(../img/arrows.png) no-repeat;
-    width:6px;
-    height:14px;
-}
-
-#pagination-digg .next span,
-#pagination-digg .previous span {
-    position:absolute;
-    left:-99999px;
-}
-
-#pagination-digg .next a{
-    background-position:right -22px;
-}
-#pagination-digg .next a:hover{
-    background-position:right -44px;
-}
-#pagination-digg .next.off a,
-#pagination-digg .next.off a:hover{
-    background-position:right top;
-}
-#pagination-digg .previous a{
-    background-position:right -88px;
-}
-#pagination-digg .previous a:hover{
-    background-position:right -110px;
-}
-
-#pagination-digg .previous.off a,
-#pagination-digg .previous.off a:hover{
-    background-position:right -66px ;
-}
 .ui-tabs-nav{
     list-style-type:none;
     margin:0;
@@ -370,28 +325,34 @@ h1 .gravatar {
 /* Votes */
 
 .score {
-    float:left;
+    float:right;
     vertical-align:middle;
-    font-size:20px;
     margin:0 3px;
+    overflow:hidden;
 }
 
 
 .content-vote {
     float:right;
-    padding:0.25em;
-    margin:1em;
     vertical-align:middle;
 }
 aside .content-vote{
     display:none;
     margin:0;
 }
+aside.suggested {
+    font-size:70%;
+    padding:1em;
+    background:#FFC
+
+}
+aside.suggested h1 {
+    font-size:200%;
+}
 aside li:hover .content-vote {
     display:block;
 }
 .upvote, .downvote {
-    clear:right;
     vertical-align:middle;
     width:14px;
     display:block;

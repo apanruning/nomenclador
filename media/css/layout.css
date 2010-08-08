@@ -1,15 +1,7 @@
-#site-wrapper{
-    width:1240px;
+#wrapper {
+    width:80em;
     margin:0 auto;
     text-align:left;
-}
-#wrapper {
-    float:left;
-    width:1000px;
-}
-#banner-column {
-    float:right;
-    width:200px;
 }
 header {
     margin-bottom:0em;
@@ -47,13 +39,13 @@ header {
 }
 
 #main {
-    float:right;
-    width:75%;
+    float:left;
+    width:70%;
     padding-bottom:4em;
 }
 aside{
-    float:left;
-    width:25%;
+    float:right;
+    width:28%;
 }
 #map {
     width:100%;

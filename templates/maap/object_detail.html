@@ -1,29 +1,47 @@
-{% extends 'maap/places.html' %}
+ {% extends 'maap/index.html' %}
 {% load markup tagging_tags banner_tags mptt_tags maap_tags %}
+{% block title %}{{object.name}}{% endblock %}
+{% block detail %}{{object.description|truncatewords:'25'}} Georefenciamiento OpenStreetMaps Mapas{% endblock %}
 
 {% block js_onload %}
     {{ block.super }}
     json_layer = {{ json_layer|safe }};
     state.setLayer(json_layer).show();     
 {% endblock %}
-
-
-{% block title %}{{object.name}}{% endblock %}
 {% block categories %}
     {% with object.category.all|first as category %}
        {% breadcrumbs category %}
        {% category_list category %}
     {% endwith %}
 {% endblock %}
-}
 
-{% block content %}
-    {% include 'place-title.html' %}
-    <div id="banner-slot-b">
-    {% pop_slot 'b-1' %}
+
+{% block page %}
+    {% block map %}
+    <div id="map" class="collapsed">
     </div>
-    <section>{{object.description|markdown }}</section>
-    <br class="visualClear" />
-
+    {% endblock %}
+    {%block actions%}  {% endblock %}
+    <article id="content">
+    {% block content %}
+    {% include 'place-title.html' %}
+        <div id="banner-slot-b">
+        {% pop_slot 'b-1' %}
+        </div>
+        <aside class="suggested">
+        <h1>Lugares sugeridos</h1>
+        {% block listing %}
+            {{ block.super }}
+            {% with request.GET.searchterm as searchterm %}
+            {% if searchterm %}
+            {% suggested_categories searchterm %}
+            {% endif %}
+            {% endwith %}
+        {% endblock listing%}
+        </aside>
+        <section>{{object.description|markdown }}</section>
+        <br class="visualClear" />
+    {% endblock %}
+    </article>
 {% endblock %}
 

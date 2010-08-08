@@ -1,7 +1,6 @@
 {% extends 'maap/base.html' %}
 {% load pagination_tags %}
 {% block title %}{{ category.name|default:'Bienvenido'}}{% endblock %}
-
 <html>
 <head>
 {% block js_onload %}
@@ -18,7 +17,7 @@
 	<ul id="obj-list">
 	    {% autopaginate object_list 10 %}
 		{% for object in object_list %}
-		<li class="visualClear item">
+		<li class="item">
         {% include 'place.html' %}
         </li>
         {% empty %}

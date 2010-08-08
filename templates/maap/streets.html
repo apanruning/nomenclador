@@ -13,11 +13,9 @@ Busqueda de calles
 {% endblock tabs %}
 {% block listing %}
 {% if object_list %}
-<h3> Resultados para {{queryterm}}</h3>
-<dl>
     {% autopaginate object_list 10 %}
     {% for street in object_list %}    
-    <dt>
+    <h2>
     {% url maap.views.street_location as url%}
     {% if with_intersection %}
     <a class="show-layer" 
@@ -26,12 +24,9 @@ Busqueda de calles
     <a class="show-layer" 
        href="{{ url }}?str={{street.norm}}{% if streetnumber %}&door={{streetnumber}}{% endif %}">{{street}} {{streetnumber}}</a>
     {% endif %}
-    </dt>
-    <dd>{{street.old|default_if_none:''}}</dd>
-    
+    <span class="discreet">{{street.old|default_if_none:''}}</span>
     {% endfor %}
-
-</dl>
+    </h2>
 {% paginate %}    
 {% else%}
 {%if request.POST %}

@@ -1,12 +1,5 @@
 {% load tagging_tags comments voting_tags %}
-<div class="content-vote">
-
-    {% score_for_object object as score %}
-    <h3 class="score">{{score.score}}</h3>
-    <a href="{% url vote object.id,'up' %}" class="upvote"><span>vote up</span></a>
-    <a href="{% url vote object.id,'down' %}" class="downvote"><span>vote down</span></a>
-</div>
-<h2><a href="{{ object.get_absolute_url }}">{{object.name}}</a></h2>    
+<h1><a href="{{ object.get_absolute_url }}">{{object.name}}</a></h1>    
 <details class="discreet">
 {% if object.creator%}
 <a href="{% url profile_detail object.creator %}">{{object.creator}}</a> 

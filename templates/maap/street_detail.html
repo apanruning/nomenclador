@@ -6,14 +6,8 @@
     json_layer = {{ json_layer|safe }};
     state.setLayer(json_layer).show();     
 {% endblock %}
-
-
 {% block title %}{{object.name}}{% endblock %}
-
 {% block listing %}
-<dl>
-    <dt id="description">{{street}} {{streetnumber|default_if_none:''}}</dt>
-    <dd>{{street.old|default_if_none:''}}</dd>
-</dl>
+<h2>{{street}} {{streetnumber|default_if_none:''}}<span class="discreet">{{street.old|default_if_none:''}}</span></h2>
 {% endblock %}
 
