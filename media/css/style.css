@@ -108,7 +108,19 @@ aside{
 #obj-list a:hover{
     background:#ebebeb;
 }
-
+#obj-list .item {
+    position: relative
+} 
+#obj-list details {
+    position:absolute;
+    right:0;
+    top:1em;
+    font-size:70%;
+    font-weight:normal;
+}
+#obj-list details a {
+    display:inline;
+}
 #content {
     margin:0;
     position:relative;

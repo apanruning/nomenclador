@@ -9,6 +9,7 @@ django-announcements
 django-messages
 django-microblogging
 django-email-confirmation
+django-db-log
 django-pagination
 hg+http://bitbucket.org/ubernostrum/django-registration#registration
 svn+http://code.djangoproject.com/svn/django/trunk/#egg=django
