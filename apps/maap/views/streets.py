@@ -13,6 +13,8 @@ from osm.utils.words import clean_search_street
 from django.core import urlresolvers
 from django.utils.http import urlquote, urlencode
 from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
+from djangodblog.models import Error
+import logging
 
 def search_streets(request):
     streetnumber = request.GET.get('streetnumber',None)
@@ -20,7 +22,6 @@ def search_streets(request):
     cs_inters = clean_search_street(request.GET.get('intersection', ''))
     with_intersection = False
     if cs_street and len(cs_street)>2:
-
         # Intersection Case
         if cs_inters and len(cs_inters)>2:
             # Reworked version with only one query
@@ -56,7 +57,10 @@ def search_streets(request):
                              urlencode(params))
                              
             return  HttpResponseRedirect(url)
-             
+        import ipdb; ipdb.set_trace()
+        if street_list:
+            Error.objects.create_from_text('Se econtraron calles, buscando por %s %s %s' %(cs_street, cs_inters, streetnumber),level=logging.INFO, url=request.build_absolute_uri())
+        
         return object_list(
             request,
             street_list,

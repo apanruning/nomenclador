@@ -131,5 +131,5 @@ INSTALLED_APPS = (
 )
 
 DBLOG_CATCH_404_ERRORS = True
-DBLOG_DATABASE_USING = 'logs_nomenclador'
+DBLOG_DATABASE_USING = 'default'
 
