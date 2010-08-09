@@ -69,8 +69,10 @@ def staging(username="mherrero", hosts=["mherrero.webfactional.com"]):
     env.hosts = hosts
     env.deploy_dir = '/home/mherrero/webapps/cyj/nomenclador'
     env.virtual_env = '/home/mherrero/webapps/cyj/venv'
-def production(username="", host=""):
-    pass
+
+def production(username="root", hosts=["nomenclador.comercioyjusticia.com.ar"]):
+    env.user = username
+    env.hosts = hosts
     
 def write_template(file_name, template):
     rendered_file = open(file_name, 'w')
