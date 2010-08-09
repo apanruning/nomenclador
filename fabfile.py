@@ -64,9 +64,11 @@ env.virtual_env = '/opt/venvs/%s' %env.project_name
 def development():
     env.hosts = ["localhost"]
 
-def staging(username="", host=""):
-    pass
-    
+def staging(username="mherrero", hosts=["mherrero.webfactional.com"]):
+    env.user = username
+    env.hosts = hosts
+    env.deploy_dir = '/home/mherrero/webapps/cyj/nomenclador'
+    env.virtual_env = '/home/mherrero/webapps/cyj/venv'
 def production(username="", host=""):
     pass
     
@@ -95,13 +97,13 @@ def release():
     local("cd %s/%s; /bin/tar cfj %s/%s *" % (tmpdir, env.project_name, tmpdir, tar,))
     put("%s/%s" % (tmpdir, tar), tar)
     # warning: contents in destination directory will be lost.
-    sudo("tar xfj %s -C %s" % (tar, env.deploy_dir))
-    sudo("rm -rf %s %s" % (tmpdir, tar))
+    run("tar xfj %s -C %s" % (tar, env.deploy_dir))
+    run("rm -rf %s %s" % (tmpdir, tar))
     local("rm -rf %s %s" % (tmpdir, tar))
 
 def apache_restart():
     """Restarts the program in the servers."""
     require("hosts", provided_by=[development, staging, production])
-    sudo("apache2ctl restart")
+    run(" /home/mherrero/webapps/cyj/apache2/bin/restart ")
 
 # vim: set fenc=utf-8 tw=79 sw=4 ts=4 sts=4 ai et:

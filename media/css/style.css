@@ -80,12 +80,11 @@ nav {
 }
 #main {
     float:left;
-    width:69%;
+    width:70%;
     padding-bottom:4em;
 }
 aside{
     float:right;
-    width:29%;
 }
 #map {
     width:100%;
