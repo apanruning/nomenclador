@@ -1,3 +1,6 @@
 *~
 *.pyc
 nomenclador/media/banners/*
+*.tar.bz2
+*.conf
+*.wsgi

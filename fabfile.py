@@ -67,6 +67,9 @@ def development():
 def staging(username="", host=""):
     pass
     
+def production(username="", host=""):
+    pass
+    
 def write_template(file_name, template):
     rendered_file = open(file_name, 'w')
     rendered_file.write(template.safe_substitute(env))
