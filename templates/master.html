@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css" media="screen" />    
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/forms.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/wmd.css" type="text/css" media="screen" />    
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/autocomplete.css" type="text/css" media="screen" />        
     {% block css %}
     {% endblock %}
 	<!--[if IE]>
@@ -23,11 +22,9 @@
      <script type="text/javascript" src="{{ MEDIA_URL }}js/OpenStreetMap.js"></script>
      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.min.js"></script>    
      <script type="text/javascript" src="{{ MEDIA_URL }}js/dimensions.js"></script>
-     <script type="text/javascript" src="{{ MEDIA_URL }}js/autocomplete.js"></script>
-     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.boxshadow.js"></script>       
      <script type="text/javascript" src="{{ MEDIA_URL }}js/forms.js"></script>       
      <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.ui.js"></script>  
-     <script type="text/javascript" src="{{ MEDIA_URL }}js/showdown.js"></script>            
+
     {% block javascript %}
     {% if form.media %}
         {% for js in form.media.render_js %} 
@@ -37,7 +34,6 @@
     {% endblock %}
     <script type="text/javascript">
     $(document).ready(function(){
-        $('.shadow').boxShadow(10, 10, 5, '#888');
         $('.select-neighborhoods').change(function(){
             window.location = $(this).find(':selected').attr('value');
         })
@@ -94,7 +90,6 @@
         <nav>    
         <div id="search-forms-wrapper" class="tabs">
 
-
             <ul>
             {% block tabs %}    
             <li><a href="#streets">Calles</a></li>
@@ -119,7 +114,7 @@
                        class="searchterm middle" size="17" name="intersection" />
                 {% neighbour_list %}
             </form>
-            <form action="{% url search_places %}" method="get" id="places" class="search shadow">
+            <form action="{% url search_places %}" method="get" id="places" class="search .ui-tabs-hide">
                 <input type="submit" value="Buscar" class="searchbuton" />
                 <input type="text" size="60" id="placename"
                        placeholder="Ingrese un nombre de un negocio o lugar"
@@ -127,7 +122,7 @@
                        class="searchterm" name="placename" />
                {% neighbour_list %}
                 </form>
-            <form action="{% url search_people %}" method="get" id="people" class="search shadow">
+            <form action="{% url search_people %}" method="get" id="people" class="search .ui-tabs-hide">
                 <input type="submit" value="Buscar" class="searchbuton" />
                 <input type="text" size="60" id="firstname"
                        placeholder="Ingrese el nombre de la persona que busca"
@@ -153,14 +148,19 @@
     </nav>
     </header>
     <div id="content-wrapper" class="shadow"> 
+        {% block page %}
         <aside>
         {% pop_slot 'a-1' %}
+        <br class="visualClear-left"/>
         </aside>
         <div id="main">
-        {% block page %}
+
             {% block map %}
+            <div id="map-wrapper">
             <div id="map">
             </div>
+            </div>
+            <a id="map-handler" href="#">Expand</a>
             {% endblock %}
             {% block listing %}
             {% endblock listing%}
@@ -169,9 +169,11 @@
             {% block content %}
             {% endblock %}
             </article>
-        {% endblock %}
+
         </div>
+
         <br class="visualClear" />
+        {% endblock %}
     </div>
     <footer class="shadow">
         <p id="credits">&copy;2009 Comercio y Justicia</p>

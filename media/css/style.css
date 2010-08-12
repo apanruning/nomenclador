@@ -1,3 +1,6 @@
+html, body,  #wrapper{
+    height:100%;
+}
 body {
     background:#E0EBEC;
     padding:0;
@@ -33,7 +36,10 @@ header {
 }
 nav {
     display:block;
+    position:relative;
     clear: both;
+    width:100%;
+    
 }
 /* Session status styles */
 
@@ -67,32 +73,96 @@ nav {
     padding:0;  
     
 }
+#categories {
+    z-index:99999;
+    background:#FFC018;
+    position:absolute;
+    clear:both;
+    padding:0;
+    width:100%;
+    margin:0;
+    border-bottom:2px solid #FFC018;
+}
+#categories table {
+    display:none;
+    background:#FFF;
+    margin:0;
+}
+
 #categories ul{
     margin:0;
     padding:0;
     list-style:none;
 }
 
+
+#categories table a {
+    color:#5485AF;
+}
+#categories .root-node {
+    color:#05365E;
+}
+#categories .current {
+    border-right:1px solid #cce44d;
+}
+#categories .not-current{
+
+}
+#categories td{
+    vertical-align:top;
+    width:20%;
+    padding:0.5em;
+}
+#more-categories{
+    background:#FFC018;
+    border:2px solid #FFC018;
+    padding:0.5em;
+    vertical-align:middle;
+    position:absolute;
+    bottom:0;
+    right:0;
+    outline:none;
+}
+#more-categories:hover{
+    text-decoration:none;
+}
+#more-categories img{ 
+    vertical-align:middle;
+}
 #content-wrapper {
-    padding:1.5em 1em 1em;
-    margin-top:-0.5em;
+    padding:0;
+    margin-top:2em;
     background:#FFF;
 }
 #main {
     float:left;
-    width:70%;
+    width:58em;
     padding-bottom:4em;
 }
 aside{
     float:right;
+    background:#CCF;
+    width:22em;
+    text-align:center;
+}
+#map-wrapper{
+    height:20em;
+    overflow:hidden;
 }
 #map {
     width:100%;
-    height:400px;
+    height:450px;
 }
-#content {
-    clear:both;
+#map-handler {
+    display:block;
+    background: #CDD;
+    text-align:center;
+    text-decoration:none;
 }
+#map-handler:hover {
+    background: #EFF;
+}
+
 #obj-list{
     list-style:none;
     margin:0;
@@ -121,9 +191,11 @@ aside{
     display:inline;
 }
 #content {
+    clear:both;
+    display:block;
     margin:0;
     position:relative;
-    padding:1em 0;
+    padding:1em;
 }
 #content .votes {
     font-size:150%;
@@ -135,53 +207,7 @@ aside{
 #navigation{
     font-size:120%;
 }
-#categories {
-    z-index:99999;
-    background:#FFC018;
-    position:relative;
-    clear:both;
-    padding:2px;
-    margin:0;
-}
-#categories table {
-    display:none;
-    background:#FFF;
-    margin:0;
 
-}
-#categories table a {
-    color:#5485AF;
-}
-#categories .root-node {
-    color:#05365E;
-}
-#categories .current {
-    border-right:1px solid #cce44d;
-}
-#categories .not-current{
-
-}
-#categories td{
-    vertical-align:top;
-    width:20%;
-    padding:0.5em;
-}
-#more-categories{
-    background:#FFC018;
-    border:1px solid #FFC018;
-    padding:0.25em 0.5em;
-    vertical-align:middle;
-    position:absolute;
-    bottom:0;
-    right:0;
-    outline:none;
-}
-#more-categories:hover{
-    text-decoration:none;
-}
-#more-categories img{ 
-    vertical-align:middle;
-}
 
 #banner-slot-a{
     float:right;
@@ -191,7 +217,6 @@ aside{
 }
 
 #banner-slot-b {
-    float:right;
     text-align:center;
     background:#EEE;
 }   
@@ -203,13 +228,10 @@ footer{
     display:block;
     padding:1em 0;
     clear:both;
-    margin:-2px 0 1em;
+    margin:-2px 0;
     z-index:99999;
     background:#FFC018;
     border:1px solid #FFC018; 
-    -moz-border-radius:0 0 5px 5px;
-    -webkit-border-radius:0 0 5px 5px;
-    border-radius:0 0 5px 5px;
 }
 #credits {
     float:right;
@@ -293,7 +315,7 @@ footer{
 
 .breadcrumb {
     background:#fff;
-    padding:0.2em 0.5em;
+    padding:0.5em;
     margin:0;
 }
 .action.close {
@@ -425,14 +447,19 @@ aside .content-vote{
     display:none;
     margin:0;
 }
-aside.suggested {
-    font-size:70%;
-    padding:1em;
-    background:#FFC
-
+aside.sugested {
+    padding:0.5em;
+    background:#FFC;
+    clear:right;
+    text-align:left;
 }
-aside.suggested h1 {
-    font-size:200%;
+aside.sugested h1 {
+    font-size:120%;
+    margin:1em 0 
+}
+aside.sugested h2 {
+    font-size:100%;
+    margin:1em 0 
 }
 aside li:hover .content-vote {
     display:block;

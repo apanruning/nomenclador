@@ -21,6 +21,11 @@ a img {
     clear:both;
     margin:0;
     padding:0;
+    display:block;
+}
+.visualClear-left{
+    clear:left;
+    display:block;
 }
 .discreet {
     line-height:1.2em;
