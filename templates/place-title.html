@@ -1,5 +1,5 @@
 {% load tagging_tags comments voting_tags %}
-<h1><a href="{{ object.get_absolute_url }}">{{object.name}}</a></h1>    
+<h1><img src="object.icon.image.url"><a href="{{ object.get_absolute_url }}">{{object.name}}</a></h1>    
 <details class="discreet">
 {% if object.creator%}
 <a href="{% url profile_detail object.creator %}">{{object.creator}}</a> 

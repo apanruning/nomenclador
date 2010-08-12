@@ -16,6 +16,7 @@ a:hover{
 }
 a img {
     border:none;
+    vertical-align:middle;
 }
 .visualClear {
     clear:both;

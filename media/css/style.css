@@ -344,13 +344,12 @@ footer{
 #pagination-digg{
     overflow:hidden;
     margin:0 auto !important;
-    padding:0;
+    padding:0 1em;
 }
 
 #pagination-digg li{
     margin:0; 
     padding:0;
-    font-size:11px;
     list-style:none;
     margin-right:2px;
     float:left;

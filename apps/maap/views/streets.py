@@ -57,7 +57,6 @@ def search_streets(request):
                              urlencode(params))
                              
             return  HttpResponseRedirect(url)
-        import ipdb; ipdb.set_trace()
         if street_list:
             Error.objects.create_from_text('Se econtraron calles, buscando por %s %s %s' %(cs_street, cs_inters, streetnumber),level=logging.INFO, url=request.build_absolute_uri())
         
