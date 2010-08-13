@@ -36,6 +36,14 @@
     $(document).ready(function(){
         $('.select-neighborhoods').change(function(){
             window.location = $(this).find(':selected').attr('value');
+        });
+        $('#map-handler').click(function(){
+            size = (this.class === 'close') ? '20em' : '35em';
+            handlerText = (this.class === 'close') ? 'Abrir el mapa' : 'Cerrar el mapa';
+            $(this).text(handlerText)
+            $('this').toggleClass('close','open');
+            $('#map-wrapper').animate({height:size}, 300)
+            return false;
         })
         $('#more-categories').click(function(){
             $('#categories table').toggle();
@@ -159,8 +167,9 @@
             <div id="map-wrapper">
             <div id="map">
             </div>
+            <a id="map-handler" class="close" href="#">Abrir el mapa</a>
             </div>
-            <a id="map-handler" href="#">Expand</a>
+
             {% endblock %}
             {% block listing %}
             {% endblock listing%}

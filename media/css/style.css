@@ -148,6 +148,7 @@ aside{
 #map-wrapper{
     height:20em;
     overflow:hidden;
+    position:relative;
 }
 #map {
     width:100%;
@@ -158,6 +159,11 @@ aside{
     background: #CDD;
     text-align:center;
     text-decoration:none;
+    z-index:99999;
+    display:block;
+    width:100%;
+    position:absolute;
+    bottom:0;
 }
 #map-handler:hover {
     background: #EFF;
