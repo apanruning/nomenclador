@@ -138,7 +138,7 @@ COMPRESS = True
 COMPRESS_CSS = {
     'stylesheets': {
         'source_filenames': ('css/base.css','css/style.css', 'css/forms.css', 'css/wmd.css','css/autocomplete.css','css/street_doors.css'),
-        'output_filename': 'css/styleshee.css',
+        'output_filename': 'css/stylesheet.css',
             'media': 'all',
     },
 }
@@ -146,11 +146,35 @@ COMPRESS_CSS = {
 
 COMPRESS_JS = {
     'scripts': {
-        'source_filenames': ('js/jquery.min.js', 'js/dimensions.js', 'js/jquery.ui.js', 'js/forms.js', 'js/jquery.ajaxQueue.js', 'js/jquery.autocomplete.js', 'js/jquery.textarearesizer.js', 'js/OpenLayers.js', 'js/OpenStreetMap.js', 'js/autocomplete.js', 'js/jstree_admin.js', 'js/wmd.js','js/showdown.js'),
+        'source_filenames': (
+            'js/jquery.min.js', 
+            'js/jquery.ui.js', 
+            'js/OpenLayers.js', 
+            'js/OpenStreetMap.js', 
+            'js/dimensions.js', 
+            'js/forms.js', 
+            'js/jquery.ajaxQueue.js', 
+            'js/jquery.autocomplete.js', 
+            'js/jquery.textarearesizer.js', 
+            'js/autocomplete.js', 
+            'js/jstree_admin.js', 
+            'js/wmd.js',
+            'js/showdown.js'
+        ),
         'output_filename': 'js/scripts.js',
     },
     'modules': {
-        'source_filenames': ('modules/utils.js', 'modules/layer.js', 'modules/point.js', 'modules/map_settings.js', 'modules/state.js', 'modules/init.js', 'modules/sys.js', 'modules/base.js', 'modules/multiline.js', 'modules/area.js'),
+        'source_filenames': (
+            'modules/base.js',
+            'modules/utils.js', 
+            'modules/state.js', 
+            'modules/point.js', 
+            'modules/multiline.js', 
+            'modules/layer.js', 
+            'modules/map_settings.js', 
+            'modules/area.js',
+            'modules/init.js', 
+        ),
         'output_filename': 'js/modules.js',
     }
 }

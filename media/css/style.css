@@ -206,6 +206,7 @@ aside{
     margin:0;
     position:relative;
     padding:1em;
+    background: #FFF;
 }
 #content .votes {
     font-size:150%;
