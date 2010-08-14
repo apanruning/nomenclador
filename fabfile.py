@@ -60,6 +60,7 @@ APACHE_TEMPLATE = Template('''
 
 env.deploy_dir = '/opt/sites/%s' %env.project_name
 env.virtual_env = '/opt/venvs/%s' %env.project_name
+env.apache_command = 'apache2ctl restart'
 
 def development():
     env.hosts = ["localhost"]
@@ -69,6 +70,7 @@ def staging(username="mherrero", hosts=["mherrero.webfactional.com"]):
     env.hosts = hosts
     env.deploy_dir = '/home/mherrero/webapps/cyj/nomenclador'
     env.virtual_env = '/home/mherrero/webapps/cyj/venv'
+    env.apache_command = '/home/mherrero/webapps/cyj/apache2/bin/restart'
 
 def production(username="root", hosts=["nomenclador.comercioyjusticia.com.ar"]):
     env.user = username
@@ -106,6 +108,6 @@ def release():
 def apache_restart():
     """Restarts the program in the servers."""
     require("hosts", provided_by=[development, staging, production])
-    run(" /home/mherrero/webapps/cyj/apache2/bin/restart ")
+    run(env.apache_command)
 
 # vim: set fenc=utf-8 tw=79 sw=4 ts=4 sts=4 ai et:

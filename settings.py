@@ -133,3 +133,8 @@ INSTALLED_APPS = (
 DBLOG_CATCH_404_ERRORS = True
 DBLOG_DATABASE_USING = 'default'
 
+#DATABASE_ROUTERS = [
+#        'djangodblog.routers.DBLogRouter',
+#]
+
+

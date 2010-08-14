@@ -27,7 +27,7 @@ DATABASES = {
     };
     'logs_nomenclador': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'logs_nomenclador',
+        'NAME': 'mherrero_nomenclador_log',
         'USER': 'mherrero_nomenclador',
         'PASSWORD': 'mherrero_nomenclador',
         'HOST':'localhost',
