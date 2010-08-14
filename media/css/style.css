@@ -44,8 +44,6 @@ nav {
     position:relative;
     clear: both;
     width:100%;
-    border: 1px solid #CCC;
-    border-width: 0 1px;
 }
 /* Session status styles */
 
@@ -138,7 +136,6 @@ nav {
 #content-wrapper {
     padding:0;
     margin-top:2em;
-    background:#CCCCFF;
 }
 #main {
     float:left;
