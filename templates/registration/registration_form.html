@@ -1,18 +1,6 @@
-{% extends "master.html" %}
+{% extends "registration/base.html" %}
 {%block title%}Bienvenido, está por registrarse{%endblock%}
-{%block css%}
-<style type="text/css">
-#content form{
-width:50%;
-margin:0 auto;
-border: 1px solid #EBEBEB;
-padding:10px;
-}
-
-</style>
-{%endblock%}
-
-{% block page %}
+{% block content %}
 <div id="login-form">
 <h2>Registrese</h2>
 {% if form.errors %}

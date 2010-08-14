@@ -9,13 +9,23 @@ body {
 }
 #wrapper {
     width:80em;
-    padding:1em;
+    padding:0;
     margin:0 auto;
     text-align:left;
 }
 
 header {
     margin-bottom:0em;
+    display:block;
+}
+#logo {
+    margin:0;
+    padding:1em 0;
+}
+
+#logo a{
+    text-decoration:none;
+    color:#333;
 }
 #head-banner{
     float:right;
@@ -29,17 +39,13 @@ header {
     float:right;
     width:30%;
 }
-
-#logo a{
-    text-decoration:none;
-    color:#333;
-}
 nav {
     display:block;
     position:relative;
     clear: both;
     width:100%;
-    
+    border: 1px solid #CCC;
+    border-width: 0 1px;
 }
 /* Session status styles */
 
@@ -50,16 +56,16 @@ nav {
   z-index: 9999;
 }
 
-#session li { 
-    display:inline;
-}
 
-#session li a {
+#session a {
+    float:right;
     text-decoration:none;
     color:#333;
+    padding: 0.5em;
+    display: block;
 }
-#session li a:hover {
-    text-decoration:underline;
+#session a:hover {
+    background: #FC0;
 }
 #sitemap {
     padding:0;
@@ -132,12 +138,13 @@ nav {
 #content-wrapper {
     padding:0;
     margin-top:2em;
-    background:#FFF;
+    background:#CCCCFF;
 }
 #main {
     float:left;
     width:58em;
     padding-bottom:4em;
+    background:#FFF;
 }
 aside{
     float:right;
@@ -188,7 +195,7 @@ aside{
 } 
 #obj-list details {
     position:absolute;
-    right:0;
+    right:1em;
     top:1em;
     font-size:70%;
     font-weight:normal;
