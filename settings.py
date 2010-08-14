@@ -133,22 +133,25 @@ INSTALLED_APPS = (
 
 DBLOG_CATCH_404_ERRORS = True
 DBLOG_DATABASE_USING = 'default'
+COMPRESS = True
 
 COMPRESS_CSS = {
-    'all_css': {
+    'stylesheets': {
         'source_filenames': ('css/base.css','css/style.css', 'css/forms.css', 'css/wmd.css','css/autocomplete.css','css/street_doors.css'),
-        'output_filename': 'css/all_compressed.css',
+        'output_filename': 'css/styleshee.css',
             'media': 'all',
-        },
     },
-    
 }
+    
 
 COMPRESS_JS = {
-    'all_js': {
-        'source_filenames': ('js/jquery-1.2.3.js', 'js/jquery-preload.js', 'js/jquery.pngFix.js',
-        'js/my_script.js', 'js/my_other_script.js'),
-        'output_filename': 'js/all_compressed.js',
+    'scripts': {
+        'source_filenames': ('js/jquery.min.js', 'js/dimensions.js', 'js/jquery.ui.js', 'js/forms.js', 'js/jquery.ajaxQueue.js', 'js/jquery.autocomplete.js', 'js/jquery.textarearesizer.js', 'js/OpenLayers.js', 'js/OpenStreetMap.js', 'js/autocomplete.js', 'js/jstree_admin.js', 'js/wmd.js','js/showdown.js'),
+        'output_filename': 'js/scripts.js',
+    },
+    'modules': {
+        'source_filenames': ('modules/utils.js', 'modules/layer.js', 'modules/point.js', 'modules/map_settings.js', 'modules/state.js', 'modules/init.js', 'modules/sys.js', 'modules/base.js', 'modules/multiline.js', 'modules/area.js'),
+        'output_filename': 'js/modules.js',
     }
 }
 
