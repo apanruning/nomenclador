@@ -116,6 +116,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'django.contrib.markup',
     'django.contrib.comments',
+    'compress',
     'announcements',
     'pagination',    
     'voting',
@@ -132,6 +133,25 @@ INSTALLED_APPS = (
 
 DBLOG_CATCH_404_ERRORS = True
 DBLOG_DATABASE_USING = 'default'
+
+COMPRESS_CSS = {
+    'all_css': {
+        'source_filenames': ('css/base.css','css/style.css', 'css/forms.css', 'css/wmd.css','css/autocomplete.css','css/street_doors.css'),
+        'output_filename': 'css/all_compressed.css',
+            'media': 'all',
+        },
+    },
+    
+}
+
+COMPRESS_JS = {
+    'all_js': {
+        'source_filenames': ('js/jquery-1.2.3.js', 'js/jquery-preload.js', 'js/jquery.pngFix.js',
+        'js/my_script.js', 'js/my_other_script.js'),
+        'output_filename': 'js/all_compressed.js',
+    }
+}
+
 
 #DATABASE_ROUTERS = [
 #        'djangodblog.routers.DBLogRouter',
