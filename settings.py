@@ -137,4 +137,7 @@ DBLOG_DATABASE_USING = 'default'
 #        'djangodblog.routers.DBLogRouter',
 #]
 
+#SMTP Test Server
+#python -m smtpd -n -c DebuggingServer localhost:1025
+
 
