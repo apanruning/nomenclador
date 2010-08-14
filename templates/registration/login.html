@@ -1,18 +1,7 @@
-{% extends "master.html" %}
+{% extends "nomap.html" %}
 {%block title%}Bienvenido, por favor ingrese su nombre de usuario y contraseña{%endblock%}
-{%block css%}
-<style type="text/css">
-#content form{
-width:50%;
-margin:0 auto;
-border: 1px solid #EBEBEB;
-padding:10px;
-}
 
-</style>
-{%endblock%}
-
-{% block page %}
+{% block content %}
 <div id="login-form">
 <h2>Por favor ingrese su nombre de usuario y contraseña</h2>
 {% if form.errors %}
@@ -22,7 +11,7 @@ padding:10px;
 <form method="post" action=".">
 {% include 'generic_form.html' %}
 <input type="hidden" name="next" value="{% if next %}{{ next }}{%else%}/{%endif%}" />
-<input type="submit" value="login" />
+<input type="submit" value="Ingresar" />
 </form>
 </div>
 {% endblock %}

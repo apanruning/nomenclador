@@ -116,7 +116,7 @@ nav {
 #more-categories{
     background:#FFC018;
     border:2px solid #FFC018;
-    padding:0.5em;
+    padding:0.25em;
     vertical-align:middle;
     position:absolute;
     bottom:0;
@@ -321,7 +321,7 @@ footer{
 
 .breadcrumb {
     background:#fff;
-    padding:0.5em;
+    padding:0.25em;
     margin:0;
 }
 .action.close {

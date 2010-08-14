@@ -120,11 +120,10 @@ ui-state-highlight, .ui-widget-content .ui-state-highlight {
     text-align:center;
 }
 /* login styles */
-
-#login-form{
+#login-form {
 margin:10% 0 25%;
+margin:0 auto;
 width:30em;
-background:#FFF;
 padding:0.5em 1em;
 }
 #search-forms-wrapper{
