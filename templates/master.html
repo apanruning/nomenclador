@@ -38,10 +38,10 @@
             window.location = $(this).find(':selected').attr('value');
         });
         $('#map-handler').click(function(){
-            size = (this.class === 'close') ? '20em' : '35em';
-            handlerText = (this.class === 'close') ? 'Abrir el mapa' : 'Cerrar el mapa';
+            size = (this.className === 'close') ? '20em' : '32em';
+            handlerText = (this.className === 'close') ? 'Abrir el mapa' : 'Cerrar el mapa';
             $(this).text(handlerText)
-            $('this').toggleClass('close','open');
+            $(this).toggleClass('close');
             $('#map-wrapper').animate({height:size}, 300)
             return false;
         })
