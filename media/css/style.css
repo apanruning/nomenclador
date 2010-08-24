@@ -8,6 +8,11 @@ body {
     text-align:center;
 }
 #wrapper {
+    padding:0;
+    margin:0 auto;
+    text-align:left;
+}
+.wrapper {
     width:80em;
     padding:0;
     margin:0 auto;
@@ -17,10 +22,12 @@ body {
 header {
     margin-bottom:0em;
     display:block;
+    background:#EBEBEB;
+    border-bottom:2px solid #CCC;
 }
 #logo {
     margin:0;
-    padding:1em 0;
+    padding:0.5em 0;
 }
 
 #logo a{
@@ -150,7 +157,7 @@ aside{
     text-align:center;
 }
 #map-wrapper{
-    height:20em;
+    height:30em;
     overflow:hidden;
     position:relative;
 }

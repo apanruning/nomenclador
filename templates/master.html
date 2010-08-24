@@ -37,14 +37,6 @@
         $('.select-neighborhoods').change(function(){
             window.location = $(this).find(':selected').attr('value');
         });
-        $('#map-handler').click(function(){
-            size = (this.className === 'close') ? '20em' : '32em';
-            handlerText = (this.className === 'close') ? 'Abrir el mapa' : 'Cerrar el mapa';
-            $(this).text(handlerText)
-            $(this).toggleClass('close');
-            $('#map-wrapper').animate({height:size}, 300)
-            return false;
-        })
         $('#more-categories').click(function(){
             $('#categories table').toggle();
             if ($(this).text() === 'Categorías'){
@@ -78,6 +70,7 @@
 
 
     <header id="header">
+        <div class="wrapper">
         <div id="session">
             {% if user.is_authenticated %}
             <a href="{% url logout %}">Salir</a>
@@ -92,7 +85,7 @@
             {% endif %}
 
         </div>
-        <div id="head-banner">{% pop_slot 'header' %}</div>
+
         <h1 id="logo"><a href="{% url index %}">NOMENCLADOR CARTOGRÁFICO</a></h1>
 
         <nav>    
@@ -154,26 +147,24 @@
         {% endblock %}
         </menu>
     </nav>
+        </div>
     </header>
-    <div id="content-wrapper" class="shadow"> 
+    <div id="content-wrapper" class="shadow wrapper"> 
         {% block page %}
         <aside>
         {% pop_slot 'a-1' %}
         <br class="visualClear-left"/>
         </aside>
         <div id="main">
-
             {% block map %}
             <div id="map-wrapper">
-            <div id="map">
+                <div id="map">
+                </div>
             </div>
-            <a id="map-handler" class="close" href="#">Abrir el mapa</a>
-            </div>
-
             {% endblock %}
             {% block listing %}
             {% endblock listing%}
-            {%block actions%}  {% endblock %}
+            {%block actions%}{% endblock %}
             <article id="content">
             {% block content %}
             {% endblock %}
@@ -185,6 +176,7 @@
         {% endblock %}
     </div>
     <footer class="shadow">
+        <div class="wrapper">
         <p id="credits">&copy;2009 Comercio y Justicia</p>
         <menu id="sitemap">
             <li><a href="/">Inicio</a> ·</li>
@@ -192,6 +184,8 @@
             <li><a href="/blog/">Blog</a> ·</li>
             <li><a href="/contacto/">Contacto</a></li>
         </menu>
+
+        </div>
     </footer>
 </div>
 </body>
