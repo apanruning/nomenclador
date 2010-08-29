@@ -49,6 +49,9 @@ Maap.Layer = function (metadata, map) {
 
 
     this.layer.events.register("featureselected", this.layer, this.onSelect);
+    
+    var control = new OpenLayers.Control.SelectFeature(this.layer);
+    this.map.addControl(control);
 /* TBD
     var highlightCtrl = new OpenLayers.Control.SelectFeature(this.layer, 
         { 
@@ -61,11 +64,8 @@ Maap.Layer = function (metadata, map) {
             } 
         }
     );
-*/    
-    
-    var control = new OpenLayers.Control.SelectFeature(this.layer);
-    this.map.addControl(control);
     this.map.addControl(highlightCtrl);
+*/    
     control.activate();
 
  
