@@ -12,18 +12,20 @@ Maap.Point = Maap.Geom.extend({
 
         var geojson_format = new OpenLayers.Format.GeoJSON();        
         var pgeom = geojson_format.read(this.geojson,"Geometry");
-        var lookup = {};
-        var features = new Array();
-        var styleMap = new OpenLayers.StyleMap();
-                
+
+        this.features = new Array();
+        this.style = {};
+        
+        
+        // If point have radius        
         if (this.radius) {
             var geom = OpenLayers.Geometry.Polygon.createRegularPolygon(
                 pgeom,
                 this.radius,
-                50
+                50 //opacity
             );
             
-            lookup['line'] = {
+            this.style['point_radius_'+this.id] = {
                 strokeColor: '#f3be4b',
                 strokeOpacity: 0.1,
                 strokeWidth: 1,
@@ -31,13 +33,13 @@ Maap.Point = Maap.Geom.extend({
                 fillOpacity: 0.2
             };
            
-            features.push(new OpenLayers.Feature.Vector(
+            this.features.push(new OpenLayers.Feature.Vector(
                 geom,
-                {style: 'line'}
+                {style: 'point_radius_'+this.id}
             ));
         };
 
-        lookup['marker'] = {
+        this.style['point_'+this.id] = {
             externalGraphic: this.icon.url,
             graphicWidth: this.icon.width,
             graphicHeight: this.icon.height,
@@ -46,15 +48,10 @@ Maap.Point = Maap.Geom.extend({
             graphicYOffset: -(this.icon.height)+2
         };
 
-        features.push(new OpenLayers.Feature.Vector(
+        this.features.push(new OpenLayers.Feature.Vector(
             pgeom,
-            {style: 'marker'}
-        ));            
-        
-
-        styleMap.addUniqueValueRules("default", "style", lookup);
-        this.layer = new OpenLayers.Layer.Vector(this.id,{styleMap:styleMap});
-        this.layer.addFeatures(features);
+            {style: 'point_'+this.id}
+        )); 
     }
 })
 
