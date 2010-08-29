@@ -157,6 +157,7 @@ class MaapModel(models.Model):
         out = dict(filter(lambda (x,y): not x.startswith('_'), self.__dict__.iteritems()))
         out['created'] = self.created.strftime('%D %T')        
         out['changed'] = self.changed.strftime('%D %T')
+        out['absolute_url'] = self.get_absolute_url()
         return out
 
     def save(self, *args, **kwargs):

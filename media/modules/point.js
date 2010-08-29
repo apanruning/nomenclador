@@ -50,7 +50,10 @@ Maap.Point = Maap.Geom.extend({
 
         this.features.push(new OpenLayers.Feature.Vector(
             pgeom,
-            {style: 'point_'+this.id}
+            {
+            style: 'point_'+this.id,
+            maap:this
+            }
         )); 
     }
 })

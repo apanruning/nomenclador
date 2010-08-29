@@ -71,12 +71,6 @@ Maap.Geom = Class.extend({
     init: function(metadata){
         for (m in metadata) 
             this[m] = metadata[m];
-    },
-    show: function() {
-        this.layer.setVisibility(true);
-    },
-    hide: function() {
-        this.layer.setVisibility(false);
     }
 });
 

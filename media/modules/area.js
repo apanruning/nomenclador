@@ -15,7 +15,7 @@ Maap.Area = Maap.Geom.extend({
 
         this.features.push(new OpenLayers.Feature.Vector(
             geom,
-            {style: 'area'}
+            {style: 'area', maap:this}
         ));            
     }
 })
