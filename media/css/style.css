@@ -25,9 +25,13 @@ header {
     background:#EBEBEB;
     border-bottom:2px solid #CCC;
 }
+header .wrapper {
+    background: #FFF;
+    
+}
 #logo {
     margin:0;
-    padding:0.5em 0;
+    padding:0.5em;
 }
 
 #logo a{
@@ -141,8 +145,10 @@ nav {
     vertical-align:middle;
 }
 #content-wrapper {
-    padding:0;
-    margin-top:2em;
+    padding-top:2em;
+    background:#FFF;
+    border:2px solid #CCC;
+    
 }
 #main {
     float:left;
@@ -152,7 +158,6 @@ nav {
 }
 aside{
     float:right;
-    background:#CCF;
     width:22em;
     text-align:center;
 }
@@ -243,12 +248,16 @@ aside{
 
 footer{
     display:block;
-    padding:1em 0;
     clear:both;
     margin:-2px 0;
     z-index:99999;
     background:#FFC018;
-    border:1px solid #FFC018; 
+    border-top:2px solid #CCC; 
+}
+footer .wrapper {
+
+    padding:1em 0;
+    
 }
 #credits {
     float:right;
