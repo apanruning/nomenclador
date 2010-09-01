@@ -47,26 +47,27 @@ Maap.Layer = function (metadata, map) {
     // add default rules with collected feature styles
     this.stylemap.addUniqueValueRules("default", "style", this.style);
 
+    // add event listeners
+    this.layer.events.on({
+        "featureselected": this.onSelect,
+        scope: this.layer
+    });  
 
-    this.layer.events.register("featureselected", this.layer, this.onSelect);
-    
-    var control = new OpenLayers.Control.SelectFeature(this.layer);
-    this.map.addControl(control);
-/* TBD
-    var highlightCtrl = new OpenLayers.Control.SelectFeature(this.layer, 
-        { 
-            hover: true, 
-            highlightOnly: true, 
-            renderIntent: "temporary",
-            eventListeners: { 
-                featurehighlighted: this.onHover, 
-                featureunhighlighted: this.onUnhover 
-            } 
+    var selectCtrl = new OpenLayers.Control.SelectFeature(this.layer);
+    var highlightCtrl = new OpenLayers.Control.SelectFeature(this.layer, {
+        hover: true,
+        highlightOnly: true,
+        renderIntent: "temporary",
+        eventListeners: {
+            featurehighlighted: this.onHover,
+            featureunhighlighted: this.onUnhover
         }
-    );
+    });
+
     this.map.addControl(highlightCtrl);
-*/    
-    control.activate();
+    this.map.addControl(selectCtrl);
+    highlightCtrl.activate();
+    selectCtrl.activate();
 
  
     this.elements = elms;   
@@ -94,24 +95,40 @@ Maap.Layer.prototype = {
             strokeWidth: 8
         },      
     },
-/*    
+    onSelect: function(evt) {
+        var maap = evt.feature.attributes.maap;
+        if (maap.type == 'point') {    
+            window.location = maap.absolute_url;
+        }
+    },
     onHover: function(evt) {
-        alert("hover");
+        var maap = evt.feature.attributes.maap;  
+        if (maap.type == 'point') {    
+            var popup = new OpenLayers.Popup.FramedCloud(maap.name, 
+                             evt.feature.geometry.getBounds().getCenterLonLat(),
+                             null,
+                             "<h2>" + maap.name +"</h2>",
+                             null, true);
+            evt.feature.popup = popup;
+            this.map.addPopup(popup);
+        }
     },
     onUnhover: function(evt) {
-        alert("unhover");
-    },
-    TBD
-*/
-    onSelect: function(evt) {
-        var maap = evt.feature.attributes.maap;  
-        window.location = maap.absolute_url
+        var maapelem = evt.feature.attributes.maap;
+        var map = this.map;
+        if (maapelem.type == 'point') {
+            setTimeout(function() {
+                map.removePopup(evt.feature.popup);
+                evt.feature.popup.destroy();
+                evt.feature.popup = null;
+            }
+            , 1000);
+        }
     },
     boxCenter: function() {
         b = this.box_size;
         this.map.zoomToExtent(new OpenLayers.Bounds(b[0],b[1],b[2],b[3]),true);
     },
-    
     getLayers: function() {
         return [this.layer];
     },
