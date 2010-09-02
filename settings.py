@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'banners',
     'maap',
     'osm',
+    'south',
 )
 
 DBLOG_CATCH_404_ERRORS = True
