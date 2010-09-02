@@ -29,7 +29,9 @@ def merkartor_to_osm(geom):
     return obj.geos
 
 def get_closest(geom, exclude_id = None):
-    closest_points = MaapPoint.objects.filter(geom__dwithin = (geom, D(m = 300)))
+    closest_points = MaapPoint.objects.filter(
+                        geom__dwithin = (geom, D(m = 500)),
+                        closest=True)
     if exclude_id:
         closest_points.exclude(id = exclude_id)
     return closest_points
@@ -235,6 +237,8 @@ class MaapPoint(MaapModel):
    
     geom = models.PointField(srid=DEFAULT_SRID)
     icon = models.ForeignKey('Icon')
+    closest = models.BooleanField(default=False)
+    popup_text = models.TextField(blank=True)    
     objects = MaapManager()
 
     def to_geo_element(self):

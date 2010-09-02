@@ -102,7 +102,7 @@ Maap.Layer.prototype = {
             var popup = new OpenLayers.Popup.FramedCloud(maap.name, 
                              evt.feature.geometry.getBounds().getCenterLonLat(),
                              null,
-                             "<h2>" + maap.name +"</h2>",
+                             "<h2>" + maap.name +"</h2>"+maap.popup_text,
                              null, true);
             evt.feature.popup = popup;
             this.map.addPopup(popup);
