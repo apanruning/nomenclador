@@ -2,11 +2,6 @@
     This module handles layers, and other elements, evaluating from json standard model representation    
 ***/
 
-/* Style Map */
-
-        this.styleMap = new OpenLayers.StyleMap();
-
-
 /*
 ------------- 
  OBJECT Layer
@@ -42,7 +37,7 @@ Maap.Layer = function (metadata, map) {
         this.layer.addFeatures(elm.features);
 
         elms.push(elm);
-    };
+    }
     
     // add default rules with collected feature styles
     this.stylemap.addUniqueValueRules("default", "style", this.style);
@@ -51,7 +46,7 @@ Maap.Layer = function (metadata, map) {
     this.layer.events.on({
         "featureselected": this.onSelect,
         scope: this.layer
-    });  
+    });
 
     var selectCtrl = new OpenLayers.Control.SelectFeature(this.layer);
     var highlightCtrl = new OpenLayers.Control.SelectFeature(this.layer, {
@@ -93,7 +88,7 @@ Maap.Layer.prototype = {
             strokeColor: '#612000',
             strokeOpacity: 0.2,
             strokeWidth: 8
-        },      
+        }      
     },
     onSelect: function(evt) {
         var maap = evt.feature.attributes.maap;

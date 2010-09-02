@@ -56,7 +56,7 @@ Maap.Point = Maap.Geom.extend({
             }
         )); 
     }
-})
+});
 
 
 
