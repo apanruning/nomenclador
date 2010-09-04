@@ -18,11 +18,11 @@ Maap.MultiLine = Maap.Geom.extend({
         this.features.push(new OpenLayers.Feature.Vector(geom.clone(),
             {style: 'line-border',
             maap:this}
-        ))
+        ));
         this.features.push(new OpenLayers.Feature.Vector(geom.clone(),
             {style: 'line',
             maap:this}
-        ))
+        ));
     }
 });
 

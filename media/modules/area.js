@@ -18,6 +18,6 @@ Maap.Area = Maap.Geom.extend({
             {style: 'area', maap:this}
         ));            
     }
-})
+});
 
 
