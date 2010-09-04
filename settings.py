@@ -26,7 +26,7 @@ DATABASES = {
         'PORT':''
     },
     'logs_nomenclador': {
-        'ENGINE': 'django.db.backends.sqlite3
+        'ENGINE': 'django.db.backends.sqlite3'
         'NAME': 'logs_nomenclador',
         'USER': '',
         'PASSWORD': '',
