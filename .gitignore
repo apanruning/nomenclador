@@ -1,6 +1,7 @@
 *~
 *.pyc
-nomenclador/media/banners/*
 *.tar.bz2
 *.conf
 *.wsgi
+local_settings.py
+media/banners/*
