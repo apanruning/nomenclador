@@ -18,20 +18,20 @@ EMAIL_PORT = 1025
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.contrib.gis.db.backends.sqlite3',
         'NAME': 'nomenclador',
-        'USER': 'nomenclador',
-        'PASSWORD': 'nomenclador',
-        'HOST':'localhost',
-        'PORT':'5432'
+        'USER': '',
+        'PASSWORD': '',
+        'HOST':'',
+        'PORT':''
     },
     'logs_nomenclador': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'logs_nomenclador',
-        'USER': 'nomenclador',
-        'PASSWORD': 'nomenclador',
-        'HOST':'localhost',
-        'PORT':'5432'
+        'USER': '',
+        'PASSWORD': '',
+        'HOST':'',
+        'PORT':''
     }
 }
 
@@ -141,4 +141,4 @@ DBLOG_DATABASE_USING = 'default'
 #SMTP Test Server
 #python -m smtpd -n -c DebuggingServer localhost:1025
 
-
+from local_settings import *
