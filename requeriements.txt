@@ -19,6 +19,6 @@ svn+http://django-tagging.googlecode.com/svn/trunk/#egg=tagging
 svn+http://django-mptt.googlecode.com/svn/trunk/#egg=mptt
 svn+http://django-voting.googlecode.com/svn/trunk/#egg=voting
 git+git://github.com/etnalubma/django-osm.git#egg=osm
-git+git@github.com:tutuca/django-db-log.git#egg=djangodblog
+git+git://github.com:tutuca/django-db-log.git#egg=djangodblog
 
 
