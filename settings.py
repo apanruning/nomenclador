@@ -82,7 +82,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',    
-    'djangodblog.middleware.DBLogMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
