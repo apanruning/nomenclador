@@ -98,12 +98,10 @@ def release():
     local("git archive HEAD| gzip > %s" %tar)
     put(tar, tar)
     run("tar xfz %s -C %s" % (tar, env.deploy_dir))
-    run("rm %s" %tar)
-    local("rm %s" %tar)
+    run("rm *.tar.gz")
+    local("rm *.tar.gz")
 
 def apache_restart():
     """Restarts the program in the servers."""
     require("hosts", provided_by=[development, staging, production])
     run(env.apache_command)
-
-# vim: set fenc=utf-8 tw=79 sw=4 ts=4 sts=4 ai et:
