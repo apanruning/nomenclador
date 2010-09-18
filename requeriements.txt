@@ -12,13 +12,13 @@ django-microblogging
 django-email-confirmation
 django-pagination
 
-hg+http://bitbucket.org/ubernostrum/django-registration#registration
-svn+http://code.djangoproject.com/svn/django/trunk/#egg=django
+
+git+git://github.com/django/django.git
+git+git://github.com/etnalubma/django-osm.git#egg=osm
+git+git://github.com/tutuca/django-db-log.git#egg=djangodblog
+svn+http://django-mptt.googlecode.com/svn/trunk/#egg=mptt
 svn+http://django-notification.googlecode.com/svn/trunk/#egg=notification
 svn+http://django-tagging.googlecode.com/svn/trunk/#egg=tagging
-svn+http://django-mptt.googlecode.com/svn/trunk/#egg=mptt
 svn+http://django-voting.googlecode.com/svn/trunk/#egg=voting
-git+git://github.com/etnalubma/django-osm.git#egg=osm
-git+git://github.com:tutuca/django-db-log.git#egg=djangodblog
-
+hg+http://bitbucket.org/ubernostrum/django-registration#registration
 
