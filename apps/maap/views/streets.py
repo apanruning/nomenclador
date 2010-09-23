@@ -13,7 +13,6 @@ from osm.utils.words import clean_search_street
 from django.core import urlresolvers
 from django.utils.http import urlquote, urlencode
 from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
-from djangodblog.models import Error
 import logging
 
 def search_streets(request):
@@ -57,9 +56,6 @@ def search_streets(request):
                              urlencode(params))
                              
             return  HttpResponseRedirect(url)
-        if street_list:
-            Error.objects.create_from_text('Se econtraron calles, buscando por %s %s %s' %(cs_street, cs_inters, streetnumber),level=logging.INFO, url=request.build_absolute_uri())
-        
         return object_list(
             request,
             street_list,
