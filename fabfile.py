@@ -54,6 +54,7 @@ def write_template(file_name, template_name):
 
 def release(rev='HEAD'):
     """Creates a tarball, uploads it and decompresses it in the rigth path."""
+
     require("hosts", provided_by=[development, staging, production])    
     tar = "%s-%s.tar.gz" % (env.project_name ,datetime.datetime.now().strftime("%Y%m%d%H%M%S"),)
     local("git archive %s| gzip > %s" %(rev,tar))

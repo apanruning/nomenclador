@@ -20,8 +20,8 @@
 		<li class="item">
         {% include 'place.html' %}
         </li>
-	    {% if forloop.counter == 4 %}<div >{% pop_slot 'h-1' %}</div>{% endif %}
-	    {% if forloop.counter == 8 %}<div >{% pop_slot 'h-2' %}</div>{% endif %}
+	    {% if forloop.counter == 4 %}<div >{% pop_slot '1r' %}</div>{% endif %}
+	    {% if forloop.counter == 8 %}<div >{% pop_slot '2r' %}</div>{% endif %}
         
         {% empty %}
         <li>No se encontraron objetos</li>
