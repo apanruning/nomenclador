@@ -5,11 +5,13 @@ from maap.models import MaapZone, MaapArea, MaapPoint, MaapMultiLine, MaapCatego
 from osm.parser import OSMXMLFile
 from settings import DEFAULT_SRID
 from djangoosm import OSM_SRID
+from django.db import connection, transaction
 
 class Command(BaseCommand):
     args = '<osm_file>'
     help = 'Take an .osm file and imports to maap'
-
+    
+    @transaction.commit_on_success
     def handle(self, osmfile=None, **options):
         print "Opening %s ..." % osmfile
         osmobject = OSMXMLFile(osmfile)
@@ -67,11 +69,9 @@ class Command(BaseCommand):
                     maap_multilines[way.tags['name']] = (maap_multiline, category)
                     
             elif way.tags.get('type', None) in ['area','zone']:
-                try:
-                    geom = Polygon(pgeom)
-                except:
-                    print way.tags['name']
-                    raise
+                geom = Polygon(pgeom)
+                if zones_count == 10:
+                    raise 
                 if OSM_SRID != 'EPSG:%d' % DEFAULT_SRID:
                     geom = osm_change_srid(geom, 'EPSG:%d' % DEFAULT_SRID)
 
