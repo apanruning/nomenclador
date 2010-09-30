@@ -22,13 +22,6 @@ from maap.layers import Point, Area, MultiLine, Layer
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from cyj_logs.models import SearchLog
 
-#def merkartor_to_osm(geom):
-#    """ Converts standard merkartor to osm projection """
-#    obj = OGRGeometry(geom.wkt)
-#    obj.srs = 'EPSG:4326'
-#    obj.transform_to(SpatialReference('EPSG:900913'))
-#    return obj.geos
-
 def get_closest(geom, exclude_id = None):
     closest_points = MaapPoint.objects.filter(
                         geom__dwithin = (geom, D(m = 500)),
@@ -71,8 +64,6 @@ class Nodes(OSMNodes):
         return out
 
     def to_geo_element(self):
-        #geom = merkartor_to_osm(self.geom)
-
         out = Point(
             id = self.id,
             geom = self.geom
@@ -93,8 +84,6 @@ class Streets(OSMStreets):
         location = get_location_by_door(self.norm, door)
         success = False
         if location:
-            #geom = merkartor_to_osm(location[0])
-
             point = Point(
                 id = 'location_%s_%s' % (self.norm, door),
                 name = "%s %s" % (self.name, door),
@@ -122,9 +111,7 @@ class Streets(OSMStreets):
             ln.append(LineString(nodes))
         
         ml = MultiLineString(ln)
-        
-        #geom = merkartor_to_osm(ml)
-        
+       
         multiline = MultiLine(
             id = 'street_%s' % self.norm,
             name = self.name,
