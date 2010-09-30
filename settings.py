@@ -123,7 +123,6 @@ INSTALLED_APPS = (
     'maap',
     'djangoosm',
     'cyj_logs',
->>>>>>> 4ca138e6c0d0c0b80883ab5c8e1cf7f5966143e2
 )
 
 #SMTP Test Server
