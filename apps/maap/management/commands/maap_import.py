@@ -27,12 +27,16 @@ class Command(BaseCommand):
                 geom = osm_change_srid(geom, 'EPSG:%d' % DEFAULT_SRID)
                 
             category = get_or_create_category(point.tags['category'])
-            maap_point = MaapPoint(
+            maap_point, created = MaapPoint.objects.get_or_create(
                 name = point.tags['name'],
-                geom = geom,
-                creator_id = 1,
-                editor_id = 1,
+                defaults = dict(
+                    geom = geom,
+                    creator_id = 1,
+                    editor_id = 1,
+                )
             )
+            if not(created):
+                maap_point.geom = geom
             maap_point.save()
             maap_point.category.add(category)
             points_count += 1
@@ -50,12 +54,17 @@ class Command(BaseCommand):
                     maap_multilines[way.tags['name']][0].geom.append(geom)
                 else:
                     category = get_or_create_category(way.tags['category'])           
-                    maap_multilines[way.tags['name']] = (MaapMultiLine(
-                        name=way.tags['name'],
-                        geom=MultiLineString([geom]),
-                        creator_id = 1,
-                        editor_id = 1,                        
-                    ), category)
+                    maap_multiline, created = MaapMultiLine.objects.get_or_create(
+                        name = way.tags['name'],
+                        defaults = dict(
+                            geom = MultiLineString([geom]),
+                            creator_id = 1,
+                            editor_id = 1,
+                        )                        
+                    )
+                    if not(created):
+                        maap_multiline.geom = MultiLineString([geom])
+                    maap_multilines[way.tags['name']] = (maap_multiline, category)
                     
             elif way.tags.get('type', None) in ['area','zone']:
                 try:
@@ -69,22 +78,30 @@ class Command(BaseCommand):
                 category = get_or_create_category(way.tags['category'])           
                 
                 if way.tags['type'] == 'area':
-                    maap_area = MaapArea(
-                        name=way.tags['name'],
-                        geom=geom,
-                        creator_id = 1,
-                        editor_id = 1,                        
+                    maap_area, created = MaapArea.objects.get_or_create(
+                        name = way.tags['name'],
+                        defaults = dict(
+                            geom = geom,
+                            creator_id = 1,
+                            editor_id = 1,
+                        )                        
                     )
+                    if not(created):
+                        maap_area.geom = geom
                     maap_area.save()
                     maap_area.category.add(category)
                     areas_count += 1
                 else:
-                    maap_zone = MaapZone(
-                        name=way.tags['name'],                   
-                        geom=geom,
-                        creator_id = 1,
-                        editor_id = 1,                        
+                    maap_zone, created = MaapZone.objects.get_or_create(
+                        name = way.tags['name'],                   
+                        defaults = dict(
+                            geom = geom,
+                            creator_id = 1,
+                            editor_id = 1,
+                        )                        
                     )
+                    if not(created):
+                        maap_zone.geom = geom
                     maap_zone.save()
                     maap_zone.category.add(category)
                     zones_count += 1
