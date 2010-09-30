@@ -20,6 +20,7 @@ import mptt
 
 from maap.layers import Point, Area, MultiLine, Layer
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
+from cyj_logs.models import SearchLog
 
 #def merkartor_to_osm(geom):
 #    """ Converts standard merkartor to osm projection """
@@ -90,6 +91,7 @@ class Streets(OSMStreets):
         
     def get_location_or_street(self, door=None):
         location = get_location_by_door(self.norm, door)
+        success = False
         if location:
             #geom = merkartor_to_osm(location[0])
 
@@ -104,11 +106,11 @@ class Streets(OSMStreets):
                 point.radius = location[1]
             
             layer = Layer(elements = [point])     
-        
+            success = True
         else:
             layer = self.to_layer()
 
-        return layer
+        return (layer, success)
         
     def to_layer(self):
         ways = self.ways_set.all()

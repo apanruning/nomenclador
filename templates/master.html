@@ -1,29 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
-
-{% load banner_tags maap_tags inbox%}
+{% load banner_tags maap_tags inbox compressed %}
 <head>
-
     <meta charset="utf-8" />
-
     <title>{% block title %}{% endblock %} Nomenclador Cartográfico</title>
     <meta name="description" content="{% block description %}Nomenclador Cartográfico, Buqueda de calles y barrios de la ciudad de córdoba y al rededores. Georefenciamiento OpenStreetMaps Mapas{% endblock %}" />
-
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css" media="screen" />    
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/forms.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/wmd.css" type="text/css" media="screen" />    
-    {% block css %}
-    {% endblock %}
+    {% compressed_css 'stylesheets' %}
 	<!--[if IE]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-     <script type="text/javascript" src="{{ MEDIA_URL }}js/OpenLayers.js"></script>
-     <script type="text/javascript" src="{{ MEDIA_URL }}js/OpenStreetMap.js"></script>
-     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.min.js"></script>    
-     <script type="text/javascript" src="{{ MEDIA_URL }}js/dimensions.js"></script>
-     <script type="text/javascript" src="{{ MEDIA_URL }}js/forms.js"></script>       
-     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.ui.js"></script>  
+    {% compressed_js 'scripts' %}
+    <script src="http://widgets.twimg.com/j/2/widget.js"></script>
 
     {% block javascript %}
     {% if form.media %}
@@ -153,6 +140,7 @@
         {% block page %}
         <aside>
         {% pop_slot 'b-1' %}
+        {% pop_slot 'twitter' %}
         {% pop_slot 'b-2' %}
         {% pop_slot 'b-3' %}
         {% pop_slot 'b-4' %}

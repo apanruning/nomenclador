@@ -1,25 +1,37 @@
 [
   {
-    "pk": 1, 
+    "pk": 10, 
     "model": "banners.banner", 
     "fields": {
-      "slot": "avellaneda colon general indepen julio martin paz san velez", 
-      "code": "", 
+      "slot": "b-2", 
+      "code": "<script type='text/javascript'><!--//<![CDATA[\r\n  var m3_u = (location.protocol=='https:'?'https://openx.comercioyjusticia.com.ar/www/delivery/ajs.php':'http://openx.comercioyjusticia.com.ar/www/delivery/ajs.php');\r\n  var m3_r = Math.floor(Math.random()*99999999999);\r\n  if (!document.MAX_used) document.MAX_used = ',';\r\n  document.write (\"<scr\"+\"ipt type='text/javascript' src='\"+m3_u);\r\n  document.write (\"?zoneid=34\");\r\n  document.write ('&amp;cb=' + m3_r);\r\n  if (document.MAX_used != ',') document.write (\"&amp;exclude=\" + document.MAX_used);\r\n  document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));\r\n  document.write (\"&amp;loc=\" + escape(window.location));\r\n  if (document.referrer) document.write (\"&amp;referer=\" + escape(document.referrer));\r\n  if (document.context) document.write (\"&context=\" + escape(document.context));\r\n  if (document.mmm_fo) document.write (\"&amp;mmm_fo=1\");\r\n  document.write (\"'><\\/scr\"+\"ipt>\");\r\n//]]>--></script><noscript><a href='http://openx.comercioyjusticia.com.ar/www/delivery/ck.php?n=aa6aa1ff&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://openx.comercioyjusticia.com.ar/www/delivery/avw.php?zoneid=34&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=aa6aa1ff' border='0' alt='' /></a></noscript>", 
       "views": 0, 
-      "url": "http://www.google.com", 
-      "image": "banners/banner_cuadrado_chico_1.jpg", 
+      "url": "", 
+      "image": "", 
       "clicks": 0
     }
   }, 
   {
-    "pk": 2, 
+    "pk": 11, 
+    "model": "banners.banner", 
+    "fields": {
+      "slot": "d-1", 
+      "code": "<script type='text/javascript'><!--//<![CDATA[\r\n  var m3_u = (location.protocol=='https:'?'https://openx.comercioyjusticia.com.ar/www/delivery/ajs.php':'http://openx.comercioyjusticia.com.ar/www/delivery/ajs.php');\r\n  var m3_r = Math.floor(Math.random()*99999999999);\r\n  if (!document.MAX_used) document.MAX_used = ',';\r\n  document.write (\"<scr\"+\"ipt type='text/javascript' src='\"+m3_u);\r\n  document.write (\"?zoneid=8\");\r\n  document.write ('&amp;cb=' + m3_r);\r\n  if (document.MAX_used != ',') document.write (\"&amp;exclude=\" + document.MAX_used);\r\n  document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));\r\n  document.write (\"&amp;loc=\" + escape(window.location));\r\n  if (document.referrer) document.write (\"&amp;referer=\" + escape(document.referrer));\r\n  if (document.context) document.write (\"&context=\" + escape(document.context));\r\n  if (document.mmm_fo) document.write (\"&amp;mmm_fo=1\");\r\n  document.write (\"'><\\/scr\"+\"ipt>\");\r\n//]]>--></script><noscript><a href='http://openx.comercioyjusticia.com.ar/www/delivery/ck.php?n=a847fe1d&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://openx.comercioyjusticia.com.ar/www/delivery/avw.php?zoneid=8&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a847fe1d' border='0' alt='' /></a></noscript>", 
+      "views": 0, 
+      "url": "", 
+      "image": "", 
+      "clicks": 0
+    }
+  }, 
+  {
+    "pk": 9, 
     "model": "banners.banner", 
     "fields": {
       "slot": "b-1", 
-      "code": "", 
+      "code": "\r\n<script type='text/javascript'><!--//<![CDATA[\r\n  var m3_u = (location.protocol=='https:'?'https://openx.comercioyjusticia.com.ar/www/delivery/ajs.php':'http://openx.comercioyjusticia.com.ar/www/delivery/ajs.php');\r\n  var m3_r = Math.floor(Math.random()*99999999999);\r\n  if (!document.MAX_used) document.MAX_used = ',';\r\n  document.write (\"<scr\"+\"ipt type='text/javascript' src='\"+m3_u);\r\n  document.write (\"?zoneid=29\");\r\n  document.write ('&amp;cb=' + m3_r);\r\n  if (document.MAX_used != ',') document.write (\"&amp;exclude=\" + document.MAX_used);\r\n  document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));\r\n  document.write (\"&amp;loc=\" + escape(window.location));\r\n  if (document.referrer) document.write (\"&amp;referer=\" + escape(document.referrer));\r\n  if (document.context) document.write (\"&context=\" + escape(document.context));\r\n  if (document.mmm_fo) document.write (\"&amp;mmm_fo=1\");\r\n  document.write (\"'><\\/scr\"+\"ipt>\");\r\n//]]>--></script><noscript><a href='http://openx.comercioyjusticia.com.ar/www/delivery/ck.php?n=a60bede4&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://openx.comercioyjusticia.com.ar/www/delivery/avw.php?zoneid=29&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a60bede4' border='0' alt='' /></a></noscript>", 
       "views": 0, 
-      "url": "http://www.google.com", 
-      "image": "banners/banner_detalle.jpg", 
+      "url": "", 
+      "image": "", 
       "clicks": 0
     }
   }, 
@@ -27,8 +39,8 @@
     "pk": 3, 
     "model": "banners.banner", 
     "fields": {
-      "slot": "a-1", 
-      "code": "<script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=2></script>", 
+      "slot": "b-5", 
+      "code": "<script type='text/javascript'><!--//<![CDATA[\r\n  var m3_u = (location.protocol=='https:'?'https://openx.comercioyjusticia.com.ar/www/delivery/ajs.php':'http://openx.comercioyjusticia.com.ar/www/delivery/ajs.php');\r\n  var m3_r = Math.floor(Math.random()*99999999999);\r\n  if (!document.MAX_used) document.MAX_used = ',';\r\n  document.write (\"<scr\"+\"ipt type='text/javascript' src='\"+m3_u);\r\n  document.write (\"?zoneid=38\");\r\n  document.write ('&amp;cb=' + m3_r);\r\n  if (document.MAX_used != ',') document.write (\"&amp;exclude=\" + document.MAX_used);\r\n  document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));\r\n  document.write (\"&amp;loc=\" + escape(window.location));\r\n  if (document.referrer) document.write (\"&amp;referer=\" + escape(document.referrer));\r\n  if (document.context) document.write (\"&context=\" + escape(document.context));\r\n  if (document.mmm_fo) document.write (\"&amp;mmm_fo=1\");\r\n  document.write (\"'><\\/scr\"+\"ipt>\");\r\n//]]>--></script><noscript><a href='http://openx.comercioyjusticia.com.ar/www/delivery/ck.php?n=ad2730c5&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://openx.comercioyjusticia.com.ar/www/delivery/avw.php?zoneid=38&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=ad2730c5' border='0' alt='' /></a></noscript>", 
       "views": 0, 
       "url": "", 
       "image": "", 
@@ -39,8 +51,56 @@
     "pk": 4, 
     "model": "banners.banner", 
     "fields": {
-      "slot": "a-1", 
+      "slot": "b-1", 
       "code": "<script language=JavaScript src=http://www.comercioyjusticia.com.ar/absolutebmxe/abm.asp?z=8></script>", 
+      "views": 0, 
+      "url": "", 
+      "image": "", 
+      "clicks": 0
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "banners.banner", 
+    "fields": {
+      "slot": "1r", 
+      "code": "<script type='text/javascript'><!--//<![CDATA[\r\n  var m3_u = (location.protocol=='https:'?'https://openx.comercioyjusticia.com.ar/www/delivery/ajs.php':'http://openx.comercioyjusticia.com.ar/www/delivery/ajs.php');\r\n  var m3_r = Math.floor(Math.random()*99999999999);\r\n  if (!document.MAX_used) document.MAX_used = ',';\r\n  document.write (\"<scr\"+\"ipt type='text/javascript' src='\"+m3_u);\r\n  document.write (\"?zoneid=26\");\r\n  document.write ('&amp;cb=' + m3_r);\r\n  if (document.MAX_used != ',') document.write (\"&amp;exclude=\" + document.MAX_used);\r\n  document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));\r\n  document.write (\"&amp;loc=\" + escape(window.location));\r\n  if (document.referrer) document.write (\"&amp;referer=\" + escape(document.referrer));\r\n  if (document.context) document.write (\"&context=\" + escape(document.context));\r\n  if (document.mmm_fo) document.write (\"&amp;mmm_fo=1\");\r\n  document.write (\"'><\\/scr\"+\"ipt>\");\r\n//]]>--></script><noscript><a href='http://openx.comercioyjusticia.com.ar/www/delivery/ck.php?n=af1520a8&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://openx.comercioyjusticia.com.ar/www/delivery/avw.php?zoneid=26&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=af1520a8' border='0' alt='' /></a></noscript>", 
+      "views": 0, 
+      "url": "", 
+      "image": "", 
+      "clicks": 0
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "banners.banner", 
+    "fields": {
+      "slot": "1r", 
+      "code": "<script type='text/javascript'><!--//<![CDATA[\r\n  var m3_u = (location.protocol=='https:'?'https://openx.comercioyjusticia.com.ar/www/delivery/ajs.php':'http://openx.comercioyjusticia.com.ar/www/delivery/ajs.php');\r\n  var m3_r = Math.floor(Math.random()*99999999999);\r\n  if (!document.MAX_used) document.MAX_used = ',';\r\n  document.write (\"<scr\"+\"ipt type='text/javascript' src='\"+m3_u);\r\n  document.write (\"?zoneid=12\");\r\n  document.write ('&amp;cb=' + m3_r);\r\n  if (document.MAX_used != ',') document.write (\"&amp;exclude=\" + document.MAX_used);\r\n  document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));\r\n  document.write (\"&amp;loc=\" + escape(window.location));\r\n  if (document.referrer) document.write (\"&amp;referer=\" + escape(document.referrer));\r\n  if (document.context) document.write (\"&context=\" + escape(document.context));\r\n  if (document.mmm_fo) document.write (\"&amp;mmm_fo=1\");\r\n  document.write (\"'><\\/scr\"+\"ipt>\");\r\n//]]>--></script><noscript><a href='http://openx.comercioyjusticia.com.ar/www/delivery/ck.php?n=ad453597&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://openx.comercioyjusticia.com.ar/www/delivery/avw.php?zoneid=12&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=ad453597' border='0' alt='' /></a></noscript>", 
+      "views": 0, 
+      "url": "", 
+      "image": "", 
+      "clicks": 0
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "banners.banner", 
+    "fields": {
+      "slot": "d-2", 
+      "code": "<script type='text/javascript'><!--//<![CDATA[\r\n  var m3_u = (location.protocol=='https:'?'https://openx.comercioyjusticia.com.ar/www/delivery/ajs.php':'http://openx.comercioyjusticia.com.ar/www/delivery/ajs.php');\r\n  var m3_r = Math.floor(Math.random()*99999999999);\r\n  if (!document.MAX_used) document.MAX_used = ',';\r\n  document.write (\"<scr\"+\"ipt type='text/javascript' src='\"+m3_u);\r\n  document.write (\"?zoneid=24\");\r\n  document.write ('&amp;cb=' + m3_r);\r\n  if (document.MAX_used != ',') document.write (\"&amp;exclude=\" + document.MAX_used);\r\n  document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));\r\n  document.write (\"&amp;loc=\" + escape(window.location));\r\n  if (document.referrer) document.write (\"&amp;referer=\" + escape(document.referrer));\r\n  if (document.context) document.write (\"&context=\" + escape(document.context));\r\n  if (document.mmm_fo) document.write (\"&amp;mmm_fo=1\");\r\n  document.write (\"'><\\/scr\"+\"ipt>\");\r\n//]]>--></script><noscript><a href='http://openx.comercioyjusticia.com.ar/www/delivery/ck.php?n=a32776a1&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://openx.comercioyjusticia.com.ar/www/delivery/avw.php?zoneid=24&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a32776a1' border='0' alt='' /></a></noscript>", 
+      "views": 0, 
+      "url": "", 
+      "image": "", 
+      "clicks": 0
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "banners.banner", 
+    "fields": {
+      "slot": "twitter", 
+      "code": "    <script>\r\n        new TWTR.Widget({\r\n            version: 2,\r\n            type: 'profile',\r\n            rpp: 3,\r\n            interval: 6000,\r\n            width: 'auto',\r\n            height: 400,\r\n            theme: {\r\n                shell: {\r\n                    background: '#ffffff',\r\n                    color: '#333333'\r\n                },\r\n                tweets: {\r\n                    background: '#FFCC00',\r\n                    color: '#333333',\r\n                    links: '#000000'\r\n                }\r\n            },\r\n            features: {\r\n                scrollbar: false,\r\n                loop: false,\r\n                live: false,\r\n                hashtags: true,\r\n                timestamp: true,\r\n                avatars: false,\r\n                behavior: 'all'\r\n            }\r\n        }).render().setUser('cyjpuntoinfo').start();            \r\n    </script>\r\n", 
       "views": 0, 
       "url": "", 
       "image": "", 

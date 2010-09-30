@@ -1,9 +1,4 @@
 import os
-#from django.contrib.gis.utils import add_postgis_srs
-
-# Add Google Maps srs. Just in case. If already exists, nothing happens.
-#add_postgis_srs(900913)
-
 # Django settings for nomenclador project.
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -111,6 +106,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'django.contrib.markup',
     'django.contrib.comments',
+    'compress',
     'announcements',
     'pagination',    
     'voting',
@@ -124,6 +120,61 @@ INSTALLED_APPS = (
     'djangoosm',
     'cyj_logs',
 )
+
+COMPRESS = not DEBUG
+
+COMPRESS_CSS = {
+    'stylesheets': {
+        'source_filenames': (
+            'css/base.css',
+            'css/style.css', 
+            'css/forms.css', 
+            'css/wmd.css',
+            'css/autocomplete.css',
+            'css/street_doors.css'
+        ),
+        'output_filename': 'css/stylesheet.css',
+            'media': 'all',
+    },
+}
+    
+
+COMPRESS_JS = {
+    'scripts': {
+        'source_filenames': (
+            'js/jquery.min.js', 
+            'js/jquery.ui.js', 
+            'js/OpenLayers.js', 
+            'js/OpenStreetMap.js', 
+            'js/dimensions.js', 
+            'js/forms.js', 
+            'js/jquery.ajaxQueue.js', 
+            'js/jquery.autocomplete.js', 
+            'js/jquery.textarearesizer.js', 
+            'js/autocomplete.js', 
+            'js/jstree_admin.js', 
+            'js/wmd.js',
+            'js/showdown.js',
+            'js/lib/jquery.tree.min.js',
+            'js/lib/plugins/jquery.tree.contextmenu.js',
+        ),
+        'output_filename': 'js/scripts.js',
+    },
+    'modules': {
+        'source_filenames': (
+            'modules/base.js',
+            'modules/state.js',
+            'modules/point.js',
+            'modules/multiline.js',
+            'modules/area.js',
+            'modules/layer.js',
+            'modules/init.js',
+
+        ),
+        'output_filename': 'js/modules.js',
+    }
+}
+
 
 #SMTP Test Server
 #python -m smtpd -n -c DebuggingServer localhost:1025

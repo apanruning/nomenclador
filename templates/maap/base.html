@@ -1,14 +1,8 @@
 {% extends 'master.html' %}
+{% load compressed %}
 
 {% block javascript %}
-     <script type="text/javascript" src="{{ MEDIA_URL }}modules/base.js"></script>
-     <script type="text/javascript" src="{{ MEDIA_URL }}modules/state.js"></script>
-     <script type="text/javascript" src="{{ MEDIA_URL }}modules/point.js"></script>
-     <script type="text/javascript" src="{{ MEDIA_URL }}modules/multiline.js"></script>
-     <script type="text/javascript" src="{{ MEDIA_URL }}modules/area.js"></script>
-     <script type="text/javascript" src="{{ MEDIA_URL }}modules/layer.js"></script>
-     <script type="text/javascript" src="{{ MEDIA_URL }}modules/init.js"></script>
-
+{% compressed_js 'modules' %}
 {% endblock %}
 
 {% block js_onload %}

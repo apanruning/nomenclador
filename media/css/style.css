@@ -165,6 +165,7 @@ aside{
     margin:0;
     position:relative;
     padding:1em;
+    background: #FFF;
 }
 #content .votes {
     font-size:150%;
@@ -182,12 +183,10 @@ aside{
     float:right;
     width:21%;
     text-align:center;
-    background:#EEE;
 }
 
 #banner-slot-b {
     text-align:center;
-    background:#EEE;
 }   
 #banner-slot-a a img, #banner-slot-b a img{
     border:none;
@@ -437,9 +436,9 @@ aside{
     margin-top:1em;
 }
 /* gravatar */
-h1 .gravatar {
-    position:absolute;
-    right:-85px;
+.gravatar {
+    float:left;
+    margin-right:1em;
 }
 
 /* Votes */
