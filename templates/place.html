@@ -1,5 +1,5 @@
 {% load tagging_tags comments voting_tags %}
-<h2>
+<h3>
     {% score_for_object object as score %}
     <a href="{{ object.get_absolute_url }}">{{object.name}}</a><details class="discreet">
 {% if object.creator%}
@@ -7,4 +7,4 @@
 {% endif %}
 {{object.changed|default:object.created|date:"j-m-Y"}}
 </details>
-</h2>    
+</h3>    

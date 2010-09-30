@@ -5,9 +5,9 @@ from django.db import models as dbmodels
 from django.utils import simplejson
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from osm.models import Nodes as OSMNodes, Streets as OSMStreets, \
+from djangoosm.models import Nodes as OSMNodes, Streets as OSMStreets, \
                        StreetIntersection as OSMStreetIntersection 
-from osm.utils.search import get_location_by_door
+from djangoosm.utils.search import get_location_by_door
 from settings import DEFAULT_SRID
 from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
 from django.template.defaultfilters import slugify
@@ -20,16 +20,19 @@ import mptt
 
 from maap.layers import Point, Area, MultiLine, Layer
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
+from cyj_logs.models import SearchLog
 
-def merkartor_to_osm(geom):
-    """ Converts standard merkartor to osm projection """
-    obj = OGRGeometry(geom.wkt)
-    obj.srs = 'EPSG:4326'
-    obj.transform_to(SpatialReference('EPSG:900913'))
-    return obj.geos
+#def merkartor_to_osm(geom):
+#    """ Converts standard merkartor to osm projection """
+#    obj = OGRGeometry(geom.wkt)
+#    obj.srs = 'EPSG:4326'
+#    obj.transform_to(SpatialReference('EPSG:900913'))
+#    return obj.geos
 
 def get_closest(geom, exclude_id = None):
-    closest_points = MaapPoint.objects.filter(geom__dwithin = (geom, D(m = 300)))
+    closest_points = MaapPoint.objects.filter(
+                        geom__dwithin = (geom, D(m = 500)),
+                        closest=True)
     if exclude_id:
         closest_points.exclude(id = exclude_id)
     return closest_points
@@ -68,11 +71,11 @@ class Nodes(OSMNodes):
         return out
 
     def to_geo_element(self):
-        geom = merkartor_to_osm(self.geom)
+        #geom = merkartor_to_osm(self.geom)
 
         out = Point(
             id = self.id,
-            geom = geom
+            geom = self.geom
         )
         return out
 
@@ -88,13 +91,14 @@ class Streets(OSMStreets):
         
     def get_location_or_street(self, door=None):
         location = get_location_by_door(self.norm, door)
+        success = False
         if location:
-            geom = merkartor_to_osm(location[0])
+            #geom = merkartor_to_osm(location[0])
 
             point = Point(
                 id = 'location_%s_%s' % (self.norm, door),
                 name = "%s %s" % (self.name, door),
-                geom = geom,
+                geom = location[0],
                 center = True,
             )
 
@@ -102,11 +106,11 @@ class Streets(OSMStreets):
                 point.radius = location[1]
             
             layer = Layer(elements = [point])     
-        
+            success = True
         else:
             layer = self.to_layer()
 
-        return layer
+        return (layer, success)
         
     def to_layer(self):
         ways = self.ways_set.all()
@@ -119,15 +123,15 @@ class Streets(OSMStreets):
         
         ml = MultiLineString(ln)
         
-        geom = merkartor_to_osm(ml)
+        #geom = merkartor_to_osm(ml)
         
         multiline = MultiLine(
             id = 'street_%s' % self.norm,
             name = self.name,
             center = True,
-            geom = geom
+            geom = ml
         )
-        layer = get_closest(geom).layer()
+        layer = get_closest(ml).layer()
         layer.id = self.id
         layer.elements.append(multiline)
         
@@ -157,6 +161,7 @@ class MaapModel(models.Model):
         out = dict(filter(lambda (x,y): not x.startswith('_'), self.__dict__.iteritems()))
         out['created'] = self.created.strftime('%D %T')        
         out['changed'] = self.changed.strftime('%D %T')
+        out['absolute_url'] = self.get_absolute_url()
         return out
 
     def save(self, *args, **kwargs):
@@ -234,6 +239,8 @@ class MaapPoint(MaapModel):
    
     geom = models.PointField(srid=DEFAULT_SRID)
     icon = models.ForeignKey('Icon')
+    closest = models.BooleanField(default=False)
+    popup_text = models.TextField(blank=True)    
     objects = MaapManager()
 
     def to_geo_element(self):
@@ -262,12 +269,12 @@ class MaapArea(MaapModel):
 
 
 class MaapZone(MaapArea):
-    nodes_covered = models.ManyToManyField('osm.Nodes', editable=False)
+    #nodes_covered = models.ManyToManyField('djangoosm.Nodes', editable=False)
     objects = MaapManager()
 
-    def save(self, force_insert=False, force_update=False):
-        super(MaapZone, self).save(force_insert, force_update)
-        self.nodes_covered = Nodes.objects.filter(geom__coveredby= self.geom)
+    #def save(self, force_insert=False, force_update=False):
+    #    super(MaapZone, self).save(force_insert, force_update)
+    #    self.nodes_covered = Nodes.objects.filter(geom__coveredby= self.geom)
 
 
 class MaapMultiLine(MaapModel):

@@ -1,4 +1,8 @@
 import os
+#from django.contrib.gis.utils import add_postgis_srs
+
+## Add Google Maps srs. Just in case. If already exists, nothing happens.
+#add_postgis_srs(900913)
 
 # Django settings for nomenclador project.
 DEBUG = True
@@ -18,20 +22,12 @@ EMAIL_PORT = 1025
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.contrib.gis.db.backends.sqlite3',
         'NAME': 'nomenclador',
-        'USER': 'nomenclador',
-        'PASSWORD': 'nomenclador',
-        'HOST':'localhost',
-        'PORT':'5432'
-    },
-    'logs_nomenclador': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'logs_nomenclador',
-        'USER': 'nomenclador',
-        'PASSWORD': 'nomenclador',
-        'HOST':'localhost',
-        'PORT':'5432'
+        'USER': '',
+        'PASSWORD': '',
+        'HOST':'',
+        'PORT':''
     }
 }
 
@@ -82,7 +78,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',    
-    'djangodblog.middleware.DBLogMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -123,21 +118,26 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'registration',
-    'djangodblog',
     'messages',
     'profiles',
     'banners',
     'maap',
-    'osm',
+    'djangoosm',
+    'cyj_logs',
 )
 
-DBLOG_CATCH_404_ERRORS = True
-DBLOG_DATABASE_USING = 'default'
-COMPRESS = True
+COMPRESS = not DEBUG
 
 COMPRESS_CSS = {
     'stylesheets': {
-        'source_filenames': ('css/base.css','css/style.css', 'css/forms.css', 'css/wmd.css','css/autocomplete.css','css/street_doors.css'),
+        'source_filenames': (
+            'css/base.css',
+            'css/style.css', 
+            'css/forms.css', 
+            'css/wmd.css',
+            'css/autocomplete.css',
+            'css/street_doors.css'
+        ),
         'output_filename': 'css/stylesheet.css',
             'media': 'all',
     },
@@ -159,32 +159,28 @@ COMPRESS_JS = {
             'js/autocomplete.js', 
             'js/jstree_admin.js', 
             'js/wmd.js',
-            'js/showdown.js'
+            'js/showdown.js',
+            'js/lib/jquery.tree.min.js',
+            'js/lib/plugins/jquery.tree.contextmenu.js',
         ),
         'output_filename': 'js/scripts.js',
     },
     'modules': {
         'source_filenames': (
             'modules/base.js',
-            'modules/utils.js', 
-            'modules/state.js', 
-            'modules/point.js', 
-            'modules/multiline.js', 
-            'modules/layer.js', 
-            'modules/map_settings.js', 
+            'modules/state.js',
+            'modules/point.js',
+            'modules/multiline.js',
             'modules/area.js',
-            'modules/init.js', 
+            'modules/layer.js',
+            'modules/init.js',
+
         ),
         'output_filename': 'js/modules.js',
     }
 }
 
 
-#DATABASE_ROUTERS = [
-#        'djangodblog.routers.DBLogRouter',
-#]
-
 #SMTP Test Server
 #python -m smtpd -n -c DebuggingServer localhost:1025
-
-
+from local_settings import *

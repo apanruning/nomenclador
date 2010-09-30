@@ -9,7 +9,7 @@ DEFAULT_ICON = {
 order = ['area','multiline','point']
 
 class BaseLayer(object):
-    meta = ['id', 'name', 'type']
+    meta = ['id', 'name', 'type', 'absolute_url','popup_text']
 
     def __init__(self, **argv):
         for k,v in argv.iteritems():

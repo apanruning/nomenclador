@@ -18,12 +18,10 @@
 
 {% block page %}
     {% block map %}
-            <div id="map-wrapper">
+        <div id="map-wrapper">
             <div id="map">
             </div>
-            <a id="map-handler" href="#">Abrir el mapa</a>
-            </div>
-
+        </div>
     {% endblock %}
     {%block actions%}  {% endblock %}
     <article id="content">
@@ -37,7 +35,9 @@
         </details>
         <aside class="sugested">
             <div id="banner-slot-b">
-            {% pop_slot 'b-1' %}
+            {% pop_slot 'd-1' %}
+            <br />
+            {% pop_slot 'd-2' %}
             </div>
             <h1>Lugares sugeridos</h1>
             {% block listing %}

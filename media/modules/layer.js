@@ -13,6 +13,10 @@ Maap.Layer = function (metadata, map) {
         this[m] = metadata[m];
         this.map = map;
     }
+    // start stylemap
+    this.stylemap = new OpenLayers.StyleMap();
+    this.layer = new OpenLayers.Layer.Vector(this.id, {styleMap:this.stylemap});
+
     var elms = new Array();
     
     for (i=0;i< this.elements.length; i++) {
@@ -23,44 +27,113 @@ Maap.Layer = function (metadata, map) {
         } else if (this.elements[i].type == 'area') {
             elm = new Maap.Area(this.elements[i])
         }
-        // Set controls
-        //var control = new OpenLayers.Control.SelectFeature(elm.layer);
-        //this.map.addControl(control);
-        //control.activate();
+
+        // insert element styles to base style
+        var st;
+        for (st in elm.style)
+            this.style[st] = elm.style[st];      
+
+        // insert features to base layer
+        this.layer.addFeatures(elm.features);
+
         elms.push(elm);
-    };
+    }
     
+    // add default rules with collected feature styles
+    this.stylemap.addUniqueValueRules("default", "style", this.style);
+
+    // add event listeners
+    this.layer.events.on({
+        "featureselected": this.onSelect,
+        scope: this.layer
+    });
+
+    var selectCtrl = new OpenLayers.Control.SelectFeature(this.layer);
+    var highlightCtrl = new OpenLayers.Control.SelectFeature(this.layer, {
+        hover: true,
+        highlightOnly: true,
+        renderIntent: "temporary",
+        eventListeners: {
+            featurehighlighted: this.onHover,
+            featureunhighlighted: this.onUnhover
+        }
+    });
+
+    this.map.addControl(highlightCtrl);
+    this.map.addControl(selectCtrl);
+    highlightCtrl.activate();
+    selectCtrl.activate();
+
+ 
     this.elements = elms;   
    
 }
 
 // Methods and extra attributes for object Layer
 Maap.Layer.prototype = {
-    
+    style: { 
+        'area': {
+            strokeColor: '#ff333f',
+            strokeWidth: 1, 
+            fillColor: '#f0aa22',
+            fillOpacity: 0.3,
+            strokeDashstyle: 'dashdot'
+        },
+        'line': {
+            strokeColor: '#feff00',
+            strokeOpacity: 0.8,
+            strokeWidth: 5
+        },
+        'line-border': {
+            strokeColor: '#612000',
+            strokeOpacity: 0.2,
+            strokeWidth: 8
+        }      
+    },
+    onSelect: function(evt) {
+        var maap = evt.feature.attributes.maap;
+        if (maap.type == 'point') {    
+            window.location = maap.absolute_url;
+        }
+    },
+    onHover: function(evt) {
+        var maap = evt.feature.attributes.maap;  
+        if (maap.type == 'point') {    
+            var popup = new OpenLayers.Popup.FramedCloud(maap.name, 
+                             evt.feature.geometry.getBounds().getCenterLonLat(),
+                             null,
+                             "<h2>" + maap.name +"</h2>"+maap.popup_text,
+                             null, true);
+            evt.feature.popup = popup;
+            this.map.addPopup(popup);
+        }
+    },
+    onUnhover: function(evt) {
+        var maapelem = evt.feature.attributes.maap;
+        var map = this.map;
+        if (maapelem.type == 'point') {
+            setTimeout(function() {
+                map.removePopup(evt.feature.popup);
+                evt.feature.popup.destroy();
+                evt.feature.popup = null;
+            }
+            , 1000);
+        }
+    },
     boxCenter: function() {
         b = this.box_size;
         this.map.zoomToExtent(new OpenLayers.Bounds(b[0],b[1],b[2],b[3]),true);
     },
-    
     getLayers: function() {
-        out = new Array();
-        for (i=0; i < this.elements.length; i++) {
-            out.push(this.elements[i].layer);
-        };
-        return out;
+        return [this.layer];
     },
-    
     show: function() {
-        for (i=0; i< this.elements.length; i++) {
-            this.elements[i].show();
-        };
+        this.layer.setVisibility(true);
         this.boxCenter();
     },
     
     hide: function() {
-        for (i=0; i< this.elements.length; i++) {
-            this.elements[i].hide();
-        }
+        this.layer.setVisibility(false);
     }
 };
 
@@ -75,7 +148,7 @@ Maap.State.prototype.setLayer = function(data) {
 };
 
 
-// Extends Maap.State functionality: Add Layer
+// Extends Maap.State functionality: Load Layer
 Maap.State.prototype.loadLayer = function(url, reload, callback) {
     state = this;
     

@@ -14,6 +14,7 @@ from profiles.forms import LoginForm
 
 admin.autodiscover()
 handler500 = 'maap.views.base.server_error'
+handler404 = 'maap.views.base.not_found'
 
 urlpatterns = patterns('maap.views',
     (r'^$', 'index',{'template_name':'maap/index.html'}, 'index'),
