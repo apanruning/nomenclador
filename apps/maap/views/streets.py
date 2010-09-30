@@ -12,6 +12,7 @@ from djangoosm.utils.words import clean_search_street
 from django.core import urlresolvers
 from django.utils.http import urlquote, urlencode
 from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
+from cyj_logs.models import SearchLog
 import logging
 
 def search_streets(request):
@@ -55,6 +56,13 @@ def search_streets(request):
                              urlencode(params))
                              
             return  HttpResponseRedirect(url)
+            
+        if street_list.count() == 0:
+            message = 'NO EXITO: %s' % cs_street
+            url = '%s' %(request.get_full_path())
+            slog = SearchLog(message=message,url=url)
+            slog.save()
+            
         return object_list(
             request,
             street_list,
@@ -99,6 +107,7 @@ def street_location(request):
                     'street':street,
                     'streetnumber':streetnumber
                     })
+            
             return render_to_response('maap/street_detail.html', context_instance = context)
                             
         else:
