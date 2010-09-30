@@ -5,12 +5,12 @@ markdown
 python-dateutil
 docutils
 psycopg2
-South
 django-announcements
 django-messages
 django-microblogging
 django-email-confirmation
 django-pagination
+django-compress
 
 git+git://github.com/django/django.git#egg=django
 git+git://github.com/etnalubma/python-osm.git#egg=osm
