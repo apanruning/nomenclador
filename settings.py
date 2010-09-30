@@ -28,14 +28,6 @@ DATABASES = {
         'PASSWORD': '',
         'HOST':'',
         'PORT':''
-    },
-    'logs_nomenclador': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'logs_nomenclador',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST':'',
-        'PORT':''
     }
 }
 
@@ -125,7 +117,6 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'registration',
-    'djangodblog',
     'messages',
     'profiles',
     'banners',
@@ -134,14 +125,6 @@ INSTALLED_APPS = (
     'south',
 )
 
-DBLOG_CATCH_404_ERRORS = True
-DBLOG_DATABASE_USING = 'default'
-
-#DATABASE_ROUTERS = [
-#        'djangodblog.routers.DBLogRouter',
-#]
-
 #SMTP Test Server
 #python -m smtpd -n -c DebuggingServer localhost:1025
-
 from local_settings import *
