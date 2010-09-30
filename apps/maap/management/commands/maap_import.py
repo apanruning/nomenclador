@@ -39,8 +39,8 @@ class Command(BaseCommand):
             
         print "Importing Maap Ways ..."
         for way in osmobject.ways.values():
+            pgeom = map(lambda p: (float(p.lon),float(p.lat)), way.nodes)
             if way.tags.get('type', None) == 'multiline':
-                pgeom = map(lambda p: (float(p.lon),float(p.lat)), way.nodes)
                 geom = LineString(pgeom)
                 
                 if OSM_SRID != 'EPSG:%d' % DEFAULT_SRID:
@@ -58,16 +58,19 @@ class Command(BaseCommand):
                     ), category)
                     
             elif way.tags.get('type', None) in ['area','zone']:
-                geom = Polygon(pgeom)
-
+                try:
+                    geom = Polygon(pgeom)
+                except:
+                    print way.tags['name']
+                    raise
                 if OSM_SRID != 'EPSG:%d' % DEFAULT_SRID:
                     geom = osm_change_srid(geom, 'EPSG:%d' % DEFAULT_SRID)
 
-                category = get_or_create_category(ways.tags['category'])           
+                category = get_or_create_category(way.tags['category'])           
                 
                 if way.tags['type'] == 'area':
                     maap_area = MaapArea(
-                        category=category,
+                        name=way.tags['name'],
                         geom=geom,
                         creator_id = 1,
                         editor_id = 1,                        
@@ -77,7 +80,7 @@ class Command(BaseCommand):
                     areas_count += 1
                 else:
                     maap_zone = MaapZone(
-                        category=category,
+                        name=way.tags['name'],                   
                         geom=geom,
                         creator_id = 1,
                         editor_id = 1,                        
