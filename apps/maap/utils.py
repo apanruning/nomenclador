@@ -155,9 +155,6 @@ def import_maap_osm(filepath):
                 category = category,
                 geom = point['geom']
             )
-            
-            
-
 
     if osm.multilines:
         print "Importing Maap Multilines"
@@ -167,9 +164,6 @@ def import_maap_osm(filepath):
 
     if osm.zones:
         print "Importing Maap Zones"
-
-
-
 
 def import_areas(filepath, zone=True, categories= None):
     
@@ -196,5 +190,3 @@ def import_areas(filepath, zone=True, categories= None):
         if categories:
             ma.category = categories
             ma.save()
-        
-
