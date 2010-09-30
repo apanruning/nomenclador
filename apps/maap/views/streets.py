@@ -1,18 +1,18 @@
 from django.shortcuts import render_to_response, redirect
 from django.db import connection
-from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.utils import simplejson
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
 from maap.models import Streets, Nodes
-from osm.models import StreetIntersection, Ways
-from osm.utils.search import get_location_by_door
-from osm.utils.words import clean_search_street
+from djangoosm.models import StreetIntersection, Ways
+from djangoosm.utils.search import get_location_by_door
+from djangoosm.utils.words import clean_search_street
 from django.core import urlresolvers
 from django.utils.http import urlquote, urlencode
 from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
+from cyj_logs.models import SearchLog
 import logging
 
 def search_streets(request):
@@ -56,6 +56,13 @@ def search_streets(request):
                              urlencode(params))
                              
             return  HttpResponseRedirect(url)
+            
+        if street_list.count() == 0:
+            message = 'NO EXITO: %s' % cs_street
+            url = '%s' %(request.get_full_path())
+            slog = SearchLog(message=message,url=url)
+            slog.save()
+            
         return object_list(
             request,
             street_list,
@@ -101,6 +108,7 @@ def street_location(request):
                     'street':street,
                     'streetnumber':streetnumber
                     })
+            
             return render_to_response('maap/street_detail.html', context_instance = context)
                             
         else:
