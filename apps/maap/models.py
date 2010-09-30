@@ -209,7 +209,7 @@ class MaapCategory(models.Model):
     is_public = models.BooleanField(default=True)
     show_all = models.BooleanField(default=False)
     
-    def save(self, force_insert=False, force_update=False):        
+    def save(self, *args, **kwargs):        
         if self.id is None:
             num = 0
             while num < 100:
@@ -218,12 +218,12 @@ class MaapCategory(models.Model):
                 if num > 0:
                     self.slug.append('-%i' % num)
                 try:
-                    out = super(MaapCategory, self).save(force_insert, force_update)
+                    out = super(MaapCategory, self).save( *args, **kwargs)
                     return out
                 except:
                     num += 1
         else:
-            return super(MaapCategory, self).save(force_insert, force_update)
+            return super(MaapCategory, self).save(*args, **kwargs)
     
     
     def __unicode__(self):

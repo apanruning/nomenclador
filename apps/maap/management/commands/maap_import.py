@@ -29,12 +29,12 @@ class Command(BaseCommand):
             category = get_or_create_category(point.tags['category'])
             maap_point = MaapPoint(
                 name = point.tags['name'],
-                #category = category,
                 geom = geom,
                 creator_id = 1,
                 editor_id = 1,
             )
             maap_point.save()
+            maap_point.category.add(category)
             points_count += 1
             
         print "Importing Maap Ways ..."
@@ -45,18 +45,18 @@ class Command(BaseCommand):
                 
                 if OSM_SRID != 'EPSG:%d' % DEFAULT_SRID:
                     geom = osm_change_srid(geom, 'EPSG:%d' % DEFAULT_SRID)
-
+                
                 if maap_multilines.has_key(way.tags['name']):
-                    maap_multilines[way.tags['name']].geom.append(geom)
+                    maap_multilines[way.tags['name']][0].geom.append(geom)
                 else:
                     category = get_or_create_category(way.tags['category'])           
-                    maap_multilines[way.tags['name']] = MaapMultiLine(
+                    maap_multilines[way.tags['name']] = (MaapMultiLine(
                         name=way.tags['name'],
-                        #category=category,
                         geom=MultiLineString([geom]),
                         creator_id = 1,
                         editor_id = 1,                        
-                    )
+                    ), category)
+                    
             elif way.tags.get('type', None) in ['area','zone']:
                 geom = Polygon(pgeom)
 
@@ -73,6 +73,7 @@ class Command(BaseCommand):
                         editor_id = 1,                        
                     )
                     maap_area.save()
+                    maap_area.category.add(category)
                     areas_count += 1
                 else:
                     maap_zone = MaapZone(
@@ -82,10 +83,12 @@ class Command(BaseCommand):
                         editor_id = 1,                        
                     )
                     maap_zone.save()
+                    maap_zone.category.add(category)
                     zones_count += 1
         
-        for maap_multiline in maap_multilines.values():
+        for maap_multiline, category in maap_multilines.values():
             maap_multiline.save()
+            maap_multiline.category.add(category)
             
         print "Points imported %s" % points_count         
         print "Multilines imported %s" % len(maap_multilines)
@@ -101,19 +104,13 @@ def osm_change_srid(geom, srid):
     return obj.geos
 
 def get_or_create_category(category_label):
-    return None
     categories = category_label.split('/')
     parent = None
     for category_name in categories:
-        defaults = dict(
-            parent = parent
-        )
-
-        category, created = MaapCategory.objects.get_or_create(name = category_name, defaults = defaults)
+        defaults={'parent': parent}
+        category, created = MaapCategory.objects.get_or_create(name = category_name,defaults=defaults)
         if created:
             print "Created New Category: %s " % category_name
-
         parent = category
-            
     return category
 
