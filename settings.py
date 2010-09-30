@@ -1,9 +1,4 @@
 import os
-#from django.contrib.gis.utils import add_postgis_srs
-
-## Add Google Maps srs. Just in case. If already exists, nothing happens.
-#add_postgis_srs(900913)
-
 # Django settings for nomenclador project.
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

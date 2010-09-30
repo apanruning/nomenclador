@@ -1,0 +1,16 @@
+#!/bin/bash
+PATH_OSMPACK=$1/src/osm/osm
+PATH_FIXTURES=$1/src/nomenclador/nomenclador/maap/fixtures
+dropdb -h localhost -U nomenclador -W nomenclador
+echo "Ingrese la contraseña de nomenclador"
+createdb -h localhost -U nomenclador -T template_postgis -W nomenclador
+echo "Ingrese la contraseña de nomenclador"
+$1/bin/django shell
+echo "Ingrese la contraseña de nomenclador"
+psql -h localhost -d nomenclador -U nomenclador -c "delete from osm_waynodesdoor;"
+echo "Ingrese la contraseña de nomenclador"
+psql -h localhost -d nomenclador -U nomenclador < $4
+$1/bin/django loaddata $PATH_FIXTURES/initial_data.json
+$1/bin/django loaddata $PATH_FIXTURES/maap.json
+
+
