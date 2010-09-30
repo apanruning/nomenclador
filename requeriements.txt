@@ -5,6 +5,7 @@ markdown
 python-dateutil
 docutils
 psycopg2
+progressbar
 django-announcements
 django-messages
 django-microblogging
