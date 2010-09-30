@@ -118,7 +118,7 @@ INSTALLED_APPS = (
     'banners',
     'maap',
     'osm',
-    'south',
+    'cyj_logs',
 )
 
 #SMTP Test Server

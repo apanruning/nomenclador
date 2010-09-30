@@ -17,6 +17,7 @@ from maap.models import MaapModel, MaapPoint, MaapArea, \
                                     MaapMultiLine, Icon, MaapCategory
 from tagging.models import TaggedItem, Tag
 from django.template.defaultfilters import slugify
+from cyj_logs.models import SearchLog
 
 
 def index(request,*args, **kwargs):
@@ -58,7 +59,11 @@ def view(request,cat_slug, object_id):
     geom = obj.cast().geom        
     
     json_layer = obj.cast().to_layer().json
-    
+
+    message = 'EXITO: %s' % obj.name
+    url = '%s' %(request.get_full_path())
+    slog = SearchLog(message=message,url=url)
+    slog.save()
     return object_list(
         request,
         objects, 
