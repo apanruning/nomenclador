@@ -14,7 +14,6 @@ django-pagination
 
 
 git+git://github.com/django/django.git
-git+git://github.com/etnalubma/django-osm.git#egg=osm
 git+git://github.com/tutuca/django-db-log.git#egg=djangodblog
 svn+http://django-mptt.googlecode.com/svn/trunk/#egg=mptt
 svn+http://django-notification.googlecode.com/svn/trunk/#egg=notification

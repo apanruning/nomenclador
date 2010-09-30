@@ -1,15 +1,14 @@
 from django.shortcuts import render_to_response, redirect
 from django.db import connection
-from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.utils import simplejson
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
 from maap.models import Streets, Nodes
-from osm.models import StreetIntersection, Ways
-from osm.utils.search import get_location_by_door
-from osm.utils.words import clean_search_street
+from djangoosm.models import StreetIntersection, Ways
+from djangoosm.utils.search import get_location_by_door
+from djangoosm.utils.words import clean_search_street
 from django.core import urlresolvers
 from django.utils.http import urlquote, urlencode
 from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point

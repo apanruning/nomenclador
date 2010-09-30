@@ -1,43 +1,20 @@
 DATABASE INSTALL
 
-#Instalar geodjango y osmosis
- * Osmosis trunk version (http://wiki.openstreetmap.org/wiki/Osmosis_PostGIS_Setup)
+#Instalar geodjango
  * GeoDjango (http://geodjango.org/docs/install.html)
  
-#Crear dos bases de datos: una para calles (osmosis) y otra para datos de aplicacion (nomenclador) Utilizar el comando createdb como se indica a continuacion
+#Crear dos bases de datos: una para logs (logs_nomenclador) y otra para datos de aplicacion (nomenclador) Utilizar el comando createdb como se indica a continuacion
 $ sudo su postgres -
 <postgres>$ createdb -T template_postgis database_name
 
-#Crear estructura de osmosis
-$ psql -d osmosis_database_name -U database_user -h localhost < <osmosis-trunk>/script/pgsql_simple_schema_0.6.sql 
 
-#Ejecutar comando osmosis 
-$ <osmosis-trunk>/bin/osmosis --read-xml file="inputfile.osm" --write-pgsql user="user" password="pass" 
-database="database_name" 
-
-donde inputfile.osm es un archivo con el mapa
-
-#Correr osmosis2osmdjango_csv.sql desde la base de datos de calles
-$ psql -d osmosis_database_name -U nomenclador -h localhost < <osmosis-django-osm-path>/osmosis2osmdjango_csv.sql
-
-#Correr osmosis2osmdjango_csv.sql desde la base de datos de la aplicacion
-$ psql -d nomenclador_database_name -U nomenclador -h localhost < <osmosis-django-osm-path>/osmdjango_csv_import.sql
-
-#BUG: Fix this
-#aca salta un error luego de ejecutar el anterior comando. Para solucionarlo, ir con pgadmin y borrar (EN CASCADA) las tablas osm_ways y osm_nodes de la base nomenclador
-
-#Luego, resetear el modelo de osm en el django
-$ ./bin/django reset osm
-
-#Correr nuevamente osmosis2osmdjango_csv.sql desde la base de datos de la aplicacion
-$ psql -d nomenclador_database_name -U nomenclador -h localhost < <osmosis-django-osm-path>/osmdjango_csv_import.sql
 
 #Correr shell en cyj.buildout
 #Ejecutar 
->>>> from osm.utils.model import set_streets, set_doors
->>>> set_streets()
->>>> set_doors()
->>>> set_intersections()
+>>>> from osm.utils.model import inport_and_update
+>>>> inport_and_update("inputfile.osm")
+
+donde inputfile.osm es un archivo con el mapa
 
 #Para cargar las areas en formato gpx, ejecuter en la shell de cyj.buildout (barrios)
 >>>> from maap.utils import import_areas
