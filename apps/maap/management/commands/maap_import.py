@@ -70,8 +70,6 @@ class Command(BaseCommand):
                     
             elif way.tags.get('type', None) in ['area','zone']:
                 geom = Polygon(pgeom)
-                if zones_count == 10:
-                    raise 
                 if OSM_SRID != 'EPSG:%d' % DEFAULT_SRID:
                     geom = osm_change_srid(geom, 'EPSG:%d' % DEFAULT_SRID)
 
