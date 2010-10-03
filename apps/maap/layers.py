@@ -16,10 +16,10 @@ class BaseLayer(object):
             setattr(self, k, v)
     
     def __iter__(self):
-        out = dict()
-        for e in self.meta:
-            out[e] = getattr(self, e, None)            
-        return out.iteritems()    
+        for k in self.meta:
+            v = getattr(self, k, None)
+            if v:
+                yield (k, v)            
     
     @property
     def json(self):
@@ -80,13 +80,9 @@ class Layer(BaseLayer):
 
             # for historical reasons
             margin = 102
-            extent = (
-                extent[0] - margin,
-                extent[1] - margin,
-                extent[2] + margin,
-                extent[3] + margin
-            )
-            
+            extent = [e-margin for e in extent[0:2]] + \
+                     [e+margin for e in extent[2:5]]
+                         
             return extent   
 
 
@@ -99,7 +95,7 @@ class GeoElement(BaseLayer):
     @property
     def meta(self):
         return super(GeoElement, self).meta + \
-               ['geojson']
+               ['geojson', 'clickable']
 
 class Point(GeoElement):
     type = 'point'

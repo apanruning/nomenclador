@@ -92,13 +92,13 @@ Maap.Layer.prototype = {
     },
     onSelect: function(evt) {
         var maap = evt.feature.attributes.maap;
-        if (maap.type == 'point') {    
+        if (maap.clickable && maap.absolute_url) {    
             window.location = maap.absolute_url;
         }
     },
     onHover: function(evt) {
         var maap = evt.feature.attributes.maap;  
-        if (maap.type == 'point') {    
+        if (maap.popup_text) {    
             var popup = new OpenLayers.Popup.FramedCloud(maap.name, 
                              evt.feature.geometry.getBounds().getCenterLonLat(),
                              null,
@@ -110,10 +110,10 @@ Maap.Layer.prototype = {
     },
     onUnhover: function(evt) {
         var maapelem = evt.feature.attributes.maap;
-        var map = this.map;
-        if (maapelem.type == 'point') {
+        var mep = this.map;
+        if (maapelem.popup_text) {
             setTimeout(function() {
-                map.removePopup(evt.feature.popup);
+                mep.removePopup(evt.feature.popup);
                 evt.feature.popup.destroy();
                 evt.feature.popup = null;
             }
