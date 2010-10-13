@@ -8,6 +8,7 @@ from django.utils.encoding import force_unicode
 from django.utils import simplejson
 from django import template
 from copy import deepcopy
+from cyj_logs.models import *
 
 class MpttAdmin(admin.ModelAdmin):
     """ Base class for mptt model admins, usage:
@@ -154,3 +155,5 @@ admin.site.register(Icon, admin.GeoModelAdmin)
 admin.site.register(MaapZone, GeoCordobaAdmin)
 admin.site.register(MaapArea, GeoCordobaAdmin)
 admin.site.register(MaapMultiLine, GeoCordobaAdmin)
+admin.site.register(SearchLog, GeoCordobaAdmin)
+

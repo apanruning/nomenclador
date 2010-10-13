@@ -54,7 +54,7 @@ def search_streets(request):
             
             url = "%s?%s" % (urlresolvers.reverse('maap.views.street_location'), 
                              urlencode(params))
-                             
+                                 
             return  HttpResponseRedirect(url)
             
         if street_list.count() == 0:
@@ -95,7 +95,7 @@ def street_location(request):
                 street = Streets.objects.get(norm = params['str'])
                 #import ipdb; ipdb.set_trace()
                 layer = street.get_location_or_street(door = params['door'])
-                json_layer = layer.json
+                json_layer = layer[0].json
 
             else:
                 # Street alone
