@@ -39,7 +39,7 @@ def production(username="mherrero", hosts=["mherrero.webfactional.com"]):
     env.project_name = BASE_DIR.split('/')[-1:].pop()
     env.deploy_dir = '/home/mherrero/webapps/cyj/nomenclador'
     env.virtual_env = '/home/mherrero/webapps/cyj/venv'
-    env.apache_command = '/home/mherrero/webapps/ltmo/apache2/bin/restart'
+    env.apache_command = '/home/mherrero/webapps/cyj/apache2/bin/restart'
     
 def write_template(file_name, template_name):
     '''
