@@ -19,5 +19,7 @@ class SearchLog(models.Model):
     level = models.PositiveIntegerField(choices=LOG_LEVELS, default=logging.ERROR, blank=True)
     tuvo_exito = models.BooleanField()
     type_search = models.TextField()
+        
+        
 
     
