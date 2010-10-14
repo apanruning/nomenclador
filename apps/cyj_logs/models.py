@@ -17,5 +17,7 @@ class SearchLog(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable = False)
     url = models.URLField(verify_exists=False, null=True, blank=True)
     level = models.PositiveIntegerField(choices=LOG_LEVELS, default=logging.ERROR, blank=True)
+    tuvo_exito = models.BooleanField()
+    type_search = models.TextField()
 
     
