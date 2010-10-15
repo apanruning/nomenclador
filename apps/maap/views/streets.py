@@ -74,7 +74,7 @@ def search_streets(request):
                 
             url = '%s' %(request.get_full_path())
             
-            slog = SearchLog(message=message,url=url,tuvo_exito=False,type_search=ty_sch)
+            slog = SearchLog(message=message,url=url,tuvo_exito=False,type_search=ty_sch,level=20)
             slog.save()
             
         return object_list(
@@ -95,6 +95,7 @@ def street_location(request):
         #Variables for log case in database
         message = "" 
         ty_sch = 0 #Type of search
+        success = True
         if params.has_key('str'):
             if params.has_key('int'):
                 # Intersection Case
@@ -113,11 +114,13 @@ def street_location(request):
                 # Street door Case
                 street = Streets.objects.get(norm = params['str'])
                 #import ipdb; ipdb.set_trace()
-                layer = street.get_location_or_street(door = params['door'])
-                json_layer = layer[0].json
-                message = 'EXITO: %s %s' %(params['str'], params['door'])
+                layer,success = street.get_location_or_street(door = params['door'])
                 ty_sch = "calle_altura"
-
+                json_layer = layer.json
+                if success:
+                    message = 'EXITO: %s %s' %(params['str'], params['door'])
+                else:
+                    message = 'NO EXITO: %s %s' %(params['str'], params['door'])
             else:
                 # Street alone
                 street = Streets.objects.get(norm=params['str'])
@@ -126,10 +129,13 @@ def street_location(request):
                 message = 'EXITO: %s' % params['str']
                 ty_sch = "calle"
                 
-            #Log a succesfully case
             url = '%s' %(request.get_full_path()) 
-            slog = SearchLog(message=message,url=url,level=20,tuvo_exito=True,type_search=ty_sch)
-            slog.save()
+
+            #Log a succesfully case
+            slog = SearchLog(message=message,url=url,level=20,tuvo_exito=success,type_search=ty_sch)
+            slog.save()                
+
+                
             
             context = RequestContext(request,{
                     'json_layer':json_layer, 
