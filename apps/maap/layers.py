@@ -9,7 +9,7 @@ DEFAULT_ICON = {
 order = ['area','multiline','point']
 
 class BaseLayer(object):
-    meta = ['id', 'name', 'type', 'absolute_url','popup_text']
+    meta = ['id', 'name', 'type', 'absolute_url','popup_text','center']
 
     def __init__(self, **argv):
         for k,v in argv.iteritems():
@@ -32,8 +32,8 @@ class BaseLayer(object):
                 object_dict['elements'] = elements
         
         return simplejson.dumps(object_dict)
-    
-class Layer(BaseLayer):    
+
+class Layer(BaseLayer):
     type = 'layer'
     
     elements = []
@@ -41,7 +41,7 @@ class Layer(BaseLayer):
     @property
     def meta(self):
         return super(Layer, self).meta + \
-               ['elements', 'box_size']        
+               ['elements', 'box_size']
         
     @property
     def box_size(self):
@@ -71,7 +71,7 @@ class Layer(BaseLayer):
                               
                 delta_y = max(abs(extent[1]-centroid[1]), 
                               abs(extent[3]-centroid[1]))
-
+            
                 extent = ((centroid[0] - delta_x),
                           (centroid[1] - delta_y),
                           (centroid[0] + delta_x),
