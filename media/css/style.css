@@ -28,9 +28,9 @@ header {
 footer{
     display:block;
     clear:both;
-    margin:-2px 0;
+    margin:2em 0 -2px;
     z-index:99999;
-    background:#FFC018;
+    background:#CCC;
 }
 
 footer .wrapper {
