@@ -60,10 +60,12 @@ def view(request,cat_slug, object_id):
     
     json_layer = obj.cast().to_layer().json
 
+    #Log a succesfully case 
     message = 'EXITO: %s' % obj.name
     url = '%s' %(request.get_full_path())
-    slog = SearchLog(message=message,url=url,level=20)
+    slog = SearchLog(message=message,url=url,level=20, tuvo_exito=True,type_search="categoria")
     slog.save()
+
     return object_list(
         request,
         objects, 

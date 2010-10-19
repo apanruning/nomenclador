@@ -45,6 +45,7 @@ footer .wrapper {
 #logo a{
     text-decoration:none;
     color:#333;
+    font-family: Courier New;
 }
 #head-banner{
     float:right;
@@ -60,6 +61,10 @@ nav {
     clear: both;
     width:100%;
 }
+
+#logo {
+    float:left;
+}
 /* Session status styles */
 
 #session {
@@ -67,7 +72,7 @@ nav {
   padding:1em 0;
   float:right;
   z-index: 9999;
-  overflow:hidden;
+  /*overflow:hidden;*/
 }
 
 

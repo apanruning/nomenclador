@@ -9,17 +9,17 @@ DEFAULT_ICON = {
 order = ['area','multiline','point']
 
 class BaseLayer(object):
-    meta = ['id', 'name', 'type', 'absolute_url','popup_text']
+    meta = ['id', 'name', 'type', 'absolute_url','popup_text','center']
 
     def __init__(self, **argv):
         for k,v in argv.iteritems():
             setattr(self, k, v)
     
     def __iter__(self):
-        out = dict()
-        for e in self.meta:
-            out[e] = getattr(self, e, None)            
-        return out.iteritems()    
+        for k in self.meta:
+            v = getattr(self, k, None)
+            if v:
+                yield (k, v)            
     
     @property
     def json(self):
@@ -32,8 +32,8 @@ class BaseLayer(object):
                 object_dict['elements'] = elements
         
         return simplejson.dumps(object_dict)
-    
-class Layer(BaseLayer):    
+
+class Layer(BaseLayer):
     type = 'layer'
     
     elements = []
@@ -41,7 +41,7 @@ class Layer(BaseLayer):
     @property
     def meta(self):
         return super(Layer, self).meta + \
-               ['elements', 'box_size']        
+               ['elements', 'box_size']
         
     @property
     def box_size(self):
@@ -71,7 +71,7 @@ class Layer(BaseLayer):
                               
                 delta_y = max(abs(extent[1]-centroid[1]), 
                               abs(extent[3]-centroid[1]))
-
+            
                 extent = ((centroid[0] - delta_x),
                           (centroid[1] - delta_y),
                           (centroid[0] + delta_x),
@@ -80,13 +80,9 @@ class Layer(BaseLayer):
 
             # for historical reasons
             margin = 102
-            extent = (
-                extent[0] - margin,
-                extent[1] - margin,
-                extent[2] + margin,
-                extent[3] + margin
-            )
-            
+            extent = [e-margin for e in extent[0:2]] + \
+                     [e+margin for e in extent[2:5]]
+                         
             return extent   
 
 
@@ -99,7 +95,7 @@ class GeoElement(BaseLayer):
     @property
     def meta(self):
         return super(GeoElement, self).meta + \
-               ['geojson']
+               ['geojson', 'clickable']
 
 class Point(GeoElement):
     type = 'point'

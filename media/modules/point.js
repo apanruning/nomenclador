@@ -38,15 +38,34 @@ Maap.Point = Maap.Geom.extend({
                 {style: 'point_radius_'+this.id}
             ));
         };
-
-        this.style['point_'+this.id] = {
-            externalGraphic: this.icon.url,
-            graphicWidth: this.icon.width,
-            graphicHeight: this.icon.height,
-            graphicOpacity: 1,
-            graphicXOffset: -(this.icon.width/2),
-            graphicYOffset: -(this.icon.height)+2
-        };
+        
+        var width = this.icon.width;
+        var height = this.icon.height;
+        if (!this.center) {
+            width = width * 0.6;
+            height = height * 0.6;
+            this.style['point_'+this.id] = {
+                externalGraphic: this.icon.url,
+                graphicWidth: width,
+                graphicHeight: height,
+                graphicOpacity: 1,
+                graphicXOffset: -(width/2),
+                graphicYOffset: -(height)+2
+            };
+        } else {
+            width = 40;
+            height = 40;
+            this.icon.url = "/media/icons/center.png";
+            this.style['point_'+this.id] = {
+                externalGraphic: this.icon.url,
+                graphicWidth: width,
+                graphicHeight: height,
+                graphicOpacity: 1,
+                graphicXOffset: -(width/2),
+                graphicYOffset: -(height/2)
+            };
+        }
+        
 
         this.features.push(new OpenLayers.Feature.Vector(
             pgeom,

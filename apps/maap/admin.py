@@ -133,24 +133,30 @@ class MaapCategoryAdmin(MpttAdmin):
 
 class GeoCordobaAdmin(admin.OSMGeoAdmin):
     default_lat = -3686022.8143382
-    default_lon = -7145792.0249884 
+    default_lon = -7145792.0249884
     #display_wkt = True
-    default_zoom = 12    
+    default_zoom = 12
     map_width = 800
     map_height = 600
-    extra_js =['/media/js/OpenStreetMap.js']
+    extra_js =['/media/js/OpenStreetMap.js',
+               '/media/js/tiny_mce/tiny_mce.js',
+               '/media/js/tiny_mce/textareas.js',]
 
     def save_model(self, request, obj, form, change):
 
         obj.editor = request.user
         if not change:
             obj.creator = request.user
-        obj.save()        
+        obj.save()
 
-    
+
+
+        
+   
 admin.site.register(MaapCategory, MaapCategoryAdmin)
 admin.site.register(MaapPoint, GeoCordobaAdmin)
 admin.site.register(Icon, admin.GeoModelAdmin)
 admin.site.register(MaapZone, GeoCordobaAdmin)
 admin.site.register(MaapArea, GeoCordobaAdmin)
 admin.site.register(MaapMultiLine, GeoCordobaAdmin)
+

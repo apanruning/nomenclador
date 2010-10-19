@@ -89,6 +89,7 @@ class Streets(OSMStreets):
                 name = "%s %s" % (self.name, door),
                 geom = location[0],
                 center = True,
+                clickable = False,
             )
 
             if location[1] > 0:    
@@ -116,6 +117,7 @@ class Streets(OSMStreets):
             id = 'street_%s' % self.norm,
             name = self.name,
             center = True,
+            clickable = False,
             geom = ml
         )
         layer = get_closest(ml).layer()
@@ -149,6 +151,7 @@ class MaapModel(models.Model):
         out['created'] = self.created.strftime('%D %T')        
         out['changed'] = self.changed.strftime('%D %T')
         out['absolute_url'] = self.get_absolute_url()
+        out['clickable'] = True
         return out
 
     def save(self, *args, **kwargs):

@@ -18,21 +18,21 @@ from fabric.api import env, run, local, require, put, sudo, prompt, cd
 
 BASE_DIR = os.path.dirname(__file__)
 
-env.project_name = BASE_DIR.split('/')[-1:].pop()
+env.project_name = 'nomenclador'
 
 def development():
     env.hosts = ["localhost"]
 
-def staging(username="mherrero", hosts=["mherrero.webfactional.com"]):
+def staging(username="root", hosts=["nomenclador.comercioyjusticia.com.ar"]):
+    env.user = username
+    env.hosts = hosts
+    
+def production(username="mherrero", hosts=["mherrero.webfactional.com"]):
     env.user = username
     env.hosts = hosts
     env.deploy_dir = '/home/mherrero/webapps/cyj/nomenclador'
     env.virtual_env = '/home/mherrero/webapps/cyj/venv'
     env.apache_command = '/home/mherrero/webapps/cyj/apache2/bin/restart'
-
-def production(username="root", hosts=["nomenclador.comercioyjusticia.com.ar"]):
-    env.user = username
-    env.hosts = hosts
     
 def write_template(file_name, template_name):
     '''

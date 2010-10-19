@@ -1,16 +1,19 @@
 #!/bin/bash
-PATH_OSMPACK=$1/src/osm/osm
-PATH_FIXTURES=$1/src/nomenclador/nomenclador/maap/fixtures
+MAIN_PATH=./
+PATH_DATA_OSM=./data_osm
+PATH_FIXTURES=./apps/maap/fixtures
 dropdb -h localhost -U nomenclador -W nomenclador
 echo "Ingrese la contraseña de nomenclador"
 createdb -h localhost -U nomenclador -T template_postgis -W nomenclador
-echo "Ingrese la contraseña de nomenclador"
-$1/bin/django shell
-echo "Ingrese la contraseña de nomenclador"
-psql -h localhost -d nomenclador -U nomenclador -c "delete from osm_waynodesdoor;"
-echo "Ingrese la contraseña de nomenclador"
-psql -h localhost -d nomenclador -U nomenclador < $4
-$1/bin/django loaddata $PATH_FIXTURES/initial_data.json
-$1/bin/django loaddata $PATH_FIXTURES/maap.json
+echo "Debe ingresar estos comando en la consola:\n"
+$MAIN_PATH/manage shell
+>> from django.contrib.gis.utils import add_postgis_srs\n
+>> add_postgis_srs(900913)\n
+>> quit()\n"
+$PATH_DATA_OSM/manage syncdb
+$PATH_DATA_OSM/manage import_osm $PATH_DATA_OSM/$1
+$PATH_DATA_OSM/manage maap_import $PATH_DATA_OSM/$2
+$PATH_DATA_OSM/manage loaddata $PATH_FIXTURES/initial_data.json
+$PATH_DATA_OSM/manage loaddata $PATH_FIXTURES/maap.json
 
 
