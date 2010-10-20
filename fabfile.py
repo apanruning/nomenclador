@@ -22,6 +22,9 @@ env.project_name = 'nomenclador'
 
 def development():
     env.hosts = ["localhost"]
+    env.deploy_dir = '/opt/sites/%s' % env.project_name
+    env.virtual_env = '/opt/venvs/%s' % env.project_name
+    env.apache_command = 'sudo apache2ctl restart'
 
 def staging(username="root", hosts=["nomenclador.comercioyjusticia.com.ar"]):
     env.user = username
