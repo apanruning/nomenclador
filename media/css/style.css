@@ -22,7 +22,7 @@ body {
 header {
     margin-bottom:0em;
     display:block;
-    background:#EBEBEB;
+    background:#EBEBEB url(../img/bg-header.png) repeat-x;
 }
 
 footer{
@@ -45,7 +45,7 @@ footer .wrapper {
 #logo a{
     text-decoration:none;
     color:#333;
-    font-family: Courier New;
+    text-transform: uppercase;
 }
 #head-banner{
     float:right;
@@ -421,7 +421,8 @@ aside{
 
 .ui-tabs-nav li a{
     outline:none;
-    color:#999;
+    color:#000;
+    text-shadow:0 1px 0 #FFF;
     text-decoration:none;
 }
 .ui-tabs-nav li a:hover{
