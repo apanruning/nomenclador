@@ -1,7 +1,7 @@
 from django.contrib.gis.geos import Point, LineString,MultiLineString, Polygon, GEOSGeometry
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.core.management.base import BaseCommand, CommandError
-from maap.models import MaapZone, MaapArea, MaapPoint, MaapMultiLine, MaapCategory
+from maap.models import MaapZone, MaapArea, MaapPoint, MaapMultiLine, MaapCategory, Icon
 from osm.parser import OSMXMLFile
 from settings import DEFAULT_SRID
 from djangoosm import OSM_SRID
@@ -28,13 +28,19 @@ class Command(BaseCommand):
             if OSM_SRID != 'EPSG:%d' % DEFAULT_SRID:
                 geom = osm_change_srid(geom, 'EPSG:%d' % DEFAULT_SRID)
                 
-            category = get_or_create_category(point.tags['category'])
+            category = get_or_create_category(node.tags['category'])
+            if node.tags.has_key('icon'):
+                icon = Icon.objects.get(name = node.tags['icon'])
+            else:
+                icon = Icon.objects.latest('id')
             maap_point, created = MaapPoint.objects.get_or_create(
-                name = point.tags['name'],
+                name = node.tags['name'],
                 defaults = dict(
                     geom = geom,
                     creator_id = 1,
                     editor_id = 1,
+                    icon = icon,
+                    description = node.tags.get('description', None)
                 )
             )
             if not(created):
@@ -83,7 +89,7 @@ class Command(BaseCommand):
                             creator_id = 1,
                             editor_id = 1,
                         )                        
-                    )
+                    ) 
                     if not(created):
                         maap_area.geom = geom
                     maap_area.save()
