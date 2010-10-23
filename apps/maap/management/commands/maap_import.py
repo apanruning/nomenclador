@@ -68,6 +68,7 @@ class Command(BaseCommand):
                             geom = MultiLineString([geom]),
                             creator_id = 1,
                             editor_id = 1,
+                            description = way.tags.get('description', None)
                         )                        
                     )
                     if not(created):
@@ -88,6 +89,7 @@ class Command(BaseCommand):
                             geom = geom,
                             creator_id = 1,
                             editor_id = 1,
+                            description = way.tags.get('description', None)
                         )                        
                     ) 
                     if not(created):
