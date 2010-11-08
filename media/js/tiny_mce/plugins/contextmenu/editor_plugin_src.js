@@ -47,16 +47,9 @@
 						ed.selection.setRng(lastRng);
 
 					t._getMenu(ed).showMenu(e.clientX, e.clientY);
-					Event.add(ed.getDoc(), 'click', function(e) {
-						hide(ed, e);
-					});
+					Event.add(ed.getDoc(), 'click', hide);
 					Event.cancel(e);
 				}
-			});
-
-			ed.onRemove.add(function() {
-				if (t._menu)
-					t._menu.removeAll();
 			});
 
 			function hide(ed, e) {

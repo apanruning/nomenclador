@@ -1,7 +1,6 @@
-from django import forms
 from maap.admin import GeoCordobaAdmin
 from maap.models import MaapPoint
-from django.contrib.gis import admin
+from django.contrib.gis import forms, admin
 
 admin_instance = GeoCordobaAdmin(MaapPoint, admin.site)
 point_field = MaapPoint._meta.get_field("geom")
@@ -23,4 +22,14 @@ class InlinePointForm (forms.ModelForm):
             'icon',
          )
     
+class MaapPointForm(forms.ModelForm):
+    class Meta:
+        model = MaapPoint
+        exclude = (
+            'default_layers', 
+            'metadata', 
+            'tags',
+            'banner_slots',
+        )
+
 

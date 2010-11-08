@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
-from django.views.generic import list_detail, create_update
+from django.views.generic import list_detail
 from django.views.generic.simple import direct_to_template
 from voting.views import vote_on_object
 
@@ -23,6 +23,7 @@ urlpatterns = patterns('maap.views',
     url(r'^map/places$', 'search_places', name='search_places'),
     url(r'^category/(?P<cat_slug>[^/]+)$', 'search_places', name='list_by_category'),
     url(r'map/view/(?P<cat_slug>[^/]+)/(?P<object_id>\d+)$','view', name='view'),
+    url(r'map/add/$','create', name='create'),
     (r'^map/streets/location$', 'street_location'),
     (r'^tags/(?P<tag>[^/]+)$','obj_list_by_tag'),
 

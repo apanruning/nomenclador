@@ -153,7 +153,7 @@ COMPRESS_JS = {
             'js/jquery.textarearesizer.js', 
             'js/autocomplete.js', 
             'js/jstree_admin.js', 
-            'js/wmd.js',
+            'js/tiny_mce/jquery.tinymce.js',
             'js/showdown.js',
             'js/lib/jquery.tree.min.js',
             'js/lib/plugins/jquery.tree.contextmenu.js',

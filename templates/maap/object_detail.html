@@ -1,4 +1,4 @@
- {% extends 'maap/index.html' %}
+{% extends 'maap/index.html' %}
 {% load markup tagging_tags banner_tags mptt_tags maap_tags %}
 {% block title %}{{object.name}}{% endblock %}
 {% block detail %}{{object.description|truncatewords:'25'}} Georefenciamiento OpenStreetMaps Mapas{% endblock %}

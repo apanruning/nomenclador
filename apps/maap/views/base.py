@@ -15,6 +15,7 @@ from django.utils.http import urlquote
 from profiles.models import Profile
 from maap.models import MaapModel, MaapPoint, MaapArea, \
                                     MaapMultiLine, Icon, MaapCategory
+from maap.forms import MaapPointForm
 from tagging.models import TaggedItem, Tag
 from django.template.defaultfilters import slugify
 from cyj_logs.models import SearchLog
@@ -87,14 +88,15 @@ def edit(request, model, slug=None):
         template_name='maap/object_form.html',
         extra_context={'model':model.__name__})  
 
+
 @login_required
-def create(request, model):
-    model = get_model('maap',model)
+def create(request):
     return create_update.create_object(
         request, 
-        model=model,
+        model=MaapPoint,
+        form_class=MaapPointForm,
         template_name='maap/object_form.html',
-        extra_context={'model':model.__name__})
+    )
 
 
 def search_places(request, cat_slug=None):
