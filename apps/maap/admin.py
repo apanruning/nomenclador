@@ -141,16 +141,17 @@ class GeoCordobaAdmin(admin.OSMGeoAdmin):
     extra_js =['/media/js/OpenStreetMap.js',
                '/media/js/tiny_mce/tiny_mce.js',
                '/media/js/tiny_mce/textareas.js',]
-
+    list_display = ('name','creator','created')           
+    list_filter = ('creator','category','created')
+    ordering = ('created','creator','category')
+    search_fields = ('creator','created','creator')
+    
     def save_model(self, request, obj, form, change):
 
         obj.editor = request.user
         if not change:
             obj.creator = request.user
         obj.save()
-
-
-
         
    
 admin.site.register(MaapCategory, MaapCategoryAdmin)
