@@ -8,6 +8,7 @@ from django.utils.encoding import force_unicode
 from django.utils import simplejson
 from django import template
 from copy import deepcopy
+from settings import MEDIA_URL
 
 class MpttAdmin(admin.ModelAdmin):
     """ Base class for mptt model admins, usage:
@@ -138,9 +139,9 @@ class GeoCordobaAdmin(admin.OSMGeoAdmin):
     default_zoom = 12
     map_width = 800
     map_height = 600
-    extra_js =['/media/js/OpenStreetMap.js',
-               '/media/js/tiny_mce/tiny_mce.js',
-               '/media/js/tiny_mce/textareas.js',]
+    extra_js =[MEDIA_URL+'js/OpenStreetMap.js',
+               MEDIA_URL+'js/tiny_mce/tiny_mce.js',
+               MEDIA_URL+'js/tiny_mce/textareas.js',]
 
     def save_model(self, request, obj, form, change):
 
