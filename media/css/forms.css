@@ -21,8 +21,9 @@ input[type='password']{
 }
 .name_field input {
     font-size: 150%;
-}
     width: 80%;
+}
+
 .name_field label {
     vertical-align:middle;
 }

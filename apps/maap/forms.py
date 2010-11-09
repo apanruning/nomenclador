@@ -44,5 +44,3 @@ class MaapPointForm(forms.ModelForm):
             'closest',
             'banner_slots',
         )
-
-

@@ -287,7 +287,6 @@ aside{
     list-style:none;
 }
 
-
 #categories table a {
     color:#5485AF;
 }
@@ -321,7 +320,9 @@ aside{
     vertical-align:middle;
 }
 
-
+#place-title {
+    margin-top:1em;
+}
 .breadcrumb {
     padding:0.25em;
     margin:0;
@@ -440,9 +441,7 @@ aside{
 .ui-tabs-hide{
     display:none;
 }
-#place-title {
-    margin-top:1em;
-}
+
 /* gravatar */
 .gravatar {
     float:left;
