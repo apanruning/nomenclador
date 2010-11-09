@@ -82,8 +82,9 @@ input[type='password']{
     margin:0;
     padding:0;
 }
-#comment-form textarea {
-    height:12em;
+textarea {
+    height:22em;
+    width:45em;
 }
 
 

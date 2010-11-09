@@ -17,6 +17,8 @@ class InlinePointForm (forms.ModelForm):
             'metadata', 
             'category', 
             'tags',
+            'popup_text',
+            'closest',
             'banner_slots',
             'name',
             'icon',
@@ -25,10 +27,19 @@ class InlinePointForm (forms.ModelForm):
 class MaapPointForm(forms.ModelForm):
     class Meta:
         model = MaapPoint
+        fields = (
+            'name',
+            'geom',
+            'description',
+            'category',
+            'icon',
+        )
         exclude = (
-            'default_layers', 
-            'metadata', 
+            'default_layers',
+            'metadata',
+            'popup_text',
             'tags',
+            'closest',
             'banner_slots',
         )
 

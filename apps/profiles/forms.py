@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 
 from profiles.models import Profile
-from fields import WMDTextField
 from maap.models import MaapPoint
 from maap.forms import InlinePointForm
 
@@ -60,13 +59,13 @@ class LoginForm(forms.Form):
 
 
 class ProfileForm(forms.ModelForm):
+    description = forms.CharField(label = 'Mensaje', widget=forms.Textarea(attrs={'cols':60}))
     class Meta:
         model = Profile
         exclude = ('user','location')
-    description = forms.CharField(widget=WMDTextField, required=False)
 
 class MailForm(forms.Form):
     name = forms.CharField(label = 'Su nombre', max_length = 50)
     mail = forms.EmailField(label = 'Su email')
-    message = forms.CharField(label = 'Mensaje', widget=WMDTextField)
+    message = forms.CharField(label = 'Mensaje', widget=forms.Textarea)
 
