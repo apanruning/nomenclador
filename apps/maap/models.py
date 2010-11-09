@@ -228,7 +228,7 @@ class MaapCategory(models.Model):
 class MaapPoint(MaapModel):
    
     geom = models.PointField(srid=DEFAULT_SRID)
-    icon = models.ForeignKey('Icon')
+    icon = models.ForeignKey('Icon', default=185, blank=True)
     closest = models.BooleanField(default=False)
     popup_text = models.TextField(blank=True)    
     objects = MaapManager()

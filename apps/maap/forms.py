@@ -25,6 +25,7 @@ class InlinePointForm (forms.ModelForm):
          )
     
 class MaapPointForm(forms.ModelForm):
+    geom = forms.CharField(widget=PointWidget, required=True)
     class Meta:
         model = MaapPoint
         fields = (
@@ -32,12 +33,13 @@ class MaapPointForm(forms.ModelForm):
             'geom',
             'description',
             'category',
-            'icon',
+
         )
         exclude = (
             'default_layers',
             'metadata',
             'popup_text',
+            'icon',
             'tags',
             'closest',
             'banner_slots',

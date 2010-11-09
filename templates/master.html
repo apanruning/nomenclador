@@ -73,9 +73,9 @@
         </div>
         <nav>    
         <div id="search-forms-wrapper" class="tabs">
-            <ul>
+            <ul class="ui-tabs-nav">
             {% block tabs %}    
-            <li><a href="#streets">Calles</a></li>
+            <li class="ui-tabs-selected"><a href="#streets">Calles</a></li>
             <li><a href="#places">Lugares y Servicios</a></li>
             <li><a href="#people">Personas</a></li>
             {% endblock tabs %}
@@ -133,6 +133,7 @@
     <div id="content-wrapper" class="shadow wrapper"> 
         {% block page %}
         <aside>
+        {% block aside %}
         {% pop_slot 'b-1' %}
         {% pop_slot 'twitter' %}
         {% pop_slot 'b-2' %}
@@ -141,6 +142,7 @@
         {% pop_slot 'b-5' %}
         {% pop_slot 'b-6' %}
         <br class="visualClear-left"/>
+        {% endblock %}
         </aside>
         <div id="main">
             {% block map %}
