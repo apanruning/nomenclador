@@ -139,11 +139,17 @@ class GeoCordobaAdmin(admin.OSMGeoAdmin):
     default_zoom = 12
     map_width = 800
     map_height = 600
+    
     extra_js =[MEDIA_URL+'js/OpenStreetMap.js',
                MEDIA_URL+'js/jquery.min.js', 
                MEDIA_URL+'js/tiny_mce/tiny_mce.js',
                MEDIA_URL+'js/tiny_mce/jquery.tinymce.js',
                MEDIA_URL+'js/tiny_mce/textareas.js',]
+    
+    list_display = ('name','creator','created')           
+    list_filter = ('creator','category','created')
+    ordering = ('created','creator','category')
+    search_fields = ('creator','created','creator')
 
     def save_model(self, request, obj, form, change):
 
@@ -151,9 +157,6 @@ class GeoCordobaAdmin(admin.OSMGeoAdmin):
         if not change:
             obj.creator = request.user
         obj.save()
-
-
-
         
    
 admin.site.register(MaapCategory, MaapCategoryAdmin)
