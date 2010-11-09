@@ -133,8 +133,8 @@ class MaapModel(models.Model):
     description = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True, editable = False)
     changed = models.DateTimeField(auto_now=True, editable = False)
-    creator = models.ForeignKey('auth.User', related_name='creators',editable = False) 
-    editor = models.ForeignKey('auth.User',related_name='editors', editable = False)
+    creator = models.ForeignKey('auth.User', related_name='creators',editable=False) 
+    editor = models.ForeignKey('auth.User',related_name='editors', editable=False)
     tags = TagField()
     category = models.ManyToManyField('MaapCategory', null=True, blank=True, related_name='maapmodel_set')
     banner_slots = models.CharField(max_length=255, blank=True, null=True)
@@ -228,7 +228,7 @@ class MaapCategory(models.Model):
 class MaapPoint(MaapModel):
    
     geom = models.PointField(srid=DEFAULT_SRID)
-    icon = models.ForeignKey('Icon')
+    icon = models.ForeignKey('Icon', default=185, blank=True)
     closest = models.BooleanField(default=False)
     popup_text = models.TextField(blank=True)    
     objects = MaapManager()

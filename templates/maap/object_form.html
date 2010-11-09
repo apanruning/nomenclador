@@ -1,0 +1,50 @@
+{% extends 'maap/index.html' %}
+{% load markup tagging_tags banner_tags mptt_tags maap_tags %}
+{% block title %}Nuevo punto{% endblock %}
+{% block js_onload %}
+            $('#id_description').tinymce(textEditorOptions);
+{% endblock %}
+
+{% block categories %}
+    {% with object.category.all|first as category %}
+       {% breadcrumbs category %}
+       {% category_list category %}
+    {% endwith %}
+{% endblock %}
+{% block page %}
+
+
+    {% block content %}
+        <h1>Nuevo Punto</h1>    
+
+        <aside>
+            <div class="sugested">
+            <h1>Mis lugares</h1>
+            {% for place in user.creators.all %}{% include 'place.html' %}{% endfor %}
+            </div>
+        </aside>
+        <section id="main">
+            <form action="." method="post">
+            <ul class="formfields">
+            {% for field in form %}
+                {% if not field.is_hidden %}
+                <li class="{{field.name}}_field {% if field.errors %}errors {% endif %} {% if field.field.required %}required{%endif%}">
+                    {% if field.field.required and not field.errors %}<p class="required-text"><span>required</span></p>{%endif%}
+                    {{field.label_tag}} {{field}}    
+                    {% if field.help_text %}<p class="discreet">{{ field.help_text }}</p>{% endif %}
+                    {% if field.errors %}{{ field.errors }}{% endif %}
+                </li>
+                {% else %}
+                    {{field}}    
+                {% endif %}
+            {% endfor %}
+            </ul>
+	
+            <p><input type="submit" value="Guardar" /></p>
+            </form>
+        </section>
+
+        <br class="visualClear" />
+    {% endblock %}
+{% endblock %}
+

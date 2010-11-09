@@ -287,7 +287,6 @@ aside{
     list-style:none;
 }
 
-
 #categories table a {
     color:#5485AF;
 }
@@ -321,7 +320,9 @@ aside{
     vertical-align:middle;
 }
 
-
+#place-title {
+    margin-top:1em;
+}
 .breadcrumb {
     padding:0.25em;
     margin:0;
@@ -440,9 +441,7 @@ aside{
 .ui-tabs-hide{
     display:none;
 }
-#place-title {
-    margin-top:1em;
-}
+
 /* gravatar */
 .gravatar {
     float:left;
@@ -467,17 +466,17 @@ aside .content-vote{
     display:none;
     margin:0;
 }
-aside.sugested {
+.sugested {
     padding:0.5em;
     background:#FFC;
     clear:right;
     text-align:left;
 }
-aside.sugested h1 {
+.sugested h1 {
     font-size:120%;
     margin:1em 0 
 }
-aside.sugested h2 {
+.sugested h2 {
     font-size:100%;
     margin:1em 0 
 }

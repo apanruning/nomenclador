@@ -2,10 +2,10 @@ form{
     margin:0;
 }
 label{
-    width:12em;
+    width:10em;
     float:left;
     text-align:right;
-    padding:0.25em;
+    padding:0.5em;
     font-size:80%;
 }
 select{
@@ -15,7 +15,18 @@ input[type='text'],
 input[type='password']{
     width:15em;
 }
+.description_field  textarea {
+    height:22em;
+    width:80%;
+}
+.name_field input {
+    font-size: 150%;
+    width: 80%;
+}
 
+.name_field label {
+    vertical-align:middle;
+}
 .formfields{
     list-style-type:none;
     margin:0;
@@ -43,7 +54,7 @@ input[type='password']{
 }
 .formfields p.required-text{
     margin:0 0 0.25em 0 !important;
-    padding: 0 0 0 10em !important;
+    padding: 0 0 0 9em !important;
 }
 .formfields p.required-text span {
     color:#900;
@@ -82,11 +93,6 @@ input[type='password']{
     margin:0;
     padding:0;
 }
-#comment-form textarea {
-    height:12em;
-}
-
-
 #comment-form li {
     margin:0;
 }

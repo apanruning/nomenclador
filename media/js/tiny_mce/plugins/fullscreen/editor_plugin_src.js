@@ -116,13 +116,9 @@
 					//document.body.overflow = 'hidden';
 
 					t.resizeFunc = tinymce.dom.Event.add(DOM.win, 'resize', function() {
-						var vp = tinymce.DOM.getViewPort(), fed = t.fullscreenEditor, outerSize, innerSize;
+						var vp = tinymce.DOM.getViewPort();
 
-						// Get outer/inner size to get a delta size that can be used to calc the new iframe size
-						outerSize = fed.dom.getSize(fed.getContainer().firstChild);
-						innerSize = fed.dom.getSize(fed.getContainer().getElementsByTagName('iframe')[0]);
-
-						fed.theme.resizeTo(vp.w - outerSize.w + innerSize.w, vp.h - outerSize.h + innerSize.h);
+						t.fullscreenEditor.theme.resizeTo(vp.w, vp.h);
 					});
 				}
 			});

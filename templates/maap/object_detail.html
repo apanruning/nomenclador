@@ -1,4 +1,4 @@
- {% extends 'maap/index.html' %}
+{% extends 'maap/index.html' %}
 {% load markup tagging_tags banner_tags mptt_tags maap_tags %}
 {% block title %}{{object.name}}{% endblock %}
 {% block detail %}{{object.description|truncatewords:'25'}} Georefenciamiento OpenStreetMaps Mapas{% endblock %}
@@ -33,12 +33,15 @@
         {% endif %}
         {{object.changed|default:object.created|date:"j-m-Y"}}
         </details>
-        <aside class="sugested">
+        <aside>
             <div id="banner-slot-b">
             {% pop_slot 'd-1' %}
             <br />
             {% pop_slot 'd-2' %}
             </div>
+            <div class="sugested">
+                
+
             <h1>Lugares sugeridos</h1>
             {% block listing %}
                 {{ block.super }}
@@ -48,6 +51,7 @@
                 {% endif %}
                 {% endwith %}
             {% endblock listing%}
+            </div>
         </aside>
         <section>{{object.description|markdown }}</section>
         <br class="visualClear" />
