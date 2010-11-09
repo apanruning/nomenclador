@@ -140,7 +140,9 @@ class GeoCordobaAdmin(admin.OSMGeoAdmin):
     map_width = 800
     map_height = 600
     extra_js =[MEDIA_URL+'js/OpenStreetMap.js',
+               MEDIA_URL+'js/jquery.min.js', 
                MEDIA_URL+'js/tiny_mce/tiny_mce.js',
+               MEDIA_URL+'js/tiny_mce/jquery.tinymce.js',
                MEDIA_URL+'js/tiny_mce/textareas.js',]
 
     def save_model(self, request, obj, form, change):
