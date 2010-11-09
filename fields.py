@@ -9,49 +9,6 @@ from tagging.models import Tag
 
 from django.conf import settings
 
-       
-class WMDTextField(forms.Textarea):
-    class Media:
-        css = {
-            'all': ('/media/css/wmd.css',)
-        }
-        js = (
-            '%sjs/showdown.js' %settings.MEDIA_URL,
-            '%sjs/jquery.textarearesizer.js' %settings.MEDIA_URL,
-
-        )  
-
-    def __init__(self, *args, **kwargs):
-        attrs = kwargs.setdefault('attrs', {})
-        if 'id' not in attrs:
-            attrs['id'] = 'wmd-input'
-        if 'cols' not in attrs:
-            attrs['cols'] = 79
-        if 'rows' not in attrs:
-            attrs['rows'] = 12
-        super(WMDTextField, self).__init__(*args, **kwargs)
-
-    def render(self, name, value, attrs=None):
-        rendered = super(WMDTextField, self).render(name, value, attrs)
-        
-        return mark_safe(u'''
-             <div id="wmd-field">
-                  <div id="wmd-button-bar" class="wmd-panel"></div>
-
-                  %s  
-                    
-                  <div id="wmd-preview" class="wmd-panel"></div>
-                  <div id="wmd-output" class="wmd-panel"></div>	
-                  <script type="text/javascript">
-                    wmd_options = {
-                        output: "Markdown",
-                        buttons: "bold italic | link blockquote code image | ol ul"
-                    };
-                  </script>
-                  <script type="text/javascript" src="%sjs/wmd.js"></script>      
-              </div>
-            ''' %(rendered, settings.MEDIA_URL) )
-
   
 class AutoCompleteTagInput(forms.TextInput):
     def __init__(self, model=None, attrs=None):        
