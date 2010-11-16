@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     'maap',
     'djangoosm',
     'cyj_logs',
+    'toolsnmt',
 )
 
 COMPRESS = not DEBUG

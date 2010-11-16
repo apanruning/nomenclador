@@ -1,0 +1,95 @@
+#wrapper {
+  
+  margin: 20px 20px 20px 20px;
+  padding-bottom: 0;
+  text-align: left;
+}
+
+body {
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  
+  font-stretch: normal;
+  font-family: 'Trebuchet MS',Arial,Helvetica,sans-serif;
+  font-variant: normal;
+  font-size: 80%;
+  font-size-adjust: none;
+}
+#top {
+  border-bottom:1px solid #CCC;
+  overflow:hidden;
+}
+#left {
+  float: left;
+  width: 30%;
+  height: 375px;
+  margin-left: 30px;
+}
+#map {
+  margin-right: 50px !important;
+  margin-top: 10px;
+  float: right;
+  width: 60%;
+  height: 425px;
+  border: 1px solid;
+  border-color: #CCC;
+}
+#nav {
+  margin-top: 5px;
+  margin-right: 5px;
+  width: 100%;
+}
+#nav li {
+  display: inline;
+}
+.visualClear {
+  margin: 0;
+  padding: 0;
+  clear: both;
+}
+#logo {
+  float: left;
+}
+#app_name {
+  float: right;
+  font-family: Verdana;
+  text-transform: uppercase;
+  font-size: x-large;
+  text-align: center;
+  margin-top: 7px;
+}
+#nav_slot {
+  float: right;
+}
+
+#street_selector {
+    margin-left: 30px;
+    margin-top:20px;
+    width: 30%;
+}
+
+.scrollable {
+    padding: 20px;
+    height:250px;
+    width: 200px;
+    overflow:auto   ;
+}
+
+#update_nodes {
+    float:right;
+    margin-right: 10px;
+}
+
+#init_text {
+    padding: 25px;
+}
+
+#detail_sync_fs {
+    margin-top:20px;
+}
+#footer {
+    padding-top:3em;
+    text-align: center;
+    border-top:1px solid #CCC;
+}

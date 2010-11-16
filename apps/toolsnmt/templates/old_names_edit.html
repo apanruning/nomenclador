@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block js_onload%}
+    //code for selector street
+        $('#street').change(function () {
+            var value = $('#street option:selected').val();
+            window.location = '/tools/old_street_edit?street=' + value;
+            return false;
+        });
+   
+       $("#save_last_name").click(function (event, object) {
+        var dir = '/tools/save_last_name?street={{ street }}&';
+        var dir_f = dir + $("form").serialize();
+        window.location = dir_f;
+        return false;
+    });
+    
+    //muestra la calle en el mapa
+    $(document).ready(function () {
+        alert({{ street }});
+        var value = $('#street option:selected').val();
+        state.loadLayer('/tools/show_street?street=' + value, null, function (data) {return 0;});
+                    
+    });
+
+{% endblock%}
+
+
+
+{% block left %}
+
+<form id="last_name_form">
+    <input type="text" id="last_name" value="{{ last_name }}" />
+  
+    <input type="submit" id="last_name" value="Actualizar/Guardar" />
+</form>
+ 
+
+
+{% endblock %}
+
+
+ 

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block js_onload%}
+    //code for selector street
+        $('#street').change(function () {
+            var value = $('#street option:selected').val();
+            window.location = '/tools/old_streets_edit?street=' + value;
+            return false; 
+        });
+        
+         //muestra la calle en el mapa
+        $(document).ready(function () {
+            var value = $('#street option:selected').val();
+            state.loadLayer('/tools/show_street?street={{ street }}', null, function (data) {return 0;});
+            });
+
+{% endblock%}
+
+{% block app_name %}
+    Administracion de Nombres Antiguos
+{% endblock %}
+
+{% block left %}
+<h5> Debe seleccionar una calle para asignarle un nombre antiguo </h5>
+{% endblock %}
+
+
+
+
+
+ 

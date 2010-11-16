@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block street_selector %}
+
+{% endblock %}
+
+
+{% block left %}
+<br />
+<p> El proceso de sincronizacion permite actualizar las alturas de calles buscables por el sistema </p>
+<p> Este debe ser realizado al menos una vez al dia. El tiempo de duracion de este proceso depende del hardware del servidor (es un proceso pesado). </p>
+          
+
+<!-- <input type="submit" 
+          id="sync" 
+          value="Sincronizar" /> -->
+<a href="/tools/detail_synchronize"> sincronizar </a>
+
+{% endblock %}
+
+{% block map %}
+    <fieldset id="detail_sync_fs">
+    <p> Fecha de sincronizacion: {{ date }}</p>
+    <p> Cantidad de calles syncronizadas: {{ length_streets }} </p>
+    <p> Listado de Calles Sincronizadas </p>
+    <ul>
+    {% for st in list_streets %}
+        <li> Way_ID: {{ st.member_id }} </li>
+    {% empty %}
+        <li> No se sincronizo ninguna calle </li>
+    {% endfor %}    
+    </ul>    
+    </fieldset>
+          
+ {% endblock %}
+ 

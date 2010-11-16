@@ -1,0 +1,10 @@
+PIL
+ipython
+-e svn+http://code.djangoproject.com/svn/django/trunk/
+Markdown
+docutils
+-e git+git://github.com/etnalubma/django-osm.git#egg=osm
+psycopg2
+python-dateutil
+simplejson
+wsgiref
