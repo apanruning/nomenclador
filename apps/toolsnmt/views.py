@@ -19,7 +19,7 @@ def doors(request):
     el sistema muestre los nodos asociados a la calle elegida 
     '''
     sw =  Streets.objects.all().order_by("name")
-    return render_to_response("waynodeslist.html", 
+    return render_to_response("toolsnmt/waynodeslist.html", 
                                {'streets2':sw,
                                 'nodes':[],
                                 'street':u'9 de Julio'})
@@ -33,7 +33,7 @@ def nodes_by_street(request):
     street = request.GET['street']
     sw =  Streets.objects.all().order_by("name")
     wnl = WayNodes.objects.filter(way__street__name=street)
-    return render_to_response("waynodeslist.html", 
+    return render_to_response("toolsnmt/waynodeslist.html", 
                                {'nodes':wnl, 
                                 'streets2':sw, 
                                 'street': unicode(street)})

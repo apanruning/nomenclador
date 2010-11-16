@@ -39,7 +39,7 @@ urlpatterns += patterns( '',
     (r"^announcements/", include("announcements.urls")),
     (r'^contacto/$', 'profiles.views.mail', {}, 'mail'),
     # toolsnmt
-    (r'^locations_tool/$', 'toolsnmt.views.doors'),
+    (r'^locations_tool/', include('toolsnmt.urls')),
     )
 
 

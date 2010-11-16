@@ -1,0 +1,14 @@
+{% extends 'master.html' %}
+{% load compressed %}
+
+{% block javascript %}
+{% compressed_js 'modules' %}
+{% endblock %}
+
+{% block js_onload %}
+    // Initialize state
+    state = new Maap.State();
+    state.init();        
+{% endblock %}
+
+

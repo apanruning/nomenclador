@@ -5,19 +5,18 @@ from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
 
-urlpatterns = patterns('views',
+urlpatterns = patterns('toolsnmt.views',
     # Example:
     (r'^$', 'doors'),
-    (r'^tools/doors/', 'doors'),
-    (r'^tools/nodes_by_street', 'nodes_by_street'),
-    (r'^tools/show_node', 'show_node'),
-    (r'^tools/show_street', 'show_street2'),
-    (r'^tools/update_nodes', 'update_nodes'),
-    (r'^tools/synchronization', 'synchronize_home'),
-    (r'^tools/detail_synchronize', 'detail_synchronize'),
-    (r'^tools/old_streets', 'old_streets'),
-    (r'^tools/old_streets_edit', 'old_streets_edit'),
-    (r'^tools/save_last_name', 'save_last_name'),
+    (r'^nodes_by_street', 'nodes_by_street'),
+    (r'^show_node', 'show_node'),
+    (r'^show_street', 'show_street2'),
+    (r'^update_nodes', 'update_nodes'),
+    (r'^synchronization', 'synchronize_home'),
+    (r'^detail_synchronize', 'detail_synchronize'),
+    (r'^old_streets', 'old_streets'),
+    (r'^old_streets_edit', 'old_streets_edit'),
+    (r'^save_last_name', 'save_last_name'),
     
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
