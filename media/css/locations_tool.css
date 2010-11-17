@@ -5,17 +5,6 @@
   text-align: left;
 }
 
-body {
-  font-style: normal;
-  font-weight: normal;
-  line-height: normal;
-  
-  font-stretch: normal;
-  font-family: 'Trebuchet MS',Arial,Helvetica,sans-serif;
-  font-variant: normal;
-  font-size: 80%;
-  font-size-adjust: none;
-}
 #top {
   border-bottom:1px solid #CCC;
   overflow:hidden;

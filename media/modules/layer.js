@@ -179,4 +179,33 @@ Maap.State.prototype.loadPoint = function(url, reload, callback) {
    return false;
  };
 
+// Extends Maap.State functionality: Show/Hide layer in Map
+Maap.State.prototype.toogleLayer = function(url, reload, callback) {
+    state = this;
+    alert(state.layers);
 
+    
+    for (j=0;j<state.layers.length;j++) {
+        if (state.layers[j].name==url) {
+            if (state.layers[j].getVisibility()==true) {
+                state.layers[j].display(false);
+                state.layers[j].visibility = false;
+                state.map.zoomIn();
+                state.map.zoomOut();
+                
+            } else {
+                state.layers[j].display(true);
+                state.layers[j].visibility = true;
+                 state.map.zoomIn();
+                 state.map.zoomOut();
+            }
+            break;       
+       } else {
+            continue;
+       }
+    }
+    
+    callback(state);
+        
+    return false;
+ };

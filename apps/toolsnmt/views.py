@@ -30,13 +30,15 @@ def nodes_by_street(request):
     para el comportamiento necesario para cuando el usuario elije un nodo este 
     sea mostrado en el mapa
     '''
-    street = request.GET['street']
+    street = Streets.objects.get(name=request.GET['street'])
     sw =  Streets.objects.all().order_by("name")
-    wnl = WayNodes.objects.filter(way__street__name=street)
+    wnl = WayNodes.objects.filter(way__street__intersects_with=street.id)
+    #wnl2 = WayNodes.objects.filter(way__street__name=street.name)
+    #wnl &= wnl2
     return render_to_response("toolsnmt/waynodeslist.html", 
                                {'nodes':wnl, 
                                 'streets2':sw, 
-                                'street': unicode(street)})
+                                'street': unicode(street.name)})
     
 def update_nodes(request):
     '''

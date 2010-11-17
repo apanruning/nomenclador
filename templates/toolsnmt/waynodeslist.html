@@ -1,10 +1,4 @@
 {% extends 'toolsnmt/base.html' %}
-{% block title %}Herramienta para Alturas{% endblock %}
-<html>
-<head>
-{% block css %}
-    <link media="all" rel="stylesheet" href="media/css/locations_tool.css" type="text/css"></link>
-{% endblock %}
 
 {% block js_onload %}
 
@@ -23,10 +17,10 @@
         return false;
     });
   
-    //muestra la calle en el mapa
-    $(document).ready(function () {
-        state.loadLayer('show_street?street={{ street }}', null, function (data) {return 0;});
-    });
+    
+    
+    state.loadLayer('show_street?street={{ street }}', null, function (data) {return 0;});
+    
     
     //code for selector street
     $('#street').change(function () {
@@ -36,30 +30,6 @@
         
 
 {% endblock %}
-
-</head>
-<body>
-{% block content %}
-<div id="wrapper">
-<div id="top">
-    <div id="logo">
-    <img src='/media/img/nomenclador_t.jpg'  />
-    </div>
-
-    <div id="app_name">{% block app_name %} Administracion de Alturas {% endblock %}</div>
-
-</div>
-
-<div id="nav_slot">
-{% block nav %}
-<ul id="nav">
-  <li><a href="/">Inicio</a></li>
-  <li><a href="/tools/synchronization">Syncro</a></li>
-  <li><a href="/tools/old_streets">Nombres Antiguos</a></li>
-  <li><a href="/tools/help">Ayuda</a></li>
-</ul>
-{% endblock %}
-</div>
 
 {% block street_selector %}
 <div id="street_selector"> 
@@ -77,25 +47,10 @@
     {% endfor%}
     </select>
 </div>
-{% endblock %} 
-
-<div id="left">
-{% block left %} 
-
-{% endblock %} 
-</div>
-
-<div id="map">
-{% block map %}
-
-
 {% endblock %}
-</div>
 
-<div id="footer" class="visualClear">
-    <span id="credits">&copy;2009 Comercio y Justicia</span>
-</div>
-</div>
+{% block left %}
+<div id="left">
 {% if nodes %}
 <form>
 <div>
@@ -138,7 +93,7 @@
 {% else %}
 <p id="init_text"> <h4>Se debe seleccionar una calle para que se muestren los nodos asociados a esta </h4></p>
 {% endif%}
+</div>
 {% endblock %}
-</html>
 
 
