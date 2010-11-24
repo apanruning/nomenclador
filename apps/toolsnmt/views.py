@@ -8,7 +8,9 @@ from django.utils import simplejson
 
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.contrib.gis.geos import LineString, MultiLineString
-from osm.models import Streets, WayNodes, Nodes, WayNodesDoor
+from maap.models import Streets, Nodes
+from maap.layers import Layer
+from djangoosm.models import  WayNodes, WayNodesDoor
 from utils import synchronize
 
     
@@ -19,10 +21,14 @@ def doors(request):
     el sistema muestre los nodos asociados a la calle elegida 
     '''
     sw =  Streets.objects.all().order_by("name")
+    street = Streets.objects.get(name=u'9 de Julio')
     return render_to_response("toolsnmt/waynodeslist.html", 
                                {'streets2':sw,
                                 'nodes':[],
-                                'street':u'9 de Julio'})
+                                'street':street.to_layer().json,
+                                'layer_points':[]
+                                })
+                                
 
 def nodes_by_street(request):
     '''
@@ -32,13 +38,26 @@ def nodes_by_street(request):
     '''
     street = Streets.objects.get(name=request.GET['street'])
     sw =  Streets.objects.all().order_by("name")
-    wnl = WayNodes.objects.filter(way__street__intersects_with=street.id)
+    wnl = WayNodes.objects.filter(way__street__name=street.name)
+    nodes = Nodes.objects.filter(waynodes__in=wnl)
+    layer = []
+    
+    for a in nodes:
+        b = Layer()
+        b.id = a.id
+        b.elements.append(a.to_geo_element())
+        layer.append(b.json)
+    
+
+    
     #wnl2 = WayNodes.objects.filter(way__street__name=street.name)
     #wnl &= wnl2
     return render_to_response("toolsnmt/waynodeslist.html", 
                                {'nodes':wnl, 
                                 'streets2':sw, 
-                                'street': unicode(street.name)})
+                                'street': street.to_layer().json,
+                                'layer_points':"["+",".join(layer)+"]"
+                                })
     
 def update_nodes(request):
     '''

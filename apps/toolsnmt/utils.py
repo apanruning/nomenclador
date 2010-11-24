@@ -1,4 +1,5 @@
-from osm.models import Streets, Ways, WayNodes, WayNodesDoor, Nodes, RelationMembers, RelationTags, Relations
+from maap.models import Streets, Nodes
+from djangoosm.models import Ways, WayNodes, WayNodesDoor, RelationMembers, RelationTags, Relations
 from django.db import connection, transaction, IntegrityError
 from django.db.models import Max
 import random

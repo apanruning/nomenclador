@@ -1,25 +1,25 @@
 from django.utils import simplejson
 
 DEFAULT_ICON = {
-    "url": "/media/icons/info.png", 
-    "width": 32, 
+    "url": "/media/icons/info.png",
+    "width": 32,
     "height": 37
 }
 
 order = ['area','multiline','point']
 
 class BaseLayer(object):
-    meta = ['id', 'name', 'type', 'absolute_url','popup_text','center']
+    meta = ['id', 'name', 'type', 'absolute_url','popup_text']
 
     def __init__(self, **argv):
         for k,v in argv.iteritems():
             setattr(self, k, v)
     
     def __iter__(self):
-        for k in self.meta:
-            v = getattr(self, k, None)
-            if v:
-                yield (k, v)            
+        out = dict()
+        for e in self.meta:
+            out[e] = getattr(self, e, None)
+        return out.iteritems()
     
     @property
     def json(self):
@@ -32,7 +32,7 @@ class BaseLayer(object):
                 object_dict['elements'] = elements
         
         return simplejson.dumps(object_dict)
-
+    
 class Layer(BaseLayer):
     type = 'layer'
     
@@ -65,13 +65,13 @@ class Layer(BaseLayer):
                 centroid = (
                     center_object.centroid.get_x(),
                     center_object.centroid.get_y()
-                )                    
-                delta_x = max(abs(extent[0]-centroid[0]), 
+                )
+                delta_x = max(abs(extent[0]-centroid[0]),
                               abs(extent[2]-centroid[0]))
                               
-                delta_y = max(abs(extent[1]-centroid[1]), 
+                delta_y = max(abs(extent[1]-centroid[1]),
                               abs(extent[3]-centroid[1]))
-            
+
                 extent = ((centroid[0] - delta_x),
                           (centroid[1] - delta_y),
                           (centroid[0] + delta_x),
@@ -80,10 +80,14 @@ class Layer(BaseLayer):
 
             # for historical reasons
             margin = 102
-            extent = [e-margin for e in extent[0:2]] + \
-                     [e+margin for e in extent[2:5]]
-                         
-            return extent   
+            extent = (
+                extent[0] - margin,
+                extent[1] - margin,
+                extent[2] + margin,
+                extent[3] + margin
+            )
+            
+            return extent
 
 
 class GeoElement(BaseLayer):
@@ -95,7 +99,7 @@ class GeoElement(BaseLayer):
     @property
     def meta(self):
         return super(GeoElement, self).meta + \
-               ['geojson', 'clickable']
+               ['geojson']
 
 class Point(GeoElement):
     type = 'point'
@@ -112,5 +116,6 @@ class MultiLine(GeoElement):
 
 class Area(GeoElement):
     type = 'area'
+
 
 
