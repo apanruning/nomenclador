@@ -69,7 +69,7 @@ body {
     font : 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
     color : #666666;
     margin : 20px 0px 20px 0px;
-    text-align: center; 
+   text-align: center; 
 }
 
 #wrapper {
@@ -80,10 +80,10 @@ body {
 } 
 }
 
-header {
+#header {
     margin-bottom:0em;
     display:block;
-    background:#EBEBEB url(../img/bg-header.png) repeat-x;
+    background: url(../img/bg-header.png) repeat-x scroll 0 0 #EBEBEB;
 }
 
 #footer{
