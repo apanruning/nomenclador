@@ -10,11 +10,11 @@
     
     json_layer_point = {{ layer_points|safe }};
     for(var i=1; i<=json_layer_point.length;i++) {
-        state.setLayer(json_layer_point[i-1]).show();
+        state.setLayer(json_layer_point[i-1]).hide();
     }
     
     $("#update_nodes").click(function (event, object) {
-        var dir = 'update_nodes?street={{ street }}&';
+        var dir = 'update_nodes?street_name={{ street_name }}&';
         var dir_f = dir + $("form").serialize();
         window.location = dir_f; 
         return false;
@@ -22,18 +22,15 @@
         
     $(".node-link").click(function (event, object) {
         var a = $(this);
-        for(var u=1;u<=state.map.layers.length;u++) {
-            if (state.map.layers[u-1].id == a.attr("id")) {
-                state.map.layers[u-1].hide()
-            }
-        }
+        var u = state.layers[a.attr('id')];
+        u.toogle();
         return false;
     });
   
     //code for selector street
     $('#street').change(function () {
         var value = $('#street option:selected').val();
-        window.location = 'nodes_by_street?street=' + value;
+        window.location = 'nodes_by_street?street_name=' + value;
     });
         
 
@@ -45,7 +42,7 @@
      
     <select id="street">
     {% for street_i in streets2 %}
-        {% ifequal street_i.name street %}
+        {% ifequal street_i.name street_name %}
             <option value="{{street_i.name }}" selected>{{ street_i.name }}</option>
         {% else %}
             <option value="{{street_i.name }}" >{{ street_i.name }}</option>
@@ -67,6 +64,7 @@
     <li> 
         <a href="#" 
            class="node-link"  
+           
            id="{{ nod.node.id }}"> 
            {{ nod.node.id }} 
         </a> 

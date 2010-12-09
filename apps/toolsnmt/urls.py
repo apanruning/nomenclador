@@ -9,8 +9,6 @@ urlpatterns = patterns('toolsnmt.views',
     # Example:
     (r'^$', 'doors'),
     (r'^nodes_by_street', 'nodes_by_street'),
-    (r'^show_node', 'show_node'),
-    (r'^show_street', 'show_street2'),
     (r'^update_nodes', 'update_nodes'),
     (r'^synchronization', 'synchronize_home'),
     (r'^detail_synchronize', 'detail_synchronize'),

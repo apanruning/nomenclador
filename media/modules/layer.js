@@ -134,7 +134,14 @@ Maap.Layer.prototype = {
     
     hide: function() {
         this.layer.setVisibility(false);
-    }
+    },
+    toogle: function() {
+        if (this.layer.getVisibility() == true) {
+            this.hide();    
+        } else {
+            this.show();
+        }
+    },
 };
 
 

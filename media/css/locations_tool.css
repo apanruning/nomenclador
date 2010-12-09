@@ -82,3 +82,80 @@
     text-align: center;
     border-top:1px solid #CCC;
 }
+
+html, body,  #wrapper{
+    height:100%;
+}
+body {
+    background:#FFF;
+    padding:0;
+    margin:0;
+    text-align:center;
+}
+#wrapper {
+    padding:0;
+    margin:0 auto;
+    text-align:left;
+}
+.wrapper {
+    width:80em;
+    padding:0;
+    margin:0 auto;
+    text-align:left;
+}
+
+header {
+    margin-bottom:0em;
+    display:block;
+    background:#EBEBEB url(../img/bg-header.png) repeat-x;
+}
+
+footer{
+    display:block;
+    clear:both;
+    margin:2em 0 -2px;
+    z-index:99999;
+    background:#CCC;
+}
+
+
+#logo {
+    margin:0;
+    padding:0.5em 0;
+}
+
+#logo a{
+    text-decoration:none;
+    color:#333;
+    font-family: Impact;
+    font-size: 20pt;
+    text-transform: uppercase;
+}
+#head-banner{
+    float:right;
+    clear:right;
+    width:750px;
+    height:75px;
+    overflow:hidden;
+}
+
+
+#logo {
+    float:left;
+}
+
+#content {
+    clear:both;
+    display:block;
+    margin:0;
+    position:relative;
+    padding:1em;
+    background: #FFF;
+}
+
+#credits {
+    float:right;
+    margin:0;
+    padding:0.5em;
+}
+
