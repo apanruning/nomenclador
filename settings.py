@@ -136,8 +136,14 @@ COMPRESS_CSS = {
         'output_filename': 'css/stylesheet.css',
             'media': 'all',
     },
+    'toolsnmt': {
+        'source_filenames': (
+            'css/locations_tool.css',
+        ),
+        'output_filename': 'css/toolsnmt.css',
+            'media': 'all',
+    },
 }
-    
 
 COMPRESS_JS = {
     'scripts': {
