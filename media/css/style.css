@@ -117,7 +117,7 @@ aside{
 }
 #map-wrapper{
     height:30em;
-    overflow:hidden;
+    
     position:relative;
 }
 #map {

@@ -35,11 +35,12 @@ Maap.State.prototype.initializeBounds = function() {
 Maap.State.prototype.initializeControls = function () {
     //add and/or remove controls to map
     this.map.addControl(new OpenLayers.Control.PanZoomBar());
-    this.map.addControl(new OpenLayers.Control.OverviewMap());
+    //this.map.addControl(new OpenLayers.Control.OverviewMap());
     this.map.addControl(new OpenLayers.Control.Navigation()); 
     this.map.addControl(new OpenLayers.Control.Attribution());
     this.map.addControl(new OpenLayers.Control.MousePosition());
-    this.map.addControl(new OpenLayers.Control.Permalink());   
+    this.map.addControl(new OpenLayers.Control.Permalink());
+
     return 0;
 }
 
