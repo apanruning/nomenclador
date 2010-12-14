@@ -14,7 +14,7 @@ from utils import synchronize
 from django.contrib.auth.decorators import login_required
 
 
-@login_required
+@login_required()
 def doors(request):
     '''
     Esta vista devuelve el listado de calles buscables en un selector  

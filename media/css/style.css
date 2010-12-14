@@ -46,8 +46,7 @@ footer .wrapper {
     text-decoration:none;
     color:#333;
     font-family: Impact;
-    font-size: 20pt;
-    text-transform: uppercase;
+    font-size: 25pt;
 }
 #head-banner{
     float:right;
@@ -107,7 +106,7 @@ nav {
 #main {
     float:left;
     width:58em;
-    padding-bottom:4em;
+/*    padding-bottom:4em; */
     background:#FFF;
 }
 aside{
@@ -116,13 +115,14 @@ aside{
     text-align:center;
 }
 #map-wrapper{
-    height:30em;
+/*    height:30em; */
     
     position:relative;
 }
 #map {
     width:100%;
-    height:450px;
+    height:350px;
+    border: 1px solid #999999;
 }
 #map-handler {
     display:block;
@@ -143,12 +143,12 @@ aside{
     list-style:none;
     margin:0;
     padding:0;
+    background: #EBEBEB;
+    
 }
 #obj-list a {
     padding: 0.5em;
     display:block;
-    
-
 }
 #obj-list a:hover{
     background:#ebebeb;
@@ -171,9 +171,14 @@ aside{
     display:block;
     margin:0;
     position:relative;
-    padding:1em;
-    background: #FFF;
+/*    padding:1em; */
+    background: #EBEBEB;
 }
+
+#content section {
+    margin-left: 5px;
+}
+
 #content .votes {
     font-size:150%;
     display:block;
@@ -366,6 +371,7 @@ aside{
     overflow:hidden;
     margin:0 auto !important;
     padding:0 1em;
+    background:#FFC018
 }
 
 #pagination-digg li{
@@ -457,7 +463,6 @@ aside{
     overflow:hidden;
 }
 
-
 .content-vote {
     float:right;
     vertical-align:middle;
@@ -471,6 +476,7 @@ aside .content-vote{
     background:#FFC;
     clear:right;
     text-align:left;
+    margin-right: 5px;
 }
 .sugested h1 {
     font-size:120%;
