@@ -105,9 +105,9 @@ nav {
 }
 #main {
     float:left;
-    width:58em;
+    width:57em;
 /*    padding-bottom:4em; */
-    background:#FFF;
+/*    background:#FFF; */
 }
 aside{
     float:right;
@@ -147,19 +147,27 @@ aside{
     
 }
 #obj-list a {
-    padding: 0.5em;
+    padding-left: 1em;
     display:block;
 }
 #obj-list a:hover{
+/*    background:#FFC018; */
+}
+
+#obj-list li:hover {
     background:#FFC018;
 }
+
 #obj-list .item {
-    position: relative
-} 
+    position: relative;
+    border-top: 1px solid #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+}
+
 #obj-list details {
     position:absolute;
     right:1em;
-    top:1em;
+    top:2em;
     font-size:70%;
     font-weight:normal;
 }
@@ -172,7 +180,7 @@ aside{
     margin:0;
     position:relative;
 /*    padding:1em; */
-    background: #EBEBEB;
+    background: #A8DAA8;
 }
 
 #content section {
