@@ -11,8 +11,10 @@ from maap.models import Streets, Nodes
 from maap.layers import Layer
 from djangoosm.models import  WayNodes, WayNodesDoor
 from utils import synchronize
+from django.contrib.auth.decorators import login_required
 
-    
+
+@login_required
 def doors(request):
     '''
     Esta vista devuelve el listado de calles buscables en un selector  
@@ -28,7 +30,7 @@ def doors(request):
                                 'street_name':u'9 de Julio',
                                 'layer_points':[]
                                 })
-
+@login_required
 def nodes_by_street(request):
     '''
     Esta vista devuelve el listado de nodos de una calle ademas del codigo 
@@ -54,6 +56,7 @@ def nodes_by_street(request):
                                 'layer_points':"["+",".join(layer)+"]"
                                 })
     
+@login_required
 def update_nodes(request):
     '''
     Este metodo actualiza localmente las alturas de los nodos
@@ -99,53 +102,54 @@ def update_nodes(request):
                                 'layer_points':"["+",".join(layer)+"]"
                                 })
 
-def synchronize_home(request):
-    """
-    Este metodo permite sincronizar las alturas cargadas localmente a la estructura de osmosis
-    """
+
+#def synchronize_home(request):
+#    """
+#    Este metodo permite sincronizar las alturas cargadas localmente a la estructura de osmosis
+#    """
    
-    return render_to_response("synchronization.html",request)
+#    return render_to_response("synchronization.html",request)
     
-def detail_synchronize(request):
-    """ 
-    Este metodo ejecuta la sincronizacion y devuelve un detalle del proceso 
-    """           
-    return render_to_response("detail_synchronize.html",request)
+#def detail_synchronize(request):
+#    """ 
+#    Este metodo ejecuta la sincronizacion y devuelve un detalle del proceso 
+#    """           
+#    return render_to_response("detail_synchronize.html",request)
     
-def old_streets(request):
+#def old_streets(request):
 
-    sw = Streets.objects.all()
-    street = u'9 de Julio'
-    return render_to_response("old_names.html",
-                                {'streets2':sw,
-                                 'street': street
-                                 })
+#    sw = Streets.objects.all()
+#    street = u'9 de Julio'
+#    return render_to_response("old_names.html",
+#                                {'streets2':sw,
+#                                 'street': street
+#                                 })
 
-def old_streets_edit(request):
-    street = request['street']
+#def old_streets_edit(request):
+#    street = request['street']
         
-    sw = Streets.objects.all()
-    st = Streets.objects.get(name=street)
-    if st.old: 
-        name_last_street = st.old
-    else:
-        name_last_street = "Editar Valor"
-    return render_to_response("old_names_edit.html",
-                               {'streets2':sw, 
-                                'street':unicode(street),
-                                'last_name':name_last_street,
-                               })    
+#    sw = Streets.objects.all()
+#    st = Streets.objects.get(name=street)
+#    if st.old: 
+#        name_last_street = st.old
+#    else:
+#        name_last_street = "Editar Valor"
+#    return render_to_response("old_names_edit.html",
+#                               {'streets2':sw, 
+#                                'street':unicode(street),
+#                                'last_name':name_last_street,
+#                               })    
     
-def save_last_name(request):
-    sw = Streets.objects.all()
-    l_name = request['last_name']
-    street = request['street']
-    st = Streets.objects.get(name=street)    
-    st.old = l_name
-    st.save()
+#def save_last_name(request):
+#    sw = Streets.objects.all()
+#    l_name = request['last_name']
+#    street = request['street']
+#    st = Streets.objects.get(name=street)    
+#    st.old = l_name
+#    st.save()
         
-    return render_to_response("old_streets_edit.html",
-                               {'streets2':sw, 
-                                'street':unicode(street),
-                                'last_name':unicode(l_name)
-                               })    
+#    return render_to_response("old_streets_edit.html",
+#                               {'streets2':sw, 
+#                                'street':unicode(street),
+#                                'last_name':unicode(l_name)
+#                               })    
