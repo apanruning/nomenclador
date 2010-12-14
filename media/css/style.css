@@ -484,15 +484,16 @@ aside .content-vote{
     background:#FFC;
     clear:right;
     text-align:left;
-    margin-right: 5px;
+    margin-right: 1em;
+    margin-bottom: 1em;
 }
 .sugested h1 {
-    font-size:120%;
-    margin:1em 0 
+    font-size:150%;
+    margin:0.5em 0; 
 }
 .sugested h2 {
     font-size:100%;
-    margin:1em 0 
+    margin:0.5em 0 ;
 }
 aside li:hover .content-vote {
     display:block;
