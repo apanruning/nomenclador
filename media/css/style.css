@@ -50,6 +50,7 @@ section {
     border: 1px solid #CCC;
     border-width: 1px 0;
     padding: 0 0 2em;
+    min-height: 40em;
 }
 
 nav {
@@ -57,6 +58,11 @@ nav {
     position:relative;
     clear: both;
     width:100%;
+}
+aside{
+    float:right;
+    width:23em;
+    text-align:center;
 }
 #logo {
     margin:0;
@@ -123,11 +129,6 @@ nav {
 #main {
     float:left;
     width:57em;
-}
-aside{
-    float:right;
-    width:22em;
-    text-align:center;
 }
 #map-wrapper{
 /*    height:30em; */
@@ -272,18 +273,20 @@ aside{
     color:#900;
 }
 
-#site_wide_announcements {
-    background:#FFC018;
-    border:2px solid #a87f0f;
-    padding:0.2em 0.5em;
+#site-wide-announcements {
+    background: #FE9;
+    border: 1px solid #FC0;
+    padding:0;
+    position: absolute;
+    width: 100%;
 }
-#site_wide_announcements ul{
+#site-wide-announcements ul{
     list-style:none;
     padding:0;
-    margin:0;
+    margin:0 2em;
 
 }
-#site_wide_announcements ul li {
+#site-wide-announcements ul li {
     padding:0;
     margin:0;
     position:relative;
@@ -350,6 +353,9 @@ aside{
 
 #place-title {
     margin-top:1em;
+}
+.banner {
+    margin: 1em 0;
 }
 .breadcrumb {
     padding:0.25em;

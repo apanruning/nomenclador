@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response, redirect
 from django.db import connection
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
@@ -7,7 +8,7 @@ from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
 from django.views.generic import create_update, simple
-
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.gis.measure import Distance, D
 from django.core import urlresolvers
@@ -139,5 +140,10 @@ def obj_list_by_tag(request, tag):
         extra_instance={'tag':tag}
     )
 
+def log_out(request):
+    from django.contrib.auth import logout
+    logout(request)
+    messages.add_message(request, messages.INFO, u'Ha cerrado su sesión')    
+    return redirect('index')
 
 

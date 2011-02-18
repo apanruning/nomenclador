@@ -71,6 +71,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',    
 )
@@ -79,6 +80,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.auth',
     'django.core.context_processors.request',
     'django.core.context_processors.media',
+    'django.contrib.messages.context_processors.messages',
     'announcements.context_processors.site_wide_announcements',
 )
 
@@ -106,6 +108,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'django.contrib.markup',
     'django.contrib.comments',
+    'django.contrib.messages',
     'compress',
     'announcements',
     'pagination',    

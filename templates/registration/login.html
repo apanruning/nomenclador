@@ -2,8 +2,9 @@
 {%block title%}Bienvenido, por favor ingrese su nombre de usuario y contraseña{%endblock%}
 
 {% block content %}
+<h1>Por favor ingrese su nombre de usuario y contraseña</h1>
 <div id="login-form">
-<h2>Por favor ingrese su nombre de usuario y contraseña</h2>
+
 {% if form.errors %}
 <p id="error-message">Nombre de usuario o contraseña incorrecta</p>
 {% endif %}

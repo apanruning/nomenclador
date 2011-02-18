@@ -33,6 +33,10 @@
             }
           return false;
         });
+        $('#site-wide-announcements .close').click(function(){
+            $('#site-wide-announcements').toggle();
+            return false;
+        })
         $('.tabs').tabs();
         {%block js_onload%}{% endblock %}
     });
@@ -41,14 +45,20 @@
   
 <body>
 <div id="wrapper">
-    {% if site_wide_announcements %}
-        <div id="site_wide_announcements">
+    {% if site_wide_announcements or messages%}
+        <div id="site-wide-announcements">
             <ul>
                 {% for announcement in site_wide_announcements %}
                 <li>
                     <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> 
-                    <a class="action close" href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">Ocultar</a>
+                    <a class="action close announcement" href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">X</a>
                 </li>
+                {% endfor %}
+                {% for message in messages %}
+                <li>
+                    {{ message }}
+                    <a class="action close" href="#">X</a>
+                </li>                    
                 {% endfor %}
             </ul>
         </div>
@@ -136,6 +146,7 @@
         <aside>
         {% block aside %}
         {% pop_slot 'b-1' %}
+        {% pop_slot 'twitter' %}
         {% pop_slot 'b-2' %}
         {% pop_slot 'b-3' %}
         {% pop_slot 'b-4' %}
