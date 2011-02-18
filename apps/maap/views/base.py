@@ -132,7 +132,12 @@ def search_places(request, cat_slug=None):
     
 def obj_list_by_tag(request, tag):
     result = TaggedItem.objects.get_by_model(MaapModel, tag)
-    context = RequestContext(request, {'tag':tag , 'objs': result})
-    return render_to_response('maap/index.html', context_instance=context)
+    return object_list(
+        request, 
+        result, 
+        template_name='maap/index.html', 
+        extra_instance={'tag':tag}
+    )
+
 
 
