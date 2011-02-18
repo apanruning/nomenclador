@@ -2,8 +2,10 @@
         {{banner.code|safe}}
 {% else%}
     {% if banner.image %}
+    <div class="banner">
     <a href="{{banner.url}}">
     <img src="/media/{{banner.image}}" />
     </a>
+    </div>
     {% endif %}
 {% endif %}
