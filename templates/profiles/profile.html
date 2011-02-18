@@ -48,7 +48,7 @@
             </div>
         </aside>
         <h1><a href="{% url profile_detail user_profile %}" rel="bookmark">{{ profile.name}}</a></h1>    	
-        <section>{{ user_profile.get_profile.description|markdown }}</section>
+        <div id="main">{{ user_profile.get_profile.description|markdown }}</div>
         <br class="visualClear" />
     {% endwith %}
     {% endblock %}
