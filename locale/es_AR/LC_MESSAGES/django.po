@@ -1,0 +1,209 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-19 00:47-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps/cyj_logs/models.py:8
+msgid "info"
+msgstr ""
+
+#: apps/cyj_logs/models.py:9
+msgid "warning"
+msgstr ""
+
+#: apps/cyj_logs/models.py:10
+msgid "debug"
+msgstr ""
+
+#: apps/cyj_logs/models.py:11
+msgid "error"
+msgstr ""
+
+#: apps/cyj_logs/models.py:12
+msgid "fatal"
+msgstr ""
+
+#: apps/profiles/forms.py:17
+msgid "Nombre de usuario"
+msgstr ""
+
+#: apps/profiles/forms.py:22
+msgid "Password"
+msgstr ""
+
+#: apps/profiles/forms.py:26
+msgid "Recordarme"
+msgstr ""
+
+#: apps/profiles/forms.py:27
+msgid "No cerrar la cuenta por tres semanas"
+msgstr ""
+
+#: apps/profiles/forms.py:44
+msgid "Esta cuenta es inactiva"
+msgstr ""
+
+#: apps/profiles/forms.py:46
+msgid "El nombre de usuario o password no son correctos"
+msgstr ""
+
+#: apps/profiles/forms.py:52
+msgid "Bienvenido"
+msgstr ""
+
+#: apps/profiles/models.py:11
+msgid "user"
+msgstr "Usuario"
+
+#: apps/profiles/models.py:12
+msgid "name"
+msgstr "Nombre"
+
+#: apps/profiles/models.py:13
+msgid "about"
+msgstr "Acerca de"
+
+#: apps/profiles/models.py:15
+msgid "is public"
+msgstr "¿Listar públicamente?"
+
+#: apps/profiles/models.py:16
+msgid "website"
+msgstr "Sitio web"
+
+#: apps/profiles/models.py:29
+msgid "profile"
+msgstr "Perfil"
+
+#: apps/profiles/models.py:30
+msgid "profiles"
+msgstr "Perfiles"
+
+#: apps/profiles/templates/profile_item.html:10
+msgid "Name"
+msgstr "Nombre"
+
+#: apps/profiles/templates/profile_item.html:11
+msgid "About"
+msgstr "Acerca de"
+
+#: apps/profiles/templates/profile_item.html:12
+msgid "Location"
+msgstr "Ubicación"
+
+#: apps/profiles/templates/profile_item.html:13
+msgid "Website"
+msgstr "Sitio Web"
+
+#: templates/messages/compose.html:4
+msgid "Compose Message"
+msgstr "Crear un mensaje"
+
+#: templates/messages/compose.html:7
+msgid "Send"
+msgstr "Enviar"
+
+#: templates/messages/inbox.html:20 templates/messages/outbox.html:16
+#: templates/messages/trash.html:16 templates/messages/view.html:11
+msgid "DATETIME_FORMAT"
+msgstr "Formaato de fecha"
+
+#: templates/messages/new_message.html:1
+#, python-format
+msgid ""
+"Hello %(recipient)s,\n"
+"\n"
+"you received a private message from %(sender)s with\n"
+"the following contents:"
+msgstr ""
+"Hola %(recipient)s,\n"
+"\n"
+"Recibiste un mensaje privado de %(sender)s con \n"
+"el siguiente contenido:"
+#: templates/messages/new_message.html:9
+#, python-format
+msgid "Sent from %(site_url)s"
+msgstr "Enviado desde %(site_url)s"
+
+#: templates/messages/new_message.html:10
+msgid "Inbox"
+msgstr "Recibidos"
+
+#: templates/messages/new_message.html:11 templates/messages/view.html:18
+msgid "Reply"
+msgstr "Responder"
+
+#: templates/messages/outbox.html:4
+msgid "Sent Messages"
+msgstr "Enviados"
+
+#: templates/messages/outbox.html:7 templates/messages/view.html:12
+msgid "Recipient"
+msgstr "Destinatario"
+
+#: templates/messages/outbox.html:7 templates/messages/trash.html:7
+#: templates/messages/view.html:6
+msgid "Subject"
+msgstr "Asunto"
+
+#: templates/messages/outbox.html:7
+msgid "Sent"
+msgstr "Enviado"
+
+#: templates/messages/outbox.html:7 templates/messages/trash.html:7
+msgid "Action"
+msgstr "Acción"
+
+#: templates/messages/outbox.html:17
+msgid "delete"
+msgstr "borrar"
+
+#: templates/messages/trash.html:4
+msgid "Deleted Messages"
+msgstr "Borrados"
+
+#: templates/messages/trash.html:7 templates/messages/view.html:8
+msgid "Sender"
+msgstr "Remitente"
+
+#: templates/messages/trash.html:7 templates/messages/view.html:10
+msgid "Date"
+msgstr "Fecha"
+
+#: templates/messages/trash.html:17
+msgid "undelete"
+msgstr "recuperar"
+
+#: templates/messages/trash.html:23
+msgid ""
+"Deleted Messages are removed from the trash at unregular intervals, don't "
+"rely on this feature for long-time storage."
+msgstr ""
+"Los Borrados son eliminados completamente en intervalos irregulares "
+"no confíe en esta prestación para almacenar mensajes  mucho tiempo"
+#: templates/messages/view.html:4
+msgid "View Message"
+msgstr ""
+
+#: templates/messages/view.html:20
+msgid "Delete"
+msgstr "Borrar"
+
+#: templates/notification/single.html:7 templates/notification/single.html:10
+msgid "Notice"
+msgstr "Información"
