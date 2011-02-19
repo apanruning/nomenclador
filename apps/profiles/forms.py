@@ -59,7 +59,8 @@ class LoginForm(forms.Form):
 
 
 class ProfileForm(forms.ModelForm):
-    description = forms.CharField(label = 'Mensaje', widget=forms.Textarea(attrs={'cols':60}))
+    description = forms.CharField(label = 'Bio', widget=forms.Textarea(attrs={'cols':60}))
+    
     class Meta:
         model = Profile
         exclude = ('user','location')

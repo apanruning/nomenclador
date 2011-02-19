@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib.auth.models import User
@@ -5,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.views.generic import create_update, simple
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
@@ -47,6 +49,7 @@ def get_default_redirect(request, redirect_field_name="next",
 
 def profile(request, username):
     user_profile = get_object_or_404(User, username=username)
+    profile = user_profile.get_profile()
     if request.user.is_authenticated():
         if request.user == user_profile:
             is_me = True
@@ -54,18 +57,26 @@ def profile(request, username):
             is_me = False
     else:
         is_me = False
+    if not profile.name and is_me:
+        messages.add_message(
+            request, 
+            messages.INFO, 
+            u'Todavía no ha creado su perfil de usuario'
+        )
+        return redirect('profile_edit', user_id=user_profile.pk)
     try :
-        json_layer = user_profile.get_profile().location.to_layer().json
+        json_layer = profile.location.to_layer().json
     except:
         json_layer = None
+        
     return simple.direct_to_template(
         request,
         'profiles/profile.html', 
         {
         'is_me': is_me,
         'user_profile': user_profile,
-        'json_layer': json_layer
-        
+        'json_layer': json_layer,
+        'created':  user_profile.created.all(),
         }
     )
     

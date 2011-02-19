@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 # Django settings for nomenclador project.
 DEBUG = True
@@ -109,6 +110,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.comments',
     'django.contrib.messages',
+    'south',
     'compress',
     'announcements',
     'pagination',    

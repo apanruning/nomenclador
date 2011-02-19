@@ -20,7 +20,7 @@
         <aside>
             <div class="sugested">
             <h1>Mis lugares</h1>
-            {% for place in user.creators.all %}{% include 'place.html' %}{% endfor %}
+            {% for place in user.created.all %}{% include 'place.html' %}{% endfor %}
             </div>
         </aside>
         <div id="main">

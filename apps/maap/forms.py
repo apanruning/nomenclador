@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from maap.admin import GeoCordobaAdmin
 from maap.models import MaapPoint
 from django.contrib.gis import forms, admin
@@ -7,7 +8,7 @@ point_field = MaapPoint._meta.get_field("geom")
 PointWidget = admin_instance.get_map_widget(point_field)
 
 class InlinePointForm (forms.ModelForm):
-    geom = forms.CharField(widget=PointWidget, required=False)
+    geom = forms.CharField( label=u'Dirección', widget=PointWidget, required=False)
     class Meta:
         model = MaapPoint
         exclude = (
@@ -25,7 +26,7 @@ class InlinePointForm (forms.ModelForm):
          )
     
 class MaapPointForm(forms.ModelForm):
-    geom = forms.CharField(widget=PointWidget, required=True)
+    geom = forms.CharField(label='Dirección', widget=PointWidget, required=True)
     class Meta:
         model = MaapPoint
         fields = (

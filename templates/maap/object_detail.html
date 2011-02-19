@@ -44,7 +44,17 @@
 
             <h1>Lugares sugeridos</h1>
             {% block listing %}
-                {{ block.super }}
+	            {% autopaginate object_list 10 %}
+		        {% for object in object_list %}
+		        <li class="item">
+                {% include 'place.html' %}
+                </li>
+	            {% if forloop.counter == 4 %}<div >{% pop_slot '1rd' %}</div>{% endif %}
+	            {% if forloop.counter == 8 %}<div >{% pop_slot '2rd' %}</div>{% endif %}
+                
+                {% empty %}
+                <li><h3>No se encontraron objetos</h3></li>
+                {% endfor %}
                 {% with request.GET.searchterm as searchterm %}
                 {% if searchterm %}
                 {% suggested_categories searchterm %}

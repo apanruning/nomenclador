@@ -1,7 +1,5 @@
 {% extends 'maap/people.html' %}
-
-{% load markup tagging_tags banner_tags mptt_tags maap_tags markup comments inbox profile_tags %}
-
+{% load markup tagging_tags banner_tags mptt_tags maap_tags markup inbox profile_tags pagination_tags %}
 {%block title%}Perfil de {{profile.user}} {%endblock%}
 
 {% block detail %}{{object.description|truncatewords:'25'}} Georefenciamiento OpenStreetMaps Mapas{% endblock %}
@@ -28,7 +26,11 @@
     <article id="content">
     {% block content %}
     {% with user_profile.get_profile as profile%}
-        <aside class="sugested">
+        <h1><a href="{% url profile_detail user_profile %}" rel="bookmark">{{ profile.name}}</a></h1>    	
+        <aside>
+            <div class="sugested">
+                
+
             <details class="discreet">
             {% gravatar user_profile.email 80 %} <h2>{{user_profile}}</h2>Miembro desde: {{user_profile.get_profile.created|date:"j-m-Y"}}</details>
             <br class="visualClear">
@@ -41,14 +43,35 @@
                 <li><a href="{% url messages_trash %}">Basura</a></li>    
             </ul>
             {% endif %}
+            </div>
             <div id="banner-slot-b">
             {% pop_slot 'd-1' %}
             <br />
             {% pop_slot 'd-2' %}
             </div>
         </aside>
-        <h1><a href="{% url profile_detail user_profile %}" rel="bookmark">{{ profile.name}}</a></h1>    	
-        <div id="main">{{ user_profile.get_profile.description|markdown }}</div>
+        <div id="main">
+        {{ user_profile.get_profile.description|markdown }}
+                <div id="created-by">
+            <h2>Puntos creados:</h2>
+        	<ul id="obj-list">
+        	    {% autopaginate created 10 %}
+		        {% for object in created %}
+		        <li class="item">
+                {% include 'place.html' %}
+                </li>
+	            {% if forloop.counter == 4 %}<div >{% pop_slot '1r' %}</div>{% endif %}
+	            {% if forloop.counter == 8 %}<div >{% pop_slot '2r' %}</div>{% endif %}
+                
+                {% empty %}
+                <li><h3>Es tiempo de <a href="{% url create %}">agregar un lugar de interés</a></h3></li>
+                {% endfor %}
+	        </ul>
+                
+        </div>
+
+        
+        </div>
         <br class="visualClear" />
     {% endwith %}
     {% endblock %}

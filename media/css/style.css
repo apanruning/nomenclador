@@ -132,7 +132,7 @@ aside{
 }
 #main {
     float:left;
-    width:57em;
+    width:56em;
 }
 #map-wrapper{
 /*    height:30em; */
@@ -405,6 +405,8 @@ aside{
     margin:0 auto !important;
     padding:0 1em;
     background:#FFC018
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
 }
 
 #pagination-digg li{
