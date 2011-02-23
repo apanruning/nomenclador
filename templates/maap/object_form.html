@@ -23,7 +23,7 @@
             {% for place in user.creators.all %}{% include 'place.html' %}{% endfor %}
             </div>
         </aside>
-        <section id="main">
+        <div id="main">
             <form action="." method="post">
             <ul class="formfields">
             {% for field in form %}
@@ -42,7 +42,7 @@
 	
             <p><input type="submit" value="Guardar" /></p>
             </form>
-        </section>
+        </div>
 
         <br class="visualClear" />
     {% endblock %}

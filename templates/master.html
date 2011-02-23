@@ -33,6 +33,10 @@
             }
           return false;
         });
+        $('#site-wide-announcements .close').click(function(){
+            $('#site-wide-announcements').toggle();
+            return false;
+        })
         $('.tabs').tabs();
         {%block js_onload%}{% endblock %}
     });
@@ -41,14 +45,20 @@
   
 <body>
 <div id="wrapper">
-    {% if site_wide_announcements %}
-        <div id="site_wide_announcements">
+    {% if site_wide_announcements or messages%}
+        <div id="site-wide-announcements">
             <ul>
                 {% for announcement in site_wide_announcements %}
                 <li>
                     <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> 
-                    <a class="action close" href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">Ocultar</a>
+                    <a class="action close announcement" href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">X</a>
                 </li>
+                {% endfor %}
+                {% for message in messages %}
+                <li>
+                    {{ message }}
+                    <a class="action close" href="#">X</a>
+                </li>                    
                 {% endfor %}
             </ul>
         </div>
@@ -57,79 +67,80 @@
 
     <header id="header">
         <div class="wrapper">
-                <p id="logo"><a href="{% url index %}">Nomenclador Cartográfico</a></p>
-        <div id="session">
-            {% if user.is_authenticated %}
-            <a href="{% url logout %}">Salir</a>
-            <a href="{% url profile_detail user %}"><strong>{{user}}</strong></a> <a href="{% url messages_inbox %}">({%inbox_count%})</a>
-            {% if user.is_staff %}
-            <a href="/admin/"> Administraci&oacute;n</a> 
-            {% endif %}
-            {% endif %}
-            {% if user.is_anonymous %}
-            <a href="{% url registration_register %}">Registrarse</a> 
-            <a href="{% url login %}">Ingresar</a>
-            {% endif %}
-        </div>
-        <nav>    
-        <div id="search-forms-wrapper" class="tabs">
-            <ul class="ui-tabs-nav">
-            {% block tabs %}    
-            <li class="ui-tabs-selected"><a href="#streets">Calles</a></li>
-            <li><a href="#places">Lugares y Servicios</a></li>
-            <li><a href="#people">Personas</a></li>
-            {% endblock tabs %}
-            </ul>
-            <form action="{% url search_streets %}" method="get" id="streets" class="search shadow">
-                <input type="submit" value="Buscar" class="searchbuton" />
-                <input type="text" size="27" id="streetname"
-                       placeholder="Ingrese un nombre de calle"
-                       value="{{request.GET.streetname|default:'Ingrese un nombre de calle'}}" 
-                       class="searchterm left" name="streetname" />
-                <input type="text" 
-                       placeholder="Altura"
-                       value="{{request.GET.streetnumber|default:'Altura'}}" 
-                       class="searchterm right" size="6" name="streetnumber" />
-                <input type="text" 
-                       placeholder="Interseccion"
-                       value="{{request.GET.intersection|default:'Interseccion'}}" 
-                       class="searchterm middle" size="17" name="intersection" />
-                {% neighbour_list %}
-            </form>
-            <form action="{% url search_places %}" method="get" id="places" class="search ui-tabs-hide">
-                <input type="submit" value="Buscar" class="searchbuton" />
-                <input type="text" size="60" id="placename"
-                       placeholder="Ingrese un nombre de un negocio o lugar"
-                       value="{{request.GET.searchterm|default:'Ingrese un nombre de un negocio o lugar' }}" 
-                       class="searchterm" name="placename" />
-               {% neighbour_list %}
+            <p id="logo"><a href="{% url index %}">Nomenclador Cartográfico</a></p>
+            <div id="session">
+                {% if user.is_authenticated %}
+                <a href="{% url logout %}">Salir</a>
+                <a href="{% url profile_detail user %}"><strong>{{user}}</strong></a> <a href="{% url messages_inbox %}">({%inbox_count%})</a>
+                {% if user.is_staff %}
+                <a href="/admin/"> Administraci&oacute;n</a> 
+                {% endif %}
+                {% endif %}
+                {% if user.is_anonymous %}
+                <a href="{% url registration_register %}">Registrarse</a> 
+                <a href="{% url login %}">Ingresar</a>
+                {% endif %}
+            </div>
+            <nav>    
+            <div id="search-forms-wrapper" class="tabs">
+                <ul class="ui-tabs-nav">
+                {% block tabs %}    
+                <li class="ui-tabs-selected"><a href="#streets">Calles</a></li>
+                <li><a href="#places">Lugares y Servicios</a></li>
+                <li><a href="#people">Personas</a></li>
+                {% endblock tabs %}
+                </ul>
+                <form action="{% url search_streets %}" method="get" id="streets" class="search shadow">
+                    <input type="submit" value="Buscar" class="searchbuton" />
+                    <input type="text" size="27" id="streetname"
+                           placeholder="Ingrese un nombre de calle"
+                           value="{{request.GET.streetname|default:'Ingrese un nombre de calle'}}" 
+                           class="searchterm left" name="streetname" />
+                    <input type="text" 
+                           placeholder="Altura"
+                           value="{{request.GET.streetnumber|default:'Altura'}}" 
+                           class="searchterm right" size="6" name="streetnumber" />
+                    <input type="text" 
+                           placeholder="Interseccion"
+                           value="{{request.GET.intersection|default:'Interseccion'}}" 
+                           class="searchterm middle" size="17" name="intersection" />
+                    {% neighbour_list %}
                 </form>
-            <form action="{% url search_people %}" method="get" id="people" class="search ui-tabs-hide">
-                <input type="submit" value="Buscar" class="searchbuton" />
-                <input type="text" size="60" id="firstname"
-                       placeholder="Ingrese el nombre de la persona que busca"
-                       value="{{request.GET.firstname|default:'Ingrese el nombre de la persona que busca'}}" 
-                       class="searchterm" name="firstname" />
-               {% neighbour_list %}
-            </form>
+                <form action="{% url search_places %}" method="get" id="places" class="search ui-tabs-hide">
+                    <input type="submit" value="Buscar" class="searchbuton" />
+                    <input type="text" size="60" id="placename"
+                           placeholder="Ingrese un nombre de un negocio o lugar"
+                           value="{{request.GET.searchterm|default:'Ingrese un nombre de un negocio o lugar' }}" 
+                           class="searchterm" name="placename" />
+                   {% neighbour_list %}
+                    </form>
+                <form action="{% url search_people %}" method="get" id="people" class="search ui-tabs-hide">
+                    <input type="submit" value="Buscar" class="searchbuton" />
+                    <input type="text" size="60" id="firstname"
+                           placeholder="Ingrese el nombre de la persona que busca"
+                           value="{{request.GET.firstname|default:'Ingrese el nombre de la persona que busca'}}" 
+                           class="searchterm" name="firstname" />
+                   {% neighbour_list %}
+                </form>
 
-        </div>
-        <menu id="categories" class="shadow">
-        {% block categories %}
-            {% with request.GET.searchterm|default_if_none:'' as searchterm %}
-            {% if category %}
-                {% breadcrumbs category %}
-                {% category_list category searchterm %}
-            {% else %}
-                {% breadcrumbs %}
-                {% category_list '' searchterm %}
-            {% endif %}
-            {% endwith %}
-        {% endblock %}
-        </menu>
-    </nav>
+            </div>
+            <menu id="categories" class="shadow">
+            {% block categories %}
+                {% with request.GET.searchterm|default_if_none:'' as searchterm %}
+                {% if category %}
+                    {% breadcrumbs category %}
+                    {% category_list category searchterm %}
+                {% else %}
+                    {% breadcrumbs %}
+                    {% category_list '' searchterm %}
+                {% endif %}
+                {% endwith %}
+            {% endblock %}
+            </menu>
+            </nav>
         </div>
     </header>
+    <section>
     <div id="content-wrapper" class="shadow wrapper"> 
         {% block page %}
         <aside>
@@ -164,6 +175,7 @@
         <br class="visualClear" />
         {% endblock %}
     </div>
+    </section>
     <footer class="shadow">
         <div class="wrapper">
         <p id="credits">&copy;2009 Comercio y Justicia</p>

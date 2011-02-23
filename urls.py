@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls.defaults import *
 from django.contrib import admin
 from django.views.generic import list_detail
@@ -57,7 +58,7 @@ urlpatterns += patterns('',
     url(r'^register/complete/$', direct_to_template,  {'template': 'registration/registration_complete.html'},      name='registration_complete'),
     (r'^ingresar/$', 'profiles.views.login',{},'login'),
     (r'^accounts/login/', 'profiles.views.login',{},'login'),
-    (r'^salir/$', 'django.contrib.auth.views.logout', {}, 'logout'),
+    (r'^salir/$', 'maap.views.log_out', {}, 'logout'),
 )
 
 
