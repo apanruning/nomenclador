@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.views.generic import list_detail
 from django.views.generic.simple import direct_to_template
 from voting.views import vote_on_object
+from django.conf import settings 
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
