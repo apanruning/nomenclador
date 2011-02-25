@@ -17,7 +17,7 @@ Busqueda de calles
     {% autopaginate object_list 10 %}
     {% for street in object_list %}    
 		<li class="item">
-        <h2>
+        <h3>
         {% url maap.views.street_location as url%}
         {% if with_intersection %}
         <a class="show-layer" 
@@ -27,7 +27,7 @@ Busqueda de calles
            href="{{ url }}?str={{street.norm}}{% if streetnumber %}&door={{streetnumber}}{% endif %}">{{street}} {{streetnumber}}</a>
         {% endif %}
         <details class="discreet">{{street.old|default_if_none:''}}</details>
-        </h2>
+        </h3>
     {% endfor %}
 {% paginate %}    
 {% else%}
