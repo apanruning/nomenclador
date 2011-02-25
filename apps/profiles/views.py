@@ -76,10 +76,9 @@ def profile(request, username):
         'is_me': is_me,
         'user_profile': user_profile,
         'json_layer': json_layer,
-        'created':  user_profile.created.all(),
+        'created':  user_profile.created.filter(category__isnull=False),
         }
     )
-    
 
 @login_required  
 def profile_edit(request, user_id):
@@ -88,15 +87,17 @@ def profile_edit(request, user_id):
     profile_form = ProfileForm(instance = profile_instance)
     default_icon = Icon.objects.get(name='home')
     if profile_instance.location_id is not None:
-    
-        point = MaapPoint.objects.get(id = profile_instance.location_id)
-        point_form = InlinePointForm(instance = point)
+        point = MaapPoint.objects.get(id=profile_instance.location_id)
+        point_form = InlinePointForm(instance=point)
     else:
         point_form = InlinePointForm()
         
     if request.method == 'POST':
-        profile_form = ProfileForm(request.POST, instance=user.get_profile())
-        point_form = InlinePointForm(request.POST)
+        profile_form = ProfileForm(request.POST, instance=profile_instance)
+        if point:
+            point_form = InlinePointForm(request.POST, instance=point)
+        else:
+            point_form = point_form(request.POST)
 
         if profile_form.is_valid():
             profile = profile_form.save(commit=False)
@@ -104,8 +105,8 @@ def profile_edit(request, user_id):
         if point_form.is_valid():
             point = point_form.save(commit=False)
             point.name = profile.name
-            point.creator = User.objects.get(username='admin')
-            point.editor = User.objects.get(username='admin')
+            point.creator = request.user
+            point.editor = request.user
             point.icon = default_icon
 
             
