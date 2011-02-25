@@ -15,6 +15,7 @@
 <body>
 
 {% block listing %}
+    {% if object_list %}
 	<ul id="obj-list">
 	    {% autopaginate object_list 10 %}
 		{% for object in object_list %}
@@ -23,12 +24,13 @@
         </li>
 	    {% if forloop.counter == 4 %}<div >{% pop_slot '1r' %}</div>{% endif %}
 	    {% if forloop.counter == 8 %}<div >{% pop_slot '2r' %}</div>{% endif %}
-        
-        {% empty %}
-        <li><h3>No se encontraron objetos</h3></li>
-        {% endfor %}
 	</ul>
     {% paginate %}
+    }
+   {% else %} 
+   <h1>Su búsqueda no tuvo resultados</h1>
+   <p>Por favor, revise los terminos o haga más general la consulta y vuelva a intentar</p>
+   {% endif %}
 {% endblock listing %}
 
 
