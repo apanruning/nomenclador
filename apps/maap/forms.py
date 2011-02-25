@@ -29,13 +29,6 @@ class MaapPointForm(forms.ModelForm):
     geom = forms.CharField(label='Dirección', widget=PointWidget, required=True)
     class Meta:
         model = MaapPoint
-        fields = (
-            'name',
-            'geom',
-            'description',
-            'category',
-
-        )
         exclude = (
             'default_layers',
             'metadata',
@@ -45,3 +38,12 @@ class MaapPointForm(forms.ModelForm):
             'closest',
             'banner_slots',
         )
+        
+    def save(self, *args, **kwargs):
+        import ipdb; ipdb.set_trace()
+
+        if not self.instance.creator_id:
+            self.instance.creator_id = self.data['user']
+
+        self.instance.editor_id = self.data['user']
+        return super(forms.ModelForm, self).save(*args, **kwargs)
