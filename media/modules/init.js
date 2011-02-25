@@ -40,6 +40,8 @@ Maap.State.prototype.initializeControls = function () {
     this.map.addControl(new OpenLayers.Control.Attribution());
     this.map.addControl(new OpenLayers.Control.MousePosition());
     this.map.addControl(new OpenLayers.Control.Permalink());
+    this.map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':false}));
+
 
     return 0;
 }
