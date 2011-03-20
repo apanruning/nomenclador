@@ -24,9 +24,9 @@
         </li>
 	    {% if forloop.counter == 4 %}<div >{% pop_slot '1r' %}</div>{% endif %}
 	    {% if forloop.counter == 8 %}<div >{% pop_slot '2r' %}</div>{% endif %}
+        {% endfor %}
 	</ul>
     {% paginate %}
-    }
    {% else %} 
    <h1>Su búsqueda no tuvo resultados</h1>
    <p>Por favor, revise los terminos o haga más general la consulta y vuelva a intentar</p>
