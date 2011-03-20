@@ -136,7 +136,6 @@ COMPRESS_CSS = {
             'css/style.css', 
             'css/forms.css', 
             'css/autocomplete.css',
-            'css/street_doors.css'
         ),
         'output_filename': 'css/stylesheet.css',
             'media': 'all',

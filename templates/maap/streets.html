@@ -31,9 +31,8 @@ Busqueda de calles
     {% endfor %}
 {% paginate %}    
 {% else%}
-{%if request.POST %}
-<h3>No hay resultados</h3>
-{% endif %}
+   <h1>Su búsqueda no tuvo resultados</h1>
+   <p>Por favor, revise los terminos o haga más general la consulta y vuelva a intentar</p>
 {% endif %}
 
 {% endblock %}
