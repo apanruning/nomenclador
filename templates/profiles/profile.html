@@ -53,6 +53,9 @@
         <div id="main">
         {{ user_profile.get_profile.description|markdown }}
                 <div id="created-by">
+            {% if created %}
+              
+
             <h2>Puntos creados:</h2>
         	<ul id="obj-list">
         	    {% autopaginate created 10 %}
@@ -62,12 +65,15 @@
                 </li>
 	            {% if forloop.counter == 4 %}<div >{% pop_slot '1r' %}</div>{% endif %}
 	            {% if forloop.counter == 8 %}<div >{% pop_slot '2r' %}</div>{% endif %}
-                
-                {% empty %}
-                <li><h3>Es tiempo de <a href="{% url create %}">agregar un lugar de interés</a></h3></li>
                 {% endfor %}
 	        </ul>
-                
+            {% else %}
+            {% if is_me %}
+            <h2>No ha agregado nada al nomenclador</h2>
+            <p>Es tiempo de <a href="{% url create %}">agregar un lugar de interés</a>, es muy simple.</p>
+            {% endif %}  
+
+            {% endif %}  
         </div>
 
         
