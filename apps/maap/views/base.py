@@ -33,7 +33,10 @@ def index(request,*args, **kwargs):
 
 def server_error(request):
     return simple.direct_to_template(request, '500.html')
-    
+
+def not_found(request):
+    return simple.direct_to_template(request, '404.html')
+
 def search_people(request):
     term = request.GET.get('firstname', None)
     queryset = Profile.objects.filter(public=True)
