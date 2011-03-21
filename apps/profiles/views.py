@@ -84,7 +84,7 @@ def profile_edit(request, user_id):
         point = MaapPoint.objects.get(id=profile_instance.location_id)
         point_form = InlinePointForm(instance=point)
     else:
-        point_form = InlinePointForm()
+        point_form = InlinePointForm
         point = None
                 
     if request.method == 'POST':
