@@ -17,12 +17,6 @@ from profiles.forms import ProfileForm, MailForm, InlinePointForm, LoginForm
 from maap.models import MaapPoint, Icon
 #from olwidget.widgets import MapDisplay
 
-if "notification" in settings.INSTALLED_APPS:
-    from notification import models as notification
-else:
-    notification = None
-
-
 
 LOGIN_REDIRECT_URLNAME = getattr(settings, "LOGIN_REDIRECT_URLNAME", '')
 
@@ -91,7 +85,8 @@ def profile_edit(request, user_id):
         point_form = InlinePointForm(instance=point)
     else:
         point_form = InlinePointForm()
-        
+        point = None
+                
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, instance=profile_instance)
         if point:

@@ -34,7 +34,6 @@ urlpatterns += patterns( '',
     (r'^admin/', include(admin.site.urls)),
     (r'^acerca_de/', direct_to_template, {'template':'about.html'}),
     (r'^mensajes/', include('messages.urls')),
-    (r'^notificaciones/', include('notification.urls')),
     (r"^announcements/", include("announcements.urls")),
     (r'^contacto/$', 'profiles.views.mail', {}, 'mail'),
     # toolsnmt

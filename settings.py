@@ -98,7 +98,6 @@ PAGINATION_DEFAULT_WINDOW = 2
 ACCOUNT_REQUIRED_EMAIL = True
 ACCOUNT_ACTIVATION_DAYS = 7
 INSTALLED_APPS = (
-#    'notification',
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.auth',
