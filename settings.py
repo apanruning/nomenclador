@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
-# Django settings for nomenclador project.
+
+BASE_DIR = os.path.dirname(__file__)
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -12,53 +14,45 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+#SMTP Test Server
+#python -m smtpd -n -c DebuggingServer localhost:1025
 ACCOUNT_EMAIL_VERIFICATION = True
 EMAIL_HOST = '127.0.0.1'
 EMAIL_PORT = 1025
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'nomenclador',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST':'',
-        'PORT':''
+        'USER': '',         # set in local_settings.py
+        'PASSWORD': '',     # set in local_settings.py
+        'HOST':'',          # set in local_settings.py
+        'PORT':''           # set in local_settings.py
     }
 }
 
-TIME_ZONE = 'America/Cordoba'
+TIME_ZONE = 'America/Argentina/Cordoba'
 
 LANGUAGE_CODE = 'es-ar'
 
 SITE_ID = 1
 
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
 USE_I18N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = '/media/'
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-OSM_CSV_ROOT = os.path.join(os.path.dirname(__file__), 'csv')
+OSM_CSV_ROOT = os.path.join(BASE_DIR, 'csv')
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/admin_media/'
+STATIC_URL = ''
 
-# Default Space Projection
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+
 DEFAULT_SRID = 900913
 
-# Don't share this with anybody.
 SECRET_KEY = 'xg%7r0k+966nuhr*8ls_@bgkf8y*-e2tar_in#9m%v&8r!y5ao'
 
 #Authenticate using email address
@@ -88,7 +82,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), "templates"),
+    os.path.join(BASE_DIR, "templates"),
 )
 AUTH_PROFILE_MODULE = "profiles.Profile"
 AUTH_PROFILE_ICON = os.path.join(MEDIA_ROOT, 'icons/home.png')
@@ -104,7 +98,6 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.databrowse',
     'django.contrib.gis',
     'django.contrib.markup',
     'django.contrib.comments',
@@ -126,7 +119,7 @@ INSTALLED_APPS = (
     'toolsnmt',
 )
 
-COMPRESS = not DEBUG
+COMPRESS = DEBUG
 
 COMPRESS_CSS = {
     'stylesheets': {
@@ -185,6 +178,4 @@ COMPRESS_JS = {
 }
 
 
-#SMTP Test Server
-#python -m smtpd -n -c DebuggingServer localhost:1025
 from local_settings import *
