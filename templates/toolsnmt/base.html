@@ -1,5 +1,5 @@
 <html>
-{% load compressed %}
+{% load compress %}
 <head>
 
 {% block title %}
@@ -8,11 +8,32 @@ Herramientas para el Nomenclador
 </title>
 {% endblock %}
 
-{% compressed_css 'toolsnmt' %}
+    <link rel="stylesheet" href="/static/css/locations_tool.css" type="text/css" media="screen">
 
 {% compressed_js 'scripts' %}
+    {% compress js %}
+    <script src="/static/js/jquery.ui.js"></script>
+    <script src="/static/js/OpenLayers.js"></script>
+    <script src="/static/js/OpenStreetMap.js"></script>
+    <script src="/static/js/dimensions.js"></script>
+    <script src="/static/js/forms.js"></script>
+    <script src="/static/js/jquery.ajaxQueue.js"></script>
+    <script src="/static/js/jquery.autocomplete.js"></script>
+    <script src="/static/js/autocomplete.js"></script>
+    <script src="/static/js/tiny_mce/tiny_mce.js"></script>
+    <script src="/static/js/tiny_mce/jquery.tinymce.js"></script>
+    <script src="/static/js/texteditoroptions.js"></script>
+    <script src="/static/js/lib/jquery.tree.min.js"></script>
+    <script src="/static/js/lib/plugins/jquery.tree.contextmenu.js"></script>
+    <script src="/static/js/modules/base.js"></script>
+    <script src="/static/js/modules/state.js"></script>
+    <script src="/static/js/modules/point.js"></script>
+    <script src="/static/js/modules/multiline.js"></script>
+    <script src="/static/js/modules/area.js"></script>
+    <script src="/static/js/modules/layer.js"></script>
+    <script src="/static/js/modules/init.js"></script>
 
-{% compressed_js 'modules' %}
+    {% endcompress %}
 
 {%block javascript %} {% endblock javascript %}
 <script type="text/javascript">

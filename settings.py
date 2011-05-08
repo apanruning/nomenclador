@@ -45,9 +45,19 @@ MEDIA_URL = '/media/'
 
 OSM_CSV_ROOT = os.path.join(BASE_DIR, 'csv')
 
-STATIC_URL = ''
+STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = (
+    MEDIA_ROOT,
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
@@ -74,9 +84,7 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.auth',
     'django.core.context_processors.request',
-    'django.core.context_processors.media',
     'django.contrib.messages.context_processors.messages',
-    'announcements.context_processors.site_wide_announcements',
 )
 
 ROOT_URLCONF = 'urls'
@@ -98,13 +106,13 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.staticfiles',
     'django.contrib.gis',
     'django.contrib.markup',
     'django.contrib.comments',
     'django.contrib.messages',
     'south',
-    'compress',
-    'announcements',
+    'compressor',
     'pagination',    
     'voting',
     'tagging',
@@ -113,69 +121,10 @@ INSTALLED_APPS = (
     'messages',
     'profiles',
     'banners',
-    'maap',
     'djangoosm',
+    'maap',
     'cyj_logs',
     'toolsnmt',
 )
-
-COMPRESS = DEBUG
-
-COMPRESS_CSS = {
-    'stylesheets': {
-        'source_filenames': (
-            'css/base.css',
-            'css/style.css', 
-            'css/forms.css', 
-            'css/autocomplete.css',
-        ),
-        'output_filename': 'css/stylesheet.css',
-            'media': 'all',
-    },
-    'toolsnmt': {
-        'source_filenames': (
-            'css/locations_tool.css',
-        ),
-        'output_filename': 'css/toolsnmt.css',
-            'media': 'all',
-    },
-}
-
-COMPRESS_JS = {
-    'scripts': {
-        'source_filenames': (
-            'js/jquery.min.js', 
-            'js/jquery.ui.js', 
-            'js/OpenLayers.js', 
-            'js/OpenStreetMap.js', 
-            'js/dimensions.js', 
-            'js/forms.js', 
-            'js/jquery.ajaxQueue.js', 
-            'js/jquery.autocomplete.js', 
-            'js/autocomplete.js', 
-            'js/jstree_admin.js', 
-            'js/tiny_mce/tiny_mce.js',
-            'js/tiny_mce/jquery.tinymce.js',
-            'js/texteditoroptions.js', 
-            'js/lib/jquery.tree.min.js',
-            'js/lib/plugins/jquery.tree.contextmenu.js',
-        ),
-        'output_filename': 'js/scripts.js',
-    },
-    'modules': {
-        'source_filenames': (
-            'modules/base.js',
-            'modules/state.js',
-            'modules/point.js',
-            'modules/multiline.js',
-            'modules/area.js',
-            'modules/layer.js',
-            'modules/init.js',
-
-        ),
-        'output_filename': 'js/modules.js',
-    }
-}
-
 
 from local_settings import *

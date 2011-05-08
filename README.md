@@ -16,6 +16,8 @@ Instalar dependencias de los repositorios de ubuntu:
 
 Crear el template_postgis y permitir que otros usuarios puedan crear bases 
 de datos con este:
+    
+    $ sudo su - postgres # cambiamos al usuario postgres para hacer más simple el resto de los comandos
 
     $ createdb -E UTF8 template_postgis
     $ createlang -d template_postgis plpgsql # Agregando soporte para PLPGSQL 
@@ -34,7 +36,11 @@ Darle permisos a todos los usuarios de alterar columnas de geomtría:
     $ psql -d template_postgis -c "GRANT ALL ON geography_columns TO PUBLIC;"
     $ psql -d template_postgis -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"    
 
-Luego podés crear una base de datos que pueda almacenar las columnas de postgis utilizando el template_postgis
+Luego podés crear una base de datos que pueda almacenar las columnas de postgis utilizando el template_postgis:
+
+    $ psql:
+    postgres=# CREATE DATABASE nomenclador WITH OWNER=nomenclador TEMPLATE=template_postgis;
+
 
 Crear el entorno de desarrollo:
 

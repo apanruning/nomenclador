@@ -1,8 +1,17 @@
 {% extends 'master.html' %}
-{% load compressed %}
+{% load compress %}
 
 {% block javascript %}
-{% compressed_js 'modules' %}
+    {% compress js %}
+    <script src="/static/js/modules/base.js"></script>
+    <script src="/static/js/modules/state.js"></script>
+    <script src="/static/js/modules/point.js"></script>
+    <script src="/static/js/modules/multiline.js"></script>
+    <script src="/static/js/modules/area.js"></script>
+    <script src="/static/js/modules/layer.js"></script>
+    <script src="/static/js/modules/init.js"></script>
+
+    {% endcompress %}
 {% endblock %}
 
 {% block js_onload %}

@@ -6,19 +6,15 @@ python-dateutil
 docutils
 psycopg2
 progressbar
-django-announcements
 django-messages
 django-microblogging
 django-email-confirmation
 django-pagination
 django-compress
+django-tagging
+django-voting
+django-mptt
+django-registration
 
-git+git://github.com/django/django.git#egg=django
 git+git://github.com/etnalubma/python-osm.git#egg=osm
 git+git://github.com/etnalubma/django-osm.git#egg=djangoosm
-svn+http://django-mptt.googlecode.com/svn/trunk/#egg=mptt
-svn+http://django-notification.googlecode.com/svn/trunk/#egg=notification
-svn+http://django-tagging.googlecode.com/svn/trunk/#egg=tagging
-svn+http://django-voting.googlecode.com/svn/trunk/#egg=voting
-hg+http://bitbucket.org/ubernostrum/django-registration#registration
-
