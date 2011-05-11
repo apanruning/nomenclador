@@ -12,7 +12,7 @@ Instalación en ubuntu
 
 Instalar dependencias de los repositorios de ubuntu:
 
-    $ sudo apt-get install libgdal1-1.6.0 postgresql-8.4-postgis
+    $ sudo apt-get install gdal-bin postgresql-8.4-postgis
 
 Crear el template_postgis y permitir que otros usuarios puedan crear bases 
 de datos con este:
