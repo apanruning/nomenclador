@@ -23,7 +23,7 @@ urlpatterns = patterns('maap.views',
     url(r'^category/(?P<cat_slug>[^/]+)$', 'search_places', name='list_by_category'),
     url(r'map/view/(?P<cat_slug>[^/]+)/(?P<object_id>\d+)$','view', name='view'),
     url(r'map/add/$','create', name='create'),
-    url(r'/publish/$','new_banner', name='publish'),
+    url(r'publish/$','new_banner', name='publish'),
     (r'^map/streets/location$', 'street_location'),
     (r'^tags/(?P<tag>[^/]+)$','obj_list_by_tag'),
 

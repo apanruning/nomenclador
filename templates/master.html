@@ -165,6 +165,23 @@
     <div id="content-wrapper" class="shadow wrapper"> 
         {% block page %}
         <aside>
+        {% block notice%}
+        {% if user.is_anonymous %}
+        <h2>¿Todavía no tenés una cuenta?</h2>
+        <p>Formar parte de esta creciente comunidad es muy simple</p>
+        <p>¿Qué por qué es interesante?</p>
+        <ul>
+            <li>Publicitá tu marca o producto en la red de comercios más grande de córdoba</li>
+            <li>Aportá a hacer más conocidos los rincones de nuestra ciudad y provincia</li>
+        </ul>
+        <p class="hook">
+        <a href="{% url registration_register %}" class="register">Registrarse Gratis</a> 
+        <a href="/pricing/">O elegí un paquete a tu medida.</a> 
+        </p>
+
+        {%  endif %}
+        {% endblock%}
+
         {% block aside %}
         {% pop_slot 'b-1' %}
         {% pop_slot 'twitter' %}
