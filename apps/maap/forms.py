@@ -28,7 +28,7 @@ class BannerForm(forms.ModelForm):
         )
 
     def save(self):
-        self.instance.slot = 'banner-en-%s' % slugify(self.point)
+        self.instance.slot = 'banner-en-%s' % slugify(self.instance.point)
         return super(BannerForm, self).save()
 
 class InlinePointForm (forms.ModelForm):

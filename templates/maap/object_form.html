@@ -1,5 +1,5 @@
 {% extends 'maap/index.html' %}
-{% load markup tagging_tags banner_tags mptt_tags maap_tags voting_tags %}
+{% load markup tagging_tags banner_tags mptt_tags maap_tags voting_tags pagination_tags %}
 {% block title %}Nuevo punto{% endblock %}
 {% block js_onload %}
             $('#id_description').tinymce(textEditorOptions);
@@ -19,7 +19,8 @@
             <div class="sugested">
             <h1>Mis lugares</h1>
             <ul id="obj-list">
-            {% for object in user.created.all %}
+            {% autopaginate user.created.all 10 as points_created %}
+            {% for object in points_created  %}
             <li class="item">
             <h3>
                 {% score_for_object object as score %}
@@ -32,6 +33,7 @@
             </li>
             {% endfor %}
             </ul>
+            {% paginate %}
             </div>
         </aside>
         <div id="main">
