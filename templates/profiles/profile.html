@@ -52,44 +52,53 @@
         </aside>
         <div id="main">
         {{ user_profile.get_profile.description|markdown }}
-                <div id="created-by">
-            {% if banners %}
-            <h2>Avisos publicados:</h2>
-        	<ul id="obj-list">
-        	    {% autopaginate banners 10 %}
-		        {% for object in banners %}
-		        <li class="item">
+        <div id="user-content" class="tabs">
+            <ul>
+                <li><a href="#banners">Avisos</a></li>
+                <li><a href="#points-created">Puntos</a></li>
+            </ul>
+            <div id="banners">
+                {% if banners %}
+            	<ul id="obj-list">
+            	    {% autopaginate banners 10 %}
+		            {% for object in banners %}
+		            <li class="item">
+                    </li>
+                    {% endfor %}
+	            </ul>            
+                {% paginate %}
 
-                </li>
-                {% endfor %}
-	        </ul>            
-            {% paginate %}
-            {% else %}    
-            <h2>No tenés avisos publicados</h2>
-            <p>Es muy simple <a href="{% url publish %}">agregar un aviso a tu perfil</a>, para promocionar tu marca o producto.</p>
-            {% endif %}
-            {% if created %}
-            <h2>Puntos creados:</h2>
-        	<ul id="obj-list">
-        	    {% autopaginate created 10 %}
-		        {% for object in created %}
-		        <li class="item">
-                {% include 'place.html' %}
-                </li>
-	            {% if forloop.counter == 4 %}<div >{% pop_slot '1r' %}</div>{% endif %}
-	            {% if forloop.counter == 8 %}<div >{% pop_slot '2r' %}</div>{% endif %}
-                {% endfor %}
-	        </ul>
-            {% paginate %}
-            {% else %}
-            {% if is_me %}
-            <h2>Todavía no agregaste nada al nomenclador</h2>
-            <p>Es tiempo de <a href="{% url create %}">agregar un lugar de interés</a>, es muy simple.</p>
-            {% endif %}  
-
-            {% endif %}  
+                {% else %}
+                <h2>No tiene avisos publicados</h2>
+                {% if is_me %}
+                <p>Es muy simple <a href="{% url publish %}">agregar un aviso a tu perfil</a>, para promocionar tu marca o producto.</p>
+                {% endif %}
+                {% endif %}
+                
+            </div>
+            <div id="points-created">
+                {% if created %}
+            	<ul id="obj-list">
+            	    {% autopaginate created 10 %}
+		            {% for object in created %}
+		            <li class="item">
+                    {% include 'place.html' %}
+                    </li>
+	                {% if forloop.counter == 4 %}<div >{% pop_slot '1r' %}</div>{% endif %}
+	                {% if forloop.counter == 8 %}<div >{% pop_slot '2r' %}</div>{% endif %}
+                    {% empty %}
+                    <li><h2>No tiene puntos publicados</h2></li>
+                    {% endfor %}
+	            </ul>
+                {% paginate %}
+                {% else %}
+                <h2>Todavía no agregó nada al nomenclador</h2>
+                {% if is_me %}
+                <p>Es tiempo de <a href="{% url create %}">agregar un lugar de interés</a>, es muy simple.</p>
+                {% endif %}  
+                {% endif %}  
+            </div>
         </div>
-
         
         </div>
         <br class="visualClear" />

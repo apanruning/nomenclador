@@ -162,7 +162,7 @@ input.searchterm{
     padding:0 0.2em;
     border:1px solid #999;
     width:auto !important;
-    font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
+    font:120% "Droid Sans", Arial, Helvetica, sans-serif;
 }
 
 .dirty{
@@ -170,7 +170,7 @@ input.searchterm{
 }
 
 .searchbuton {
-    font:120% "Trebuchet MS", Verdana, Helvetica, sans-serif;
+    font:120% "Droid Sans", Arial, Helvetica, sans-serif;
     border-color:transparent;
     background:transparent url(../img/bg_searchbutton.png) no-repeat;
     margin:0px;
