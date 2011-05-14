@@ -15,6 +15,7 @@ django-tagging
 django-voting
 django-mptt
 django-registration
+django-debug-toolbar
 
 git+git://github.com/tutuca/banners.git#egg=banners
 git+git://github.com/etnalubma/python-osm.git#egg=osm

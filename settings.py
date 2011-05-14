@@ -73,6 +73,7 @@ AUTHENTICATION_BACKENDS = (
 
 
 MIDDLEWARE_CLASSES = (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -111,6 +112,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.comments',
     'django.contrib.messages',
+    'debug_toolbar',
     'south',
     'compressor',
     'pagination',    
@@ -126,5 +128,9 @@ INSTALLED_APPS = (
     'cyj_logs',
     'toolsnmt',
 )
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS' : False,
+}
 
 from local_settings import *
