@@ -1,20 +1,16 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render_to_response, get_object_or_404, redirect
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.generic import create_update, simple
-from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ugettext
 from django.core.mail import EmailMessage
 
 from profiles.models import Profile
 from profiles.forms import ProfileForm, MailForm, InlinePointForm, LoginForm
-from maap.models import MaapPoint, Icon
+from maap.models import MaapPoint, Icon, PointBanner
 #from olwidget.widgets import MapDisplay
 
 
@@ -44,26 +40,24 @@ def get_default_redirect(request, redirect_field_name="next",
 def profile(request, username):
     user_profile = get_object_or_404(User, username=username)
     profile = user_profile.get_profile()
-    if request.user.is_authenticated():
-        if request.user == user_profile:
-            is_me = True
-        else:
-            is_me = False
-    else:
-        is_me = False
-    if not profile.name and is_me:
+    is_me = False
+    if request.user.is_authenticated() and request.user == user_profile:
+        is_me = True
+
+    if is_me and not profile.name:
         messages.add_message(
             request, 
             messages.INFO, 
             u'Todavía no ha creado su perfil de usuario'
         )
         return redirect('profile_edit', user_id=user_profile.pk)
+
     try :
         json_layer = profile.location.to_layer().json
     except:
         json_layer = None
         
-    return simple.direct_to_template(
+    return render(
         request,
         'profiles/profile.html', 
         {
@@ -71,6 +65,7 @@ def profile(request, username):
         'user_profile': user_profile,
         'json_layer': json_layer,
         'created':  user_profile.created.filter(category__isnull=False),
+        'banners': profile.location.pointbanner_set.all,
         }
     )
 
@@ -125,10 +120,10 @@ def profile_edit(request, user_id):
         if success:
             return redirect('profile_detail', username = user.username)
         
-    return simple.direct_to_template(
+    return render(
         request, 
         'profiles/profile_form.html',
-        extra_context={
+        {
             'form':profile_form,
             'inline_form':point_form,
             'user':user
@@ -153,10 +148,10 @@ def mail(request):
             if not settings.DEBUG :                
                 email.send()
                     
-    return simple.direct_to_template(
+    return render(
         request,
         'contact.html', 
-        extra_context={'form':mailform}
+        {'form':mailform}
     )
 
 
@@ -166,13 +161,13 @@ def login(request, success_url=None):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.login(request):
-            return HttpResponseRedirect(success_url)
+            return redirect(success_url)
     else:
         form = LoginForm()
-    return simple.direct_to_template(
+    return render(
         request,
         "registration/login.html", 
-        extra_context={
+        {
         "form": form,
         }
     )

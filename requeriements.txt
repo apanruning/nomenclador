@@ -16,5 +16,6 @@ django-voting
 django-mptt
 django-registration
 
+git+git://github.com/tutuca/banners.git#egg=banners
 git+git://github.com/etnalubma/python-osm.git#egg=osm
 git+git://github.com/etnalubma/django-osm.git#egg=djangoosm

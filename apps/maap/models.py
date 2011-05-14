@@ -2,6 +2,8 @@
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models.query import GeoQuerySet
 from django.contrib.gis.measure import Distance, D
+from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
+from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.db import models as dbmodels
 from django.utils import simplejson
 from django.contrib.auth.models import User
@@ -10,17 +12,14 @@ from djangoosm.models import Nodes as OSMNodes, Streets as OSMStreets, \
                        StreetIntersection as OSMStreetIntersection 
 from djangoosm.utils.search import get_location_by_door
 from settings import DEFAULT_SRID
-from django.contrib.gis.geos import LineString, MultiLineString, MultiPoint, Point
-from django.template.defaultfilters import slugify
-from django.utils.translation import ugettext_lazy as _
 
+from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
 from django.template.defaultfilters import slugify
-
 import mptt
-
 from maap.layers import Point, Area, MultiLine, Layer
-from django.contrib.gis.gdal import OGRGeometry, SpatialReference
+from banners.models import TemplateBanner
+
 from cyj_logs.models import SearchLog
 
 def get_closest(geom, exclude_id = None):
@@ -233,7 +232,6 @@ class MaapPoint(MaapModel):
     closest = models.BooleanField(default=False)
     popup_text = models.TextField(blank=True)    
     objects = MaapManager()
-
     def to_geo_element(self):
         out = self.json_dict
         out.pop('geom')
@@ -293,6 +291,18 @@ class Icon(models.Model):
         out['width'] = self.image.width
         out['height'] = self.image.height
         return out
+
+class PointBanner(TemplateBanner):
+
+    point = models.ForeignKey('MaapPoint', null=True)
+    
+    def __unicode__(self):
+        return slugify('#%s-en-%s' %(self.pk, self.point))
+        
+    def save(self):
+        self.slot = slugify(self.point)
+        return super(PointBanner, self).save()
+
         
 try: 
     mptt.register(MaapCategory)  

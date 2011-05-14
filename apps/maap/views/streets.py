@@ -113,7 +113,6 @@ def street_location(request):
             elif params.has_key('door'):
                 # Street door Case
                 street = Streets.objects.get(norm = params['str'])
-                #import ipdb; ipdb.set_trace()
                 layer,success = street.get_location_or_street(door = params['door'])
                 ty_sch = "calle_altura"
                 json_layer = layer.json

@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 from maap.admin import GeoCordobaAdmin
-from maap.models import MaapPoint
+from maap.models import MaapPoint, PointBanner
 from django.contrib.gis import forms, admin
 
 admin_instance = GeoCordobaAdmin(MaapPoint, admin.site)
 point_field = MaapPoint._meta.get_field("geom")
 PointWidget = admin_instance.get_map_widget(point_field)
+
+class BannerForm(forms.ModelForm):
+    class Meta:
+        model = PointBanner
 
 class InlinePointForm (forms.ModelForm):
     geom = forms.CharField( label=u'Dirección', widget=PointWidget, required=False)
@@ -40,8 +44,6 @@ class MaapPointForm(forms.ModelForm):
         )
         
     def save(self, *args, **kwargs):
-        import ipdb; ipdb.set_trace()
-
         if not self.instance.creator_id:
             self.instance.creator_id = self.data['user']
 
