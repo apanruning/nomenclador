@@ -1,18 +1,55 @@
 {% extends "registration/base.html" %}
-{%block title%}Bienvenido, por favor ingrese su nombre de usuario y contraseña{%endblock%}
+{%block title%}Ingrese con su nombre de usuario y contraseña o cree una nueva cuenta{%endblock%}
 
-{% block content %}
-<h1>Por favor ingrese su nombre de usuario y contraseña</h1>
-<div id="login-form">
+{% block page%}
 
-{% if form.errors %}
-<p id="error-message">Nombre de usuario o contraseña incorrecta</p>
-{% endif %}
-
-<form method="post" action=".">
-{% include 'generic_form.html' %}
-<input type="hidden" name="next" value="{% if next %}{{ next }}{%else%}/{%endif%}" />
-<input type="submit" value="Ingresar" />
-</form>
+<div id="hook-registration">
+    <h1>¿Todavía no tenés una cuenta?</h1>
+    <p>Formar parte de esta creciente comunidad es muy simple</p>
+    <p>¿Qué por qué es interesante?</p>
+    <ul>
+        <li>Publicitá tu marca o producto en la red de comercios más grande de córdoba</li>
+        <li>Aportá a hacer más conocidos los rincones de nuestra ciudad y provincia</li>
+    </ul>
+    <p class="hook">
+    <a href="{% url registration_register %}" class="register">Registrarse Gratis</a> 
+    <a href="/pricing/">O elegí un paquete a tu medida.</a> 
+    </p>
 </div>
+<form id="login-form" method="post" action="." >
+    <h1>Ingresar</h1>
+    <input type="hidden" name="next" value="{% if next %}{{ next }}{%else%}/{%endif%}" />
+
+    {% if form.errors %}
+    <p id="error-message">Nombre de usuario o contraseña incorrecta</p>
+    {% endif %}
+    <ul class="formfields">
+    {% for field in form %}
+        {% if not field.is_hidden %}
+            {% if field.name == 'remember' %}
+        <li class="{{field.name}}_field {% if field.errors %}errors {% endif %} {% if field.field.required %}required{%endif%}">
+            {% if field.errors %}{{ field.errors }}{% endif %}
+            {{field}} <span>Recordarme</span>
+            {% if field.help_text %}<p class="discreet">{{ field.help_text }}</p>{% endif %}
+        </li>
+
+            {%else%}
+        <li class="{{field.name}}_field {% if field.errors %}errors {% endif %} {% if field.field.required %}required{%endif%}">
+            {{field.label_tag}} 
+            {% if field.errors %}{{ field.errors }}{% endif %}
+            {{field}}
+            {% if field.help_text %}<p class="discreet">{{ field.help_text }}</p>{% endif %}
+        </li>
+            {% endif %}
+        {% else %}
+        <li class="hidden">
+            {{field}}    
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    <input type="submit" value="Ingresar" />
+</form>
+
+
 {% endblock %}

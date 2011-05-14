@@ -2,11 +2,11 @@ form{
     margin:0;
 }
 label{
-    width:10em;
-    float:left;
-    text-align:right;
-    padding:0.5em;
-    font-size:80%;
+    display:block;
+    padding:0.5em 0;
+}
+.required label {
+    font-weight: bold;
 }
 select{
     width:15em;
@@ -14,6 +14,11 @@ select{
 input[type='text'],
 input[type='password']{
     width:15em;
+    border: 2px solid #EFEFEF;
+    padding: 0.25em;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 .description_field  textarea {
     height:22em;
@@ -52,25 +57,20 @@ input[type='password']{
     left:-9999px;
     
 }
-.formfields p.required-text{
-    margin:0 0 0.25em 0 !important;
-    padding: 0 0 0 9em !important;
-}
 .formfields p.required-text span {
     color:#900;
     font-size:80%;
 }
-
-.formfields li.errors{
-    background: #fe9 url(../img/blocked.png) no-repeat !important;
-    background-position: 0.5em center !important;
-    border:1px solid #F99;
-    background:#e99;
+#error-message {
+    color:#C00;
+    font-weight: bold;
 }
-
+.errors input {
+    border-color: #C00;
+}
 .errorlist{
     margin:0;
-    padding: 0 0 0 8em;
+    padding: 0;
     list-style-type:none;
 
 }
@@ -127,10 +127,9 @@ ui-state-highlight, .ui-widget-content .ui-state-highlight {
 }
 /* login styles */
 #login-form {
-margin:10% 0 25%;
-margin:0 auto;
-width:30em;
-padding:0.5em 1em;
+    float:left;
+    margin-left:10em;
+    padding:0.5em 1em;
 }
 #search-forms-wrapper{
     position:relative;
@@ -156,7 +155,7 @@ padding:0.5em 1em;
 .search form {
     margin:0;
 }
-.searchterm{
+input.searchterm{
     color:#CCC;
     background:#FFF;
     margin:0;
@@ -197,4 +196,3 @@ padding:0.5em 1em;
     overflow:hidden;
 }
 
-/* #content input[type=submit] { outline: 1px solid red } */

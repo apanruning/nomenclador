@@ -91,14 +91,15 @@
             <div id="session">
                 {% if user.is_authenticated %}
                 <a href="{% url logout %}">Salir</a>
-                <a href="{% url profile_detail user %}"><strong>{{user}}</strong></a> <a href="{% url messages_inbox %}">({%inbox_count%})</a>
+                <a href="{% url profile_detail user %}">({%inbox_count%}) <strong>{{user}}</strong></a> 
                 {% if user.is_staff %}
                 <a href="/admin/"> Administraci&oacute;n</a> 
                 {% endif %}
                 {% endif %}
                 {% if user.is_anonymous %}
-                <a href="{% url registration_register %}">Registrarse</a> 
                 <a href="{% url login %}">Ingresar</a>
+                <a href="{% url registration_register %}">Registrarse</a> 
+                <a href="/pricing/">Tarifas</a>
                 {% endif %}
             </div>
             <nav>    

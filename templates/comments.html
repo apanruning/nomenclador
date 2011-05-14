@@ -34,16 +34,12 @@
         <input type="hidden" name="next" value="{{object.get_absolute_url}}"/>
         <ul class="formfields">
     
-        <li class="{% if form.comment.errors %}errors{% endif %}" >
-            {% if form.comment.required and not form.comment.errors %}
-            <p class="required-text"><span>required</span></p>{%endif%}
+        <li class="{% if form.comment.errors %}errors{% endif %} required" >
             {{form.comment}}    
             {% if form.comment.help_text %}<p class="discreet">{{ form.comment.help_text }}</p>{% endif %}
             {% if form.comment.errors %}{{ form.comment.errors }}{% endif %}
         </li>
         <li class="honeypot {% if form.honeypot.errors %}errors{% endif %}" >
-            {% if form.honeypot.required and not form.honeypot.errors %}
-            <p class="required-text"><span>required</span></p>{%endif%}
             {{form.honeypot.label_tag}} {{form.honeypot}}    
             {% if form.honeypot.help_text %}<p class="discreet">{{ form.honeypot.help_text }}</p>{% endif %}
             {% if form.honeypot.errors %}{{ form.honeypot.errors }}{% endif %}

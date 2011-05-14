@@ -108,11 +108,52 @@ aside{
     float:right;
     text-decoration:none;
     color:#333;
-    padding: 0.5em;
+    padding: 0.5em 1em;
+    margin: 0 0.5em;
     display: block;
+    border:2px solid transparent;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius: 3px;
 }
 #session a:hover {
-    background: #FC0;
+    border:2px solid #FFF;
+    -moz-box-shadow: 0px 0px 3px #000;
+    -webkit-box-shadow: 0px 0px 3px #000;
+    box-shadow: 0px 0px 3px #000;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius: 5px;
+    
+}
+
+#hook-registration {
+    margin-right:10em;
+    padding:0.5em 1em;
+    width:30%;
+    float: right;
+}
+
+.hook {
+    border:2px solid #FEE;
+    -moz-box-shadow: 0px 0px 3px #000;
+    -webkit-box-shadow: 0px 0px 3px #000;
+    box-shadow: 0px 0px 3px #000;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius: 5px;
+    padding: 0.5em 1em;
+    background:-webkit-gradient(linear,0% 0,0% 100%,from(#EAF5FA),to(#C5E8F1));
+    background:-moz-linear-gradient(-112deg,#eaf5fa,#c5e8f1);
+
+}
+.hook a {
+    text-align: center;
+    display:block;
+
+}
+a.register {
+    font-size:200%;
 }
 #sitemap {
     padding:0;
