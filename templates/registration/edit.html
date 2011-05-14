@@ -4,7 +4,7 @@
 {% block content %}
 	<h1 class="documentFirstHeading">Editar perfil</h1>
 
-	<form enctype="multipart/form-data" Saction="" method="post">
+	<form enctype="multipart/form-data" action="." method="post">
 		{% if page.creator%}
         <input type="hidden" name="creator" value="{{ profile.creator }}" />
         <input type="hidden" name="editor" value="{{ user }}" />

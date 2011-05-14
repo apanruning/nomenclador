@@ -7,8 +7,7 @@ from maap.forms import BannerForm
 def new_banner(request):
     form = BannerForm
     if request.method == 'POST':
-        form = BannerForm(request)
-
+        form = form(request.POST, request.FILES)
         if form.is_valid():
     
             messages.add_message(
@@ -17,10 +16,11 @@ def new_banner(request):
                 u'Aviso creado con éxito',
             )
             form.save()
-    
+    else:
+        form = form(initial={'point':request.user.get_profile().location.pk})
     return render(
         request,
-        'banners/banner_form.html',
+        'maap/object_form.html',
         {
             'form': form,
         }

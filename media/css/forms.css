@@ -14,7 +14,7 @@ select{
 input[type='text'],
 input[type='password']{
     width:15em;
-    border: 2px solid #EFEFEF;
+    border: 2px solid #CCC;
     padding: 0.25em;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;

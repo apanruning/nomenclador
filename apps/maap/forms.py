@@ -2,14 +2,34 @@
 from maap.admin import GeoCordobaAdmin
 from maap.models import MaapPoint, PointBanner
 from django.contrib.gis import forms, admin
+from django.template.defaultfilters import slugify
+
 
 admin_instance = GeoCordobaAdmin(MaapPoint, admin.site)
 point_field = MaapPoint._meta.get_field("geom")
 PointWidget = admin_instance.get_map_widget(point_field)
 
 class BannerForm(forms.ModelForm):
+    code = forms.CharField(widget=forms.Textarea)
+    point = forms.ModelChoiceField(
+        queryset=MaapPoint.objects.all(), 
+        widget=forms.HiddenInput
+    )
     class Meta:
         model = PointBanner
+        fields = (
+            'point',
+            'image',
+            'code',
+            'url',
+            'template'
+
+            
+        )
+
+    def save(self):
+        self.instance.slot = 'banner-en-%s' % slugify(self.point)
+        return super(BannerForm, self).save()
 
 class InlinePointForm (forms.ModelForm):
     geom = forms.CharField( label=u'Dirección', widget=PointWidget, required=False)

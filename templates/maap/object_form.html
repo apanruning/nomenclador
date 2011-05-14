@@ -1,5 +1,5 @@
 {% extends 'maap/index.html' %}
-{% load markup tagging_tags banner_tags mptt_tags maap_tags %}
+{% load markup tagging_tags banner_tags mptt_tags maap_tags voting_tags %}
 {% block title %}Nuevo punto{% endblock %}
 {% block js_onload %}
             $('#id_description').tinymce(textEditorOptions);
@@ -15,16 +15,27 @@
 
 
     {% block content %}
-        <h1>Nuevo Punto</h1>    
-
         <aside>
             <div class="sugested">
             <h1>Mis lugares</h1>
-            {% for object in user.created.all %}{% include 'place.html' %}{% endfor %}
+            <ul id="obj-list">
+            {% for object in user.created.all %}
+            <li class="item">
+            <h3>
+                {% score_for_object object as score %}
+                <a href="{{ object.get_absolute_url }}">{{object.name}}</a>
+            </h3>
+            <details class="discreet">
+            {{object.changed|default:object.created|date:"j-m-Y"}}
+            </details>
+
+            </li>
+            {% endfor %}
+            </ul>
             </div>
         </aside>
         <div id="main">
-            <form action="." method="post">
+            <form action="." method="post" enctype="multipart/form-data">
             <input type="hidden" name="user" value="{{user.pk}}" />
             <ul class="formfields">
             {% for field in form %}
