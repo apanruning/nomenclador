@@ -6,6 +6,7 @@ python-dateutil
 docutils
 psycopg2
 progressbar
+south
 django-messages
 django-microblogging
 django-email-confirmation
@@ -16,6 +17,7 @@ django-voting
 django-mptt
 django-registration
 django-debug-toolbar
+django-compressor
 
 git+git://github.com/tutuca/banners.git#egg=banners
 git+git://github.com/etnalubma/python-osm.git#egg=osm

@@ -39,10 +39,8 @@
             <br />
             {% pop_slot 'd-2' %}
             </div>
-            <div  id="obj-list" class="sugested">
-                
-
-            <h1>Lugares sugeridos</h1>
+            <h2>Lugares sugeridos</h2>
+            <ul  id="obj-list" class="sugested">
             {% block listing %}
 	            {% autopaginate object_list 10 %}
 		        {% for object in object_list %}
@@ -61,7 +59,7 @@
                 {% endif %}
                 {% endwith %}
             {% endblock listing%}
-            </div>
+            </ul>
         </aside>
         <div id="main">{{object.description|markdown }}</div>
         <br class="visualClear" />

@@ -149,4 +149,12 @@ def log_out(request):
     messages.add_message(request, messages.INFO, u'Ha cerrado su sesión')    
     return redirect('index')
 
-
+def barrios(request):
+    return dict(object_list = MaapModel.objects.filter(category__name='Barrios'))
+    name = request.GET.get('name')
+    if name:
+        queryset = queryset.filter(name__istartswith=name)
+    return HttpResponse(
+        json.dumps([(x.pk, x.name) for x in queryset]), 
+        mimetype="application/json",
+    )

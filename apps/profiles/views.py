@@ -98,7 +98,6 @@ def profile_edit(request, user_id):
             point.creator = request.user
             point.editor = request.user
             point.icon = default_icon
-
             
         try :
             point.save()

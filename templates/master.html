@@ -53,12 +53,15 @@
             }
           return false;
         });
-        $('#site-wide-announcements .close').click(function(){
-            $('#site-wide-announcements').toggle();
+        $('#announcements .close').click(function(){
+            $('#announcements').toggle('blind', 300);
             return false;
         })
         $('.tabs').tabs();
         {%block js_onload%}{% endblock %}
+        window.setTimeout(function(){
+            $('#announcements .close').click()
+            }, 1000);
     });
     </script>
     </head>
@@ -66,7 +69,7 @@
 <body>
 <div id="wrapper">
     {% if site_wide_announcements or messages%}
-        <div id="site-wide-announcements">
+        <div id="announcements">
             <ul>
                 {% for announcement in site_wide_announcements %}
                 <li>
@@ -77,7 +80,7 @@
                 {% for message in messages %}
                 <li>
                     {{ message }}
-                    <a class="action close" href="#">X</a>
+                    <a class="action close" href="#site-wide-announcements">x</a>
                 </li>                    
                 {% endfor %}
             </ul>
@@ -125,7 +128,10 @@
                            placeholder="Interseccion"
                            value="{{request.GET.intersection|default:'Interseccion'}}" 
                            class="searchterm middle" size="17" name="intersection" />
-                    {% neighbour_list %}
+                    <input type="text" 
+                           placeholder="Barrio"
+                           value="{{request.GET.barrio|default:'Barrio'}}" 
+                           class="searchterm" size="17" name="barrios" id="id_barrios"/>
                 </form>
                 <form action="{% url search_places %}" method="get" id="places" class="search ui-tabs-hide">
                     <input type="submit" value="Buscar" class="searchbuton" />
@@ -133,7 +139,6 @@
                            placeholder="Ingrese un nombre de un negocio o lugar"
                            value="{{request.GET.searchterm|default:'Ingrese un nombre de un negocio o lugar' }}" 
                            class="searchterm" name="placename" />
-                   {% neighbour_list %}
                     </form>
                 <form action="{% url search_people %}" method="get" id="people" class="search ui-tabs-hide">
                     <input type="submit" value="Buscar" class="searchbuton" />
@@ -141,7 +146,6 @@
                            placeholder="Ingrese el nombre de la persona que busca"
                            value="{{request.GET.firstname|default:'Ingrese el nombre de la persona que busca'}}" 
                            class="searchterm" name="firstname" />
-                   {% neighbour_list %}
                 </form>
 
             </div>
