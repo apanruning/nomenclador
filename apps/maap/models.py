@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse
 from djangoosm.models import Nodes as OSMNodes, Streets as OSMStreets, \
                        StreetIntersection as OSMStreetIntersection 
 from djangoosm.utils.search import get_location_by_door
-from settings import DEFAULT_SRID
+from django.conf import settings
 
 from django.utils.translation import ugettext_lazy as _
 from tagging.fields import TagField
@@ -227,7 +227,7 @@ class MaapCategory(models.Model):
 
 class MaapPoint(MaapModel):
    
-    geom = models.PointField(srid=DEFAULT_SRID)
+    geom = models.PointField(srid=settings.DEFAULT_SRID)
     icon = models.ForeignKey('Icon', default=185, blank=True)
     closest = models.BooleanField(default=False)
     popup_text = models.TextField(blank=True)    
@@ -248,7 +248,7 @@ class MaapPoint(MaapModel):
 class MaapArea(MaapModel):
     objects = MaapManager()
 
-    geom = models.PolygonField(srid=DEFAULT_SRID)
+    geom = models.PolygonField(srid=settings.DEFAULT_SRID)
 
     def to_geo_element(self):
         out = self.json_dict
@@ -267,7 +267,7 @@ class MaapZone(MaapArea):
 
 
 class MaapMultiLine(MaapModel):
-    geom = models.MultiLineStringField(srid = DEFAULT_SRID)
+    geom = models.MultiLineStringField(srid = settings.DEFAULT_SRID)
     objects = MaapManager()
 
     def to_geo_element(self):

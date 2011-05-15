@@ -8,7 +8,7 @@ from django.utils.encoding import force_unicode
 from django.utils import simplejson
 from django import template
 from copy import deepcopy
-from settings import MEDIA_URL
+from django.conf import settings
 
 class MpttAdmin(admin.ModelAdmin):
     """ Base class for mptt model admins, usage:
@@ -36,7 +36,7 @@ class MpttAdmin(admin.ModelAdmin):
         {% load mptt_tags %}        
         {% block extrahead %}
         <script>var permissions={{permissions|safe}};</script>
-        <script src="{{ MEDIA_URL }}js/jstree_admin.js"></script>
+        <script src="{{ settings.MEDIA_URL }}js/jstree_admin.js"></script>
         {% endblock %}
         {% block search %}{% endblock %}{% block date_hierarchy %}{% endblock %}
         {% block result_list %}{% endblock %}{% block pagination %}{% endblock %}
@@ -76,7 +76,7 @@ class MpttAdmin(admin.ModelAdmin):
             'app_label': app_label,
             'tree':self._tree_tpl.render(template.Context()),
             'permissions': permissions,
-            'MEDIA_URL': settings.MEDIA_URL,
+            'settings.MEDIA_URL': settings.settings.MEDIA_URL,
         }
         context.update(extra_context or {})
         context_instance = template.RequestContext(request, current_app=self.admin_site.name)
@@ -140,11 +140,11 @@ class GeoCordobaAdmin(admin.OSMGeoAdmin):
     map_width = 800
     map_height = 600
     
-    extra_js =[MEDIA_URL+'js/OpenStreetMap.js',
-               MEDIA_URL+'js/jquery.min.js', 
-               MEDIA_URL+'js/tiny_mce/tiny_mce.js',
-               MEDIA_URL+'js/tiny_mce/jquery.tinymce.js',
-               MEDIA_URL+'js/tiny_mce/textareas.js',]
+    extra_js =[settings.MEDIA_URL+'js/OpenStreetMap.js',
+               settings.MEDIA_URL+'js/jquery.min.js', 
+               settings.MEDIA_URL+'js/tiny_mce/tiny_mce.js',
+               settings.MEDIA_URL+'js/tiny_mce/jquery.tinymce.js',
+               settings.MEDIA_URL+'js/tiny_mce/textareas.js',]
     
     list_display = ('name','creator','created')           
     list_filter = ('creator','category','created')

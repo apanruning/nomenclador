@@ -3,7 +3,7 @@ from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.core.management.base import BaseCommand, CommandError
 from maap.models import MaapZone, MaapArea, MaapPoint, MaapMultiLine, MaapCategory, Icon
 from osm.parser import OSMXMLFile
-from settings import DEFAULT_SRID
+from django.conf import settings
 from djangoosm import OSM_SRID
 from django.db import connection, transaction
 
@@ -25,8 +25,8 @@ class Command(BaseCommand):
                 continue
             geom = Point(float(node.lon),float(node.lat), srid=OSM_SRID)
             
-            if OSM_SRID != 'EPSG:%d' % DEFAULT_SRID:
-                geom = osm_change_srid(geom, 'EPSG:%d' % DEFAULT_SRID)
+            if OSM_SRID != 'EPSG:%d' % settings.DEFAULT_SRID:
+                geom = osm_change_srid(geom, 'EPSG:%d' % settings.DEFAULT_SRID)
                 
             category = get_or_create_category(node.tags['category'])
             if node.tags.has_key('icon'):
@@ -55,8 +55,8 @@ class Command(BaseCommand):
             if way.tags.get('type', None) == 'multiline':
                 geom = LineString(pgeom)
                 
-                if OSM_SRID != 'EPSG:%d' % DEFAULT_SRID:
-                    geom = osm_change_srid(geom, 'EPSG:%d' % DEFAULT_SRID)
+                if OSM_SRID != 'EPSG:%d' % settings.DEFAULT_SRID:
+                    geom = osm_change_srid(geom, 'EPSG:%d' % settings.DEFAULT_SRID)
                 
                 if maap_multilines.has_key(way.tags['name']):
                     maap_multilines[way.tags['name']][0].geom.append(geom)
@@ -77,8 +77,8 @@ class Command(BaseCommand):
                     
             elif way.tags.get('type', None) in ['area','zone']:
                 geom = Polygon(pgeom)
-                if OSM_SRID != 'EPSG:%d' % DEFAULT_SRID:
-                    geom = osm_change_srid(geom, 'EPSG:%d' % DEFAULT_SRID)
+                if OSM_SRID != 'EPSG:%d' % settings.DEFAULT_SRID:
+                    geom = osm_change_srid(geom, 'EPSG:%d' % settings.DEFAULT_SRID)
 
                 category = get_or_create_category(way.tags['category'])           
                 
