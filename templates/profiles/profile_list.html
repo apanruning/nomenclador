@@ -1,0 +1,57 @@
+{% extends 'maap/people.html' %}
+{% load markup tagging_tags banner_tags mptt_tags maap_tags markup inbox profile_tags pagination_tags %}
+{%block title%}Usuarios y Marcas{%endblock%}
+{% block page%}
+<aside>
+    {% block notice%}
+    {% if user.is_anonymous %}
+    <h2>¿Todavía no tenés una cuenta?</h2>
+    <p>Formar parte de esta creciente comunidad es muy simple</p>
+    <p>¿Qué por qué es interesante?</p>
+    <ul>
+        <li>Publicitá tu marca o producto en la red de comercios más grande de córdoba</li>
+        <li>Aportá a hacer más conocidos los rincones de nuestra ciudad y provincia</li>
+    </ul>
+    <p class="hook">
+    <a href="{% url registration_register %}" class="register">Registrarse Gratis</a> 
+    <a href="/pricing/">O elegí un paquete a tu medida.</a> 
+    </p>
+
+    {%  endif %}
+    {% endblock%}
+
+    {% block aside %}
+    {% pop_slot 'b-1' %}
+    {% pop_slot 'twitter' %}
+    {% pop_slot 'b-2' %}
+    {% pop_slot 'b-3' %}
+    {% pop_slot 'b-4' %}
+    {% pop_slot 'b-5' %}
+    {% pop_slot 'b-6' %}
+    <br class="visualClear-left"/>
+    {% endblock %}
+</aside>
+
+<div id="main">
+    <h1>Indice completo de personas y marcas</h1>
+    {% if object_list %}
+    <ul id="obj-list">
+        {% autopaginate object_list 10 %}
+        {% for object in object_list %}
+        
+        <li class="item {% if object.user == request.user %}me{% endif %}">
+        <h3>
+            <a href="{{ object.get_absolute_url }}">{{object.name}}</a>
+        </h3>
+        <details class="discreet">
+        {% gravatar object.user.email 18 %} 
+        {{a.user.created.count}} puntos - 
+        {{object.user.get_profile.created|date:"j-m-Y"}}
+        </details>
+        </li>
+        {% endfor %}
+    </ul>            
+    {% paginate %}
+    {% endif %}
+</section>
+{%endblock%}

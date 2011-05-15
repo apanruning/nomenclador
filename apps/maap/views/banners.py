@@ -3,13 +3,14 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from maap.models import PointBanner
 from maap.forms import BannerForm
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def new_banner(request):
     form = BannerForm
     if request.method == 'POST':
         form = form(request.POST, request.FILES)
         if form.is_valid():
-    
             messages.add_message(
                 request, 
                 messages.INFO, 

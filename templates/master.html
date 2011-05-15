@@ -45,7 +45,7 @@
             window.location = $(this).find(':selected').attr('value');
         });
         $('#more-categories').click(function(){
-            $('#categories table').toggle();
+            $('#categories table').toggle('blind', 300);
             if ($(this).text() === 'Categorías'){
                 $(this).text('Ocultar')
             }else{

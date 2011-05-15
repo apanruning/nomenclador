@@ -185,6 +185,11 @@ aside{
     background:-moz-linear-gradient(-112deg,#eaf5fa,#c5e8f1);
 
 }
+.hook:hover {
+    background:-webkit-gradient(linear,0% 0,0% 100%,from(#FFF),to(#EBEBEB));
+    background:-moz-linear-gradient(-112deg,#FFF,#EBEBEB);
+
+}
 .hook a {
     text-align: center;
     display:block;
@@ -299,9 +304,6 @@ a.register {
     text-align:center;
 }
 
-#banner-slot-b {
-    text-align:center;
-}   
 #banner-slot-a a img, #banner-slot-b a img{
     border:none;
 }
@@ -620,12 +622,13 @@ aside .content-vote{
     display:none;
     margin:0;
 }
+
 .sugested {
     padding:0.5em 1em;
     background:#EEE;
     clear:right;
     text-align:left;
-    margin: 1em 0;
+    margin: 0;
 }
 .sugested h1 {
     font-size:150%;
@@ -634,6 +637,19 @@ aside .content-vote{
 .sugested h2 {
     font-size:100%;
     margin:0.5em 0 ;
+}
+#profile ul {
+    list-style: none;
+    padding: 0 ;
+    margin: 1em 0;
+    border-top:1px solid #CCC;
+}
+#profile li {
+    padding: 0.5em 1em;
+    margin: 0 -1em;
+    border:1px solid #FFF;
+    border-width: 1px 0;
+    border-color: #FFF transparent #CCC;
 }
 aside li:hover .content-vote {
     display:block;

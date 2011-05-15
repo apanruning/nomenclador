@@ -71,7 +71,7 @@ urlpatterns += patterns('',
 #)
 urlpatterns += patterns('',
 
-#    url(r'^miembros/$', 'profiles.views.profiles', name='profile_list'),
+    url(r'^miembros/$', 'profiles.views.profile_list', name='profile_list'),
     url(r'^miembros/(?P<username>[\w\._-]+)$', 'profiles.views.profile', name='profile_detail'),
     url(r'^miembros/(?P<user_id>[\w\._-]+)/edit$', 'profiles.views.profile_edit', name='profile_edit'),
 

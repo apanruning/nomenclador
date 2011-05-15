@@ -42,7 +42,7 @@
             <h2>Lugares sugeridos</h2>
             <ul  id="obj-list" class="sugested">
             {% block listing %}
-	            {% autopaginate object_list 10 %}
+	            {% autopaginate object_list 6 %}
 		        {% for object in object_list %}
 		        <li class="item">
                 {% include 'place.html' %}

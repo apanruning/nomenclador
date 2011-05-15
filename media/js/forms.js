@@ -5,12 +5,14 @@ $.fn.lousyField = function (){
     return $(this)
         .focus(function(){
             oldvalue = this.value;
-            return $(this).val('');
+            return $(this).val('')
+                          .toggleClass('dirty');
         })
         .blur(function(){
             placeholder = $(this).attr('placeholder');
             if (this.value == ''){
-                return $(this).val(placeholder);
+                return $(this).val(placeholder)
+                              .toggleClass('dirty');
             };
         })
     }
@@ -23,6 +25,7 @@ $.fn.noCrap = function (){
         placeholder = $(this).attr('placeholder');
         if ($(this).val() == placeholder){
             return $(this).val('');
+            
         };
     })
 
