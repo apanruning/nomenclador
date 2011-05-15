@@ -88,7 +88,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
 )
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'nomenclador.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "templates"),
