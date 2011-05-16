@@ -63,6 +63,16 @@
             	    {% autopaginate banners 10 %}
 		            {% for object in banners %}
 		            <li class="item">
+                    <h3>
+                        <a href="{{ object.point.get_absolute_url }}">{{object.point.name}}</a>
+                    </h3>
+                    <details class="discreet">
+                    <a href="{% url profile_detail object.point.creator %}">{{object.point.creator}}</a>
+                    {{object.point.changed|default:object.point.created|date:"j-m-Y"}}
+                    </details>
+                    <div class="pointbanner">
+                    {{object.render_code|safe}}
+                    </div>
                     </li>
                     {% endfor %}
 	            </ul>            
@@ -70,8 +80,9 @@
 
                 {% else %}
                 <h2>No tiene avisos publicados</h2>
+                
                 {% if is_me %}
-                <p>Es muy simple <a href="{% url publish %}">agregar un aviso a tu perfil</a>, para promocionar tu marca o producto.</p>
+                <p>Es muy simple <a href="{% url publish user_profile.get_profile.location.pk  %}">agregar un aviso a tu perfil</a>, para promocionar tu marca o producto.</p>
                 {% endif %}
                 {% endif %}
                 

@@ -6,7 +6,7 @@ from maap.forms import BannerForm
 from django.contrib.auth.decorators import login_required
 
 @login_required
-def new_banner(request):
+def new_banner(request, point_id):
     form = BannerForm
     if request.method == 'POST':
         form = form(request.POST, request.FILES)
@@ -19,7 +19,8 @@ def new_banner(request):
             form.save()
             return redirect('profile_detail', request.user.username,)
     else:
-        form = form(initial={'point':request.user.get_profile().location.pk})
+        
+        form = form(initial={'point':point_id})
     return render(
         request,
         'maap/object_form.html',

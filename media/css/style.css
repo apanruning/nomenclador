@@ -447,6 +447,9 @@ a.register {
 .banner {
     margin: 1em 0;
 }
+.pointbanner {
+    padding: 1em;
+}
 .breadcrumb {
     padding:0.25em;
     margin:0;
