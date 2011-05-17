@@ -85,6 +85,7 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.auth',
     'django.core.context_processors.request',
+    'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
 )
 
@@ -94,7 +95,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "templates"),
 )
 AUTH_PROFILE_MODULE = "profiles.Profile"
-AUTH_PROFILE_ICON = os.path.join(MEDIA_ROOT, 'icons/home.png')
+AUTH_PROFILE_ICON = 'icons/home.png'
 
 PAGINATION_DEFAULT_WINDOW = 2
 
