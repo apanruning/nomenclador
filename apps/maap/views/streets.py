@@ -1,10 +1,7 @@
-from django.shortcuts import render_to_response, redirect
-from django.db import connection
 from django.utils import simplejson
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import Http404
 from django.template import RequestContext
-from django.shortcuts import get_object_or_404, render_to_response
-from django.views.generic.list_detail import object_list, object_detail
+from django.shortcuts import get_object_or_404, render_to_response, render, redirect
 from maap.models import Streets, Nodes
 from djangoosm.models import StreetIntersection, Ways
 from djangoosm.utils.search import get_location_by_door
@@ -55,7 +52,7 @@ def search_streets(request):
             url = "%s?%s" % (urlresolvers.reverse('maap.views.street_location'), 
                              urlencode(params))
                                  
-            return  HttpResponseRedirect(url)
+            return  redirect(url)
             
         #In this case log a fail search
         if street_list.count() == 0:
@@ -77,13 +74,15 @@ def search_streets(request):
             slog = SearchLog(message=message,url=url,tuvo_exito=False,type_search=ty_sch,level=20)
             slog.save()
             
-        return object_list(
+        return render(
             request,
-            street_list,
-            template_name='maap/streets.html',
-            extra_context={'with_intersection':with_intersection,
-                           'streetnumber':streetnumber,
-                           'queryterm':queryterm})
+            'maap/streets.html',
+            {
+                'object_list': street_list,
+                'with_intersection':with_intersection,
+                'streetnumber':streetnumber,
+                'queryterm':queryterm}
+        )
                            
     return redirect('index')
     
@@ -142,7 +141,11 @@ def street_location(request):
                     'streetnumber':streetnumber
                     })
             
-            return render_to_response('maap/street_detail.html', context_instance = context)
+            return render(
+                request, 
+                'maap/street_detail.html', 
+                context
+            )
                             
         else:
             raise Http404

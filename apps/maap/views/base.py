@@ -1,18 +1,12 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render_to_response, redirect
-from django.db import connection
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.utils import simplejson
 from django.http import HttpResponse, Http404
-from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response, render
-from django.views.generic.list_detail import object_list, object_detail
-from django.views.generic import create_update, simple
+from django.views.generic import create_update
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.gis.measure import Distance, D
-from django.core import urlresolvers
-from django.utils.http import urlquote
 from profiles.models import Profile
 from maap.models import MaapModel, MaapPoint, MaapArea, \
                                     MaapMultiLine, Icon, MaapCategory
@@ -24,6 +18,7 @@ from cyj_logs.models import SearchLog
 
 def index(request, template_name='maap/index.html'):
     queryset = MaapModel.objects.filter(category__isnull=False, category__is_public=True)
+    queryset = queryset.distinct()
     return render(
         request, 
         template_name,
@@ -33,10 +28,10 @@ def index(request, template_name='maap/index.html'):
 
     )
 def server_error(request):
-    return simple.direct_to_template(request, '500.html')
+    return render(request, '500.html')
 
 def not_found(request):
-    return simple.direct_to_template(request, '404.html')
+    return render(request, '404.html')
 
 def search_people(request):
     term = request.GET.get('firstname', None)
@@ -46,11 +41,11 @@ def search_people(request):
         queryset = queryset.filter(name__icontains=term)
 
     objects = MaapPoint.objects.filter(profile__in = queryset)    
-    return object_list(
+    return render(
         request,
-        queryset,
-        template_name = 'maap/people.html', 
-        extra_context = {
+        'maap/people.html', 
+        {
+            'object_list': queryset,
             'default':'people',
             'json_layer': objects.layer().json
         }          
@@ -72,15 +67,15 @@ def view(request,cat_slug, object_id):
     slog = SearchLog(message=message,url=url,level=20, tuvo_exito=True,type_search="categoria")
     slog.save()
 
-    return object_list(
+    return render(
         request,
-        objects, 
-        template_name = 'maap/object_detail.html',
-        extra_context = {
+        'maap/object_detail.html',
+        {
+            'object_list': objects,
             'category':category, 
             'object':obj, 
             'json_layer': json_layer,
-            },
+        }
     )
 
 @login_required  
@@ -106,16 +101,12 @@ def create(request):
 
 def search_places(request, cat_slug=None):
     search_term = request.GET.get('placename', None)
-    
     objects = MaapModel.objects.all()
-
-    kwargs = dict(
-        template_name = 'maap/places.html', 
-        extra_context = {
+    context =  {
+            'object_list': objects,
             'default':'places',
-        }      
-    )
-
+            'category': category,
+    }
     
     if cat_slug:    
         try:
@@ -125,23 +116,29 @@ def search_places(request, cat_slug=None):
         descendants = category.get_descendants(include_self = True)
         objects = objects.filter(category__in = descendants)
 
-        kwargs['extra_context']['category'] = category
-    
+        context['category'] = category
+        
     if search_term:
         objects = objects.filter(slug__contains = slugify(search_term))
         
-    objects = objects.distinct()
-    kwargs['extra_context']['json_layer'] = objects.layer().json        
+    context['objects'] = objects.distinct()
+    context['json_layer'] = objects.layer().json        
     
-    return object_list(request, objects, **kwargs)
+    return render(
+        request, 
+        'maap/places.html',
+        context,
+    )
     
 def obj_list_by_tag(request, tag):
     result = TaggedItem.objects.get_by_model(MaapModel, tag)
-    return object_list(
+    return render(
         request, 
-        result, 
-        template_name='maap/index.html', 
-        extra_instance={'tag':tag}
+        'maap/index.html', 
+        {
+        'object_list':result,
+        'tag':tag
+        }
     )
 
 def log_out(request):

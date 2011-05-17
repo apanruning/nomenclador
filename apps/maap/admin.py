@@ -76,7 +76,7 @@ class MpttAdmin(admin.ModelAdmin):
             'app_label': app_label,
             'tree':self._tree_tpl.render(template.Context()),
             'permissions': permissions,
-            'settings.STATIC_URL': settings.settings.STATIC_URL,
+            'settings.STATIC_URL': settings.STATIC_URL,
         }
         context.update(extra_context or {})
         context_instance = template.RequestContext(request, current_app=self.admin_site.name)
@@ -125,10 +125,7 @@ class MpttAdmin(admin.ModelAdmin):
         return self.get_tree(request)
 
 
-class MaapCategoryAdmin(MpttAdmin):
-    #tree_title_field = 'maapcategory'
-    tree_display = ('name',) # you can use filters here
-    #prepopulated_fields = {"slug": ("name",)}
+class MaapCategoryAdmin(admin.ModelAdmin):
     class Meta:
         model = MaapCategory
 
