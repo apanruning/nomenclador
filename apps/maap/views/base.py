@@ -105,7 +105,6 @@ def search_places(request, cat_slug=None):
     context =  {
             'object_list': objects,
             'default':'places',
-            'category': category,
     }
     
     if cat_slug:    
@@ -113,10 +112,11 @@ def search_places(request, cat_slug=None):
             category = MaapCategory.objects.get(slug = cat_slug)
         except MaapCategory.DoesNotExist:
             raise Http404
+
+        context['category'] = category        
         descendants = category.get_descendants(include_self = True)
         objects = objects.filter(category__in = descendants)
 
-        context['category'] = category
         
     if search_term:
         objects = objects.filter(slug__contains = slugify(search_term))
