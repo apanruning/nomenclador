@@ -55,7 +55,7 @@ Maap.Point = Maap.Geom.extend({
         } else {
             width = 40;
             height = 40;
-            this.icon.url = "/media/icons/center.png";
+            this.icon.url = MEDIA_URL+"/icons/center.png";
             this.style['point_'+this.id] = {
                 externalGraphic: this.icon.url,
                 graphicWidth: width,

@@ -1,5 +1,5 @@
 /**window.onload=function(){
-     include('media/modules/state.js');
+     include(MEDIA_URL+'/modules/state.js');
      
 }  **/
 
@@ -8,8 +8,8 @@ $(document).ready(
     //initilize system
     function(){
         //load modules. Note that the order is important
-        include('media/modules/state.js');  
-        include('media/modules/map_settings.js');  
+        include(MEDIA_URL+'/modules/state.js');  
+        include(MEDIA_URL+'/modules/map_settings.js');  
 
         //settings for map's options
 map_options = {
@@ -25,8 +25,8 @@ map_options = {
         state['map'] = map
 
         //load modules
-        include('media/modules/point.js');
-        include('media/modules/init.js');
+        include(MEDIA_URL+'/modules/point.js');
+        include(MEDIA_URL+'/modules/init.js');
 
         //Start execution        
         init_phase_one();

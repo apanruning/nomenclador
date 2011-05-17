@@ -247,6 +247,8 @@ a.register {
     margin:0;
     padding:0;
     background: #EBEBEB;
+    border-top: 1px solid #CCC;
+    border-bottom: 1px solid #FFF;
     
 }
 #obj-list h3{
@@ -266,8 +268,8 @@ a.register {
 
 #obj-list .item {
     position: relative;
-    border-top: 1px solid #FFFFFF;
-    border-bottom: 1px solid #FFFFFF;
+    border-top: 1px solid #FFF;
+    border-bottom: 1px solid #CCC;
 }
 
 #obj-list details {

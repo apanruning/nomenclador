@@ -5,7 +5,7 @@ from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.utils import simplejson
 from django.http import HttpResponse, Http404
 from django.template import RequestContext
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render_to_response, render
 from django.views.generic.list_detail import object_list, object_detail
 from django.views.generic import create_update, simple
 from django.contrib import messages
@@ -22,15 +22,16 @@ from django.template.defaultfilters import slugify
 from cyj_logs.models import SearchLog
 
 
-def index(request,*args, **kwargs):
+def index(request, template_name='maap/index.html'):
     queryset = MaapModel.objects.filter(category__isnull=False, category__is_public=True)
-    queryset = queryset.distinct()
-    return object_list(
+    return render(
         request, 
-        queryset,
-        extra_context= {'json_layer': queryset.layer().json},       
-        *args,**kwargs)
+        template_name,
+        {
+            'object_list': queryset,
+        }
 
+    )
 def server_error(request):
     return simple.direct_to_template(request, '500.html')
 

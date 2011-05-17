@@ -200,6 +200,11 @@ class MaapCategory(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
     is_public = models.BooleanField(default=True)
     show_all = models.BooleanField(default=False)
+
+    class Meta:
+    
+        verbose_name_plural = 'MaapCategories'
+    
     
     def save(self, *args, **kwargs):        
         if self.id is None:

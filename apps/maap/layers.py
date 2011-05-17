@@ -1,7 +1,7 @@
 from django.utils import simplejson
-
+from django.conf import settings
 DEFAULT_ICON = {
-    "url": "/media/icons/info.png",
+    "url": "%s/icons/info.png" %(settings.STATIC_URL),
     "width": 32,
     "height": 37
 }
