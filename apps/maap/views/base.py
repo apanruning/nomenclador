@@ -148,11 +148,11 @@ def log_out(request):
     return redirect('index')
 
 def barrios(request):
-    return dict(object_list = MaapModel.objects.filter(category__name='Barrios'))
+    queryset = MaapModel.objects.filter(category__name='Barrios')
     name = request.GET.get('name')
     if name:
         queryset = queryset.filter(name__istartswith=name)
     return HttpResponse(
-        json.dumps([(x.pk, x.name) for x in queryset]), 
-        mimetype="application/json",
+        simplejson.dumps([(x.pk, x.name) for x in queryset]), 
+        content_type="application/json",
     )

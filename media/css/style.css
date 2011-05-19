@@ -227,20 +227,6 @@ a.register {
     width:100%;
     height:350px;
 }
-#map-handler {
-    display:block;
-    background: #CDD;
-    text-align:center;
-    text-decoration:none;
-    z-index:99999;
-    display:block;
-    width:100%;
-    position:absolute;
-    bottom:0;
-}
-#map-handler:hover {
-    background: #EFF;
-}
 
 #obj-list{
     list-style:none;

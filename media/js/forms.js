@@ -33,11 +33,17 @@ $.fn.noCrap = function (){
 })(jQuery);
 
 $(document).ready( function(){
+	function split(val){
+		return val.split(/,\s*/);
+	}
+	function extractLast(term) {
+		return split(term).pop();
+	}
     $('.searchterm').lousyField()
     $('.search').submit(function(){
         $(this).find(':fields').noCrap()
     })
-    $( "#id_barrios" )
+    $("#id_barrios")
 		.autocomplete({
 			source: function( request, response ) {
 				$.getJSON( "/barrios/", {
@@ -53,7 +59,7 @@ $(document).ready( function(){
 			focus: function() {
 				return false;
 			},
-			select: function( event, ui ) {
+			select: function(event, ui) {
 				var terms = split( this.value );
 				terms.pop();
 				terms.push( ui.item.value );
