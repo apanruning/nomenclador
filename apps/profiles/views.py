@@ -36,16 +36,6 @@ def get_default_redirect(request, redirect_field_name="next",
         redirect_to = default_redirect_to
     return redirect_to
 
-def profile_list(request):
-    queryset = Profile.objects.filter(public=True)
-    return render(
-        request, 
-        'profiles/profile_list.html',
-        {
-            'object_list': queryset,
-        }
-    )
-
 def profile(request, username):
     user_profile = get_object_or_404(User, username=username)
     profile = user_profile.get_profile()

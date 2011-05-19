@@ -18,7 +18,6 @@ handler404 = 'maap.views.base.not_found'
 urlpatterns = patterns('maap.views',
     (r'^$', 'index',{'template_name':'maap/index.html'}, 'index'),
     url(r'^map/streets$', 'search_streets', name='search_streets'),
-    url(r'^map/people$', 'search_people', name='search_people'),
     url(r'^map/places$', 'search_places', name='search_places'),
     url(r'^barrios/$', 'barrios', name='barrios'),
     url(r'^category/(?P<cat_slug>[^/]+)$', 'search_places', name='list_by_category'),
@@ -70,10 +69,9 @@ urlpatterns += patterns('',
 #    url(r'^ingresar/$', 'account.views.login', name='login'),
 #)
 urlpatterns += patterns('',
-
-    url(r'^miembros/$', 'profiles.views.profile_list', name='profile_list'),
-    url(r'^miembros/(?P<username>[\w\._-]+)$', 'profiles.views.profile', name='profile_detail'),
-    url(r'^miembros/(?P<user_id>[\w\._-]+)/edit$', 'profiles.views.profile_edit', name='profile_edit'),
+    url(r'^map/people$', 'maap.views.search_people', name='search_people'),
+    url(r'^map/people/(?P<username>[\w\._-]+)$', 'profiles.views.profile', name='profile_detail'),
+    url(r'^map/people/(?P<user_id>[\w\._-]+)/edit$', 'profiles.views.profile_edit', name='profile_edit'),
 
     )
 

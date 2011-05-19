@@ -36,19 +36,22 @@ def not_found(request):
 def search_people(request):
     term = request.GET.get('firstname', None)
     queryset = Profile.objects.filter(public=True)
+    context = {
+        'object_list': queryset,
+        'default':'people',
+        'search_term': term,
+    }
 
     if term:
-        queryset = queryset.filter(name__icontains=term)
+        results = queryset.filter(name__icontains=term) 
+        objects = MaapPoint.objects.filter(profile__in = results).layer().json
+        context['object_list'] = results
+        context['objects'] = objects
 
-    objects = MaapPoint.objects.filter(profile__in = queryset)    
     return render(
         request,
-        'maap/people.html', 
-        {
-            'object_list': queryset,
-            'default':'people',
-            'json_layer': objects.layer().json
-        }          
+        'profiles/profile_list.html', 
+        context
     )
     
 ##Generic Views
@@ -74,7 +77,7 @@ def view(request,cat_slug, object_id):
             'object_list': objects,
             'category':category, 
             'object':obj, 
-            'json_layer': json_layer,
+             'json_layer': json_layer,
         }
     )
 

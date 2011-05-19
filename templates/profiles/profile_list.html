@@ -1,6 +1,14 @@
-{% extends 'maap/people.html' %}
+{% extends "maap/index.html" %}
 {% load markup tagging_tags banner_tags mptt_tags maap_tags markup inbox profile_tags pagination_tags %}
+
 {%block title%}Usuarios y Marcas{%endblock%}
+
+{% block tabs %}
+    <li><a href="#streets">Calles</a></li>
+    <li><a href="#places">Lugares y Servicios</a></li>
+    <li class="ui-tabs-selected" ><a href="#people">Personas</a></li>
+{% endblock tabs %}
+{% if object.user == request.user %}me{% endif %}
 {% block page%}
 <aside>
     {% block notice%}
@@ -33,25 +41,35 @@
 </aside>
 
 <div id="main">
-    <h1>Indice completo de personas y marcas</h1>
+
     {% if object_list %}
+    {% if term %}
+    <h1>Personas y marcas con {{term}}</h1>
+    {%else%}
+    <h1>Indice completo de Personas y Marcas</h1>
+    {% endif %}
+
     <ul id="obj-list">
         {% autopaginate object_list 10 %}
         {% for object in object_list %}
         
         <li class="item {% if object.user == request.user %}me{% endif %}">
         <h3>
-            <a href="{{ object.get_absolute_url }}">{{object.name}}</a>
+            <a href="{{ object.get_absolute_url }}">{{object.name}}</a>{% if object.user == request.user %} - este es usted{% endif %}
         </h3>
         <details class="discreet">
         {% gravatar object.user.email 18 %} 
         {{a.user.created.count}} puntos - 
-        {{object.user.get_profile.created|date:"j-m-Y"}}
+        {{object.created|date:"j-m-Y"}}
         </details>
         </li>
         {% endfor %}
     </ul>            
     {% paginate %}
+    {%else%}
+    <h1>Su búsqueda no tuvo resultados</h1>
+    <p>Por favor, revise los terminos o haga más general la consulta y vuelva a intentar, o busque en el <a href="{% url search_people %}">Listado completo de personas y Marcas</a></p>
+    
     {% endif %}
 </section>
 {%endblock%}

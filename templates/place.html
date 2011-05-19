@@ -1,6 +1,4 @@
-{% load tagging_tags comments voting_tags %}
 <h3>
-    {% score_for_object object as score %}
     <a href="{{ object.get_absolute_url }}">{{object.name}}</a>
 </h3>
 <details class="discreet">

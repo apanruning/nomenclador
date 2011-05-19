@@ -240,13 +240,6 @@ a.register {
 #obj-list h3{
     margin:0.5em;
 }
-#obj-list a {
-    padding-left: 1em;
-    display:block;
-}
-#obj-list a:hover{
-/*    background:#FFC018; */
-}
 
 #obj-list li:hover {
     background:#FFC018;
@@ -532,7 +525,6 @@ a.register {
     
 }
 #user-content .ui-tabs-nav {
-    border-bottom: 1px solid #CCC;
     padding:0 2em;
     height:2em;
 }
