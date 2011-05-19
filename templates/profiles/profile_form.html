@@ -4,6 +4,7 @@
 {%block title%}Perfil de {{user}} {%endblock%}
 
 {% block js_onload %}
+            $('#id_description').tinymce(textEditorOptions);
 {% endblock %}
 
 {%block categories %}  {% endblock %}

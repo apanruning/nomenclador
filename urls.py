@@ -69,7 +69,7 @@ urlpatterns += patterns('',
 #    url(r'^ingresar/$', 'account.views.login', name='login'),
 #)
 urlpatterns += patterns('',
-    url(r'^map/people$', 'maap.views.search_people', name='search_people'),
+    url(r'^map/people/$', 'maap.views.search_people', name='search_people'),
     url(r'^map/people/(?P<username>[\w\._-]+)$', 'profiles.views.profile', name='profile_detail'),
     url(r'^map/people/(?P<user_id>[\w\._-]+)/edit$', 'profiles.views.profile_edit', name='profile_edit'),
 

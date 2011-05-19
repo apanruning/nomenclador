@@ -2,7 +2,7 @@
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.utils import simplejson
 from django.http import HttpResponse, Http404
-from django.shortcuts import get_object_or_404, render_to_response, render
+from django.shortcuts import get_object_or_404, render_to_response, render, redirect
 from django.views.generic import create_update
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required

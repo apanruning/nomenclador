@@ -11,6 +11,7 @@ label{
 select{
     width:15em;
 }
+.mceLayout,
 input[type='text'],
 input[type='password']{
     width:15em;
@@ -183,16 +184,3 @@ input.searchterm{
 #searchbuton:hover{
     text-decoration:none;
 }
-
-.grippie{
-    background:#EEE url(../img/grippie.png) no-repeat center center;
-    height:11px;
-    cursor:pointer;
-    border-color:#DDDDDD;
-    border-style:solid;
-    border-width:0 1px 1px;
-    cursor:s-resize;
-    height:9px;
-    overflow:hidden;
-}
-

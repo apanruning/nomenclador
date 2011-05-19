@@ -91,18 +91,15 @@ def profile_edit(request, user_id):
         if profile_form.is_valid():
             profile = profile_form.save(commit=False)
             
-        if point_form.is_valid():
-            point = point_form.save(commit=False)
-            point.name = profile.name
-            point.creator = request.user
-            point.editor = request.user
-            point.icon = default_icon
+            if point_form.is_valid():
+                point = point_form.save(commit=False)
+                point.name = profile.name
+                point.creator = request.user
+                point.editor = request.user
+                point.icon = default_icon
             
-        try :
-            point.save()
-            success = True
-        except:
-            success = False
+                point.save()
+                success = True
 
         if success:
             profile.user = user            
