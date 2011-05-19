@@ -19,6 +19,6 @@ django-registration
 django-debug-toolbar
 django-compressor
 
-git+git://github.com/tutuca/banners.git#egg=banners
+git+git://github.com/Inventta/banners.git#egg=banners
 git+git://github.com/etnalubma/python-osm.git#egg=osm
 git+git://github.com/etnalubma/django-osm.git#egg=djangoosm
