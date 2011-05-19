@@ -37,6 +37,7 @@
     {% endblock %}
     <script type="text/javascript">
     $(document).ready(function(){
+        MEDIA_URL = {{STATIC_URL}}
         $('.select-neighborhoods').change(function(){
             window.location = $(this).find(':selected').attr('value');
         });
