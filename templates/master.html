@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="/static/css/style.css" type="text/css" media="screen">
     <link rel="stylesheet" href="/static/css/forms.css" type="text/css" media="screen">
     {% endcompress %}
-    <script src="http://openlayers.org/api/OpenLayers.js"></script>
     {% compress js %}
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/jquery.ui.js"></script>
+    <script src="/static/js/OpenLayers.js"></script>
     <script src="/static/js/OpenStreetMap.js"></script>
     <script src="/static/js/dimensions.js"></script>
     <script src="/static/js/forms.js"></script>
@@ -107,7 +107,7 @@
                 {% block tabs %}    
                 <li class="ui-tabs-selected"><a href="#streets">Calles</a></li>
                 <li><a href="#places">Lugares y Servicios</a></li>
-                <li><a href="#people">Personas</a></li>
+                <li><a href="#">Personas y marcas</a></li>
                 {% endblock tabs %}
                 </ul>
                 <form action="{% url search_streets %}" method="get" id="streets" class="search shadow">
