@@ -1,8 +1,6 @@
 {% extends 'master.html' %}
-{% load compress %}
 
 {% block javascript %}
-    {% compress js %}
     <script src="/static/modules/base.js"></script>
     <script src="/static/modules/state.js"></script>
     <script src="/static/modules/point.js"></script>
@@ -10,8 +8,6 @@
     <script src="/static/modules/area.js"></script>
     <script src="/static/modules/layer.js"></script>
     <script src="/static/modules/init.js"></script>
-
-    {% endcompress %}
 {% endblock %}
 
 {% block js_onload %}

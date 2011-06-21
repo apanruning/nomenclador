@@ -1,5 +1,4 @@
 <html>
-{% load compress %}
 <head>
 
 {% block title %}
@@ -9,20 +8,14 @@ Herramientas para el Nomenclador
 {% endblock %}
 
     <link rel="stylesheet" href="/static/css/locations_tool.css" type="text/css" media="screen">
-
-{% compressed_js 'scripts' %}
-    {% compress js %}
     <script src="/static/js/jquery.ui.js"></script>
     <script src="/static/js/OpenLayers.js"></script>
     <script src="/static/js/OpenStreetMap.js"></script>
     <script src="/static/js/dimensions.js"></script>
     <script src="/static/js/forms.js"></script>
-    <script src="/static/js/autocomplete.js"></script>
     <script src="/static/js/tiny_mce/tiny_mce.js"></script>
     <script src="/static/js/tiny_mce/jquery.tinymce.js"></script>
     <script src="/static/js/texteditoroptions.js"></script>
-    <script src="/static/js/lib/jquery.tree.min.js"></script>
-    <script src="/static/js/lib/plugins/jquery.tree.contextmenu.js"></script>
     <script src="/static/modules/base.js"></script>
     <script src="/static/modules/state.js"></script>
     <script src="/static/modules/point.js"></script>
@@ -30,8 +23,6 @@ Herramientas para el Nomenclador
     <script src="/static/modules/area.js"></script>
     <script src="/static/modules/layer.js"></script>
     <script src="/static/modules/init.js"></script>
-
-    {% endcompress %}
 
 {%block javascript %} {% endblock javascript %}
 <script type="text/javascript">

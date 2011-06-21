@@ -3,7 +3,7 @@ import os
 
 BASE_DIR = os.path.dirname(__file__)
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -45,7 +45,7 @@ MEDIA_URL = '/media/'
 
 OSM_CSV_ROOT = os.path.join(BASE_DIR, 'csv')
 
-STATIC_URL = '/static/'
+STATIC_URL = 'http://localhost/cyj_media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -56,7 +56,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
 )
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
@@ -115,7 +114,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'debug_toolbar',
     'south',
-    'compressor',
     'pagination',    
     'voting',
     'tagging',
