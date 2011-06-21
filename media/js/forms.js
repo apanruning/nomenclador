@@ -41,7 +41,7 @@ $(document).ready( function(){
 	}
     $('.searchterm').lousyField()
     $('.search').submit(function(){
-        $(this).find(':fields').noCrap()
+        $(this).find(':input').noCrap()
     })
     $("#id_barrios")
 		.autocomplete({

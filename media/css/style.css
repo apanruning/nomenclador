@@ -251,13 +251,13 @@ a.register {
     border-bottom: 1px solid #CCC;
 }
 
-#obj-list details {
+.details {
     position:absolute;
     right:1em;
     top:8px;
     font-weight:normal;
 }
-#obj-list details a {
+.details a {
     display:inline;
 }
 #content {
@@ -339,24 +339,27 @@ a.register {
     color:#900;
 }
 
-#announcements {
+#messages {
+    text-align:left;
     background: #FE9;
     border: 1px solid #FC0;
-    padding:0;
-    position: absolute;
-    width: 100%;
-}
-#announcements ul{
-    list-style:none;
-    padding:0;
+    font-size:80%;
     margin:0;
-
+    padding:0 1em;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    z-index:100;
+    list-style:none;
 }
-#announcements li {
-    padding:0.25em;
-    margin:0 auto;
-    position:relative;
-    width:80%;
+#messages li {
+    padding: 0.25em 2em;
+    position: relative;
+}
+#messages .control {
+    position: absolute;
+    right: 4em;
 }
 .close:hover {
     text-decoration:none;
