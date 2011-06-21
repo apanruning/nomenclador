@@ -34,11 +34,11 @@ Darle permisos a todos los usuarios de alterar columnas de geomtría:
 
     $ psql -d template_postgis -c "GRANT ALL ON geometry_columns TO PUBLIC;"
     $ psql -d template_postgis -c "GRANT ALL ON geography_columns TO PUBLIC;"
-    $ psql -d template_postgis -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"    
+    $ psql -d template_postgis -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"
 
 Luego podés crear una base de datos que pueda almacenar las columnas de postgis utilizando el template_postgis:
 
-    $ psql:
+    $ psql
     postgres=# CREATE DATABASE nomenclador WITH OWNER=nomenclador TEMPLATE=template_postgis;
 
 
@@ -66,7 +66,7 @@ Ahora resta guardar los datos de entorno en local_settings.py, una configuració
 
 Correr syncdb pero **NO** crear un super usuario:
 
-    r$ ./manage.py syncdb
+    $ ./manage.py syncdb
     Skipping creation of NoticeTypes as notification app not found
     Syncing...
     Creating tables ...
@@ -78,7 +78,15 @@ Correr syncdb pero **NO** crear un super usuario:
         ((snip))
     $ 
 
-
+Correr las migraciones, el orden es importante:
+    
+    $ ./manage.py migrate banners
+    $ ./manage.py migrate maap
+    $ ./manage.py migrate profiles
+    
+Crear el superusuario:
+    $ ./manage.py createsuperuser
+    
 
     
     
