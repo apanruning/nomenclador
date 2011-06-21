@@ -18,6 +18,10 @@ def category_list(current_node = None, searchterm = None):
         
     return out
     
+@register.inclusion_tag('../templates/barrios.html')
+def neighbour_list(current_node = None):
+    return dict(object_list = MaapModel.objects.filter(category__name='Barrios'))
+    
 @register.inclusion_tag('../templates/breadcrumbs.html')
 def breadcrumbs(current_node = None):
     return dict(current = current_node)

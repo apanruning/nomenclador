@@ -1,10 +1,10 @@
 <h3>
     <a href="{{ object.get_absolute_url }}">{{object.name}}</a>
 </h3>
-<details class="discreet">
+<p class="details discreet">
 {% if object.creator%}
 <a href="{% url profile_detail object.creator %}">{{object.creator}}</a>
 {% endif %}
 {{object.changed|default:object.created|date:"j-m-Y"}}
-</details>
+</p>
 

@@ -35,8 +35,6 @@ urlpatterns += patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^acerca_de/', direct_to_template, {'template':'about.html'}),
-    (r'^mensajes/', include('messages.urls')),
-    (r"^announcements/", include("announcements.urls")),
     (r'^contacto/$', 'profiles.views.mail', {}, 'mail'),
     # toolsnmt
     (r'^locations_tool/', include('toolsnmt.urls')),

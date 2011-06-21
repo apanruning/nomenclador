@@ -1,5 +1,5 @@
 {% extends "maap/index.html" %}
-{% load markup tagging_tags banner_tags mptt_tags maap_tags markup inbox profile_tags pagination_tags %}
+{% load markup tagging_tags banner_tags mptt_tags maap_tags markup profile_tags pagination_tags %}
 
 {%block title%}Usuarios y Marcas{%endblock%}
 
@@ -57,11 +57,11 @@
         <h3>
             <a href="{{ object.get_absolute_url }}">{{object.name}}</a>{% if object.user == request.user %} - este es usted{% endif %}
         </h3>
-        <details class="discreet">
+        <p class="details discreet">
         {% gravatar object.user.email 18 %} 
         {{a.user.created.count}} puntos - 
         {{object.created|date:"j-m-Y"}}
-        </details>
+        </p>
         </li>
         {% endfor %}
     </ul>            

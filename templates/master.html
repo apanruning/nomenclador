@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-{% load banner_tags maap_tags inbox compress %}
+{% load banner_tags maap_tags compress %}
 <head>
     <meta charset="utf-8" />
     <title>{% block title %}{% endblock %} Nomenclador Cartográfico</title>
@@ -41,14 +41,18 @@
         $('.select-neighborhoods').change(function(){
             window.location = $(this).find(':selected').attr('value');
         });
+        $('.control').click(function(){
+            target = $(this).attr('href');
+            $(target).toggle('blind', 300);
+            return false;
+        });
+
         $('#more-categories').click(function(){
-            $('#categories table').toggle('blind', 300);
             if ($(this).text() === 'Categorías'){
                 $(this).text('Ocultar')
             }else{
                 $(this).text('Categorías')
             }
-          return false;
         });
         $('#announcements .close').click(function(){
             $('#announcements').toggle('blind', 300);
@@ -65,25 +69,13 @@
   
 <body>
 <div id="wrapper">
-    {% if site_wide_announcements or messages%}
-        <div id="announcements">
-            <ul>
-                {% for announcement in site_wide_announcements %}
-                <li>
-                    <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> 
-                    <a class="action close announcement" href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">X</a>
-                </li>
-                {% endfor %}
-                {% for message in messages %}
-                <li>
-                    {{ message }}
-                    <a class="action close" href="#site-wide-announcements">x</a>
-                </li>                    
-                {% endfor %}
-            </ul>
-        </div>
+    {% if messages %}
+    <ul id="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<a class="control" href="#messages">X</a></li>
+    {% endfor %}
+    </ul>
     {% endif %}
-
 
     <header id="header">
         <div class="wrapper">
@@ -91,7 +83,7 @@
             <div id="session">
                 {% if user.is_authenticated %}
                 <a href="{% url logout %}">Salir</a>
-                <a href="{% url profile_detail user %}">({%inbox_count%}) <strong>{{user}}</strong></a> 
+                <a href="{% url profile_detail user %}"><strong>{{user}}</strong></a> 
                 {% if user.is_staff %}
                 <a href="/admin/"> Administraci&oacute;n</a> 
                 {% endif %}
@@ -125,10 +117,7 @@
                            placeholder="Interseccion"
                            value="{{request.GET.intersection|default:'Interseccion'}}" 
                            class="searchterm middle" size="17" name="intersection" />
-                    <input type="text" 
-                           placeholder="Barrio"
-                           value="{{request.GET.barrio|default:'Barrio'}}" 
-                           class="searchterm" size="17" name="barrios" id="id_barrios"/>
+                    {% neighbour_list %}
                 </form>
                 <form action="{% url search_places %}" method="get" id="places" class="search ui-tabs-hide">
                     <input type="submit" value="Buscar" class="searchbuton" />
@@ -136,6 +125,7 @@
                            placeholder="Ingrese un nombre de un negocio o lugar"
                            value="{{request.GET.searchterm|default:'Ingrese un nombre de un negocio o lugar' }}" 
                            class="searchterm" name="placename" />
+                    {% neighbour_list %}
                     </form>
                 <form action="{% url search_people %}" method="get" id="people" class="search ui-tabs-hide">
                     <input type="submit" value="Buscar" class="searchbuton" />
@@ -143,6 +133,7 @@
                            placeholder="Ingrese el nombre de la persona que busca"
                            value="{{request.GET.firstname|default:'Ingrese el nombre de la persona que busca'}}" 
                            class="searchterm" name="firstname" />
+                    {% neighbour_list %}
                 </form>
 
             </div>

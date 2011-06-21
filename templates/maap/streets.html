@@ -26,7 +26,7 @@ Busqueda de calles
         <a class="show-layer" 
            href="{{ url }}?str={{street.norm}}{% if streetnumber %}&door={{streetnumber}}{% endif %}">{{street}} {{streetnumber}}</a>
         {% endif %}
-        <details class="discreet">{{street.old|default_if_none:''}}</details>
+        <p class="discreet">{{street.old|default_if_none:''}}</p>
         </h3>
     {% endfor %}
 {% paginate %}    

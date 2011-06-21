@@ -27,12 +27,12 @@
     <article id="content">
     {% block content %}
         <h1>{{ object.icon }}<a href="{{ object.get_absolute_url }}">{{object.name}}</a></h1>    
-        <details class="discreet">
+        <p class="details discreet">
         {% if object.creator%}
         <a href="{% url profile_detail object.creator %}">{{object.creator}}</a> 
         {% endif %}
         {{object.changed|default:object.created|date:"j-m-Y"}}
-        </details>
+        </p>
         <aside>
             <div id="banner-slot-b">
             {% pop_slot 'd-1' %}
