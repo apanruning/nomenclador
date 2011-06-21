@@ -13,10 +13,9 @@
     <link rel="stylesheet" href="{{STATIC_URL}}css/style.css" type="text/css" media="screen">
     <link rel="stylesheet" href="{{STATIC_URL}}css/forms.css" type="text/css" media="screen">
     {% endcompress %}
-    <script src="http://openlayers.org/api/OpenLayers.js"></script>
-    {% compress js %}
     <script src="{{STATIC_URL}}js/jquery.min.js"></script>
     <script src="{{STATIC_URL}}js/jquery.ui.js"></script>
+    <script src="{{STATIC_URL}}js/OpenLayers.js"></script>
     <script src="{{STATIC_URL}}js/OpenStreetMap.js"></script>
     <script src="{{STATIC_URL}}js/dimensions.js"></script>
     <script src="{{STATIC_URL}}js/forms.js"></script>
@@ -25,9 +24,7 @@
     <script src="{{STATIC_URL}}js/texteditoroptions.js"></script>
     <script src="{{STATIC_URL}}js/lib/jquery.tree.min.js"></script>
     <script src="{{STATIC_URL}}js/lib/plugins/jquery.tree.contextmenu.js"></script>
-    {% endcompress %}
     <script src="http://widgets.twimg.com/j/2/widget.js"></script>
-
     {% block javascript %}
     {% if form.media %}
         {% for js in form.media.render_js %} 
@@ -38,27 +35,26 @@
     <script type="text/javascript">
     $(document).ready(function(){
         MEDIA_URL = "{{STATIC_URL}}";
-        $('.control').click(function(){
-            target = $(this).attr('href');
-            $(target).toggle('blind', 300);
-            return false;
-        });
 
         $('#more-categories').click(function(){
             if ($(this).text() === 'Categorías'){
-                $(this).text('Ocultar')
+                $(this).text('Ocultar');
             }else{
-                $(this).text('Categorías')
+                $(this).text('Categorías');
             }
+            target = $(this).attr('href');
+            $(target).toggle('blind', 300);
+            return false;
+
         });
-        $('#announcements .close').click(function(){
+        $('#messages .control').click(function(){
             $('#announcements').toggle('blind', 300);
             return false;
         })
         $('.tabs').tabs();
         {%block js_onload%}{% endblock %}
         window.setTimeout(function(){
-            $('#announcements .close').click()
+            $('#messages .control').click();
             }, 1000);
     });
     </script>
