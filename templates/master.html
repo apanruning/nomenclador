@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-{% load banner_tags maap_tags %}
+{% load banner_tags maap_tags compress %}
 <head>
     <meta charset="utf-8" />
     <title>{% block title %}{% endblock %} Nomenclador Cartográfico</title>
@@ -8,20 +8,24 @@
 	<!--[if IE]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-    <link rel="stylesheet" href="/static/css/base.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="/static/css/style.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="/static/css/forms.css" type="text/css" media="screen">
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/js/jquery.ui.js"></script>
-    <script src="/static/js/OpenLayers.js"></script>
-    <script src="/static/js/OpenStreetMap.js"></script>
-    <script src="/static/js/dimensions.js"></script>
-    <script src="/static/js/forms.js"></script>
-    <script src="/static/js/tiny_mce/tiny_mce.js"></script>
-    <script src="/static/js/tiny_mce/jquery.tinymce.js"></script>
-    <script src="/static/js/texteditoroptions.js"></script>
-    <script src="/static/js/lib/jquery.tree.min.js"></script>
-    <script src="/static/js/lib/plugins/jquery.tree.contextmenu.js"></script>
+	{% compress css %}
+    <link rel="stylesheet" href="{{STATIC_URL}}css/base.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{STATIC_URL}}css/style.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{STATIC_URL}}css/forms.css" type="text/css" media="screen">
+    {% endcompress %}
+    <script src="http://openlayers.org/api/OpenLayers.js"></script>
+    {% compress js %}
+    <script src="{{STATIC_URL}}js/jquery.min.js"></script>
+    <script src="{{STATIC_URL}}js/jquery.ui.js"></script>
+    <script src="{{STATIC_URL}}js/OpenStreetMap.js"></script>
+    <script src="{{STATIC_URL}}js/dimensions.js"></script>
+    <script src="{{STATIC_URL}}js/forms.js"></script>
+    <script src="{{STATIC_URL}}js/tiny_mce/tiny_mce.js"></script>
+    <script src="{{STATIC_URL}}js/tiny_mce/jquery.tinymce.js"></script>
+    <script src="{{STATIC_URL}}js/texteditoroptions.js"></script>
+    <script src="{{STATIC_URL}}js/lib/jquery.tree.min.js"></script>
+    <script src="{{STATIC_URL}}js/lib/plugins/jquery.tree.contextmenu.js"></script>
+    {% endcompress %}
     <script src="http://widgets.twimg.com/j/2/widget.js"></script>
 
     {% block javascript %}
@@ -33,10 +37,7 @@
     {% endblock %}
     <script type="text/javascript">
     $(document).ready(function(){
-        MEDIA_URL = {{STATIC_URL}}
-        $('.select-neighborhoods').change(function(){
-            window.location = $(this).find(':selected').attr('value');
-        });
+        MEDIA_URL = "{{STATIC_URL}}";
         $('.control').click(function(){
             target = $(this).attr('href');
             $(target).toggle('blind', 300);

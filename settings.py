@@ -56,8 +56,8 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
-
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 DEFAULT_SRID = 900913
@@ -113,6 +113,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django.contrib.messages',
     'debug_toolbar',
+    'compressor',
     'south',
     'pagination',    
     'voting',
