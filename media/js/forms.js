@@ -47,7 +47,7 @@ $(document).ready( function(){
 		.autocomplete({
 			source: function( request, response ) {
 				$.getJSON( "/barrios/", {
-					name: extractLast( request.term );
+					name: extractLast( request.term ),
 				}, response );
 			},
 			search: function() {
